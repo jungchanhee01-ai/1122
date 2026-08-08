@@ -28,7 +28,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 relative flex items-center justify-between">
             <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider z-10">FUTURE <span class="text-orange-600">GLS</span></a>
             
-            <!-- 네비게이션 메뉴 (마우스 호버 및 업계소식 페이지 시 주황색 글씨 적용, 점 제거) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 absolute left-1/2 -translate-x-1/2">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
@@ -38,7 +37,7 @@
                 <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
             </nav>
 
-            <div class="z-10 w-20"></div> <!-- 로고와 균형을 맞추기 위한 빈 공간 -->
+            <div class="z-10 w-20"></div>
         </div>
     </header>
 
@@ -59,7 +58,7 @@
                     <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C U S T O M E R &nbsp; C E N T E R</span>
                 </div>
                 <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
-                    물류 산업의 최신 <span class="text-orange-600">업계 소식</span>을 전해드립니다.
+                    물류 산업의 최신 <span class="text-orange-600">소식 및 공지</span>를 전해드립니다.
                 </h1>
             </div>
             
@@ -71,12 +70,20 @@
 
         <!-- [뷰 1] 목록 화면 -->
         <div id="listView">
+            <!-- 탭 메뉴 (전체 / 공지사항 / 업계소식) -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="filterTab('all')" id="tabAll" class="px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all">전체</button>
+                <button onclick="filterTab('공지사항')" id="tabNotice" class="px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">공지사항</button>
+                <button onclick="filterTab('업계소식')" id="tabNews" class="px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">업계소식</button>
+            </div>
+
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold text-center">
                                 <th class="py-4 px-4 w-16">번호</th>
+                                <th class="py-4 px-28 w-32">구분</th>
                                 <th class="py-4 px-6 text-left">제목</th>
                                 <th class="py-4 px-4 w-24">작성자</th>
                                 <th class="py-4 px-4 w-28">작성일자</th>
@@ -116,7 +123,11 @@
                 <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
                     <tbody class="divide-y divide-slate-200">
                         <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 w-28 sm:w-36 text-center border-r border-slate-200">제목</th>
+                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 w-28 sm:w-36 text-center border-r border-slate-200">구분</th>
+                            <td id="detailCategory" class="py-4 px-6 font-bold text-orange-600"></td>
+                        </tr>
+                        <tr>
+                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 text-center border-r border-slate-200">제목</th>
                             <td id="detailTitle" class="py-4 px-6 font-bold text-slate-900"></td>
                         </tr>
                         <tr>
@@ -156,7 +167,7 @@
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
             <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
                 <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 업계소식 글쓰기
+                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 게시글 작성
                 </h3>
                 <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
                     <i class="ri-close-line"></i>
@@ -164,6 +175,13 @@
             </div>
 
             <form id="writeForm" onsubmit="submitPost(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">카테고리 선택</label>
+                    <select id="postCategory" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 outline-none focus:border-orange-600">
+                        <option value="공지사항">공지사항</option>
+                        <option value="업계소식">업계소식</option>
+                    </select>
+                </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1">제목</label>
                     <input type="text" id="postTitle" required placeholder="제목을 입력하세요" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
@@ -223,7 +241,6 @@
 
     <!-- 스크립트 -->
     <script>
-        // 초기 게시글을 빈 배열로 설정하고 localStorage도 비웁니다.
         let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
         if (!posts) {
             posts = [];
@@ -231,6 +248,7 @@
         }
 
         let currentPostId = null;
+        let currentTab = 'all';
         const editor = document.getElementById('postContentEditor');
         let savedRange = null;
 
@@ -330,12 +348,28 @@
             event.target.value = ''; 
         }
 
+        function filterTab(tab) {
+            currentTab = tab;
+            
+            // 탭 버튼 스타일 변경
+            document.getElementById('tabAll').className = tab === 'all' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
+            document.getElementById('tabNotice').className = tab === '공지사항' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
+            document.getElementById('tabNews').className = tab === '업계소식' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
+
+            if(tab === 'all') {
+                renderTable(posts);
+            } else {
+                const filtered = posts.filter(p => p.category === tab);
+                renderTable(filtered);
+            }
+        }
+
         function renderTable(data) {
             const tbody = document.getElementById('boardBody');
             tbody.innerHTML = '';
             
             if(data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-slate-400">등록된 게시글이 없습니다.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-slate-400">등록된 게시글이 없습니다.</td></tr>`;
                 return;
             }
 
@@ -343,8 +377,14 @@
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors cursor-pointer";
                 tr.onclick = () => viewDetail(post.id);
+                
+                const categoryBadge = post.category === '공지사항' 
+                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600">공지사항</span>`
+                    : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">업계소식</span>`;
+
                 tr.innerHTML = `
                     <td class="py-4 px-4 text-slate-400 font-medium">${post.id}</td>
+                    <td class="py-4 px-4">${categoryBadge}</td>
                     <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600">${post.title}</td>
                     <td class="py-4 px-4">${post.writer}</td>
                     <td class="py-4 px-4 text-xs text-slate-500">${post.date}</td>
@@ -362,6 +402,7 @@
             post.views += 1;
             localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
 
+            document.getElementById('detailCategory').innerText = post.category || '업계소식';
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
@@ -379,7 +420,7 @@
             document.getElementById('detailView').classList.add('hidden');
             document.getElementById('listView').classList.remove('hidden');
             document.getElementById('pageHeader').style.display = 'flex';
-            renderTable(posts);
+            filterTab(currentTab);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -396,7 +437,9 @@
             const type = document.getElementById('searchType').value;
             const keyword = document.getElementById('searchInput').value.toLowerCase();
 
-            const filtered = posts.filter(post => {
+            let targetList = currentTab === 'all' ? posts : posts.filter(p => p.category === currentTab);
+
+            const filtered = targetList.filter(post => {
                 if(type === 'title') {
                     return post.title.toLowerCase().includes(keyword);
                 } else if(type === 'writer') {
@@ -420,6 +463,7 @@
 
         function submitPost(event) {
             event.preventDefault();
+            const category = document.getElementById('postCategory').value;
             const title = document.getElementById('postTitle').value;
             const writer = document.getElementById('postWriter').value;
             const content = editor.innerHTML;
@@ -433,6 +477,7 @@
 
             const newPost = {
                 id: posts.length > 0 ? posts[0].id + 1 : 1,
+                category: category,
                 title: title,
                 writer: writer,
                 date: today,
@@ -442,12 +487,12 @@
 
             posts.unshift(newPost);
             localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
-            renderTable(posts);
+            filterTab(currentTab);
             closeWriteModal();
             alert('성공적으로 등록되었습니다.');
         }
 
-        renderTable(posts);
+        filterTab('all');
     </script>
 </body>
 </html>
