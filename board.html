@@ -241,7 +241,7 @@
             { id: 204, title: "대만 완하이라인, 1.3만TEU급 컨선 도입 매듭…남미항로 취항", writer: "관리자", date: "2025-09-02", views: 707, content: "대형 컨테이너선 투입으로 남미 항로의 서비스 경쟁력이 한층 강화되었습니다." },
             { id: 203, title: "\"美 관세 부과 '선주문 효과' 끝\"…아시아 ..", writer: "관리자", date: "2025-08-05", views: 760, content: "미국의 관세 정책 변화에 따른 아시아권 수출입 시장의 동향 변화 분석 리포트입니다." },
             { id: 202, title: "하루에 컨테이너선 단 3척…美 최대 아시아 무역항도 '텅텅'", writer: "관리자", date: "2025-07-02", views: 773, content: "공급망 병목 현상 완화와 물동량 변동에 따른 주요 항만들의 가동 현황입니다." },
-            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "`관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
+            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
         ];
 
         let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
@@ -251,69 +251,77 @@
         }
 
         let currentPostId = null;
-        let currentFontSize = "14px"; // 기본 글자 크기
+        let globalTargetFontSize = "14px"; // 전역 상태로 현재 지정된 글자 크기 유지
 
         const editor = document.getElementById('postContentEditor');
 
-        // 브라우저 기본 CSS 스타일 적용 모드 활성화
-        document.addEventListener("DOMContentLoaded", () => {
-            document.execCommand('styleWithCSS', false, true);
-        });
-
-        // 1. 글자 크기 드롭다운 변경 시 처리
+        // 드롭다운에서 글자 크기를 변경할 때
         function changeFontSize(selectElem) {
             const size = selectElem.value;
             if (!size) return;
-            currentFontSize = size; // 앞으로 입력될 크기 기억
+            globalTargetFontSize = size; // 크기 기억
 
             editor.focus();
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
                 
-                // 드래그해서 선택한 텍스트가 있는 경우: 해당 영역만 크기 변경
+                // 1. 드래그해서 선택한 글자가 있다면 그 영역만 즉시 크기 변경
                 if (!range.collapsed) {
                     const span = document.createElement('span');
                     span.style.fontSize = size;
                     span.appendChild(range.extractContents());
                     range.insertNode(span);
                     selection.removeAllRanges();
-                } else {
-                    // 드래그가 없는 경우: 커서 위치에 스타일이 지정된 빈 span을 삽입하여 이후 타이핑에 반영
-                    const span = document.createElement('span');
-                    span.style.fontSize = size;
-                    span.innerHTML = '&#8203;'; // 제로 너비 공백
-                    range.insertNode(span);
-                    
-                    range.setStart(span, 0);
-                    range.setEnd(span, 0);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
+                } 
+                else {
+                    // 2. 드래그 없이 커서만 있는 경우: 
+                    // 현재 커서가 속한 기존 span이나 태그의 글자 크기를 즉시 변경하거나 감쌈
+                    let container = range.commonAncestorContainer;
+                    let targetNode = container.nodeType === 3 ? container.parentElement : container;
+
+                    if (targetNode && targetNode !== editor && targetNode.tagName === 'SPAN') {
+                        // 이미 span 안에 있다면 스타일만 바로 수정 (지우지 않고 즉시 변경 가능!)
+                        targetNode.style.fontSize = size;
+                    } else {
+                        // 일반 영역이면 새로운 span을 삽입하여 이후 타이핑에 적용
+                        const span = document.createElement('span');
+                        span.style.fontSize = size;
+                        span.innerHTML = '&#8203;';
+                        range.insertNode(span);
+                        
+                        range.setStart(span, 0);
+                        range.setEnd(span, 0);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
                 }
             }
         }
 
-        // 2. 글을 입력할 때 현재 설정된 글자 크기로 자동 감싸기 (워드/한글 방식)
+        // 키를 입력하거나 글을 쓸 때 현재 설정된 크기가 실시간으로 유지되도록 보정
         editor.addEventListener('input', (e) => {
             const selection = window.getSelection();
             if (!selection.rangeCount) return;
             const range = selection.getRangeAt(0);
-            const container = range.commonAncestorContainer;
-            
-            // 현재 커서가 특정 span(글자크기가 지정된 곳) 안에 있지 않다면 현재 설정된 크기로 감싸기
-            let parentSpan = container.nodeType === 3 ? container.parentElement : container;
-            if (parentSpan && parentSpan !== editor && !parentSpan.style.fontSize) {
-                // 이미 스타일이 없는 일반 텍스트 노드일 경우 크기 적용
-                if (container.nodeType === 3 && container.textContent.length === 1) {
-                    const span = document.createElement('span');
-                    span.style.fontSize = currentFontSize;
-                    span.textContent = container.textContent;
-                    container.parentNode.replaceChild(span, container);
-                    
-                    range.setStartAfter(span);
-                    range.collapse(true);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
+            let container = range.startContainer;
+
+            // 방금 입력된 텍스트 노드가 스타일 없는 일반 상태라면 현재 설정된 크기 span으로 감싸기
+            if (container.nodeType === 3) {
+                let parent = container.parentElement;
+                if (parent && parent === editor || (parent && !parent.style.fontSize)) {
+                    const text = container.textContent;
+                    if (text.length > 0) {
+                        const span = document.createElement('span');
+                        span.style.fontSize = globalTargetFontSize;
+                        span.textContent = text;
+                        container.parentNode.replaceChild(span, container);
+
+                        range.setStartAfter(span);
+                        range.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
                 }
             }
         });
@@ -446,7 +454,7 @@
             document.getElementById('writeForm').reset();
             editor.innerHTML = '';
             document.getElementById('fontSizeSelect').value = "";
-            currentFontSize = "14px";
+            globalTargetFontSize = "14px";
         }
 
         // 새 글 등록 제출
