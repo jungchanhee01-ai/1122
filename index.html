@@ -16,8 +16,8 @@
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         
-        /* 구글 번역바 기본 UI 숨기기 (깔끔한 커스텀 드롭다운 연동용) */
-        .goog-te-banner-frame,.skiptranslate { display: none !important; }
+        /* 구글 번역바 기본 UI 숨기기 및 레이아웃 밀림 방지 */
+        .goog-te-banner-frame, .skiptranslate { display: none !important; }
         body { top: 0px !important; }
     </style>
 </head>
@@ -41,8 +41,8 @@
 
     <!-- Main Header -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2.5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0 notranslate">
                 <div class="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
                     <i class="ri-ship-line"></i>
                 </div>
@@ -51,28 +51,28 @@
                     <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase">Global Logistics</span>
                 </div>
             </a>
-            <!-- 상단 메뉴 글씨 크기(text-base) 및 간격(gap-10) 확대 적용 -->
-            <nav class="hidden lg:flex items-center gap-10 font-bold text-base text-slate-700">
-                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
+            <!-- 번역 시 글자 길이 증가를 고려하여 간격(gap-5) 및 글자 크기(text-sm) 최적화 -->
+            <nav class="hidden lg:flex items-center gap-5 font-bold text-sm text-slate-700">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">회사소개</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">항공운송</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">해상운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">업계소식</a>
             </nav>
-            <div id="authButtons" class="flex items-center gap-3">
+            <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
                 <!-- 1. 화물 추적 버튼 -->
-                <a href="#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                <a href="#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
                     <i class="ri-search-line"></i> 화물 추적
                 </a>
 
                 <!-- 2. 견적 요청 버튼 -->
-                <a href="#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
+                <a href="#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
                     견적 요청 <i class="ri-arrow-right-line"></i>
                 </a>
 
                 <!-- 3. 관리자 로그인 버튼 (로그인 시 동적으로 변경됨) -->
-                <a id="adminBtn" href="login/login.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                <a id="adminBtn" href="login/login.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                     <i class="ri-user-settings-line"></i> 관리자 로그인
                 </a>
             </div>  
@@ -358,7 +358,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4">
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4 notranslate">
                         <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white text-base">
                             <i class="ri-ship-line"></i>
                         </div>
@@ -529,13 +529,13 @@
                 adminBtn.remove();
 
                 const nameSpan = document.createElement('span');
-                nameSpan.className = "text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200";
+                nameSpan.className = "text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200 whitespace-nowrap";
                 nameSpan.innerText = "관리자(FUTURE)";
                 authButtons.appendChild(nameSpan);
 
                 const logoutBtn = document.createElement('button');
                 logoutBtn.innerText = "로그아웃";
-                logoutBtn.className = "text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md";
+                logoutBtn.className = "text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap";
                 logoutBtn.onclick = () => {
                     localStorage.removeItem('isAdminLoggedIn');
                     localStorage.removeItem('adminName');
@@ -544,12 +544,12 @@
                 authButtons.appendChild(logoutBtn);
             }
 
-            // [추가] LANGUAGE 드롭다운 UI 동적 생성 (로그아웃 버튼 옆)
+            // LANGUAGE 드롭다운 UI 동적 생성 (로그아웃 버튼 옆)
             if (authButtons) {
                 const langContainer = document.createElement('div');
-                langContainer.className = "relative inline-block text-left";
+                langContainer.className = "relative inline-block text-left notranslate";
                 langContainer.innerHTML = `
-                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md">
+                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md whitespace-nowrap">
                         <i class="ri-global-line text-orange-400"></i> Language <i class="ri-arrow-down-s-line"></i>
                     </button>
                     <div id="langDropdown" class="hidden absolute right-0 mt-2 w-36 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-1.5 z-50 text-xs font-medium text-slate-200">
