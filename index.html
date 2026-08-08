@@ -87,7 +87,45 @@
 
     <!-- Hero Section -->
     <section class="relative bg-slate-950 text-white overflow-hidden py-24 sm:py-36 px-4">
-        <div class="absolute inset-0 opacity-40 mix-blend-luminosity bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=1600')"></div>
+   <!-- Hero Section -->
+<section class="relative bg-slate-950 text-white overflow-hidden py-24 sm:py-36 px-4">
+    
+    <!-- [추가] 배경 동영상 태그 -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity">
+        <source src="video/main-video.mp4" type="video/mp4">
+        사용 중인 브라우저는 동영상을 지원하지 않습니다.
+    </video>
+
+    <!-- 어두운 그라데이션 오버레이 (글씨가 잘 보이게 해주는 역할) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10 text-center sm:text-left">
+        <span class="px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-orange-500/30">
+            <i class="ri-sparkling-fill"></i> SMART GLOBAL FORWARDING PARTNER
+        </span>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6">
+            바다에서 하늘까지,<br>
+            <span class="text-orange-500">FUTURE GLS</span>가 연결합니다.
+        </h1>
+        <p class="max-w-2xl text-slate-300 text-sm sm:text-base mb-10 font-normal leading-relaxed">
+            전 세계 주요 항로 최적화 운임 제공, AI 실시간 화물 위치 추적 및 원스톱 통관 대행까지.<br class="hidden sm:block">
+            글로벌 비즈니스의 확실한 물류 솔루션을 경험하세요.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-16">
+            <a href="#quote" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                <i class="ri-calculator-line text-lg"></i> 무상 견적 문의
+            </a>
+            <a href="#tracking" class="px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold rounded-xl hover:bg-slate-700 transition-all flex items-center gap-2">
+                <i class="ri-radar-line text-lg text-orange-400"></i> 화물 실시간 추적
+            </a>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl bg-slate-900/90 backdrop-blur border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <!-- 내부 내용 이어짐 -->
+        </div>
+    </div>
+</section>    
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
         <div class="max-w-7xl mx-auto relative z-10 text-center sm:text-left">
             <span class="px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-orange-500/30">
