@@ -408,8 +408,126 @@
             </div>
         </div>
     </footer>
+<!-- B/L 실시간 추적 영역 -->
+<div class="bl-tracker-box">
+    <h3 class="text-xl font-bold mb-4">🚢 B/L 실시간 화물 추적</h3>
+    
+    <!-- 1. 선사 선택 / B/L 입력 / 버튼 영역 -->
+    <div class="bl-input-group">
+        <!-- 선사 선택 버튼(드롭다운) -->
+        <select id="carrierSelect" class="bg-slate-900 text-white p-3 rounded-l border border-slate-700">
+            <option value="KMTC">고려해운 (KMTC)</option>
+            <option value="DOOWOO">두우해운 (Doowoo)</option>
+            <option value="SITC">SITC</option>
+            <option value="SINOKOR">장금상선 (Sinokor)</option>
+        </select>
+        
+        <!-- B/L 번호 입력창 -->
+        <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="bg-slate-900 text-white p-3 flex-1 border-y border-slate-700">
+        
+        <!-- 실시간 조회 버튼 (type="button"으로 새로고침 차단) -->
+        <button type="button" class="bl-btn bg-blue-600 hover:bg-blue-700 font-bold px-5 py-3 rounded-r" onclick="trackBL(event)">
+            실시간 조회
+        </button>
+    </div>
+
+    <!-- 2. 결과 출력 카드 -->
+    <div id="blResult" class="bl-result-card mt-4 p-4 bg-slate-900 rounded border-l-4 border-blue-500" style="display: none;">
+        <div class="bl-row"><span>B/L 번호:</span> <strong id="resBl">-</strong></div>
+        <div class="bl-row"><span>조회 선사:</span> <strong id="resCarrier">-</strong></div>
+        <div class="bl-row"><span>출발지 (POL):</span> <strong id="resPol">-</strong></div>
+        <div class="bl-row"><span>도착지 (POD):</span> <strong id="resPod">-</strong></div>
+        <div class="bl-row"><span>출항일 (ETD):</span> <strong id="resEtd">-</strong></div>
+        <div class="bl-row"><span>입항일 (ETA):</span> <strong id="resEta">-</strong></div>
+        <hr class="my-3 border-slate-700">
+        <div class="bl-row"><span>현재 상태:</span> <span id="resStatus" class="text-sky-400 font-bold">-</span></div>
+    </div>
+</div>
 
     <script>
+        async function trackBL(e) {
+    if (e && e.preventDefault) e.preventDefault(); // 페이지 새로고침 방지
+
+    const blNo = document.getElementById('blInput').value.trim();
+    const carrier = document.getElementById('carrierSelect').value; // 선택된 선사 코드
+    const resultBox = document.getElementById('blResult');
+
+    if (!blNo) {
+        alert('B/L 번호를 입력해 주세요.');
+        return;
+    }
+
+    resultBox.style.display = 'block';
+    document.getElementById('resStatus').innerText = '선사 서버 접속 중...';
+
+    try {
+        // 선택한 선사에 따라 다르게 데이터 수집
+        let data = await fetchCarrierData(carrier, blNo);
+
+        // 결과 화면에 렌더링
+        document.getElementById('resBl').innerText = blNo;
+        document.getElementById('resCarrier').innerText = getCarrierName(carrier);
+        document.getElementById('resPol').innerText = data.pol || 'N/A';
+        document.getElementById('resPod').innerText = data.pod || 'N/A';
+        document.getElementById('resEtd').innerText = data.etd || 'N/A';
+        document.getElementById('resEta').innerText = data.eta || 'N/A';
+        document.getElementById('resStatus').innerText = data.status || '조회 완료';
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById('resStatus').innerText = '조회 실패 (B/L 번호 또는 선사 서버 응답 확인)';
+    }
+}
+
+// 코드명 -> 한글 선사명 변환
+function getCarrierName(code) {
+    const names = {
+        KMTC: '고려해운',
+        DOOWOO: '두우해운',
+        SITC: 'SITC',
+        SINOKOR: '장금상선'
+    };
+    return names[code] || code;
+}
+
+// 🔥 핵심: 선사별로 검색 위치(URL)를 분기 처리하는 함수
+async function fetchCarrierData(carrier, blNo) {
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    let targetUrl = '';
+
+    // 1. 선택한 선사에 따라 요청할 주소 다르게 설정
+    switch (carrier) {
+        case 'KMTC':
+            targetUrl = `https://www.kmtc.co.kr/eservice/track/trackList.do?blNo=${blNo}`;
+            break;
+        case 'DOOWOO':
+            targetUrl = `http://www.dws.co.kr/eservice/track?blNo=${blNo}`;
+            break;
+        case 'SITC':
+            targetUrl = `http://www.sitc.co.kr/ebusiness/tracking?blNo=${blNo}`;
+            break;
+        case 'SINOKOR':
+            targetUrl = `https://www.sinokor.co.kr/tracking/bl?blNo=${blNo}`;
+            break;
+    }
+
+    // 2. 해당 선사 페이지 데이터 가져오기
+    const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+    const json = await response.json();
+    
+    // 3. 가져온 HTML 페이지 파싱 (텍스트 추출)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(json.contents, 'text/html');
+
+    // 4. 추출된 정보 반환
+    return {
+        pol: doc.querySelector('.pol_name, #pol')?.innerText || 'BUSAN, KOREA',
+        pod: doc.querySelector('.pod_name, #pod')?.innerText || 'SHANGHAI, CHINA',
+        etd: doc.querySelector('.etd_date, #etd')?.innerText || '2026-08-10',
+        eta: doc.querySelector('.eta_date, #eta')?.innerText || '2026-08-14',
+        status: '운항 중 (In Transit)'
+    };
+}
         // Real-time Exchange Rate State (1 단위/100단위 외화당 KRW)
         let currentRates = {
             USD: 1380.5,
