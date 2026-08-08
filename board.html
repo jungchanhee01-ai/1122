@@ -68,7 +68,6 @@
 
         <!-- [뷰 1] 목록 화면 -->
         <div id="listView">
-            <!-- 게시판 컨테이너 -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
@@ -82,7 +81,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 text-center text-slate-600" id="boardBody">
-                            <!-- Javascript로 동적 렌더링 -->
+                            <!-- 동적 렌더링 -->
                         </tbody>
                     </table>
                 </div>
@@ -116,7 +115,6 @@
         <!-- [뷰 2] 상세 보기 화면 (기본 숨김) -->
         <div id="detailView" class="hidden">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
-                <!-- 상단 정보 테이블 -->
                 <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
                     <tbody class="divide-y divide-slate-200">
                         <tr>
@@ -138,13 +136,11 @@
                     </tbody>
                 </table>
 
-                <!-- 본문 내용 영역 -->
                 <div class="p-8 sm:p-12 min-h-[250px]">
                     <div id="detailContent" class="text-slate-800 leading-relaxed text-base sm:text-lg whitespace-pre-wrap"></div>
                 </div>
             </div>
 
-            <!-- 하단 버튼 영역 (삭제 및 목록으로) -->
             <div class="flex justify-between items-center">
                 <button onclick="deletePost()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
                     <i class="ri-delete-bin-line"></i> 삭제하기
@@ -198,10 +194,10 @@
         </div>
     </footer>
 
-    <!-- 게시판 스크립트 (상세보기, 삭제, 목록전환 기능 추가) -->
+    <!-- 게시판 스크립트 (LocalStorage 영구 저장 연동) -->
     <script>
-        // 초기 게시글 데이터
-        let posts = [
+        // 초기 기본 데이터 정의
+        const defaultPosts = [
             { id: 210, title: "팬오션, 2분기 영업이익 57.4% 증가한 1,937억 원 기록", writer: "관리자", date: "2026-08-03", views: 132, content: "탱커부문 영업이익 165.7% 성장…상반기 누적 영업익도 37.4% 늘어\n\n팬오션은 글로벌 불확실성 속에서도 철저한 리스크 관리와 시황 대응을 통해 견조한 실적을 달성했습니다." },
             { id: 209, title: "피격 HMM 나무호 수리 완료…‘출항 계획 수립 중’", writer: "관리자", date: "2026-07-14", views: 151, content: "안전 점검을 모두 마치고 정상 운항을 위한 최종 출항 스케줄을 조율 중입니다." },
             { id: 208, title: "해진공, 해운·항만·물류 AI 전환 선도", writer: "관리자", date: "2026-06-11", views: 248, content: "물류 전 과정에 인공지능(AI) 기술을 접목하여 스마트 항만 생태계를 조성합니다." },
@@ -214,7 +210,14 @@
             { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
         ];
 
-        let currentPostId = null; // 현재 보고 있는 게시글 ID
+        // LocalStorage에서 데이터를 불러오거나 없으면 기본 데이터 저장
+        let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
+        if (!posts) {
+            posts = defaultPosts;
+            localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
+        }
+
+        let currentPostId = null;
 
         // 테이블 렌더링
         function renderTable(data) {
@@ -241,26 +244,23 @@
             });
         }
 
-        // 상세 보기 화면으로 전환
+        // 상세 보기 화면으로 전환 및 조회수 반영 저장
         function viewDetail(id) {
             const post = posts.find(p => p.id === id);
             if(!post) return;
 
             currentPostId = id;
             post.views += 1; // 조회수 증가
+            localStorage.setItem('futureGlsPosts', JSON.stringify(posts)); // 변경된 조회수 저장
 
-            // 데이터 채우기
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
             document.getElementById('detailViews').innerText = post.views;
             document.getElementById('detailContent').innerText = post.content;
 
-            // 뷰 전환 (목록 숨기고 상세 보기 표시)
             document.getElementById('listView').classList.add('hidden');
             document.getElementById('detailView').classList.remove('hidden');
-            
-            // 상단 타이틀 안내 변경
             document.getElementById('pageHeader').style.display = 'none';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -275,10 +275,11 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 게시글 삭제하기
+        // 게시글 삭제하기 및 LocalStorage 반영
         function deletePost() {
             if(confirm('정말 이 게시글을 삭제하시겠습니까?')) {
                 posts = posts.filter(p => p.id !== currentPostId);
+                localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
                 alert('게시글이 삭제되었습니다.');
                 showListView();
             }
@@ -308,7 +309,7 @@
             document.getElementById('writeForm').reset();
         }
 
-        // 새 글 등록 제출 함수
+        // 새 글 등록 및 LocalStorage 저장
         function submitPost(event) {
             event.preventDefault();
             const title = document.getElementById('postTitle').value;
@@ -327,6 +328,7 @@
             };
 
             posts.unshift(newPost);
+            localStorage.setItem('futureGlsPosts', JSON.stringify(posts)); // 브라우저 저장소에 영구 반영
             renderTable(posts);
             closeWriteModal();
             alert('성공적으로 등록되었습니다.');
