@@ -411,126 +411,127 @@
 
     <script>
       // Real-time Exchange Rate State (기본값 설정)
+// 1. 기본 환율 데이터 (API 실패 시 사용될 안전장치)
 let currentRates = {
     USD: 1380.5,
     EUR: 1502.2,
-    JPY: 9.15,   // 1엔당 원화 가치
+    JPY: 9.15,
     CNY: 191.8,
     GBP: 1780.4
 };
 
-// 1. 실시간 환율 API 호출 및 데이터 갱신
+// 페이지 로드 완료 시 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    fetchExchangeRates();
+    setupEventListeners();
+});
+
+// 2. 실시간 환율 API 호출
 async function fetchExchangeRates() {
     let isSuccess = false;
     let dateStr = new Date().toISOString().split('T')[0];
 
-    try {
-        const res = await fetch('https://open.er-api.com/v6/latest/USD');
-        if (res.ok) {
-            const data = await res.json();
-            if (data.result === "success") {
-                const rates = data.rates;
-                const krw = rates.KRW;
+    // 여러 API 경로를 시도하여 안정성 확보
+    const apiUrls = [
+        'https://open.er-api.com/v6/latest/USD',
+        'https://api.exchangerate-api.com/v4/latest/USD'
+    ];
 
+    for (const url of apiUrls) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) continue;
+
+            const data = await res.json();
+            const rates = data.rates;
+            
+            if (rates && rates.KRW) {
+                const krw = rates.KRW;
                 currentRates.USD = krw;
-                currentRates.EUR = krw / rates.EUR;
-                currentRates.JPY = krw / rates.JPY;
-                currentRates.CNY = krw / rates.CNY;
-                currentRates.GBP = krw / rates.GBP;
+                currentRates.EUR = krw / (rates.EUR || 0.92);
+                currentRates.JPY = krw / (rates.JPY || 150);
+                currentRates.CNY = krw / (rates.CNY || 7.2);
+                currentRates.GBP = krw / (rates.GBP || 0.78);
 
                 if (data.time_last_update_utc) {
                     dateStr = new Date(data.time_last_update_utc).toISOString().split('T')[0];
                 }
                 isSuccess = true;
+                break; // 성공했으면 반복문 탈출
             }
+        } catch (err) {
+            console.warn(`[${url}] 환율 로딩 실패:`, err);
         }
-    } catch (err) {
-        console.warn('실시간 환율 API 호출 실패, 기본 환율 데이터를 적용합니다.', err);
     }
 
-    // API 성공 여부와 상관없이 무조건 테이블과 변환기를 렌더링
+    // API 성공 여부와 상관없이 무조건 화면 렌더링 실행!
     renderRatesTable(dateStr, isSuccess);
 }
 
-// 2. 환율 테이블 화면 렌더링
-function renderRatesTable(dateStr, isSuccess = false) {
+// 3. 환율 테이블 및 변환기 UI 렌더링
+function renderRatesTable(dateStr, isSuccess) {
+    // 배지 텍스트 변경
     const timeEl = document.getElementById('rateUpdateTime');
     if (timeEl) {
         timeEl.innerText = isSuccess 
-            ? `기준일자: ${dateStr} (실시간)` 
+            ? `기준일자: ${dateStr}` 
             : `기준일자: ${dateStr} (기본 환율)`;
+        timeEl.classList.remove('animate-pulse'); // 반짝이는 애니메이션 제거
     }
 
+    // 테이블 데이터 채우기
     const tbody = document.getElementById('rateTableBody');
-    if (!tbody) return;
-    
-    const currencies = [
-        { code: 'USD', name: '미국 달러', rate: currentRates.USD },
-        { code: 'EUR', name: '유로화', rate: currentRates.EUR },
-        { code: 'JPY', name: '일본 엔화 (100엔)', rate: currentRates.JPY * 100 },
-        { code: 'CNY', name: '중국 위안화', rate: currentRates.CNY },
-        { code: 'GBP', name: '영국 파운드', rate: currentRates.GBP }
-    ];
+    if (tbody) {
+        const currencies = [
+            { code: 'USD', name: '미국 달러', rate: currentRates.USD },
+            { code: 'EUR', name: '유로화', rate: currentRates.EUR },
+            { code: 'JPY', name: '일본 엔화 (100엔)', rate: currentRates.JPY * 100 },
+            { code: 'CNY', name: '중국 위안화', rate: currentRates.CNY },
+            { code: 'GBP', name: '영국 파운드', rate: currentRates.GBP }
+        ];
 
-    tbody.innerHTML = currencies.map(c => {
-        const buy = (c.rate * 1.008).toFixed(2);
-        const sell = (c.rate * 0.992).toFixed(2);
-        return `
-            <tr class="hover:bg-slate-800/50 transition-colors">
-                <td class="p-3.5 font-bold text-white">${c.name} <span class="text-slate-500 font-normal">(${c.code})</span></td>
-                <td class="p-3.5 text-orange-400 font-bold">₩ ${c.rate.toFixed(2)}</td>
-                <td class="p-3.5 text-slate-300">₩ ${buy}</td>
-                <td class="p-3.5 text-slate-300">₩ ${sell}</td>
-            </tr>
-        `;
-    }).join('');
+        tbody.innerHTML = currencies.map(c => {
+            const buy = (c.rate * 1.008).toFixed(2);
+            const sell = (c.rate * 0.992).toFixed(2);
+            return `
+                <tr class="hover:bg-slate-800/50 transition-colors border-b border-slate-800/50">
+                    <td class="p-3.5 font-bold text-white">${c.name} <span class="text-slate-500 font-normal">(${c.code})</span></td>
+                    <td class="p-3.5 text-orange-400 font-bold">₩ ${c.rate.toFixed(2)}</td>
+                    <td class="p-3.5 text-slate-300">₩ ${buy}</td>
+                    <td class="p-3.5 text-slate-300">₩ ${sell}</td>
+                </tr>
+            `;
+        }).join('');
+    }
 
+    // 환율 변환기 계산 실행
     calculateExchange();
 }
 
-        // 3. 통화 계산기 (통일된 표준 계산)
-        function calculateExchange() {
-            const amountInput = document.getElementById('calcAmount');
-            const currencySelect = document.getElementById('calcCurrency');
-            const resultEl = document.getElementById('calcResult');
+// 4. 환율 변환기 계산 함수
+function calculateExchange() {
+    const amountInput = document.getElementById('calcAmount');
+    const currencySelect = document.getElementById('calcCurrency');
+    const resultEl = document.getElementById('calcResult');
 
-            if (!amountInput || !currencySelect || !resultEl) return;
+    if (!amountInput || !currencySelect || !resultEl) return;
 
-            const amount = parseFloat(amountInput.value) || 0;
-            const currency = currencySelect.value;
-            
-            let krwVal = 0;
+    const amount = parseFloat(amountInput.value) || 0;
+    const selectedCurrency = currencySelect.value;
+    const unitRate = currentRates[selectedCurrency] || 0;
 
-            // JPY 선택 시 사용자가 '엔'을 입력하는지 '100엔' 기준으로 입력하는지에 맞춘 계산법
-            if (currency === 'JPY') {
-                // 사용자가 입력한 엔화 x 1엔당 원화 가치
-                krwVal = amount * currentRates.JPY; 
-            } else {
-                krwVal = amount * (currentRates[currency] || 1380);
-            }
+    const totalKRW = Math.round(amount * unitRate);
+    resultEl.innerText = `₩ ${totalKRW.toLocaleString()}`;
+}
 
-            resultEl.innerText = '₩ ' + Math.round(krwVal).toLocaleString();
-        }
+// 5. 이벤트 리스너 등록
+function setupEventListeners() {
+    const amountInput = document.getElementById('calcAmount');
+    const currencySelect = document.getElementById('calcCurrency');
 
-        // 4. B/L 화물 추적 제출
-        function handleTrackingSubmit(e) {
-            e.preventDefault();
-            const blInput = document.getElementById('blNumberInput').value.trim();
-            if (!blInput) return;
-
-            const targetUrl = `https://www.searates.com/container/tracking/?number=${encodeURIComponent(blInput)}`;
-            window.open(targetUrl, '_blank');
-        }
-
-        // 5. 견적 요청 제출
-        function handleQuoteSubmit(e) {
-            e.preventDefault();
-            alert('견적 요청이 성공적으로 접수되었습니다! 담당자가 신속히 연락드리겠습니다.');
-            e.target.reset();
-        }
-
-        // 6. 페이지 로드시 환율 불러오기 실행
-        window.addEventListener('DOMContentLoaded', fetchExchangeRates);
+    if (amountInput) amountInput.addEventListener('input', calculateExchange);
+    if (currencySelect) currencySelect.addEventListener('change', calculateExchange);
+}
     </script>
 </body>
 </html>
