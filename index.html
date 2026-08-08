@@ -392,14 +392,26 @@
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // 기존 board.html 등과 동일한 파이어베이스 설정값 (필요시 본인의 설정값으로 확인 및 사용)
+    <!-- Firebase SDK 연동 스크립트 (모듈 타입) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // board.html과 동일한 파이어베이스 설정값 적용 완료
         const firebaseConfig = {
-            apiKey: "AIzaSyDummyKeyForFutureGls",
-            authDomain: "futuregls-db.firebaseapp.com",
-            projectId: "futuregls-db",
-            storageBucket: "futuregls-db.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef"
+            apiKey: "AIzaSyBPwNp7-Yrl6LwAqaReC3ht1JKwSnTTEcI",
+            authDomain: "jch01-65141.firebaseapp.com",
+            projectId: "jch01-65141",
+            storageBucket: "jch01-65141.firebasestorage.app",
+            messagingSenderId: "885424801252",
+            appId: "1:885424801252:web:0b840323f160d0d4cc73f1",
+            measurementId: "G-3ECML2H6S6"
         };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // ... (이하 생략)
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
