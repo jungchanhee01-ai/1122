@@ -72,10 +72,11 @@
             const id = document.getElementById('adminId').value;
             const pw = document.getElementById('adminPassword').value;
 
-            // 임시 관리자 계정 설정 (아이디: admin, 비밀번호: 1234)
-            if (id === 'admin' && pw === '1234') {
+            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
+            if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 alert('관리자 로그인 성공!');
                 localStorage.setItem('isAdminLoggedIn', 'true');
+                localStorage.setItem('adminName', '관리자');
                 window.location.href = '../board.html'; // 로그인 후 게시판으로 이동
             } else {
                 alert('아이디 또는 비밀번호가 일치하지 않습니다.');
