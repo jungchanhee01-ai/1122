@@ -574,10 +574,12 @@
         }
 
         // 6. 위성 레이더 상세 조회 팝업
+       // 6. 위성 레이더 상세 조회 팝업 (Searates 제거 -> 무제한 Track-Trace 적용)
         function openGlobalRadar() {
             if (!activeBL) return;
-            const targetUrl = `https://www.searates.com/container/tracking/?number=${encodeURIComponent(activeBL)}`;
-            window.open(targetUrl, '_blank', 'width=1200,height=800,scrollbars=yes');
+            // 하루 제한 및 앱 설치 팝업이 전혀 없는 글로벌 트래킹 연결
+            const targetUrl = `https://www.track-trace.com/bol?query=${encodeURIComponent(activeBL)}`;
+            window.open(targetUrl, '_blank');
         }
 
         // 7. 페이지 로드시 환율 불러오기 실행
