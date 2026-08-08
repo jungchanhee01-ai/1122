@@ -409,7 +409,7 @@
         </div>
     </footer>
 <script>
-    // Real-time Exchange Rate State
+    // 기본 정적 환율 (API 실패 시 백업용)
     let currentRates = {
         USD: 1380.5,
         EUR: 1502.2,
@@ -418,42 +418,43 @@
         GBP: 1780.4
     };
 
-    // 1. 실시간 환율 API 호출 및 데이터 갱신
+    // 1. 실시간 환율 API 호출
     async function fetchExchangeRates() {
         try {
-            // CORS 우회 및 안정성이 우수한 공개 API 사용
-            const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-            if (!res.ok) throw new Error('Network response was not ok');
+            // KRW 기준으로 직결 연산 가능한 API 호출
+            const res = await fetch('https://open.er-api.com/v6/latest/USD');
+            if (!res.ok) throw new Error('API 응답 오류');
             
             const data = await res.json();
 
-            if (data && data.rates) {
-                const rates = data.rates;
-                const krw = rates.KRW; // 1 달러당 원화
+            if (data && data.rates && data.rates.KRW) {
+                const usdKrw = data.rates.KRW; // 1 USD = ? KRW
 
-                // 각 통화 1단위당 KRW 가격 계산
-                currentRates.USD = krw;
-                currentRates.EUR = krw / rates.EUR;
-                currentRates.JPY = krw / rates.JPY; // 1엔당 원화
-                currentRates.CNY = krw / rates.CNY;
-                currentRates.GBP = krw / rates.GBP;
+                // 각 통화 1단위당 KRW 금액 계산 (예: 1 EUR = USD_KRW / USD_EUR)
+                currentRates.USD = usdKrw;
+                currentRates.EUR = data.rates.EUR ? usdKrw / data.rates.EUR : 1500;
+                currentRates.JPY = data.rates.JPY ? usdKrw / data.rates.JPY : 9.15; // 1 JPY 당 KRW
+                currentRates.CNY = data.rates.CNY ? usdKrw / data.rates.CNY : 190;
+                currentRates.GBP = data.rates.GBP ? usdKrw / data.rates.GBP : 1750;
 
-                const dateStr = data.date || new Date().toISOString().split('T')[0];
+                const dateStr = data.time_last_update_utc 
+                    ? new Date(data.time_last_update_utc).toLocaleDateString('ko-KR') 
+                    : new Date().toLocaleDateString('ko-KR');
+
                 renderRatesTable(dateStr);
             } else {
-                throw new Error('Invalid rate data format');
+                throw new Error('올바르지 않은 환율 데이터 형식');
             }
         } catch (err) {
-            console.warn('실시간 환율 API 연동 실패 (기본 환율로 대체합니다):', err);
-            // 에러 발생 시 멈추지 않고 기본 정적 환율값으로 대체 렌더링
-            renderRatesTable(new Date().toISOString().split('T')[0] + ' (기준)');
+            console.warn('환율 API 로딩 실패. 기본 데이터로 표시합니다:', err);
+            renderRatesTable(new Date().toLocaleDateString('ko-KR') + ' (기본값)');
         }
     }
 
     // 2. 환율 테이블 화면 렌더링
     function renderRatesTable(dateStr) {
         const timeEl = document.getElementById('rateUpdateTime');
-        if (timeEl) timeEl.innerText = `기준일자: ${dateStr}`;
+        if (timeEl) timeEl.innerText = `기준: ${dateStr}`;
 
         const tbody = document.getElementById('rateTableBody');
         if (!tbody) return;
@@ -467,12 +468,13 @@
         ];
 
         tbody.innerHTML = currencies.map(c => {
-            const buy = (c.rate * 1.008).toFixed(2);
-            const sell = (c.rate * 0.992).toFixed(2);
+            const rateNum = Number(c.rate) || 0;
+            const buy = (rateNum * 1.008).toFixed(2);
+            const sell = (rateNum * 0.992).toFixed(2);
             return `
                 <tr class="hover:bg-slate-800/50 transition-colors">
                     <td class="p-3.5 font-bold text-white">${c.name} <span class="text-slate-500 font-normal">(${c.code})</span></td>
-                    <td class="p-3.5 text-orange-400 font-bold">₩ ${c.rate.toFixed(2)}</td>
+                    <td class="p-3.5 text-orange-400 font-bold">₩ ${rateNum.toFixed(2)}</td>
                     <td class="p-3.5 text-slate-300">₩ ${buy}</td>
                     <td class="p-3.5 text-slate-300">₩ ${sell}</td>
                 </tr>
@@ -496,7 +498,7 @@
         let krwVal = 0;
 
         if (currency === 'JPY') {
-            krwVal = amount * currentRates.JPY; 
+            krwVal = amount * (currentRates.JPY || 9.15); 
         } else {
             krwVal = amount * (currentRates[currency] || 1380);
         }
