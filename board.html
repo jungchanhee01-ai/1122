@@ -19,14 +19,6 @@
             margin: 1rem 0; 
             display: block;
         }
-        /* 폰트 사이즈 드롭다운 매핑 (1~7 단계 지원) */
-        font[size="1"] { font-size: 12px; }
-        font[size="2"] { font-size: 14px; }
-        font[size="3"] { font-size: 16px; }
-        font[size="4"] { font-size: 20px; }
-        font[size="5"] { font-size: 24px; }
-        font[size="6"] { font-size: 28px; }
-        font[size="7"] { font-size: 32px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
@@ -194,17 +186,17 @@
                         <label class="block text-xs font-bold text-slate-500 uppercase">내용 (서식 및 이미지 첨부 가능)</label>
                         <!-- 에디터 툴바 -->
                         <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <select id="fontSizeSelect" onchange="changeFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
+                            <select id="fontSizeSelect" onmousedown="saveSelection()" onchange="applyFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">글자 크기 선택</option>
-                                <option value="1">12 px (작게)</option>
-                                <option value="2">14 px (보통)</option>
-                                <option value="3">16 px (약간 크게)</option>
-                                <option value="4">20 px (크게)</option>
-                                <option value="5">24 px (매우 크게)</option>
-                                <option value="6">28 px (특대)</option>
-                                <option value="7">32 px (최대)</option>
+                                <option value="12px">12 px (작게)</option>
+                                <option value="14px">14 px (보통)</option>
+                                <option value="16px">16 px (기본)</option>
+                                <option value="20px">20 px (크게)</option>
+                                <option value="24px">24 px (매우 크게)</option>
+                                <option value="28px">28 px (특대)</option>
+                                <option value="32px">32 px (최대)</option>
                             </select>
-                            <select id="fontFamilySelect" onchange="changeFontFamily(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
+                            <select id="fontFamilySelect" onmousedown="saveSelection()" onchange="applyFontFamily(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">기본 글꼴</option>
                                 <option value="Pretendard, sans-serif">프리텐다드</option>
                                 <option value="Gulim, 굴림, sans-serif">굴림</option>
@@ -219,7 +211,7 @@
                         </div>
                     </div>
                     <!-- 리치 텍스트 편집 영역 -->
-                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
+                    <div id="postContentEditor" contenteditable="true" onmouseup="saveSelection()" onkeyup="saveSelection()" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
@@ -261,28 +253,71 @@
 
         let currentPostId = null;
         const editor = document.getElementById('postContentEditor');
+        let savedRange = null; // 선택 영역 메모리 변수
 
-        // 브라우저 기본 CSS 스타일 적용 모드 활성화
-        document.addEventListener("DOMContentLoaded", () => {
-            document.execCommand('styleWithCSS', false, false);
-        });
-
-        // 글자 크기 변경 함수 (브라우저 표준 execCommand 활용으로 확실하게 동작)
-        function changeFontSize(selectElem) {
-            const size = selectElem.value;
-            if (!size) return;
-
-            editor.focus();
-            document.execCommand('fontSize', false, size);
-            selectElem.value = ""; // 드롭다운 초기화
+        // [핵심] 에디터 내에서 드래그/클릭할 때마다 영역을 저장
+        function saveSelection() {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                // 에디터 내부 영역인지 확인 후 저장
+                if (editor.contains(range.commonAncestorContainer)) {
+                    savedRange = range;
+                }
+            }
         }
 
-        // 글꼴 변경 함수
-        function changeFontFamily(selectElem) {
+        // 저장된 선택 영역을 복원하고 스타일에 맞게 감싸기
+        function applyStyle(styleProperty, styleValue) {
+            editor.focus();
+            const selection = window.getSelection();
+            
+            if (savedRange) {
+                selection.removeAllRanges();
+                selection.addRange(savedRange);
+            }
+
+            if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+
+            if (range.collapsed) {
+                const span = document.createElement('span');
+                span.style[styleProperty] = styleValue;
+                span.innerHTML = '&#8203;';
+                range.insertNode(span);
+                
+                const newRange = document.createRange();
+                newRange.setStart(span.firstChild, 1);
+                newRange.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            } else {
+                const span = document.createElement('span');
+                span.style[styleProperty] = styleValue;
+                span.appendChild(range.extractContents());
+                range.insertNode(span);
+                
+                selection.removeAllRanges();
+                const newRange = document.createRange();
+                newRange.selectNodeContents(span);
+                selection.addRange(newRange);
+            }
+            saveSelection(); // 변경된 최종 영역 재저장
+        }
+
+        // 글자 크기 변경 실행
+        function applyFontSize(selectElem) {
+            const size = selectElem.value;
+            if (!size) return;
+            applyStyle('fontSize', size);
+            selectElem.value = ""; 
+        }
+
+        // 글꼴 변경 실행
+        function applyFontFamily(selectElem) {
             const font = selectElem.value;
             if (!font) return;
-            editor.focus();
-            document.execCommand('fontName', false, font);
+            applyStyle('fontFamily', font);
             selectElem.value = "";
         }
 
@@ -295,6 +330,12 @@
             reader.onload = function(e) {
                 const base64Image = e.target.result;
                 editor.focus();
+                
+                if (savedRange) {
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(savedRange);
+                }
 
                 const img = document.createElement('img');
                 img.src = base64Image;
@@ -310,6 +351,7 @@
                 } else {
                     editor.appendChild(img);
                 }
+                saveSelection();
             };
             reader.readAsDataURL(file);
             event.target.value = ''; 
@@ -404,7 +446,9 @@
             document.getElementById('writeModal').classList.add('hidden');
             document.getElementById('writeForm').reset();
             editor.innerHTML = '';
+            savedRange = null;
             document.getElementById('fontSizeSelect').value = "";
+            document.getElementById('fontFamilySelect').value = "";
         }
 
         // 새 글 등록 제출
