@@ -12,8 +12,14 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
-        /* 에디터 내부 스타일 */
-        .editor-content img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1rem 0; }
+        /* 에디터 및 상세 화면 내 이미지 크기 및 레이아웃 제어 */
+        .editor-content img, #detailContent img { 
+            max-width: 100% !important; 
+            height: auto !important; 
+            border-radius: 0.75rem; 
+            margin: 1rem 0; 
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
@@ -139,7 +145,7 @@
                 </table>
 
                 <div class="p-8 sm:p-12 min-h-[250px]">
-                    <div id="detailContent" class="editor-content text-slate-800 leading-relaxed text-base sm:text-lg"></div>
+                    <div id="detailContent" class="text-slate-800 leading-relaxed text-base sm:text-lg"></div>
                 </div>
             </div>
 
@@ -177,18 +183,23 @@
                     <input type="text" id="postWriter" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
                 </div>
                 <div>
-                    <div class="flex justify-between items-center mb-1">
+                    <div class="flex flex-wrap justify-between items-center mb-1 gap-2">
                         <label class="block text-xs font-bold text-slate-500 uppercase">내용 (서식 및 이미지 첨부 가능)</label>
-                        <!-- 에디터 툴바 -->
-                        <div class="flex items-center gap-2 text-xs">
+                        <!-- 에디터 툴바 (PT 단위 글씨 크기 및 폰트, 이미지 첨부) -->
+                        <div class="flex flex-wrap items-center gap-2 text-xs">
                             <select id="fontSizeSelect" onchange="changeFontSize(this.value)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
-                                <option value="3">글자 크기 (기본)</option>
-                                <option value="2">작게 (Small)</option>
-                                <option value="4">크게 (Large)</option>
-                                <option value="5">매우 크게 (X-Large)</option>
+                                <option value="">글자 크기 (기본)</option>
+                                <option value="10px">10 pt (매우 작게)</option>
+                                <option value="12px">12 pt (작게)</option>
+                                <option value="14px">14 pt (보통)</option>
+                                <option value="16px">16 pt (약간 크게)</option>
+                                <option value="20px">20 pt (크게)</option>
+                                <option value="24px">24 pt (매우 크게)</option>
+                                <option value="32px">32 pt (특대)</option>
                             </select>
                             <select id="fontFamilySelect" onchange="changeFontFamily(this.value)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
-                                <option value="Pretendard, sans-serif">기본 글꼴</option>
+                                <option value="">기본 글꼴</option>
+                                <option value="Pretendard, sans-serif">프리텐다드</option>
                                 <option value="Gulim, 굴림, sans-serif">굴림</option>
                                 <option value="Dotum, 돋움, sans-serif">돋움</option>
                                 <option value="Batang, 바탕, serif">바탕</option>
@@ -200,7 +211,7 @@
                             </label>
                         </div>
                     </div>
-                    <!-- 리치 텍스트 편집 영역 (contenteditable) -->
+                    <!-- 리치 텍스트 편집 영역 -->
                     <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto" placeholder="내용을 입력하세요"></div>
                 </div>
 
@@ -220,7 +231,7 @@
         </div>
     </footer>
 
-    <!-- 게시판 및 에디터 스크립트 -->
+    <!-- 스크립트 -->
     <script>
         const defaultPosts = [
             { id: 210, title: "팬오션, 2분기 영업이익 57.4% 증가한 1,937억 원 기록", writer: "관리자", date: "2026-08-03", views: 132, content: "탱커부문 영업이익 165.7% 성장…상반기 누적 영업익도 37.4% 늘어\n\n팬오션은 글로벌 불확실성 속에서도 철저한 리스크 관리와 시황 대응을 통해 견조한 실적을 달성했습니다." },
@@ -243,15 +254,29 @@
 
         let currentPostId = null;
 
-        // 에디터 서식 변경 함수
+        // PT 단위 글씨 크기 적용 (Selection 객체를 활용하여 span 태그로 감싸 크기 부여)
         function changeFontSize(size) {
-            document.execCommand('fontSize', false, size);
+            if (!size) return;
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+            
+            if (range.collapsed) return; // 선택된 텍스트가 없으면 리턴
+
+            const span = document.createElement('span');
+            span.style.fontSize = size;
+            span.appendChild(range.extractContents());
+            range.insertNode(span);
+            selection.removeAllRanges();
         }
+
+        // 글꼴 변경
         function changeFontFamily(font) {
+            if (!font) return;
             document.execCommand('fontName', false, font);
         }
 
-        // 이미지 첨부 및 Base64 변환 후 에디터에 삽입
+        // 이미지 첨부 문제 해결 (Base64 변환 후 상세 보기에서 정상 렌더링되도록 처리)
         function insertImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -259,11 +284,21 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const base64Image = e.target.result;
-                const imgHtml = `<img src="${base64Image}" alt="첨부 이미지" style="max-width:100%; border-radius:0.75rem; margin:1rem 0;" />`;
-                document.execCommand('insertHTML', false, imgHtml);
+                const editor = document.getElementById('postContentEditor');
+                
+                // 에디터 내에 이미지를 확실하게 삽입
+                const img = document.createElement('img');
+                img.src = base64Image;
+                img.style.maxWidth = "100%";
+                img.style.borderRadius = "0.75rem";
+                img.style.margin = "1rem 0";
+                
+                const range = window.getSelection().getRangeAt(0);
+                range.insertNode(img);
+                range.collapse(false);
             };
             reader.readAsDataURL(file);
-            event.target.value = ''; // 동일 파일 재선택 가능하도록 초기화
+            event.target.value = ''; 
         }
 
         // 테이블 렌더링
@@ -291,7 +326,7 @@
             });
         }
 
-        // 상세 보기 화면 전환
+        // 상세 보기 화면 전환 및 사진 정상 노출 보장
         function viewDetail(id) {
             const post = posts.find(p => p.id === id);
             if(!post) return;
@@ -304,7 +339,8 @@
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
             document.getElementById('detailViews').innerText = post.views;
-            // HTML 형식(서식 및 이미지 포함) 그대로 출력
+            
+            // 저장된 HTML 콘텐츠(이미지 포함)를 상세 화면에 그대로 삽입
             document.getElementById('detailContent').innerHTML = post.content;
 
             document.getElementById('listView').classList.add('hidden');
@@ -363,7 +399,7 @@
             event.preventDefault();
             const title = document.getElementById('postTitle').value;
             const writer = document.getElementById('postWriter').value;
-            const content = document.getElementById('postContentEditor').innerHTML; // HTML 서식 및 이미지 포함 내용 저장
+            const content = document.getElementById('postContentEditor').innerHTML;
             
             if (!content.trim() || content === '<br>') {
                 alert('내용을 입력해주세요.');
