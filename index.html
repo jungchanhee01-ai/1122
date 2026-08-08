@@ -124,15 +124,16 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section & News Board Combined Layout -->
     <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl my-12 border border-slate-200/80 shadow-sm">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">OUR CORE SERVICES</span>
+            <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">OUR CORE SERVICES & NEWS</span>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">해상부터 항공까지 통합 물류 솔루션</h2>
             <p class="text-slate-500 text-sm mt-3">수출입 고객의 특성에 맞춘 최적의 물류 경로와 투명한 정산 체계를 지원합니다.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 4개 코어 서비스 그리드 -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             <!-- Service 1 -->
             <div class="group bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm hover:bg-orange-600 hover:border-orange-600 transition-all duration-300">
                 <div class="w-14 h-14 rounded-xl bg-white text-orange-600 flex items-center justify-center text-2xl font-bold mb-6 group-hover:bg-white group-hover:text-orange-600 transition-colors shadow-sm">
@@ -173,10 +174,68 @@
                 <a href="index.html" class="text-xs font-semibold text-orange-600 group-hover:text-white inline-flex items-center gap-1">자세히 보기 <i class="ri-arrow-right-s-line"></i></a>
             </div>
         </div>
+
+        <!-- 요청하신 업계소식 및 공지사항 게시판 컴포넌트 (참고 이미지 스타일 반영) -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
+                <div class="flex items-center gap-8">
+                    <button class="text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1">공지사항</button>
+                    <button class="text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 transition-colors pb-1">업계소식</button>
+                </div>
+                <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
+                    More <i class="ri-arrow-right-s-line"></i>
+                </a>
+            </div>
+
+            <!-- 게시글 리스트 영역 (홈페이지에 올린 업계소식/공지사항 데이터 연동부) -->
+            <div class="divide-y divide-slate-200">
+                <!-- 아이템 1 -->
+                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div class="text-left w-16 shrink-0">
+                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">07.28</span>
+                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
+                            일본 오봉절 기간 위험물 및 특수화물 선적 제한 사항 안내
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
+                </a>
+
+                <!-- 아이템 2 -->
+                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div class="text-left w-16 shrink-0">
+                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">07.02</span>
+                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
+                            [안내] 부산 감만 CFS 종료 및 투엠글로벌 감만 CFS 이전 안내 (2026년 7월 1일부)
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
+                </a>
+
+                <!-- 아이템 3 -->
+                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div class="text-left w-16 shrink-0">
+                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">06.18</span>
+                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
+                            &lt;한국발 수출 Low Sulphur Fuel Surcharge 요율 변경 안내&gt;
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Cargo Tracking Section (부드러운 블루그레이 톤으로 시각적 충격 완화) -->
-    <section id="tracking" class="py-24 bg-slate-850 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800">
+    <!-- Cargo Tracking Section -->
+    <section id="tracking" class="py-24 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800">
         <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
             <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block mb-3">REAL-TIME VISIBILITY</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
@@ -212,7 +271,7 @@
         </div>
     </section>
 
-    <!-- Live Exchange Rates Section (은은한 아이보리/라이트 그레이 톤으로 자연스러운 전환) -->
+    <!-- Live Exchange Rates Section -->
     <section id="exchange" class="py-24 bg-slate-100/80 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
@@ -315,7 +374,7 @@
         </div>
     </section>
 
-    <!-- Quote Request Form Section (너무 무겁지 않은 부드러운 다크 그레이 톤으로 자연스러운 연결) -->
+    <!-- Quote Request Form Section -->
     <section id="quote" class="py-24 bg-slate-900 text-white relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 relative z-10">
             <div class="bg-slate-800/90 border border-slate-700 shadow-2xl rounded-3xl p-8 sm:p-12">
