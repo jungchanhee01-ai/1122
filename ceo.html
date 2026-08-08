@@ -25,26 +25,32 @@
             
             <!-- 중앙 네비게이션 메뉴 -->
             <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                <a href="ceo.html" class="text-orange-600 transition-colors">회사소개</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
+                <a href="ceo.html" class="text-orange-600 transition-colors" data-i18n="nav_intro">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="nav_ocean">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors" data-i18n="nav_air">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors" data-i18n="nav_triangle">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors" data-i18n="nav_customs">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors" data-i18n="nav_board">업계소식</a>
             </nav>
 
             <!-- 우측 버튼 영역 -->
             <div class="flex items-center gap-2 shrink-0" id="authButtons">
+                <!-- 언어 선택 셀렉트박스 -->
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-xl px-2.5 py-2.5 outline-none focus:border-orange-600 cursor-pointer shadow-sm">
+                    <option value="ko">KOR</option>
+                    <option value="en">ENG</option>
+                    <option value="zh">CHN</option>
+                </select>
                 <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
-                    <i class="ri-search-line"></i> 화물추적
+                    <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물추적</span>
                 </a>
                 <a href="index.html#quote" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
-                    견적요청 <i class="ri-arrow-right-line"></i>
+                    <span data-i18n="btn_quote">견적요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
                 
                 <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
                 <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
-                    <i class="ri-user-settings-line"></i> 관리자로그인
+                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자로그인</span>
                 </a>
             </div>  
         </div>
@@ -56,18 +62,18 @@
         <!-- 브레드크럼 및 페이지 타이틀 헤더 -->
         <div class="mb-12 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
-                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
                 <i class="ri-arrow-right-s-line"></i>
-                <span class="text-slate-900 font-bold">회사소개</span>
+                <span class="text-slate-900 font-bold" data-i18n="nav_intro">회사소개</span>
                 <i class="ri-arrow-right-s-line"></i>
-                <span class="text-orange-600 font-bold">CEO 인사말</span>
+                <span class="text-orange-600 font-bold" data-i18n="ceo_badge">CEO 인사말</span>
             </div>
             
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-orange-600"></span>
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C O M P A N Y &nbsp; I N T R O D U C T I O N</span>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="ceo_title">
                 고객의 입장에서 생각하는 <span class="text-orange-600">“최상의 물류 서비스”</span>를 제공하여 <br class="hidden sm:inline">
                 <span class="text-orange-600">“최고의 물류기업”</span>으로 거듭나겠습니다.
             </h1>
@@ -87,21 +93,21 @@
 
             <!-- 우측 텍스트 내용 -->
             <div class="md:col-span-7 space-y-6 text-slate-600 text-sm sm:text-base leading-relaxed">
-                <p>
+                <p data-i18n="ceo_desc1">
                     당사는 동남아 및 미국, 중남미 중심으로 전세계 600개국으로 국제운송 Air &amp; Sea뿐만 아니라 Sea &amp; Air를 연계한 최상의 물류 서비스를 제공하고 있으며 앞으로도 세계를 대표하는 종합물류 회사로 발전하여 명실공히 업계 수위의 자리를 차지하고 하고 있습니다.
                 </p>
-                <p>
+                <p data-i18n="ceo_desc2">
                     오랜 경험에서 축적된 풍부한 Know-how와 연구개발로 최고의 서비스를 자랑하는 저희 <strong class="text-slate-900 font-semibold">(주)퓨처지엘스</strong>는 3자 물류 서비스(Third Party Logistics) 제공업체로 사업영역을 확장하여, 경영환경이 갈수록 치열해지는 현재 상황에서 고객이 좀 더 저렴한 비용으로 최상의 서비스를 제공 받을 수 있도록 하기 위해 고객서비스는 한층 향상시키고, 물류비용은 절감함과 동시에 효율적인 물류운영에 힘쓰고 있으며, 고객이 원하는 것을 바로 고객의 입장에서 생각하는 최상의 물류 서비스를 제공하여 최고의 종합 물류기업으로 거듭나겠습니다.
                 </p>
                 
                 <!-- 하단 인사말 맺음말 강조 박스 -->
                 <div class="pt-6 border-t border-slate-200 mt-6 flex items-center justify-between">
-                    <p class="font-bold text-slate-900 text-base">
+                    <p class="font-bold text-slate-900 text-base" data-i18n="ceo_closing">
                         항상 협조 및 격려를 부탁드립니다. <br><span class="text-orange-600 font-normal">대단히 감사합니다.</span>
                     </p>
                     <div class="text-right">
-                        <span class="block text-xs text-slate-400">대표이사</span>
-                        <span class="text-lg font-bold text-slate-800">임직원 일동</span>
+                        <span class="block text-xs text-slate-400" data-i18n="ceo_title_sub">대표이사</span>
+                        <span class="text-lg font-bold text-slate-800" data-i18n="ceo_name">임직원 일동</span>
                     </div>
                 </div>
             </div>
@@ -118,9 +124,29 @@
         </div>
     </footer>
 
-    <!-- 로그인 상태 반영 스크립트 -->
+    <!-- 다국어 및 로그인 연동 스크립트 -->
+    <script src="translations.js"></script>
     <script>
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            if (typeof translations === 'undefined') return;
+            const t = translations[lang];
+            if (!t) return;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key];
+                }
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'ko';
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) langSelect.value = savedLang;
+            changeLanguage(savedLang);
+
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminBtn = document.getElementById('adminBtn');
             const authButtons = document.getElementById('authButtons');
@@ -135,7 +161,7 @@
 
                 const logoutBtn = document.createElement('button');
                 logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
-                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
+                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
                 logoutBtn.onclick = () => {
                     localStorage.removeItem('isAdminLoggedIn');
                     localStorage.removeItem('adminName');
