@@ -12,6 +12,9 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+        /* 마우스 호버 시 점이 나타나도록 설정하는 스타일 */
+        .nav-item .hover-dot { display: none; }
+        .nav-item:hover .hover-dot { display: block; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
@@ -21,17 +24,33 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 relative flex items-center justify-between">
             <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider z-10">FUTURE <span class="text-orange-600">GLS</span></a>
             
-            <!-- 항공운송 메뉴에만 주황색 글씨 및 상단 점 고정 적용 -->
+            <!-- 네비게이션 메뉴 (호버 및 현재 페이지 표시 적용) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 absolute left-1/2 -translate-x-1/2">
-                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
-                <a href="air.html" class="text-orange-600 transition-colors relative py-2">
+                <a href="ceo.html" class="nav-item hover:text-orange-600 transition-colors relative py-2">
+                    회사소개
+                    <span class="hover-dot absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+                </a>
+                <a href="ocean.html" class="nav-item hover:text-orange-600 transition-colors relative py-2">
+                    해상운송
+                    <span class="hover-dot absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+                </a>
+                <!-- 현재 머물고 있는 항공운송 페이지는 항상 표시 -->
+                <a href="air.html" class="nav-item text-orange-600 transition-colors relative py-2">
                     항공운송
                     <span class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
                 </a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
+                <a href="triangle.html" class="nav-item hover:text-orange-600 transition-colors relative py-2">
+                    삼국간운송
+                    <span class="hover-dot absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+                </a>
+                <a href="customs.html" class="nav-item hover:text-orange-600 transition-colors relative py-2">
+                    통관업무
+                    <span class="hover-dot absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+                </a>
+                <a href="board.html" class="nav-item hover:text-orange-600 transition-colors relative py-2">
+                    업계소식
+                    <span class="hover-dot absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-orange-600 rounded-full"></span>
+                </a>
             </nav>
 
             <div class="z-10 w-20"></div> <!-- 로고와 균형을 맞추기 위한 빈 공간 -->
