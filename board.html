@@ -19,7 +19,6 @@
             margin: 1rem 0; 
             display: block;
         }
-        #postContentEditor { font-size: 14px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
@@ -188,7 +187,7 @@
                         <!-- 에디터 툴바 -->
                         <div class="flex flex-wrap items-center gap-2 text-xs">
                             <select id="fontSizeSelect" onchange="changeFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
-                                <option value="">글자 크기 (기본)</option>
+                                <option value="">글자 크기 선택</option>
                                 <option value="12px">12 px (작게)</option>
                                 <option value="14px">14 px (보통)</option>
                                 <option value="16px">16 px (약간 크게)</option>
@@ -211,7 +210,7 @@
                         </div>
                     </div>
                     <!-- 리치 텍스트 편집 영역 -->
-                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
+                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
@@ -242,7 +241,7 @@
             { id: 204, title: "대만 완하이라인, 1.3만TEU급 컨선 도입 매듭…남미항로 취항", writer: "관리자", date: "2025-09-02", views: 707, content: "대형 컨테이너선 투입으로 남미 항로의 서비스 경쟁력이 한층 강화되었습니다." },
             { id: 203, title: "\"美 관세 부과 '선주문 효과' 끝\"…아시아 ..", writer: "관리자", date: "2025-08-05", views: 760, content: "미국의 관세 정책 변화에 따른 아시아권 수출입 시장의 동향 변화 분석 리포트입니다." },
             { id: 202, title: "하루에 컨테이너선 단 3척…美 최대 아시아 무역항도 '텅텅'", writer: "관리자", date: "2025-07-02", views: 773, content: "공급망 병목 현상 완화와 물동량 변동에 따른 주요 항만들의 가동 현황입니다." },
-            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
+            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "`관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
         ];
 
         let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
@@ -252,36 +251,40 @@
         }
 
         let currentPostId = null;
-        let selectedFontSize = ""; // 사용자가 지정한 글자 크기 상태 변수
+        let currentFontSize = "14px"; // 기본 글자 크기
 
         const editor = document.getElementById('postContentEditor');
 
-        // 1. 드롭다운에서 글자 크기를 고를 때
+        // 브라우저 기본 CSS 스타일 적용 모드 활성화
+        document.addEventListener("DOMContentLoaded", () => {
+            document.execCommand('styleWithCSS', false, true);
+        });
+
+        // 1. 글자 크기 드롭다운 변경 시 처리
         function changeFontSize(selectElem) {
             const size = selectElem.value;
-            selectedFontSize = size; // 선택한 크기를 기억
+            if (!size) return;
+            currentFontSize = size; // 앞으로 입력될 크기 기억
 
             editor.focus();
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
                 
-                // 드래그해서 선택한 글자가 있다면 그 영역만 즉시 크기 변경
+                // 드래그해서 선택한 텍스트가 있는 경우: 해당 영역만 크기 변경
                 if (!range.collapsed) {
                     const span = document.createElement('span');
                     span.style.fontSize = size;
                     span.appendChild(range.extractContents());
                     range.insertNode(span);
                     selection.removeAllRanges();
-                } 
-                else if (size) {
-                    // 드래그 없이 크기만 바꾼 경우, 현재 커서 위치에 스타일이 지정된 빈 span(또는 제로스페이스)을 심어둠
+                } else {
+                    // 드래그가 없는 경우: 커서 위치에 스타일이 지정된 빈 span을 삽입하여 이후 타이핑에 반영
                     const span = document.createElement('span');
                     span.style.fontSize = size;
-                    span.innerHTML = '&#8203;'; // 보이지 않는 공백 삽입
+                    span.innerHTML = '&#8203;'; // 제로 너비 공백
                     range.insertNode(span);
                     
-                    // 커서를 해당 span 안쪽으로 이동시켜서 바로 타이핑할 준비 완료
                     range.setStart(span, 0);
                     range.setEnd(span, 0);
                     selection.removeAllRanges();
@@ -290,29 +293,28 @@
             }
         }
 
-        // 2. 키보드로 글자를 입력할 때 워드/한글처럼 크기 자동 적용 (핵심 제어)
-        editor.addEventListener('keydown', (e) => {
-            // 글자 크기가 선택되어 있고, 일반 글자/숫자/특수문자/띄어쓰기/엔터를 칠 때
-            if (selectedFontSize && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault(); // 기본 브라우저 입력 차단
-
-                const selection = window.getSelection();
-                if (!selection.rangeCount) return;
-                const range = selection.getRangeAt(0);
-                range.deleteContents();
-
-                // 선택된 글자 크기가 적용된 span 노드 생성 후 입력 글자 삽입
-                const span = document.createElement('span');
-                span.style.fontSize = selectedFontSize;
-                span.textContent = e.key;
-
-                range.insertNode(span);
-
-                // 커서를 방금 입력한 글자 바로 뒤로 이동
-                range.setStartAfter(span);
-                range.setEndAfter(span);
-                selection.removeAllRanges();
-                selection.addRange(range);
+        // 2. 글을 입력할 때 현재 설정된 글자 크기로 자동 감싸기 (워드/한글 방식)
+        editor.addEventListener('input', (e) => {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            const range = selection.getRangeAt(0);
+            const container = range.commonAncestorContainer;
+            
+            // 현재 커서가 특정 span(글자크기가 지정된 곳) 안에 있지 않다면 현재 설정된 크기로 감싸기
+            let parentSpan = container.nodeType === 3 ? container.parentElement : container;
+            if (parentSpan && parentSpan !== editor && !parentSpan.style.fontSize) {
+                // 이미 스타일이 없는 일반 텍스트 노드일 경우 크기 적용
+                if (container.nodeType === 3 && container.textContent.length === 1) {
+                    const span = document.createElement('span');
+                    span.style.fontSize = currentFontSize;
+                    span.textContent = container.textContent;
+                    container.parentNode.replaceChild(span, container);
+                    
+                    range.setStartAfter(span);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
             }
         });
 
@@ -444,7 +446,7 @@
             document.getElementById('writeForm').reset();
             editor.innerHTML = '';
             document.getElementById('fontSizeSelect').value = "";
-            selectedFontSize = "";
+            currentFontSize = "14px";
         }
 
         // 새 글 등록 제출
