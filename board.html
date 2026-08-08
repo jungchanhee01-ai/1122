@@ -19,6 +19,8 @@
             margin: 1rem 0; 
             display: block;
         }
+        /* 에디터 내부 기본 글자 크기 강제 기본값 설정 */
+        #postContentEditor { font-size: 14px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
@@ -188,7 +190,6 @@
                         <div class="flex flex-wrap items-center gap-2 text-xs">
                             <select id="fontSizeSelect" onchange="changeFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">글자 크기 (기본)</option>
-                                <option value="10px">10 px (매우 작게)</option>
                                 <option value="12px">12 px (작게)</option>
                                 <option value="14px">14 px (보통)</option>
                                 <option value="16px">16 px (약간 크게)</option>
@@ -210,8 +211,8 @@
                             </label>
                         </div>
                     </div>
-                    <!-- 리치 텍스트 편집 영역 -->
-                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto" placeholder="내용을 입력하세요"></div>
+                    <!-- 리치 텍스트 편집 영역 (워드 방식 실시간 타이핑 적용) -->
+                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
@@ -252,52 +253,62 @@
         }
 
         let currentPostId = null;
+        let activeFontSize = ""; // 사용자가 선택한 현재 글자 크기 상태 유지
 
-        // 에디터 초기화 시 스타일 제어 설정
-        document.addEventListener("DOMContentLoaded", () => {
-            document.execCommand('styleWithCSS', false, true);
-        });
+        const editor = document.getElementById('postContentEditor');
 
-        // 글자 크기 변경 함수 (드래그 변경 및 선택한 순간부터 자동 적용 기능 통합)
+        // 글자 크기 선택 시 상태 저장 및 드래그 영역 즉시 변경
         function changeFontSize(selectElem) {
             const size = selectElem.value;
-            if (!size) return;
+            activeFontSize = size; // 선택한 크기를 기억 (이후 타이핑 시 적용)
 
-            const editor = document.getElementById('postContentEditor');
             editor.focus();
-
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
-                
-                // 드래그된 텍스트가 있는 경우: 해당 영역만 크기 변경
+                // 드래그된 텍스트가 있으면 해당 부분만 즉시 크기 변경
                 if (!range.collapsed) {
                     const span = document.createElement('span');
                     span.style.fontSize = size;
                     span.appendChild(range.extractContents());
                     range.insertNode(span);
                     selection.removeAllRanges();
-                } else {
-                    // 드래그가 없는 경우: 커서 위치에 빈 span을 삽입하여 이후 타이핑되는 글자가 이 크기를 따르게 함
-                    const span = document.createElement('span');
-                    span.style.fontSize = size;
-                    span.innerHTML = '&#8203;'; // 보이지 않는 제로 너비 공백 삽입
-                    range.insertNode(span);
-                    
-                    // 커서를 방금 만든 span 안쪽으로 이동
-                    range.setStart(span, 0);
-                    range.setEnd(span, 0);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
                 }
             }
         }
+
+        // 워드/한글처럼 글자 크기를 선택해두면 타이핑할 때마다 그 크기로 입력되도록 가로채기
+        editor.addEventListener('beforeinput', (e) => {
+            if (!activeFontSize) return; // 기본 크기면 통과
+
+            // 텍스트를 입력하는 상황일 때
+            if (e.inputType === 'insertText' && e.data) {
+                e.preventDefault(); // 기본 입력 차단 후 커스텀 적용
+
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+                const range = selection.getRangeAt(0);
+                range.deleteContents();
+
+                // 선택된 글자 크기가 적용된 span 생성 후 글자 주입
+                const span = document.createElement('span');
+                span.style.fontSize = activeFontSize;
+                span.textContent = e.data;
+
+                range.insertNode(span);
+                
+                // 커서를 방금 입력한 글자 뒤로 이동
+                range.setStartAfter(span);
+                range.setEndAfter(span);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        });
 
         // 글꼴 변경 함수
         function changeFontFamily(selectElem) {
             const font = selectElem.value;
             if (!font) return;
-            const editor = document.getElementById('postContentEditor');
             editor.focus();
             document.execCommand('fontName', false, font);
             selectElem.value = "";
@@ -311,7 +322,6 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const base64Image = e.target.result;
-                const editor = document.getElementById('postContentEditor');
                 editor.focus();
 
                 const img = document.createElement('img');
@@ -421,8 +431,9 @@
         function closeWriteModal() {
             document.getElementById('writeModal').classList.add('hidden');
             document.getElementById('writeForm').reset();
-            document.getElementById('postContentEditor').innerHTML = '';
+            editor.innerHTML = '';
             document.getElementById('fontSizeSelect').value = "";
+            activeFontSize = "";
         }
 
         // 새 글 등록 제출
@@ -430,7 +441,7 @@
             event.preventDefault();
             const title = document.getElementById('postTitle').value;
             const writer = document.getElementById('postWriter').value;
-            const content = document.getElementById('postContentEditor').innerHTML;
+            const content = editor.innerHTML;
             
             if (!content.trim() || content === '<br>') {
                 alert('내용을 입력해주세요.');
