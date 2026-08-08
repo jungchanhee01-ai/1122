@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -35,12 +35,7 @@
                 <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
                 <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
                 <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
-                <a href="index.html#quote" class="hover:text-orange-600 transition-colors">견적문의</a>
             </nav>
-
-            <a href="index.html#quote" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
-                견적 문의
-            </a>
         </div>
     </header>
 
@@ -253,9 +248,8 @@
 
         let currentPostId = null;
         const editor = document.getElementById('postContentEditor');
-        let savedRange = null; // 선택 영역 메모리 변수
+        let savedRange = null;
 
-        // [핵심] 에디터 내에서 드래그/클릭할 때마다 영역을 저장
         function saveSelection() {
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
@@ -266,7 +260,6 @@
             }
         }
 
-        // 저장된 선택 영역을 복원하고 스타일에 맞게 감싸기
         function applyStyle(styleProperty, styleValue) {
             editor.focus();
             const selection = window.getSelection();
@@ -304,7 +297,6 @@
             saveSelection(); 
         }
 
-        // 글자 크기 변경 실행
         function applyFontSize(selectElem) {
             const size = selectElem.value;
             if (!size) return;
@@ -312,7 +304,6 @@
             selectElem.value = ""; 
         }
 
-        // 글꼴 변경 실행
         function applyFontFamily(selectElem) {
             const font = selectElem.value;
             if (!font) return;
@@ -320,7 +311,6 @@
             selectElem.value = "";
         }
 
-        // 이미지 삽입 함수
         function insertImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -356,7 +346,6 @@
             event.target.value = ''; 
         }
 
-        // 테이블 렌더링
         function renderTable(data) {
             const tbody = document.getElementById('boardBody');
             tbody.innerHTML = '';
@@ -381,7 +370,6 @@
             });
         }
 
-        // 상세 보기 화면 전환
         function viewDetail(id) {
             const post = posts.find(p => p.id === id);
             if(!post) return;
@@ -402,7 +390,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 목록으로 돌아가기
         function showListView() {
             currentPostId = null;
             document.getElementById('detailView').classList.add('hidden');
@@ -412,7 +399,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 게시글 삭제
         function deletePost() {
             if(confirm('정말 이 게시글을 삭제하시겠습니까?')) {
                 posts = posts.filter(p => p.id !== currentPostId);
@@ -422,7 +408,6 @@
             }
         }
 
-        // 검색 기능
         function searchBoard() {
             const type = document.getElementById('searchType').value;
             const keyword = document.getElementById('searchInput').value.toLowerCase();
@@ -437,7 +422,6 @@
             renderTable(filtered);
         }
 
-        // 모달 제어
         function openWriteModal() {
             document.getElementById('writeModal').classList.remove('hidden');
         }
@@ -450,7 +434,6 @@
             document.getElementById('fontFamilySelect').value = "";
         }
 
-        // 새 글 등록 제출
         function submitPost(event) {
             event.preventDefault();
             const title = document.getElementById('postTitle').value;
@@ -480,7 +463,6 @@
             alert('성공적으로 등록되었습니다.');
         }
 
-        // 초기 로딩
         renderTable(posts);
     </script>
 </body>
