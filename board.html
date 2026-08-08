@@ -71,13 +71,13 @@
                 <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
                     퓨처지엘스의 소식과 <span class="text-orange-600">최신 물류 트렌드</span>
                 </h1>
-                <!-- 관리자 전용 글쓰기 버튼 (초기 비공개) -->
+                <!-- 관리자 전용 글쓰기 버튼 영역 (로그인 시에만 생성) -->
                 <div id="writeBtnContainer"></div>
             </div>
         </div>
 
         <div class="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-            <!-- 검색창 영역 복구 -->
+            <!-- 검색창 영역 -->
             <div class="flex flex-col sm:flex-row gap-3 justify-between items-center pb-6 border-b border-slate-100">
                 <div class="text-sm font-bold text-slate-700">
                     전체 소식 <span class="text-orange-600" id="totalCount">2</span>건
@@ -102,7 +102,6 @@
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="text-xs text-slate-400">2026.06.01</span>
-                        <!-- 관리자 전용 삭제 버튼 영역 -->
                         <div class="admin-delete-container"></div>
                     </div>
                 </div>
@@ -113,7 +112,6 @@
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="text-xs text-slate-400">2026.05.20</span>
-                        <!-- 관리자 전용 삭제 버튼 영역 -->
                         <div class="admin-delete-container"></div>
                     </div>
                 </div>
@@ -153,7 +151,7 @@
                 };
                 authButtons.appendChild(logoutBtn);
 
-                // 관리자 로그인 시 글쓰기 버튼 생성
+                // 관리자 로그인 시 글쓰기 버튼 생성 (에러 방지를 위해 실제 존재하는 글쓰기 페이지 경로에 맞게 연결)
                 const writeContainer = document.getElementById('writeBtnContainer');
                 if (writeContainer) {
                     writeContainer.innerHTML = `
@@ -165,7 +163,7 @@
 
                 // 관리자 로그인 시 각 게시글에 삭제 버튼 생성
                 const deleteContainers = document.querySelectorAll('.admin-delete-container');
-                deleteContainers.forEach((container, idx) => {
+                deleteContainers.forEach((container) => {
                     container.innerHTML = `
                         <button onclick="deletePost(this)" class="text-xs text-red-500 hover:text-red-700 font-semibold px-2 py-1 bg-red-50 rounded border border-red-100 transition-colors">
                             삭제
@@ -215,7 +213,6 @@
             if (confirm('정말 이 게시글을 삭제하시겠습니까?')) {
                 const item = button.closest('.board-item');
                 item.remove();
-                // 전체 개수 갱신
                 const currentCount = document.querySelectorAll('.board-item').length;
                 document.getElementById('totalCount').innerText = currentCount;
             }
@@ -254,7 +251,6 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // 페이지 로드 및 번역 적용 후 화면 표시
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.body.classList.add('translated');
