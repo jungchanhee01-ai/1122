@@ -209,6 +209,7 @@
         </div>
     </section>
 <!-- REAL-TIME VISIBILITY: B/L 화물 추적 섹션 -->
+<!-- REAL-TIME VISIBILITY: B/L 화물 추적 섹션 -->
 <section id="tracking-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-8">
         <span class="text-xs font-bold text-orange-500 uppercase tracking-widest block mb-2">REAL-TIME VISIBILITY</span>
@@ -216,16 +217,16 @@
         <p class="text-slate-400 text-xs sm:text-sm mt-2">B/L (선하증권) 번호를 입력하시면 글로벌 트래킹 시스템에서 즉시 조회 가능합니다.</p>
     </div>
 
-    <!-- B/L 검색 폼 -->
-    <form onsubmit="handleTrackingSubmit(event)" class="flex gap-2 max-w-xl mx-auto mb-8">
+    <!-- B/L 검색 폼 (onsubmit 및 input 수정 완료) -->
+    <div class="flex gap-2 max-w-xl mx-auto mb-8">
         <input type="text" id="blNumberInput" placeholder="B/L 번호를 입력하세요 (예: MAEU1234567)" class="flex-1 bg-slate-900 text-white border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-orange-500">
-        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-colors flex items-center gap-2 shadow-lg shadow-orange-500/20">
+        <button type="button" onclick="handleTrackingSubmit()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-colors flex items-center gap-2 shadow-lg shadow-orange-500/20 cursor-pointer">
             🔍 실시간 조회
         </button>
-    </form>
+    </div>
 
-    <!-- 실시간 지도/트래킹 iFrame 결과 컨테이너 -->
-    <div id="trackingResultContainer" class="w-full bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl transition-all duration-300">
+    <!-- 실시간 지도 컨테이너 (정상 작동하는 VesselFinder Embed URL 적용) -->
+    <div id="trackingResultContainer" class="w-full bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl">
         <div id="trackingHeader" class="p-4 bg-slate-950 border-b border-slate-800 flex justify-between items-center text-xs sm:text-sm">
             <span class="text-slate-300 font-bold flex items-center gap-2">
                 🌐 글로벌 선박 실시간 모니터링 레이더
@@ -233,15 +234,15 @@
             <span id="currentTrackingBL" class="text-orange-400 font-mono font-bold"></span>
         </div>
         
-       <iframe 
-    id="trackingIframe"
-    src="https://www.vesselfinder.com/embed"
-    width="100%" 
-    height="500" 
-    frameborder="0" 
-    scrolling="no"
-    class="w-full border-0">
-</iframe>
+        <iframe 
+            id="trackingIframe"
+            src="https://www.vesselfinder.com/aais-embed?zoom=3&lat=20&lon=120&width=100%25&height=500&names=true"
+            width="100%" 
+            height="500" 
+            frameborder="0" 
+            scrolling="no"
+            class="w-full border-0">
+        </iframe>
     </div>
 </section>
     <!-- Live Exchange Rates Section -->
@@ -542,25 +543,28 @@
         // 4. B/L 화물 추적 제출
       // 4. B/L 화물 추적 제출 (내 사이트 내부 iFrame 연동)
        // 4. B/L 화물 추적 제출
-function handleTrackingSubmit(e) {
-    e.preventDefault();
-    const blInput = document.getElementById('blNumberInput').value.trim();
+// 4. B/L 화물 추적 제출 (버튼 클릭시 실행)
+function handleTrackingSubmit() {
+    const inputEl = document.getElementById('blNumberInput');
+    const blInput = inputEl ? inputEl.value.trim() : '';
     
     if (!blInput) {
         alert('B/L 번호를 입력해 주세요.');
         return;
     }
 
-    // 상단 텍스트 변경
+    // 화면 상단에 입력한 B/L 번호 표시
     const headerBL = document.getElementById('currentTrackingBL');
     if (headerBL) {
         headerBL.innerText = `조회 B/L: ${blInput.toUpperCase()}`;
     }
 
-    // SafeCube 추적 페이지를 새 탭에서 열어 오차 없이 완벽하게 조회시킵니다.
+    // B/L 번호를 품은 트래킹 페이지를 새 창으로 열어줍니다.
     const trackingUrl = `https://www.safecube.ai/resource/container-tracking?number=${encodeURIComponent(blInput)}`;
     window.open(trackingUrl, '_blank');
 }
+
+    
             // 내 사이트 안의 iframe 화면 전환
             const iframe = document.getElementById('trackingIframe');
             if (iframe) {
