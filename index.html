@@ -516,6 +516,7 @@
         let activeBL = '';
 
      // B/L 실시간 화물 추적 (해상 화물 전용 무제한 트래커)
+   // B/L 실시간 화물 추적 (주요 선사 공식 조회 시스템 다이렉트 연동)
         function handleTrackingSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             
@@ -527,9 +528,42 @@
                 return;
             }
 
-            // 해상 B/L 전용 트래커 (Not Found 및 일일 제한 없음)
-            const targetUrl = `https://www.track-trace.com/bol?query=${encodeURIComponent(blInput)}`;
-            window.open(targetUrl, '_blank');
+            // 1. 고려해운 (KMTC)
+            if (blInput.startsWith('KMTC')) {
+                window.open(`https://www.ekmtc.com/eservice/dis/DIS3001N.do?blNo=${encodeURIComponent(blInput)}`, '_blank');
+                return;
+            }
+
+            // 2. SITC
+            if (blInput.startsWith('SITC')) {
+                window.open(`https://www.sitc.com/en/tracking.html?blNo=${encodeURIComponent(blInput)}`, '_blank');
+                return;
+            }
+
+            // 3. 장금상선 (Sinokor / SNKO)
+            if (blInput.startsWith('SNKO') || blInput.startsWith('SKOR')) {
+                window.open(`https://www.sinokor.co.kr/eservice/dis/DIS3001N.do?blNo=${encodeURIComponent(blInput)}`, '_blank');
+                return;
+            }
+
+            // 4. 두우해운 (Dongwoo / DOWO)
+            if (blInput.startsWith('DOWO') || blInput.startsWith('DOW')) {
+                window.open(`http://www.dowoo.com/eservice/dis/DIS3001N.do?blNo=${encodeURIComponent(blInput)}`, '_blank');
+                return;
+            }
+
+            // 5. 기타 대표 글로벌 선사 (머스크, HMM, MSC 등)
+            if (blInput.startsWith('MAEU') || blInput.startsWith('MSK')) {
+                window.open(`https://www.maersk.com/tracking/${encodeURIComponent(blInput)}`, '_blank');
+                return;
+            }
+            if (blInput.startsWith('HDMU') || blInput.startsWith('HMM')) {
+                window.open(`https://www.hmm21.com/cms/company/kor/index.jsp`, '_blank');
+                return;
+            }
+
+            // 6. 목록에 없는 기타 선사 B/L 입력 시 (공통 안내)
+            alert('입력하신 B/L의 선사 시스템으로 연결할 수 없습니다.\n고려해운(KMTC), SITC, 장금상선(SNKO), 두우해운(DOWO) 등의 B/L 번호를 확인해 주세요.');
         }
 
         // 6. 위성 레이더 상세 조회 팝업
