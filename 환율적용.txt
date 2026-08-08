@@ -185,28 +185,43 @@
 
     <!-- Cargo Tracking Section -->
     <section id="tracking" class="py-24 bg-slate-950 text-white relative overflow-hidden border-y border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <span class="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2">REAL-TIME VISIBILITY</span>
-            <h2 class="text-2xl sm:text-4xl font-bold mb-4">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mb-8">B/L (선하증권) 번호를 입력하시면 글로벌 트래킹 시스템에서 즉시 조회 가능합니다.</p>
+       <!-- 🚢 B/L 실시간 화물 추적 영역 (확장형 디자인) -->
+<div class="text-center my-12 px-4">
+    <span class="text-xs font-bold tracking-widest text-orange-500 uppercase">REAL-TIME VISIBILITY</span>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
+    <p class="text-slate-400 text-base mb-8">B/L (선하증권) 번호와 선사를 선택하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
 
-            <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl max-w-2xl mx-auto backdrop-blur">
-                <form id="trackingForm" onsubmit="handleTrackingSubmit(event)" class="flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <i class="ri-barcode-box-line absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                        <input type="text" id="blNumberInput" required placeholder="B/L 번호를 입력하세요 (예: MAEU1234567)" 
-                            class="w-full pl-11 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors uppercase">
-                    </div>
-                    <button type="submit" class="px-8 py-3.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-orange-500/20 transition-all flex items-center justify-center gap-2 whitespace-nowrap">
-                        <i class="ri-search-2-line"></i> 실시간 조회
-                    </button>
-                </form>
-                <div class="mt-4 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2 px-1">
-                    <span class="flex items-center gap-1.5"><i class="ri-check-line text-orange-400"></i> B/L 번호 자동 연동 지원</span>
-                    <span class="flex items-center gap-1.5"><i class="ri-shield-check-line text-orange-400"></i> 24/7 글로벌 파트너사 데이터 연동</span>
-                </div>
+    <!-- 묵직하고 넓은 네모난 둥근 테두리 틀 -->
+    <div class="max-w-4xl mx-auto bg-slate-900/80 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-xl">
+        
+        <!-- 입력폼 그룹 (간격과 높이 확장) -->
+        <div class="flex flex-col md:flex-row items-center gap-4">
+            <!-- 1. 선사 선택 드롭다운 -->
+            <select id="carrierSelect" class="w-full md:w-56 bg-slate-950 text-white text-base font-bold px-5 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500">
+                <option value="KMTC">고려해운 (KMTC)</option>
+                <option value="SINOKOR">장금상선 (Sinokor)</option>
+                <option value="DOOWOO">두우해운 (Doowoo)</option>
+                <option value="SITC">SITC</option>
+            </select>
+
+            <!-- 2. B/L 번호 입력창 -->
+            <div class="relative flex-1 w-full">
+                <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="w-full bg-slate-950 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 placeholder-slate-500">
             </div>
+
+            <!-- 3. 실시간 조회 버튼 -->
+            <button type="button" onclick="openCarrierTracking()" class="w-full md:w-auto bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                <span>실시간 조회 ↗</span>
+            </button>
         </div>
+
+        <!-- 박스 내부 하단 텍스트 -->
+        <div class="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-slate-400 mt-6 px-2 border-t border-slate-800 pt-5 gap-2">
+            <span class="flex items-center gap-1.5">✓ 선사별 공식 시스템 실시간 연동</span>
+            <span class="flex items-center gap-1.5">🛡️ 24/7 안전한 트래킹 서비스</span>
+        </div>
+    </div>
+</div>
     </section>
 
     <!-- Live Exchange Rates Section -->
