@@ -12,7 +12,6 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
-        /* 에디터 및 상세 화면 내 이미지 크기 및 레이아웃 제어 */
         .editor-content img, #detailContent img { 
             max-width: 100% !important; 
             height: auto !important; 
@@ -185,19 +184,19 @@
                 <div>
                     <div class="flex flex-wrap justify-between items-center mb-1 gap-2">
                         <label class="block text-xs font-bold text-slate-500 uppercase">내용 (서식 및 이미지 첨부 가능)</label>
-                        <!-- 에디터 툴바 (PT 단위 글씨 크기 및 폰트, 이미지 첨부) -->
+                        <!-- 에디터 툴바 -->
                         <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <select id="fontSizeSelect" onchange="changeFontSize(this.value)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
+                            <select id="fontSizeSelect" onchange="changeFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">글자 크기 (기본)</option>
-                                <option value="10px">10 pt (매우 작게)</option>
-                                <option value="12px">12 pt (작게)</option>
-                                <option value="14px">14 pt (보통)</option>
-                                <option value="16px">16 pt (약간 크게)</option>
-                                <option value="20px">20 pt (크게)</option>
-                                <option value="24px">24 pt (매우 크게)</option>
-                                <option value="32px">32 pt (특대)</option>
+                                <option value="10pt">10 pt (매우 작게)</option>
+                                <option value="12pt">12 pt (작게)</option>
+                                <option value="14pt">14 pt (보통)</option>
+                                <option value="16pt">16 pt (약간 크게)</option>
+                                <option value="20pt">20 pt (크게)</option>
+                                <option value="24pt">24 pt (매우 크게)</option>
+                                <option value="32pt">32 pt (특대)</option>
                             </select>
-                            <select id="fontFamilySelect" onchange="changeFontFamily(this.value)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
+                            <select id="fontFamilySelect" onchange="changeFontFamily(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">기본 글꼴</option>
                                 <option value="Pretendard, sans-serif">프리텐다드</option>
                                 <option value="Gulim, 굴림, sans-serif">굴림</option>
@@ -254,29 +253,38 @@
 
         let currentPostId = null;
 
-        // PT 단위 글씨 크기 적용 (Selection 객체를 활용하여 span 태그로 감싸 크기 부여)
-        function changeFontSize(size) {
+        // PT 단위 글자 크기 즉시 적용 함수 (선택 영역에 span 스타일 주입)
+        function changeFontSize(selectElem) {
+            const size = selectElem.value;
             if (!size) return;
+
             const selection = window.getSelection();
             if (!selection.rangeCount) return;
             const range = selection.getRangeAt(0);
             
-            if (range.collapsed) return; // 선택된 텍스트가 없으면 리턴
+            if (range.collapsed) {
+                alert('크기를 변경할 텍스트를 드래그하여 선택해주세요.');
+                selectElem.value = "";
+                return;
+            }
 
             const span = document.createElement('span');
             span.style.fontSize = size;
             span.appendChild(range.extractContents());
             range.insertNode(span);
             selection.removeAllRanges();
+            selectElem.value = ""; // 셀렉트 박스 초기화
         }
 
-        // 글꼴 변경
-        function changeFontFamily(font) {
+        // 글꼴 변경 함수
+        function changeFontFamily(selectElem) {
+            const font = selectElem.value;
             if (!font) return;
             document.execCommand('fontName', false, font);
+            selectElem.value = "";
         }
 
-        // 이미지 첨부 문제 해결 (Base64 변환 후 상세 보기에서 정상 렌더링되도록 처리)
+        // 이미지 삽입 함수
         function insertImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -285,17 +293,22 @@
             reader.onload = function(e) {
                 const base64Image = e.target.result;
                 const editor = document.getElementById('postContentEditor');
-                
-                // 에디터 내에 이미지를 확실하게 삽입
+                editor.focus();
+
                 const img = document.createElement('img');
                 img.src = base64Image;
                 img.style.maxWidth = "100%";
                 img.style.borderRadius = "0.75rem";
                 img.style.margin = "1rem 0";
                 
-                const range = window.getSelection().getRangeAt(0);
-                range.insertNode(img);
-                range.collapse(false);
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    range.insertNode(img);
+                    range.collapse(false);
+                } else {
+                    editor.appendChild(img);
+                }
             };
             reader.readAsDataURL(file);
             event.target.value = ''; 
@@ -326,7 +339,7 @@
             });
         }
 
-        // 상세 보기 화면 전환 및 사진 정상 노출 보장
+        // 상세 보기 화면 전환
         function viewDetail(id) {
             const post = posts.find(p => p.id === id);
             if(!post) return;
@@ -339,8 +352,6 @@
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
             document.getElementById('detailViews').innerText = post.views;
-            
-            // 저장된 HTML 콘텐츠(이미지 포함)를 상세 화면에 그대로 삽입
             document.getElementById('detailContent').innerHTML = post.content;
 
             document.getElementById('listView').classList.add('hidden');
