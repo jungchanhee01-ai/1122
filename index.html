@@ -39,20 +39,28 @@
 <body class="antialiased selection:bg-orange-500 selection:text-white">
 
     <!-- Top Bar -->
-    <div class="bg-slate-950 text-slate-400 text-xs py-2 px-4 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-400"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
-                <span class="hidden md:inline text-slate-700">|</span>
-                <span class="hidden md:inline text-slate-400">고객센터: 02-6203-8800 (평일 09:00 - 18:00)</span>
-            </div>
-            <div class="flex items-center gap-4 font-medium">
-                <a href="#tracking" class="hover:text-orange-400 transition-colors">화물 추적</a>
-                <a href="#exchange" class="hover:text-orange-400 transition-colors">환율 조회</a>
-                <a href="#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold">견적 요청</a>
-            </div>
-        </div>
+   <!-- 🚢 선사별 B/L 원터치 실시간 추적 -->
+<div class="bg-slate-800 p-6 rounded-xl border border-slate-700 max-w-2xl mx-auto my-6">
+    <h3 class="text-xl font-bold text-white mb-4">🚢 B/L 실시간 화물 추적</h3>
+    
+    <div class="flex flex-col sm:flex-row gap-2">
+        <!-- 1. 선사 선택 -->
+        <select id="carrierSelect" class="bg-slate-900 text-white p-3 rounded border border-slate-700 font-bold outline-none">
+            <option value="KMTC">고려해운 (KMTC)</option>
+            <option value="SINOKOR">장금상선 (Sinokor)</option>
+            <option value="DOOWOO">두우해운 (Doowoo)</option>
+            <option value="SITC">SITC</option>
+        </select>
+        
+        <!-- 2. B/L 번호 입력창 -->
+        <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="bg-slate-900 text-white p-3 rounded border border-slate-700 flex-1 outline-none">
+        
+        <!-- 3. 조회 버튼 -->
+        <button type="button" onclick="openCarrierTracking()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded transition-colors">
+            실시간 조회 ↗
+        </button>
     </div>
+</div>
 
     <!-- Main Header -->
     <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white shadow-xl border-b border-slate-800">
@@ -523,6 +531,41 @@
 
         // 6. 페이지 로드시 환율 불러오기 실행
         window.addEventListener('DOMContentLoaded', fetchExchangeRates);
+        // 선사별 공식 조회 페이지 새창 이동 함수
+function openCarrierTracking() {
+    const blInput = document.getElementById('blInput');
+    const carrierSelect = document.getElementById('carrierSelect');
+
+    if (!blInput || !blInput.value.trim()) {
+        alert('B/L 번호를 입력해 주세요!');
+        return;
+    }
+
+    const blNo = blInput.value.trim();
+    const carrier = carrierSelect.value;
+    let targetUrl = '';
+
+    // 선택한 선사에 맞는 공식 Tracking URL 생성
+    switch (carrier) {
+        case 'KMTC':
+            targetUrl = `https://www.kmtc.co.kr/eservice/track/trackList.do?blNo=${encodeURIComponent(blNo)}`;
+            break;
+        case 'SINOKOR':
+            targetUrl = `https://www.sinokor.co.kr/eservice/tracking/tracking.do?blNo=${encodeURIComponent(blNo)}`;
+            break;
+        case 'DOOWOO':
+            targetUrl = `http://www.dws.co.kr/eservice/track/trackList.do?blNo=${encodeURIComponent(blNo)}`;
+            break;
+        case 'SITC':
+            targetUrl = `http://www.sitc.co.kr/ebusiness/tracking.do?blNo=${encodeURIComponent(blNo)}`;
+            break;
+        default:
+            targetUrl = `https://www.searates.com/container/tracking/?number=${encodeURIComponent(blNo)}`;
+    }
+
+    // 새 탭(창)으로 바로 열기
+    window.open(targetUrl, '_blank');
+}
     </script>
 </body>
 </html>
