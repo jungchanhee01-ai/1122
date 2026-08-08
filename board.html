@@ -70,7 +70,7 @@
 
         <!-- [뷰 1] 목록 화면 -->
         <div id="listView">
-            <!-- 탭 메뉴 (전체 / 공지사항 / 업계소식) -->
+            <!-- 탭 메뉴 -->
             <div class="flex gap-2 mb-6">
                 <button onclick="filterTab('all')" id="tabAll" class="px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all">전체</button>
                 <button onclick="filterTab('공지사항')" id="tabNotice" class="px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">공지사항</button>
@@ -91,14 +91,9 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 text-center text-slate-600" id="boardBody">
-                            <!-- 동적 렌더링 -->
+                            <tr><td colspan="6" class="py-8 text-slate-400">데이터를 불러오는 중...</td></tr>
                         </tbody>
                     </table>
-                </div>
-
-                <!-- 페이지네이션 -->
-                <div class="py-6 bg-slate-50 border-t border-slate-200 flex justify-center items-center gap-1.5 text-sm font-semibold">
-                    <button class="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center shadow-sm">1</button>
                 </div>
             </div>
 
@@ -117,7 +112,7 @@
             </div>
         </div>
 
-        <!-- [뷰 2] 상세 보기 화면 (기본 숨김) -->
+        <!-- [뷰 2] 상세 보기 화면 -->
         <div id="detailView" class="hidden">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
                 <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
@@ -164,7 +159,7 @@
 
     <!-- 글쓰기 모달 팝업 -->
     <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
             <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
                 <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-orange-600"></span> 게시글 작성
@@ -175,17 +170,16 @@
             </div>
 
             <form id="writeForm" onsubmit="submitPost(event)" class="space-y-4">
-                <!-- 커스텀 드롭다운 카테고리 선택 -->
                 <div class="relative">
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1">카테고리 선택</label>
                     <input type="hidden" id="postCategory" value="공지사항">
-                    <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer focus:border-orange-600">
+                    <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer">
                         <span id="selectedCategoryText">공지사항</span>
                         <i id="dropdownIcon" class="ri-arrow-down-s-line text-slate-400 transition-transform"></i>
                     </div>
                     <div id="dropdownMenu" class="hidden absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-20">
-                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors">공지사항</div>
-                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors">업계소식</div>
+                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">공지사항</div>
+                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">업계소식</div>
                     </div>
                 </div>
 
@@ -199,8 +193,7 @@
                 </div>
                 <div>
                     <div class="flex flex-wrap justify-between items-center mb-1 gap-2">
-                        <label class="block text-xs font-bold text-slate-500 uppercase">내용 (서식 및 이미지 첨부 가능)</label>
-                        <!-- 에디터 툴바 -->
+                        <label class="block text-xs font-bold text-slate-500 uppercase">내용</label>
                         <div class="flex flex-wrap items-center gap-2 text-xs">
                             <select id="fontSizeSelect" onmousedown="saveSelection()" onchange="applyFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
                                 <option value="">글자 크기 선택</option>
@@ -209,16 +202,6 @@
                                 <option value="16px">16 px (기본)</option>
                                 <option value="20px">20 px (크게)</option>
                                 <option value="24px">24 px (매우 크게)</option>
-                                <option value="28px">28 px (특대)</option>
-                                <option value="32px">32 px (최대)</option>
-                            </select>
-                            <select id="fontFamilySelect" onmousedown="saveSelection()" onchange="applyFontFamily(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
-                                <option value="">기본 글꼴</option>
-                                <option value="Pretendard, sans-serif">프리텐다드</option>
-                                <option value="Gulim, 굴림, sans-serif">굴림</option>
-                                <option value="Dotum, 돋움, sans-serif">돋움</option>
-                                <option value="Batang, 바탕, serif">바탕</option>
-                                <option value="Courier New, monospace">고정폭</option>
                             </select>
                             <label class="bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200 px-3 py-1 rounded-lg cursor-pointer font-bold transition-colors flex items-center gap-1">
                                 <i class="ri-image-add-line"></i> 사진 첨부
@@ -226,13 +209,12 @@
                             </label>
                         </div>
                     </div>
-                    <!-- 리치 텍스트 편집 영역 -->
                     <div id="postContentEditor" contenteditable="true" onmouseup="saveSelection()" onkeyup="saveSelection()" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
-                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100 transition-colors">취소</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md transition-all">등록하기</button>
+                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100">취소</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md">등록하기</button>
                 </div>
             </form>
         </div>
@@ -246,45 +228,58 @@
         </div>
     </footer>
 
-    <!-- 스크립트 -->
-    <script>
-        let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
-        if (!posts) {
-            posts = [];
-            localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
-        }
+    <!-- Firebase SDK 로드 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // 🔥 [중요] 본인의 Firebase 설정값으로 아래를 교체해야 합니다.
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let posts = [];
         let currentPostId = null;
         let currentTab = 'all';
         const editor = document.getElementById('postContentEditor');
         let savedRange = null;
 
-        // 커스텀 드롭다운 제어 함수
-        function toggleDropdown() {
-            const menu = document.getElementById('dropdownMenu');
-            const icon = document.getElementById('dropdownIcon');
-            menu.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+        // 데이터 불러오기 (Firestore)
+        async function fetchPosts() {
+            try {
+                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                posts = [];
+                querySnapshot.forEach((docSnap) => {
+                    posts.push({ docId: docSnap.id, ...docSnap.data() });
+                });
+                filterTab(currentTab);
+            } catch (error) {
+                console.error("데이터 로딩 실패:", error);
+                document.getElementById('boardBody').innerHTML = `<tr><td colspan="6" class="py-8 text-rose-500">Firebase 설정을 완료해주세요!</td></tr>`;
+            }
         }
 
-        function selectCategory(category) {
+        window.toggleDropdown = function() {
+            document.getElementById('dropdownMenu').classList.toggle('hidden');
+            document.getElementById('dropdownIcon').classList.toggle('rotate-180');
+        }
+
+        window.selectCategory = function(category) {
             document.getElementById('postCategory').value = category;
             document.getElementById('selectedCategoryText').innerText = category;
             toggleDropdown();
         }
 
-        // 화면 바깥 클릭 시 드롭다운 닫기
-        window.addEventListener('click', function(e) {
-            const toggle = document.getElementById('dropdownToggle');
-            const menu = document.getElementById('dropdownMenu');
-            const icon = document.getElementById('dropdownIcon');
-            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.add('hidden');
-                icon.classList.remove('rotate-180');
-            }
-        });
-
-        function saveSelection() {
+        window.saveSelection = function() {
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
@@ -294,150 +289,100 @@
             }
         }
 
-        function applyStyle(styleProperty, styleValue) {
-            editor.focus();
-            const selection = window.getSelection();
-            
-            if (savedRange) {
-                selection.removeAllRanges();
-                selection.addRange(savedRange);
-            }
-
-            if (!selection.rangeCount) return;
-            const range = selection.getRangeAt(0);
-
-            if (range.collapsed) {
-                const span = document.createElement('span');
-                span.style[styleProperty] = styleValue;
-                span.innerHTML = '&#8203;';
-                range.insertNode(span);
-                
-                const newRange = document.createRange();
-                newRange.setStart(span.firstChild, 1);
-                newRange.collapse(true);
-                selection.removeAllRanges();
-                selection.addRange(newRange);
-            } else {
-                const span = document.createElement('span');
-                span.style[styleProperty] = styleValue;
-                span.appendChild(range.extractContents());
-                range.insertNode(span);
-                
-                selection.removeAllRanges();
-                const newRange = document.createRange();
-                newRange.selectNodeContents(span);
-                selection.addRange(newRange);
-            }
-            saveSelection(); 
-        }
-
-        function applyFontSize(selectElem) {
+        window.applyFontSize = function(selectElem) {
             const size = selectElem.value;
             if (!size) return;
-            applyStyle('fontSize', size);
-            selectElem.value = ""; 
-        }
-
-        function applyFontFamily(selectElem) {
-            const font = selectElem.value;
-            if (!font) return;
-            applyStyle('fontFamily', font);
+            editor.focus();
+            const selection = window.getSelection();
+            if (savedRange) { selection.removeAllRanges(); selection.addRange(savedRange); }
+            
+            const span = document.createElement('span');
+            span.style.fontSize = size;
+            span.appendChild(selection.getRangeAt(0).extractContents());
+            selection.getRangeAt(0).insertNode(span);
             selectElem.value = "";
         }
 
-        function insertImage(event) {
+        window.insertImage = function(event) {
             const file = event.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
-                const base64Image = e.target.result;
                 editor.focus();
-                
                 if (savedRange) {
                     const selection = window.getSelection();
                     selection.removeAllRanges();
                     selection.addRange(savedRange);
                 }
-
                 const img = document.createElement('img');
-                img.src = base64Image;
+                img.src = e.target.result;
                 img.style.maxWidth = "100%";
                 img.style.borderRadius = "0.75rem";
-                img.style.margin = "1rem 0";
-                
                 const selection = window.getSelection();
                 if (selection.rangeCount > 0) {
-                    const range = selection.getRangeAt(0);
-                    range.insertNode(img);
-                    range.collapse(false);
-                } else {
-                    editor.appendChild(img);
+                    selection.getRangeAt(0).insertNode(img);
                 }
-                saveSelection();
             };
             reader.readAsDataURL(file);
-            event.target.value = ''; 
+            event.target.value = '';
         }
 
-        function filterTab(tab) {
+        window.filterTab = function(tab) {
             currentTab = tab;
-            
-            document.getElementById('tabAll').className = tab === 'all' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
-            document.getElementById('tabNotice').className = tab === '공지사항' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
-            document.getElementById('tabNews').className = tab === '업계소식' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all";
+            document.getElementById('tabAll').className = tab === 'all' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
+            document.getElementById('tabNotice').className = tab === '공지사항' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
+            document.getElementById('tabNews').className = tab === '업계소식' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
 
-            if(tab === 'all') {
-                renderTable(posts);
-            } else {
-                const filtered = posts.filter(p => p.category === tab);
-                renderTable(filtered);
-            }
+            const target = tab === 'all' ? posts : posts.filter(p => p.category === tab);
+            renderTable(target);
         }
 
         function renderTable(data) {
             const tbody = document.getElementById('boardBody');
             tbody.innerHTML = '';
-            
             if(data.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-slate-400">등록된 게시글이 없습니다.</td></tr>`;
                 return;
             }
 
-            data.forEach(post => {
+            data.forEach((post, index) => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50/80 transition-colors cursor-pointer";
-                tr.onclick = () => viewDetail(post.id);
+                tr.onclick = () => viewDetail(post.docId);
                 
-                const categoryBadge = post.category === '공지사항' 
+                const badge = post.category === '공지사항' 
                     ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600">공지사항</span>`
                     : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">업계소식</span>`;
 
                 tr.innerHTML = `
-                    <td class="py-4 px-4 text-slate-400 font-medium">${post.id}</td>
-                    <td class="py-4 px-4">${categoryBadge}</td>
-                    <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600">${post.title}</td>
+                    <td class="py-4 px-4 text-slate-400 font-medium">${data.length - index}</td>
+                    <td class="py-4 px-4">${badge}</td>
+                    <td class="py-4 px-6 text-left font-semibold text-slate-900">${post.title}</td>
                     <td class="py-4 px-4">${post.writer}</td>
                     <td class="py-4 px-4 text-xs text-slate-500">${post.date}</td>
-                    <td class="py-4 px-4 text-xs text-slate-400">${post.views}</td>
+                    <td class="py-4 px-4 text-xs text-slate-400">${post.views || 0}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function viewDetail(id) {
-            const post = posts.find(p => p.id === id);
-            if(!post) return;
+        window.viewDetail = async function(docId) {
+            const docRef = doc(db, "posts", docId);
+            const docSnap = await getDoc(docRef);
+            if(!docSnap.exists()) return;
 
-            currentPostId = id;
-            post.views += 1;
-            localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
+            const post = docSnap.data();
+            currentPostId = docId;
 
-            document.getElementById('detailCategory').innerText = post.category || '업계소식';
+            // 조회수 증가
+            const newViews = (post.views || 0) + 1;
+            await updateDoc(docRef, { views: newViews });
+
+            document.getElementById('detailCategory').innerText = post.category;
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
-            document.getElementById('detailViews').innerText = post.views;
+            document.getElementById('detailViews').innerText = newViews;
             document.getElementById('detailContent').innerHTML = post.content;
 
             document.getElementById('listView').classList.add('hidden');
@@ -446,85 +391,62 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showListView() {
+        window.showListView = function() {
             currentPostId = null;
             document.getElementById('detailView').classList.add('hidden');
             document.getElementById('listView').classList.remove('hidden');
             document.getElementById('pageHeader').style.display = 'flex';
-            filterTab(currentTab);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            fetchPosts();
         }
 
-        function deletePost() {
+        window.deletePost = async function() {
             if(confirm('정말 이 게시글을 삭제하시겠습니까?')) {
-                posts = posts.filter(p => p.id !== currentPostId);
-                localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
+                await deleteDoc(doc(db, "posts", currentPostId));
                 alert('게시글이 삭제되었습니다.');
                 showListView();
             }
         }
 
-        function searchBoard() {
-            const type = document.getElementById('searchType').value;
-            const keyword = document.getElementById('searchInput').value.toLowerCase();
-
-            let targetList = currentTab === 'all' ? posts : posts.filter(p => p.category === currentTab);
-
-            const filtered = targetList.filter(post => {
-                if(type === 'title') {
-                    return post.title.toLowerCase().includes(keyword);
-                } else if(type === 'writer') {
-                    return post.writer.toLowerCase().includes(keyword);
-                }
-            });
-            renderTable(filtered);
-        }
-
-        function openWriteModal() {
-            document.getElementById('writeModal').classList.remove('hidden');
-        }
-        function closeWriteModal() {
+        window.openWriteModal = function() { document.getElementById('writeModal').classList.remove('hidden'); }
+        window.closeWriteModal = function() { 
             document.getElementById('writeModal').classList.add('hidden');
             document.getElementById('writeForm').reset();
-            selectCategory('공지사항'); // 모달 닫힐 때 기본값으로 초기화
             editor.innerHTML = '';
-            savedRange = null;
-            document.getElementById('fontSizeSelect').value = "";
-            document.getElementById('fontFamilySelect').value = "";
         }
 
-        function submitPost(event) {
+        // 새 글 등록 (Firestore 저장)
+        window.submitPost = async function(event) {
             event.preventDefault();
             const category = document.getElementById('postCategory').value;
             const title = document.getElementById('postTitle').value;
             const writer = document.getElementById('postWriter').value;
             const content = editor.innerHTML;
-            
-            if (!content.trim() || content === '<br>') {
-                alert('내용을 입력해주세요.');
-                return;
-            }
+
+            if (!content.trim() || content === '<br>') { alert('내용을 입력해주세요.'); return; }
 
             const today = new Date().toISOString().split('T')[0];
 
-            const newPost = {
-                id: posts.length > 0 ? posts[0].id + 1 : 1,
-                category: category,
-                title: title,
-                writer: writer,
-                date: today,
-                views: 1,
-                content: content
-            };
-
-            posts.unshift(newPost);
-            localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
-            filterTab(currentTab);
-            closeWriteModal();
-            alert('성공적으로 등록되었습니다.');
+            try {
+                await addDoc(collection(db, "posts"), {
+                    category,
+                    title,
+                    writer,
+                    date: today,
+                    views: 0,
+                    content,
+                    createdAt: Date.now() // 정렬용 타임스탬프
+                });
+                alert('성공적으로 등록되었습니다.');
+                closeWriteModal();
+                fetchPosts();
+            } catch (error) {
+                console.error("등록 실패:", error);
+                alert('등록 중 오류가 발생했습니다.');
+            }
         }
 
-        filterTab('all');
+        // 페이지 접속 시 데이터 로드
+        fetchPosts();
     </script>
 </body>
 </html>
