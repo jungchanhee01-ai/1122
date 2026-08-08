@@ -420,6 +420,7 @@
         let currentBoardTab = 'notice';
 
         // Firestore에서 데이터 불러오기
+      // Firebase에서 데이터 불러오기
         async function fetchBoardData() {
             try {
                 const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
@@ -431,7 +432,6 @@
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     
-                    // 날짜 형식 가공 (YYYY-MM-DD -> 월.일 및 연도 분리)
                     let dateStr = data.date || "08.09";
                     let yearStr = "2026";
                     
@@ -448,9 +448,12 @@
                         link: "board.html"
                     };
 
-                    if (data.category === "notice") {
+                    // category가 "공지사항"이거나 "notice"인 경우 공지사항으로 분류
+                    if (data.category === "공지사항" || data.category === "notice") {
                         notices.push(postItem);
-                    } else if (data.category === "news") {
+                    } 
+                    // category가 "업계소식"이거나 "news"인 경우 업계소식으로 분류
+                    else if (data.category === "업계소식" || data.category === "news") {
                         industryNews.push(postItem);
                     }
                 });
@@ -460,7 +463,6 @@
                 console.error("게시글을 불러오는 중 오류가 발생했습니다:", err);
             }
         }
-
         window.switchBoardTab = function(tabType) {
             currentBoardTab = tabType;
             const tabNotice = document.getElementById('tabNotice');
