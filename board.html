@@ -211,7 +211,7 @@
                         </div>
                     </div>
                     <!-- 리치 텍스트 편집 영역 -->
-                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto" placeholder="내용을 입력하세요"></div>
+                    <div id="postContentEditor" contenteditable="true" onkeydown="handleEditorKeydown(event)" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-sm text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto" placeholder="내용을 입력하세요"></div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-4">
@@ -253,27 +253,55 @@
 
         let currentPostId = null;
 
-        // PT 단위 글자 크기 즉시 적용 함수 (선택 영역에 span 스타일 주입)
+        // 글자 크기 변경 함수 (드래그 변경 및 선택한 순간부터 자동 적용 기능 겸용)
         function changeFontSize(selectElem) {
             const size = selectElem.value;
-            if (!size) return;
-
             const selection = window.getSelection();
             if (!selection.rangeCount) return;
             const range = selection.getRangeAt(0);
-            
-            if (range.collapsed) {
-                alert('크기를 변경할 텍스트를 드래그하여 선택해주세요.');
-                selectElem.value = "";
-                return;
-            }
 
-            const span = document.createElement('span');
-            span.style.fontSize = size;
-            span.appendChild(range.extractContents());
-            range.insertNode(span);
-            selection.removeAllRanges();
-            selectElem.value = ""; // 셀렉트 박스 초기화
+            // 드래그된 텍스트가 있는 경우: 해당 텍스트만 크기 변경
+            if (!range.collapsed) {
+                const span = document.createElement('span');
+                span.style.fontSize = size;
+                span.appendChild(range.extractContents());
+                range.insertNode(span);
+                selection.removeAllRanges();
+            }
+            // 드래그가 없는 경우: 이후 타이핑하는 텍스트에 적용되도록 임시 상태 유지 (selectElem.value 보존)
+        }
+
+        // 키 입력 시 선택된 글자 크기(selectElem)가 있으면 해당 크기로 자동 감싸서 입력
+        function handleEditorKeydown(event) {
+            // 엔터나 특수 제어키가 아닐 때만 처리
+            if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
+                const selectElem = document.getElementById('fontSizeSelect');
+                const size = selectElem.value;
+                if (!size) return; // 기본 크기면 패스
+
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+                const range = selection.getRangeAt(0);
+
+                if (range.collapsed) {
+                    // 현재 커서 위치의 부모가 이미 지정된 크기의 span인지 확인
+                    let parentSpan = range.startContainer.parentElement;
+                    if (parentSpan && parentSpan.tagName === 'SPAN' && parentSpan.style.fontSize === size) {
+                        return; // 이미 같은 크기면 브라우저 기본 입력에 맡김
+                    }
+
+                    event.preventDefault(); // 기본 입력 막고 커스텀 span 주입
+                    const span = document.createElement('span');
+                    span.style.fontSize = size;
+                    span.textContent = event.key;
+                    
+                    range.insertNode(span);
+                    range.setStartAfter(span);
+                    range.setEndAfter(span);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            }
         }
 
         // 글꼴 변경 함수
@@ -403,6 +431,7 @@
             document.getElementById('writeModal').classList.add('hidden');
             document.getElementById('writeForm').reset();
             document.getElementById('postContentEditor').innerHTML = '';
+            document.getElementById('fontSizeSelect').value = "";
         }
 
         // 새 글 등록 제출
