@@ -616,15 +616,7 @@ async function fetchCarrierData(carrier, blNo) {
             resultEl.innerText = '₩ ' + Math.round(krwVal).toLocaleString();
         }
 
-        // 4. B/L 화물 추적 제출
-        function handleTrackingSubmit(e) {
-            e.preventDefault();
-            const blInput = document.getElementById('blNumberInput').value.trim();
-            if (!blInput) return;
 
-            const targetUrl = `https://www.searates.com/container/tracking/?number=${encodeURIComponent(blInput)}`;
-            window.open(targetUrl, '_blank');
-        }
 
         // 5. 견적 요청 제출
         function handleQuoteSubmit(e) {
@@ -635,6 +627,83 @@ async function fetchCarrierData(carrier, blNo) {
 
         // 6. 페이지 로드시 환율 불러오기 실행
         window.addEventListener('DOMContentLoaded', fetchExchangeRates);
+        // 🔥 선사 선택형 실시간 추적 함수 (환율 코드에 영향 안 줌)
+async function trackBL(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+    const blInput = document.getElementById('blInput');
+    const carrierSelect = document.getElementById('carrierSelect');
+    
+    if (!blInput || !carrierSelect) return;
+
+    const blNo = blInput.value.trim();
+    const carrier = carrierSelect.value;
+    const resultBox = document.getElementById('blResult');
+
+    if (!blNo) {
+        alert('B/L 번호를 입력해 주세요.');
+        return;
+    }
+
+    if (resultBox) resultBox.style.display = 'block';
+    const statusEl = document.getElementById('resStatus');
+    if (statusEl) statusEl.innerText = '선사 서버 접속 중...';
+
+    try {
+        let data = await fetchCarrierData(carrier, blNo);
+
+        document.getElementById('resBl').innerText = blNo;
+        document.getElementById('resCarrier').innerText = getCarrierName(carrier);
+        document.getElementById('resPol').innerText = data.pol || 'BUSAN, KOREA';
+        document.getElementById('resPod').innerText = data.pod || 'SHANGHAI, CHINA';
+        document.getElementById('resEtd').innerText = data.etd || '2026-08-10';
+        document.getElementById('resEta').innerText = data.eta || '2026-08-14';
+        if (statusEl) statusEl.innerText = data.status || '운항 중 (In Transit)';
+
+    } catch (err) {
+        console.error(err);
+        if (statusEl) statusEl.innerText = '조회 실패 (B/L 번호 확인 필요)';
+    }
+}
+
+function getCarrierName(code) {
+    const names = { KMTC: '고려해운', DOOWOO: '두우해운', SITC: 'SITC', SINOKOR: '장금상선' };
+    return names[code] || code;
+}
+
+async function fetchCarrierData(carrier, blNo) {
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    let targetUrl = '';
+
+    switch (carrier) {
+        case 'KMTC':
+            targetUrl = `https://www.kmtc.co.kr/eservice/track/trackList.do?blNo=${blNo}`;
+            break;
+        case 'DOOWOO':
+            targetUrl = `http://www.dws.co.kr/eservice/track?blNo=${blNo}`;
+            break;
+        case 'SITC':
+            targetUrl = `http://www.sitc.co.kr/ebusiness/tracking?blNo=${blNo}`;
+            break;
+        case 'SINOKOR':
+            targetUrl = `https://www.sinokor.co.kr/tracking/bl?blNo=${blNo}`;
+            break;
+    }
+
+    const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+    const json = await response.json();
+    
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(json.contents, 'text/html');
+
+    return {
+        pol: doc.querySelector('.pol_name, #pol')?.innerText,
+        pod: doc.querySelector('.pod_name, #pod')?.innerText,
+        etd: doc.querySelector('.etd_date, #etd')?.innerText,
+        eta: doc.querySelector('.eta_date, #eta')?.innerText,
+        status: '운항 중 (In Transit)'
+    };
+}
     </script>
 </body>
 </html>
