@@ -37,25 +37,17 @@
                 <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
             </nav>
 
-            <!-- 우측 화물추적 및 견적요청 버튼 (index.html 동일 적용) -->
-            <div class="z-10 flex items-center gap-3">
-                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors">
-                    <i class="ri-search-line text-orange-600"></i> 화물추적
-                </a>
-                <a href="index.html#quote" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 transition-colors shadow-sm shadow-orange-600/20">
-                    <i class="ri-calculator-line"></i> 견적요청
-                </a>
-            </div>
-          <div class="flex items-center gap-3">
-                <a href="#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+            <!-- 우측 버튼 영역 (화물추적, 견적요청, 관리자 인증) -->
+            <div class="flex items-center gap-2.5" id="authButtons">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                     <i class="ri-search-line"></i> 화물 추적
                 </a>
-                <a href="#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
                     견적 요청 <i class="ri-arrow-right-line"></i>
                 </a>
                 
-                <!-- ⭐ [추가할 관리자 로그인 버튼 코드] ⭐ -->
-                <a href="login/login.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
+                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
                     <i class="ri-user-settings-line"></i> 관리자 로그인
                 </a>
             </div>  
@@ -83,9 +75,8 @@
                 </h1>
             </div>
             
-            
-            <!-- 글쓰기 버튼 -->
-            <button onclick="openWriteModal()" class="bg-slate-900 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0">
+            <!-- 글쓰기 버튼 (관리자에게만 노출되도록 기본 hidden 클래스 부여) -->
+            <button onclick="openWriteModal()" id="writeBtn" class="hidden bg-slate-900 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0">
                 <i class="ri-pencil-line"></i> 글쓰기
             </button>
         </div>
@@ -464,7 +455,47 @@
             }
         }
 
-        fetchPosts();
+        // 페이지 로드 시 로그인 상태 확인 및 UI 반영
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchPosts();
+
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminBtn = document.getElementById('adminBtn');
+            const authButtons = document.getElementById('authButtons');
+            const writeBtn = document.getElementById('writeBtn');
+
+            if (isLoggedIn === 'true') {
+                // 관리자 로그인 상태인 경우 글쓰기 버튼 노출
+                if (writeBtn) {
+                    writeBtn.classList.remove('hidden');
+                }
+
+                // 상단 헤더 관리자 로그인 버튼을 프로필 및 로그아웃 버튼으로 변경
+                if (adminBtn && authButtons) {
+                    adminBtn.remove();
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = "inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm";
+                    nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
+                    authButtons.appendChild(nameSpan);
+
+                    const logoutBtn = document.createElement('button');
+                    logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
+                    logoutBtn.className = "inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md";
+                    logoutBtn.onclick = () => {
+                        localStorage.removeItem('isAdminLoggedIn');
+                        localStorage.removeItem('adminName');
+                        window.location.reload();
+                    };
+                    authButtons.appendChild(logoutBtn);
+                }
+            } else {
+                // 비로그인 상태인 경우 글쓰기 버튼 숨김 유지
+                if (writeBtn) {
+                    writeBtn.classList.add('hidden');
+                }
+            }
+        });
     </script>
 </body>
 </html>
