@@ -39,9 +39,20 @@
 <body class="antialiased selection:bg-orange-500 selection:text-white">
 
     <!-- Top Bar -->
-   <!-- 🚢 선사별 B/L 원터치 실시간 추적 -->
-<!-- B/L 실시간 화물 추적 영역 (기존 예쁜 디자인 + 선사 선택 통합) -->
-
+    <div class="bg-slate-950 text-slate-400 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-400"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="hidden md:inline text-slate-400">고객센터: 02-6203-8800 (평일 09:00 - 18:00)</span>
+            </div>
+            <div class="flex items-center gap-4 font-medium">
+                <a href="#tracking" class="hover:text-orange-400 transition-colors">화물 추적</a>
+                <a href="#exchange" class="hover:text-orange-400 transition-colors">환율 조회</a>
+                <a href="#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold">견적 요청</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Header -->
     <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white shadow-xl border-b border-slate-800">
@@ -172,8 +183,9 @@
         </div>
     </section>
 
-<!-- 🚢 B/L 실시간 화물 추적 영역 (테두리 박스 포함) -->
-<!-- 🚢 B/L 실시간 화물 추적 영역 (확장형 디자인) -->
+    <!-- Cargo Tracking Section -->
+    <section id="tracking" class="py-24 bg-slate-950 text-white relative overflow-hidden border-y border-slate-800">
+       <!-- 🚢 B/L 실시간 화물 추적 영역 (확장형 디자인) -->
 <div class="text-center my-12 px-4">
     <span class="text-xs font-bold tracking-widest text-orange-500 uppercase">REAL-TIME VISIBILITY</span>
     <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-3">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
@@ -210,6 +222,78 @@
         </div>
     </div>
 </div>
+    </section>
+
+    <!-- Live Exchange Rates Section -->
+    <section id="exchange" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold text-orange-500 uppercase tracking-widest block mb-2">LIVE EXCHANGE RATES</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white">오늘의 환율 및 물류비 계산기</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">유럽중앙은행(ECB) 및 글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Exchange Rates Table -->
+            <div class="lg:col-span-2 bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-8 shadow-xl">
+                <div class="flex items-center justify-between mb-6 border-b border-slate-800 pb-4">
+                    <h3 class="font-bold text-white flex items-center gap-2 text-sm sm:text-base">
+                        <i class="ri-money-dollar-circle-line text-orange-400 text-xl"></i> 주요 통화 환율 정보 (KRW 기준)
+                    </h3>
+                    <span id="rateUpdateTime" class="text-xs text-slate-400 font-medium bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">실시간 불러오는 중...</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-slate-400 font-semibold bg-slate-950/50">
+                                <th class="p-3.5">통화명 (Code)</th>
+                                <th class="p-3.5">매매기준율</th>
+                                <th class="p-3.5">현찰 살 때</th>
+                                <th class="p-3.5">현찰 팔 때</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="rateTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200">
+                            <!-- Rates injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Currency Calculator -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-base text-white mb-6 flex items-center gap-2">
+                        <i class="ri-calculator-fill text-orange-400"></i> 실시간 통화 변환기
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-2 font-medium">외화 금액 입력</label>
+                            <div class="flex gap-2">
+                                <input type="number" id="calcAmount" value="1000" oninput="calculateExchange()" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500">
+                                <select id="calcCurrency" onchange="calculateExchange()" class="bg-slate-950 border border-slate-800 text-white text-xs rounded-xl px-3 py-3 focus:outline-none">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="JPY">JPY (¥)</option>
+                                    <option value="CNY">CNY (¥)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-800">
+                            <span class="block text-xs text-slate-400 mb-1">원화 환산 금액 (KRW)</span>
+                            <div id="calcResult" class="text-2xl sm:text-3xl font-black text-orange-400">₩ 0</div>
+                            <span class="text-[11px] text-slate-500 mt-1.5 block">* 실시간 기준율 적용 금액 (참고용)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                    <p><i class="ri-information-line text-orange-400"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Customs Information Section -->
@@ -454,41 +538,6 @@
 
         // 6. 페이지 로드시 환율 불러오기 실행
         window.addEventListener('DOMContentLoaded', fetchExchangeRates);
-        // 선사별 공식 조회 페이지 새창 이동 함수
-function openCarrierTracking() {
-    const blInput = document.getElementById('blInput');
-    const carrierSelect = document.getElementById('carrierSelect');
-
-    if (!blInput || !blInput.value.trim()) {
-        alert('B/L 번호를 입력해 주세요!');
-        return;
-    }
-
-    const blNo = blInput.value.trim();
-    const carrier = carrierSelect.value;
-    let targetUrl = '';
-
-    // 선택한 선사에 맞는 공식 Tracking URL 생성
-    switch (carrier) {
-        case 'KMTC':
-            targetUrl = `https://www.kmtc.co.kr/eservice/track/trackList.do?blNo=${encodeURIComponent(blNo)}`;
-            break;
-        case 'SINOKOR':
-            targetUrl = `https://www.sinokor.co.kr/eservice/tracking/tracking.do?blNo=${encodeURIComponent(blNo)}`;
-            break;
-        case 'DOOWOO':
-            targetUrl = `http://www.dws.co.kr/eservice/track/trackList.do?blNo=${encodeURIComponent(blNo)}`;
-            break;
-        case 'SITC':
-            targetUrl = `http://www.sitc.co.kr/ebusiness/tracking.do?blNo=${encodeURIComponent(blNo)}`;
-            break;
-        default:
-            targetUrl = `https://www.searates.com/container/tracking/?number=${encodeURIComponent(blNo)}`;
-    }
-
-    // 새 탭(창)으로 바로 열기
-    window.open(targetUrl, '_blank');
-}
     </script>
 </body>
 </html>
