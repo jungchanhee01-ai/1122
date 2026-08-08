@@ -233,15 +233,15 @@
             <span id="currentTrackingBL" class="text-orange-400 font-mono font-bold"></span>
         </div>
         
-        <iframe 
-            id="trackingIframe"
-            src="https://www.vesselfinder.com/aais-embed?mmsi=0&zoom=3&lat=20&lon=120&width=100%25&height=500&names=true"
-            width="100%" 
-            height="500" 
-            frameborder="0" 
-            scrolling="no"
-            class="w-full border-0">
-        </iframe>
+       <iframe 
+    id="trackingIframe"
+    src="https://www.vesselfinder.com/embed"
+    width="100%" 
+    height="500" 
+    frameborder="0" 
+    scrolling="no"
+    class="w-full border-0">
+</iframe>
     </div>
 </section>
     <!-- Live Exchange Rates Section -->
@@ -541,21 +541,26 @@
 
         // 4. B/L 화물 추적 제출
       // 4. B/L 화물 추적 제출 (내 사이트 내부 iFrame 연동)
-        function handleTrackingSubmit(e) {
-            e.preventDefault();
-            const blInput = document.getElementById('blNumberInput').value.trim();
-            
-            if (!blInput) {
-                alert('B/L 번호를 입력해 주세요.');
-                return;
-            }
+       // 4. B/L 화물 추적 제출
+function handleTrackingSubmit(e) {
+    e.preventDefault();
+    const blInput = document.getElementById('blNumberInput').value.trim();
+    
+    if (!blInput) {
+        alert('B/L 번호를 입력해 주세요.');
+        return;
+    }
 
-            // 상단 텍스트 변경
-            const headerBL = document.getElementById('currentTrackingBL');
-            if (headerBL) {
-                headerBL.innerText = `조회 B/L: ${blInput.toUpperCase()}`;
-            }
+    // 상단 텍스트 변경
+    const headerBL = document.getElementById('currentTrackingBL');
+    if (headerBL) {
+        headerBL.innerText = `조회 B/L: ${blInput.toUpperCase()}`;
+    }
 
+    // SafeCube 추적 페이지를 새 탭에서 열어 오차 없이 완벽하게 조회시킵니다.
+    const trackingUrl = `https://www.safecube.ai/resource/container-tracking?number=${encodeURIComponent(blInput)}`;
+    window.open(trackingUrl, '_blank');
+}
             // 내 사이트 안의 iframe 화면 전환
             const iframe = document.getElementById('trackingIframe');
             if (iframe) {
