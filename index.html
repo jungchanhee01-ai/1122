@@ -515,7 +515,7 @@
         // 5. B/L 실시간 화물 추적 처리 (내 사이트 UI 전용)
         let activeBL = '';
 
-        // B/L 실시간 화물 추적 (선사 자동판별 & 진짜 B/L 데이터 무제한 조회)
+     // B/L 실시간 화물 추적 (해상 화물 전용 무제한 트래커)
         function handleTrackingSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             
@@ -527,8 +527,8 @@
                 return;
             }
 
-            // 전 세계 모든 선사 B/L 자동 인식 + 제한(Limit) 없는 글로벌 실시간 추적
-            const targetUrl = `https://www.ship24.com/tracking?p=${encodeURIComponent(blInput)}`;
+            // 해상 B/L 전용 트래커 (Not Found 및 일일 제한 없음)
+            const targetUrl = `https://www.track-trace.com/bol?query=${encodeURIComponent(blInput)}`;
             window.open(targetUrl, '_blank');
         }
 
