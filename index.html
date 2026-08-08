@@ -413,23 +413,17 @@
     <h3 class="text-xl font-bold mb-4">🚢 B/L 실시간 화물 추적</h3>
     
     <!-- 1. 선사 선택 / B/L 입력 / 버튼 영역 -->
-    <div class="bl-input-group">
-        <!-- 선사 선택 버튼(드롭다운) -->
-        <select id="carrierSelect" class="bg-slate-900 text-white p-3 rounded-l border border-slate-700">
-            <option value="KMTC">고려해운 (KMTC)</option>
-            <option value="DOOWOO">두우해운 (Doowoo)</option>
-            <option value="SITC">SITC</option>
-            <option value="SINOKOR">장금상선 (Sinokor)</option>
-        </select>
-        
-        <!-- B/L 번호 입력창 -->
-        <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="bg-slate-900 text-white p-3 flex-1 border-y border-slate-700">
-        
-        <!-- 실시간 조회 버튼 (type="button"으로 새로고침 차단) -->
-        <button type="button" class="bl-btn bg-blue-600 hover:bg-blue-700 font-bold px-5 py-3 rounded-r" onclick="trackBL(event)">
-            실시간 조회
-        </button>
-    </div>
+   <!-- 기존 B/L 입력 폼 대신 이걸로 교체 -->
+<div class="bl-input-group flex gap-2 mb-4">
+    <select id="carrierSelect" class="bg-slate-900 text-white p-3 rounded border border-slate-700">
+        <option value="KMTC">고려해운 (KMTC)</option>
+        <option value="DOOWOO">두우해운 (Doowoo)</option>
+        <option value="SITC">SITC</option>
+        <option value="SINOKOR">장금상선 (Sinokor)</option>
+    </select>
+    <input type="text" id="blInput" placeholder="B/L 번호 입력" class="bg-slate-900 text-white p-3 flex-1 rounded border border-slate-700">
+    <button type="button" class="bl-btn bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded font-bold" onclick="trackBL(event)">실시간 조회</button>
+</div>
 
     <!-- 2. 결과 출력 카드 -->
     <div id="blResult" class="bl-result-card mt-4 p-4 bg-slate-900 rounded border-l-4 border-blue-500" style="display: none;">
