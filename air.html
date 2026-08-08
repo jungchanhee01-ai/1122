@@ -32,7 +32,15 @@
                 <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
             </nav>
 
-            <div class="z-10 w-20"></div> <!-- 로고와 균형을 맞추기 위한 빈 공간 -->
+            <!-- 우측 화물추적 및 견적요청 버튼 (index.html 동일 적용) -->
+            <div class="z-10 flex items-center gap-3">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors">
+                    <i class="ri-search-line text-orange-600"></i> 화물추적
+                </a>
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 transition-colors shadow-sm shadow-orange-600/20">
+                    <i class="ri-calculator-line"></i> 견적요청
+                </a>
+            </div>
         </div>
     </header>
 
