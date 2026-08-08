@@ -348,6 +348,9 @@
             document.getElementById('tabNotice').className = tab === '공지사항' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
             document.getElementById('tabNews').className = tab === '업계소식' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
 
+            // 탭을 바꿀 때 검색어 입력창 초기화 후 전체 목록 출력 (원하는 경우 유지 가능)
+            document.getElementById('searchInput').value = '';
+
             const target = tab === 'all' ? posts : posts.filter(p => p.category === tab);
             renderTable(target);
         }
@@ -380,6 +383,38 @@
                 tbody.appendChild(tr);
             });
         }
+
+        // 검색 기능 구현
+        window.searchBoard = function() {
+            const searchType = document.getElementById('searchType').value;
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            if (!keyword) {
+                alert('검색어를 입력해주세요.');
+                filterTab(currentTab);
+                return;
+            }
+
+            const baseData = currentTab === 'all' ? posts : posts.filter(p => p.category === currentTab);
+
+            const filteredData = baseData.filter(post => {
+                if (searchType === 'title') {
+                    return post.title && post.title.toLowerCase().includes(keyword);
+                } else if (searchType === 'writer') {
+                    return post.writer && post.writer.toLowerCase().includes(keyword);
+                }
+                return false;
+            });
+
+            renderTable(filteredData);
+        };
+
+        // 엔터키 입력 시 검색 실행
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchBoard();
+            }
+        });
 
         window.viewDetail = async function(docId) {
             const docRef = doc(db, "posts", docId);
@@ -499,3 +534,4 @@
     </script>
 </body>
 </html>
+```[cite: 10]
