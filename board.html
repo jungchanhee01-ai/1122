@@ -4,245 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUTURE GLS - 업계소식</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Remix Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- Google Fonts (Pretendard) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
-        .editor-content img, #detailContent img { 
-            max-width: 100% !important; 
-            height: auto !important; 
-            border-radius: 0.75rem; 
-            margin: 1rem 0; 
-            display: block;
-        }
+        .goog-te-banner-frame, .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .dynamic-nav { font-size: 1.05rem; gap: 2.75rem; }
+        html[lang*="en"] .dynamic-nav { font-size: 0.75rem; gap: 0.75rem; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
-    <!-- 상단 네비게이션 -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0 notranslate">
+                <div class="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
+                    <i class="ri-ship-line"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider block leading-none text-slate-900">FUTURE GLS</span>
+                    <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase mt-0.5 block">Global Logistics</span>
+                </div>
+            </a>
             
-            <!-- 로고 -->
-            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0">FUTURE <span class="text-orange-600">GLS</span></a>
-            
-            <!-- 중앙 네비게이션 메뉴 (간격 및 크기 최적화) -->
-            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
-                <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
+            <nav class="hidden lg:flex items-center font-bold text-slate-600 dynamic-nav transition-all">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">회사소개</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">항공운송</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">해상운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">통관업무</a>
+                <a href="board.html" class="text-orange-600 transition-colors whitespace-nowrap">업계소식</a>
             </nav>
 
-            <!-- 우측 버튼 영역 (겹침 방지를 위해 간격 및 크기 정돈) -->
-            <div class="flex items-center gap-2 shrink-0" id="authButtons">
-                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+            <div class="flex items-center gap-2.5 shrink-0" id="authButtons">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
                     <i class="ri-search-line"></i> 화물추적
                 </a>
-                <a href="index.html#quote" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
                     견적요청 <i class="ri-arrow-right-line"></i>
                 </a>
-                
-                <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
-                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
-                    <i class="ri-user-settings-line"></i> 관리자로그인
+                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                    <i class="ri-user-settings-line"></i> 관리자
                 </a>
             </div>  
         </div>
     </header>
 
-    <!-- 메인 컨텐츠 영역 -->
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
-        
-        <!-- 페이지 타이틀 헤더 -->
-        <div id="pageHeader" class="mb-14 border-b border-slate-200 pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
-                    <a href="index.html" class="hover:text-orange-600">홈</a>
-                    <i class="ri-arrow-right-s-line"></i>
-                    <span class="text-orange-600 font-bold">업계소식</span>
-                </div>
-                
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                    <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C U S T O M E R &nbsp; C E N T E R</span>
-                </div>
-                <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
-                    물류 산업의 최신 <span class="text-orange-600">소식 및 공지</span>를 전해드립니다.
-                </h1>
+        <div class="mb-14 border-b border-slate-200 pb-8">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
+                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-orange-600 font-bold">업계소식</span>
             </div>
-            
-            <!-- 글쓰기 버튼 (관리자에게만 노출) -->
-            <button onclick="openWriteModal()" id="writeBtn" class="hidden bg-slate-900 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0">
-                <i class="ri-pencil-line"></i> 글쓰기
-            </button>
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">N E W S &nbsp; & &nbsp; N O T I C E</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+                퓨처지엘스의 소식과 <span class="text-orange-600">최신 물류 트렌드</span>
+            </h1>
         </div>
 
-        <!-- [뷰 1] 목록 화면 -->
-        <div id="listView">
-            <!-- 탭 메뉴 -->
-            <div class="flex gap-2 mb-6">
-                <button onclick="filterTab('all')" id="tabAll" class="px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm transition-all">전체</button>
-                <button onclick="filterTab('공지사항')" id="tabNotice" class="px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">공지사항</button>
-                <button onclick="filterTab('업계소식')" id="tabNews" class="px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">업계소식</button>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold text-center">
-                                <th class="py-4 px-4 w-16">번호</th>
-                                <th class="py-4 px-4 w-32">구분</th>
-                                <th class="py-4 px-6 text-left">제목</th>
-                                <th class="py-4 px-4 w-24">작성자</th>
-                                <th class="py-4 px-4 w-28">작성일자</th>
-                                <th class="py-4 px-4 w-20">조회</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 text-center text-slate-600" id="boardBody">
-                            <tr><td colspan="6" class="py-8 text-slate-400">데이터를 불러오는 중...</td></tr>
-                        </tbody>
-                    </table>
+        <div class="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">공지사항 및 물류 인사이트</h2>
+            <div class="divide-y divide-slate-100">
+                <div class="py-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md">공지</span>
+                        <a href="#" class="font-semibold text-slate-800 hover:text-orange-600 ml-2">2026년 글로벌 물류 운송 스케줄 변동 안내</a>
+                    </div>
+                    <span class="text-xs text-slate-400">2026.06.01</span>
                 </div>
-            </div>
-
-            <!-- 검색 영역 -->
-            <div class="flex justify-center items-center gap-2">
-                <select id="searchType" class="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 outline-none focus:border-orange-600 shadow-sm">
-                    <option value="title">제목</option>
-                    <option value="writer">작성자</option>
-                </select>
-                <div class="relative w-full max-w-sm">
-                    <input type="text" id="searchInput" placeholder="검색어를 입력하세요" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-800 outline-none focus:border-orange-600 shadow-sm">
+                <div class="py-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md">뉴스</span>
+                        <a href="#" class="font-semibold text-slate-800 hover:text-orange-600 ml-2">미주 및 유럽 항로 해상 운임 동향 리포트</a>
+                    </div>
+                    <span class="text-xs text-slate-400">2026.05.20</span>
                 </div>
-                <button onclick="searchBoard()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm px-6 py-2.5 rounded-xl shadow-md transition-all shrink-0">
-                    검색
-                </button>
             </div>
         </div>
-
-        <!-- [뷰 2] 상세 보기 화면 -->
-        <div id="detailView" class="hidden">
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
-                <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
-                    <tbody class="divide-y divide-slate-200">
-                        <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 w-28 sm:w-36 text-center border-r border-slate-200">구분</th>
-                            <td id="detailCategory" class="py-4 px-6 font-bold text-orange-600"></td>
-                        </tr>
-                        <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 text-center border-r border-slate-200">제목</th>
-                            <td id="detailTitle" class="py-4 px-6 font-bold text-slate-900"></td>
-                        </tr>
-                        <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 text-center border-r border-slate-200">작성자</th>
-                            <td id="detailWriter" class="py-4 px-6 text-slate-700"></td>
-                        </tr>
-                        <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 text-center border-r border-slate-200">작성일자</th>
-                            <td id="detailDate" class="py-4 px-6 text-slate-600"></td>
-                        </tr>
-                        <tr>
-                            <th class="py-4 px-6 bg-slate-50 font-bold text-slate-700 text-center border-r border-slate-200">조회</th>
-                            <td id="detailViews" class="py-4 px-6 text-slate-600"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="p-8 sm:p-12 min-h-[250px]">
-                    <div id="detailContent" class="text-slate-800 leading-relaxed text-base sm:text-lg"></div>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center">
-                <!-- 삭제하기 버튼 (기본 hidden, 관리자에게만 노출) -->
-                <div id="deleteButtonContainer" class="hidden">
-                    <button onclick="deletePost()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
-                        <i class="ri-delete-bin-line"></i> 삭제하기
-                    </button>
-                </div>
-                <!-- 버튼 정렬 유지용 빈 div (삭제 버튼이 숨겨질 때 목록으로 버튼이 우측에 오도록 처리) -->
-                <div id="deleteButtonSpacer"></div>
-                
-                <button onclick="showListView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 ml-auto">
-                    <i class="ri-list-unordered"></i> 목록으로
-                </button>
-            </div>
-        </div>
-
     </main>
 
-    <!-- 글쓰기 모달 팝업 -->
-    <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 게시글 작성
-                </h3>
-                <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
-                    <i class="ri-close-line"></i>
-                </button>
-            </div>
-
-            <form id="writeForm" onsubmit="submitPost(event)" class="space-y-4">
-                <div class="relative">
-                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">카테고리 선택</label>
-                    <input type="hidden" id="postCategory" value="공지사항">
-                    <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer">
-                        <span id="selectedCategoryText">공지사항</span>
-                        <i id="dropdownIcon" class="ri-arrow-down-s-line text-slate-400 transition-transform"></i>
-                    </div>
-                    <div id="dropdownMenu" class="hidden absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-20">
-                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">공지사항</div>
-                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">업계소식</div>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">제목</label>
-                    <input type="text" id="postTitle" required placeholder="제목을 입력하세요" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">작성자</label>
-                    <input type="text" id="postWriter" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
-                </div>
-                <div>
-                    <div class="flex flex-wrap justify-between items-center mb-1 gap-2">
-                        <label class="block text-xs font-bold text-slate-500 uppercase">내용</label>
-                        <div class="flex flex-wrap items-center gap-2 text-xs">
-                            <select id="fontSizeSelect" onmousedown="saveSelection()" onchange="applyFontSize(this)" class="bg-slate-100 border border-slate-300 rounded-lg px-2 py-1 outline-none font-semibold text-slate-700">
-                                <option value="">글자 크기 선택</option>
-                                <option value="12px">12 px (작게)</option>
-                                <option value="14px">14 px (보통)</option>
-                                <option value="16px">16 px (기본)</option>
-                                <option value="20px">20 px (크게)</option>
-                                <option value="24px">24 px (매우 크게)</option>
-                            </select>
-                            <label class="bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200 px-3 py-1 rounded-lg cursor-pointer font-bold transition-colors flex items-center gap-1">
-                                <i class="ri-image-add-line"></i> 사진 첨부
-                                <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="insertImage(event)">
-                            </label>
-                        </div>
-                    </div>
-                    <div id="postContentEditor" contenteditable="true" onmouseup="saveSelection()" onkeyup="saveSelection()" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[220px] max-h-[350px] overflow-y-auto"></div>
-                </div>
-
-                <div class="flex justify-end gap-3 pt-4">
-                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100">취소</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md">등록하기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
         <div class="max-w-7xl mx-auto px-4">
             <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
@@ -250,297 +96,79 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK 로드 -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <div id="google_translate_element" style="display:none;"></div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBPwNp7-Yrl6LwAqaReC3ht1JKwSnTTEcI",
-            authDomain: "jch01-65141.firebaseapp.com",
-            projectId: "jch01-65141",
-            storageBucket: "jch01-65141.firebasestorage.app",
-            messagingSenderId: "885424801252",
-            appId: "1:885424801252:web:0b840323f160d0d4cc73f1",
-            measurementId: "G-3ECML2H6S6"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        let posts = [];
-        let currentPostId = null;
-        let currentTab = 'all';
-        const editor = document.getElementById('postContentEditor');
-        let savedRange = null;
-
-        async function fetchPosts() {
-            try {
-                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-                posts = [];
-                querySnapshot.forEach((docSnap) => {
-                    posts.push({ docId: docSnap.id, ...docSnap.data() });
-                });
-                filterTab(currentTab);
-            } catch (error) {
-                console.error("데이터 로딩 실패:", error);
-                document.getElementById('boardBody').innerHTML = `<tr><td colspan="6" class="py-8 text-rose-500">데이터를 불러오지 못했습니다. Firestore 설정을 확인해주세요.</td></tr>`;
-            }
-        }
-
-        window.toggleDropdown = function() {
-            document.getElementById('dropdownMenu').classList.toggle('hidden');
-            document.getElementById('dropdownIcon').classList.toggle('rotate-180');
-        }
-
-        window.selectCategory = function(category) {
-            document.getElementById('postCategory').value = category;
-            document.getElementById('selectedCategoryText').innerText = category;
-            toggleDropdown();
-        }
-
-        window.saveSelection = function() {
-            const selection = window.getSelection();
-            if (selection.rangeCount > 0) {
-                const range = selection.getRangeAt(0);
-                if (editor.contains(range.commonAncestorContainer)) {
-                    savedRange = range;
-                }
-            }
-        }
-
-        window.applyFontSize = function(selectElem) {
-            const size = selectElem.value;
-            if (!size) return;
-            editor.focus();
-            const selection = window.getSelection();
-            if (savedRange) { selection.removeAllRanges(); selection.addRange(savedRange); }
-            
-            const span = document.createElement('span');
-            span.style.fontSize = size;
-            span.appendChild(selection.getRangeAt(0).extractContents());
-            selection.getRangeAt(0).insertNode(span);
-            selectElem.value = "";
-        }
-
-        window.insertImage = function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                editor.focus();
-                if (savedRange) {
-                    const selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(savedRange);
-                }
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.maxWidth = "100%";
-                img.style.borderRadius = "0.75rem";
-                const selection = window.getSelection();
-                if (selection.rangeCount > 0) {
-                    selection.getRangeAt(0).insertNode(img);
-                }
-            };
-            reader.readAsDataURL(file);
-            event.target.value = '';
-        }
-
-        window.filterTab = function(tab) {
-            currentTab = tab;
-            document.getElementById('tabAll').className = tab === 'all' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
-            document.getElementById('tabNotice').className = tab === '공지사항' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
-            document.getElementById('tabNews').className = tab === '업계소식' ? "px-4 py-2 rounded-xl text-sm font-bold bg-orange-600 text-white shadow-sm" : "px-4 py-2 rounded-xl text-sm font-bold bg-white text-slate-600 border border-slate-200";
-
-            document.getElementById('searchInput').value = '';
-
-            const target = tab === 'all' ? posts : posts.filter(p => p.category === tab);
-            renderTable(target);
-        }
-
-        function renderTable(data) {
-            const tbody = document.getElementById('boardBody');
-            tbody.innerHTML = '';
-            if(data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-slate-400">등록된 게시글이 없습니다.</td></tr>`;
-                return;
-            }
-
-            data.forEach((post, index) => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/80 transition-colors cursor-pointer";
-                tr.onclick = () => viewDetail(post.docId);
-                
-                const badge = post.category === '공지사항' 
-                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600">공지사항</span>`
-                    : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">업계소식</span>`;
-
-                tr.innerHTML = `
-                    <td class="py-4 px-4 text-slate-400 font-medium">${data.length - index}</td>
-                    <td class="py-4 px-4">${badge}</td>
-                    <td class="py-4 px-6 text-left font-semibold text-slate-900">${post.title}</td>
-                    <td class="py-4 px-4">${post.writer}</td>
-                    <td class="py-4 px-4 text-xs text-slate-500">${post.date}</td>
-                    <td class="py-4 px-4 text-xs text-slate-400">${post.views || 0}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        window.searchBoard = function() {
-            const searchType = document.getElementById('searchType').value;
-            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
-
-            if (!keyword) {
-                alert('검색어를 입력해주세요.');
-                filterTab(currentTab);
-                return;
-            }
-
-            const baseData = currentTab === 'all' ? posts : posts.filter(p => p.category === currentTab);
-
-            const filteredData = baseData.filter(post => {
-                if (searchType === 'title') {
-                    return post.title && post.title.toLowerCase().includes(keyword);
-                } else if (searchType === 'writer') {
-                    return post.writer && post.writer.toLowerCase().includes(keyword);
-                }
-                return false;
-            });
-
-            renderTable(filteredData);
-        };
-
-        document.getElementById('searchInput').addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                searchBoard();
-            }
-        });
-
-        window.viewDetail = async function(docId) {
-            const docRef = doc(db, "posts", docId);
-            const docSnap = await getDoc(docRef);
-            if(!docSnap.exists()) return;
-
-            const post = docSnap.data();
-            currentPostId = docId;
-
-            const newViews = (post.views || 0) + 1;
-            await updateDoc(docRef, { views: newViews });
-
-            document.getElementById('detailCategory').innerText = post.category;
-            document.getElementById('detailTitle').innerText = post.title;
-            document.getElementById('detailWriter').innerText = post.writer;
-            document.getElementById('detailDate').innerText = post.date;
-            document.getElementById('detailViews').innerText = newViews;
-            document.getElementById('detailContent').innerHTML = post.content;
-
-            document.getElementById('listView').classList.add('hidden');
-            document.getElementById('detailView').classList.remove('hidden');
-            document.getElementById('pageHeader').style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        window.showListView = function() {
-            currentPostId = null;
-            document.getElementById('detailView').classList.add('hidden');
-            document.getElementById('listView').classList.remove('hidden');
-            document.getElementById('pageHeader').style.display = 'flex';
-            fetchPosts();
-        }
-
-        window.deletePost = async function() {
-            if(confirm('정말 이 게시글을 삭제하시겠습니까?')) {
-                await deleteDoc(doc(db, "posts", currentPostId));
-                alert('게시글이 삭제되었습니다.');
-                showListView();
-            }
-        }
-
-        window.openWriteModal = function() { document.getElementById('writeModal').classList.remove('hidden'); }
-        window.closeWriteModal = function() { 
-            document.getElementById('writeModal').classList.add('hidden');
-            document.getElementById('writeForm').reset();
-            editor.innerHTML = '';
-        }
-
-        window.submitPost = async function(event) {
-            event.preventDefault();
-            const category = document.getElementById('postCategory').value;
-            const title = document.getElementById('postTitle').value;
-            const writer = document.getElementById('postWriter').value;
-            const content = editor.innerHTML;
-
-            if (!content.trim() || content === '<br>') { alert('내용을 입력해주세요.'); return; }
-
-            const today = new Date().toISOString().split('T')[0];
-
-            try {
-                await addDoc(collection(db, "posts"), {
-                    category,
-                    title,
-                    writer,
-                    date: today,
-                    views: 0,
-                    content,
-                    createdAt: Date.now()
-                });
-                alert('성공적으로 등록되었습니다.');
-                closeWriteModal();
-                fetchPosts();
-            } catch (error) {
-                console.error("등록 실패:", error);
-                alert('등록 중 오류가 발생했습니다.');
-            }
-        }
-
-        // 페이지 로드 시 로그인 상태 확인 및 UI 반영 (글쓰기, 삭제 버튼 제어)
+    <script>
         window.addEventListener('DOMContentLoaded', () => {
-            fetchPosts();
-
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminBtn = document.getElementById('adminBtn');
             const authButtons = document.getElementById('authButtons');
-            const writeBtn = document.getElementById('writeBtn');
-            const deleteButtonContainer = document.getElementById('deleteButtonContainer');
 
-            if (isLoggedIn === 'true') {
-                if (writeBtn) {
-                    writeBtn.classList.remove('hidden');
-                }
-                if (deleteButtonContainer) {
-                    deleteButtonContainer.classList.remove('hidden'); // 관리자 로그인 시 삭제 버튼 노출
-                }
+            if (isLoggedIn === 'true' && adminBtn && authButtons) {
+                adminBtn.remove();
+                const nameSpan = document.createElement('span');
+                nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 whitespace-nowrap";
+                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자`;
+                authButtons.appendChild(nameSpan);
+                const logoutBtn = document.createElement('button');
+                logoutBtn.innerHTML = `로그아웃`;
+                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0 whitespace-nowrap";
+                logoutBtn.onclick = () => {
+                    localStorage.removeItem('isAdminLoggedIn');
+                    localStorage.removeItem('adminName');
+                    window.location.reload();
+                };
+                authButtons.appendChild(logoutBtn);
+            }
 
-                if (adminBtn && authButtons) {
-                    adminBtn.remove();
-
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
-                    nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
-                    authButtons.appendChild(nameSpan);
-
-                    const logoutBtn = document.createElement('button');
-                    logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
-                    logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
-                    logoutBtn.onclick = () => {
-                        localStorage.removeItem('isAdminLoggedIn');
-                        localStorage.removeItem('adminName');
-                        window.location.reload();
-                    };
-                    authButtons.appendChild(logoutBtn);
-                }
-            } else {
-                if (writeBtn) {
-                    writeBtn.classList.add('hidden');
-                }
-                if (deleteButtonContainer) {
-                    deleteButtonContainer.classList.add('hidden'); // 비로그인 시 삭제 버튼 숨김
-                }
+            if (authButtons) {
+                const langContainer = document.createElement('div');
+                langContainer.className = "relative inline-block text-left notranslate";
+                langContainer.innerHTML = `
+                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-global-line text-orange-400"></i> Lang <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-1.5 z-50 text-xs font-medium text-slate-200">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">中文</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">日本語</a>
+                    </div>
+                `;
+                authButtons.appendChild(langContainer);
             }
         });
     </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'ko', includedLanguages: 'ko,en,zh-CN,ja', autoDisplay: false }, 'google_translate_element');
+        }
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
+        }
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) dropdown.classList.add('hidden');
+        });
+        function changeLanguage(langCode) {
+            const selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+                setTimeout(() => { document.documentElement.setAttribute('lang', langCode); }, 300);
+            }
+        }
+        setInterval(() => {
+            const htmlTag = document.documentElement;
+            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            if (googCookie) {
+                const langVal = googCookie.split('=')[1].split('/')[2];
+                if (langVal && htmlTag.getAttribute('lang') !== langVal) htmlTag.setAttribute('lang', langVal);
+            }
+        }, 1000);
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
