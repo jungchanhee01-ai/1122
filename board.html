@@ -92,11 +92,6 @@
                 <!-- 페이지네이션 -->
                 <div class="py-6 bg-slate-50 border-t border-slate-200 flex justify-center items-center gap-1.5 text-sm font-semibold">
                     <button class="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center shadow-sm">1</button>
-                    <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">2</button>
-                    <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">3</button>
-                    <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">4</button>
-                    <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">5</button>
-                    <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors"><i class="ri-arrow-right-s-line"></i></button>
                 </div>
             </div>
 
@@ -228,22 +223,10 @@
 
     <!-- 스크립트 -->
     <script>
-        const defaultPosts = [
-            { id: 210, title: "팬오션, 2분기 영업이익 57.4% 증가한 1,937억 원 기록", writer: "관리자", date: "2026-08-03", views: 132, content: "탱커부문 영업이익 165.7% 성장…상반기 누적 영업익도 37.4% 늘어\n\n팬오션은 글로벌 불확실성 속에서도 철저한 리스크 관리와 시황 대응을 통해 견조한 실적을 달성했습니다." },
-            { id: 209, title: "피격 HMM 나무호 수리 완료…‘출항 계획 수립 중’", writer: "관리자", date: "2026-07-14", views: 151, content: "안전 점검을 모두 마치고 정상 운항을 위한 최종 출항 스케줄을 조율 중입니다." },
-            { id: 208, title: "해진공, 해운·항만·물류 AI 전환 선도", writer: "관리자", date: "2026-06-11", views: 248, content: "물류 전 과정에 인공지능(AI) 기술을 접목하여 스마트 항만 생태계를 조성합니다." },
-            { id: 207, title: "중동전쟁 중소기업 피해 756건‥물류비 상승·계약 취소", writer: "관리자", date: "2026-05-07", views: 389, content: "지정학적 리스크로 인한 해상 운임 급등과 수출입 기업들의 피해 상황에 대한 대책 마련이 시급합니다." },
-            { id: 206, title: "올 인천항 컨 물동량 357만TEU 전망", writer: "관리자", date: "2026-01-22", views: 559, content: "수도권 물류 중심지로서 인천항의 컨테이너 물동량이 꾸준한 증가세를 보이고 있습니다." },
-            { id: 205, title: "칭다오 잇는 화물선 매주 수요일 제주 입항", writer: "관리자", date: "2025-10-14", views: 693, content: "한중간 정기 화물선 운항으로 신선식품 및 물류 교류가 더욱 활발해질 전망입니다." },
-            { id: 204, title: "대만 완하이라인, 1.3만TEU급 컨선 도입 매듭…남미항로 취항", writer: "관리자", date: "2025-09-02", views: 707, content: "대형 컨테이너선 투입으로 남미 항로의 서비스 경쟁력이 한층 강화되었습니다." },
-            { id: 203, title: "\"美 관세 부과 '선주문 효과' 끝\"…아시아 ..", writer: "관리자", date: "2025-08-05", views: 760, content: "미국의 관세 정책 변화에 따른 아시아권 수출입 시장의 동향 변화 분석 리포트입니다." },
-            { id: 202, title: "하루에 컨테이너선 단 3척…美 최대 아시아 무역항도 '텅텅'", writer: "관리자", date: "2025-07-02", views: 773, content: "공급망 병목 현상 완화와 물동량 변동에 따른 주요 항만들의 가동 현황입니다." },
-            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "관리자", date: "2025-06-05", views: 759, content: "미국의 급격한 관세 인상 조치로 인해 국내 철강 수출 기업들의 비상 경영이 시작되었습니다." }
-        ];
-
+        // 초기 게시글을 빈 배열로 설정하고 localStorage도 비웁니다.
         let posts = JSON.parse(localStorage.getItem('futureGlsPosts'));
         if (!posts) {
-            posts = defaultPosts;
+            posts = [];
             localStorage.setItem('futureGlsPosts', JSON.stringify(posts));
         }
 
@@ -352,7 +335,7 @@
             tbody.innerHTML = '';
             
             if(data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-slate-400">검색된 결과가 없습니다.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-slate-400">등록된 게시글이 없습니다.</td></tr>`;
                 return;
             }
 
