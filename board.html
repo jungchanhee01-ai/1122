@@ -25,10 +25,13 @@
 
     <!-- 상단 네비게이션 -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 relative flex items-center justify-between">
-            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider z-10">FUTURE <span class="text-orange-600">GLS</span></a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 absolute left-1/2 -translate-x-1/2">
+            <!-- 로고 -->
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0">FUTURE <span class="text-orange-600">GLS</span></a>
+            
+            <!-- 중앙 네비게이션 메뉴 (간격 및 크기 최적화) -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
@@ -37,18 +40,18 @@
                 <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
             </nav>
 
-            <!-- 우측 버튼 영역 (화물추적, 견적요청, 관리자 인증) -->
-            <div class="flex items-center gap-2.5" id="authButtons">
-                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
-                    <i class="ri-search-line"></i> 화물 추적
+            <!-- 우측 버튼 영역 (겹침 방지를 위해 간격 및 크기 정돈) -->
+            <div class="flex items-center gap-2 shrink-0" id="authButtons">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                    <i class="ri-search-line"></i> 화물추적
                 </a>
-                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
-                    견적 요청 <i class="ri-arrow-right-line"></i>
+                <a href="index.html#quote" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
+                    견적요청 <i class="ri-arrow-right-line"></i>
                 </a>
                 
                 <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
-                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
-                    <i class="ri-user-settings-line"></i> 관리자 로그인
+                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                    <i class="ri-user-settings-line"></i> 관리자로그인
                 </a>
             </div>  
         </div>
@@ -75,7 +78,7 @@
                 </h1>
             </div>
             
-            <!-- 글쓰기 버튼 (관리자에게만 노출되도록 기본 hidden 클래스 부여) -->
+            <!-- 글쓰기 버튼 (관리자에게만 노출) -->
             <button onclick="openWriteModal()" id="writeBtn" class="hidden bg-slate-900 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0">
                 <i class="ri-pencil-line"></i> 글쓰기
             </button>
@@ -465,23 +468,21 @@
             const writeBtn = document.getElementById('writeBtn');
 
             if (isLoggedIn === 'true') {
-                // 관리자 로그인 상태인 경우 글쓰기 버튼 노출
                 if (writeBtn) {
                     writeBtn.classList.remove('hidden');
                 }
 
-                // 상단 헤더 관리자 로그인 버튼을 프로필 및 로그아웃 버튼으로 변경
                 if (adminBtn && authButtons) {
                     adminBtn.remove();
 
                     const nameSpan = document.createElement('span');
-                    nameSpan.className = "inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm";
+                    nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
                     nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
                     authButtons.appendChild(nameSpan);
 
                     const logoutBtn = document.createElement('button');
                     logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
-                    logoutBtn.className = "inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md";
+                    logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
                     logoutBtn.onclick = () => {
                         localStorage.removeItem('isAdminLoggedIn');
                         localStorage.removeItem('adminName');
@@ -490,7 +491,6 @@
                     authButtons.appendChild(logoutBtn);
                 }
             } else {
-                // 비로그인 상태인 경우 글쓰기 버튼 숨김 유지
                 if (writeBtn) {
                     writeBtn.classList.add('hidden');
                 }
