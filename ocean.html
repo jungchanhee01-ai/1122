@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURE GLS - 해상운송</title>
+    <title>FUTURE GLS - 해상운송 서비스</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Remix Icons -->
@@ -12,63 +12,39 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
-        
-        /* 구글 번역바 기본 UI 숨기기 및 레이아웃 밀림 방지 */
-        .goog-te-banner-frame, .skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-
-        /* 평소(한·중·일 등)에는 한층 더 큼직하고 여유 있는 메뉴 스타일 적용 */
-        .dynamic-nav {
-            font-size: 1.05rem;
-            gap: 2.75rem;
-        }
-
-        /* 오직 영어(en)로 번역되었을 때만 글자와 간격을 줄여서 오버플로우 방지 */
-        html[lang*="en"] .dynamic-nav {
-            font-size: 0.75rem;
-            gap: 0.75rem;
-        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
 
     <!-- 상단 네비게이션 -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <!-- 로고 -->
-            <a href="index.html" class="flex items-center gap-2.5 shrink-0 notranslate">
-                <div class="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
-                    <i class="ri-ship-line"></i>
-                </div>
-                <div>
-                    <span class="text-lg font-black tracking-wider block leading-none text-slate-900">FUTURE GLS</span>
-                    <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase mt-0.5 block">Global Logistics</span>
-                </div>
-            </a>
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0">FUTURE <span class="text-orange-600">GLS</span></a>
             
-            <!-- 중앙 네비게이션 메뉴 (동적 클래스 적용) -->
-            <nav class="hidden lg:flex items-center font-bold text-slate-600 dynamic-nav transition-all">
-                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">회사소개</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">항공운송</a>
-                <a href="ocean.html" class="text-orange-600 transition-colors whitespace-nowrap">해상운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">업계소식</a>
+            <!-- 중앙 네비게이션 메뉴 -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
+                <a href="ocean.html" class="text-orange-600 transition-colors">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
             </nav>
 
             <!-- 우측 버튼 영역 -->
-            <div class="flex items-center gap-2.5 shrink-0" id="authButtons">
-                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
+            <div class="flex items-center gap-2 shrink-0" id="authButtons">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                     <i class="ri-search-line"></i> 화물추적
                 </a>
-                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
+                <a href="index.html#quote" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
                     견적요청 <i class="ri-arrow-right-line"></i>
                 </a>
                 
                 <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
-                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> 관리자
+                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                    <i class="ri-user-settings-line"></i> 관리자로그인
                 </a>
             </div>  
         </div>
@@ -87,36 +63,84 @@
             
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">O C E A N &nbsp; F R E I G H T</span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">O C E A N &nbsp; T R A F F I C &nbsp; S E R V I C E</span>
             </div>
             <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
-                안전하고 경제적인 대량 화물 수송, <span class="text-orange-600">해상운송 서비스</span>
+                전 세계를 연결하는 안정적인 <span class="text-orange-600">해상 화물 운송 솔루션</span>
             </h1>
         </div>
 
-        <!-- 본문 내용 -->
-        <div class="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-sm space-y-8">
-            <div>
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">FCL / LCL 맞춤형 해상 서비스</h2>
-                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                    세계 주요 항구와 긴밀한 네트워크를 구축하여 전 세계 어디든 대량의 컨테이너 화물(FCL)부터 소량 화물(LCL)까지 안전하고 비용 효율적으로 수송합니다. 정기적인 스케줄과 철저한 화물 관리로 신뢰할 수 있는 물류 서비스를 경험하세요.
+        <!-- 1. 해상수출 섹션 -->
+        <section class="mb-20">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-xl font-black text-orange-600">1.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">해상수출</h2>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base mb-8">
+                적시 운송(JUST IN TIME)을 Motto로 (주)퓨처지엘스의 고객 맞춤 서비스는 항상 고객의 요구에 부응할 수 있도록 준비되어 있습니다.
+            </p>
+
+            <!-- 업무절차 & 이미지 Grid -->
+            <div class="grid md:grid-cols-12 gap-8 items-center mb-10">
+                <div class="md:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">업무절차 (Export Workflow)</h3>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        예약접수 <span class="text-orange-600">→</span> P/U <span class="text-orange-600">→</span> 서류작성 <span class="text-orange-600">→</span> 수출통관 <span class="text-orange-600">→</span> 선적 <span class="text-orange-600">→</span> 도착 <span class="text-orange-600">→</span> 수입통관 <span class="text-orange-600">→</span> 내륙운송 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D
+                    </p>
+                </div>
+                <div class="md:col-span-5 bg-white p-2 rounded-2xl border border-slate-200 shadow-md">
+                    <img src="https://media.istockphoto.com/id/1339057752/ko/%EC%82%AC%EC%A7%84/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94-%EB%8C%80%ED%98%95-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%94%EC%AC%BC%EC%84%A0.jpg?s=612x612&w=0&k=20&c=4b2v3Vt4Zq1AA5ypT2PztefeR7PwMy-xpk7AKnE6PF4=" alt="해상운송" class="w-full h-48 object-cover rounded-xl">
+                </div>
+            </div>
+
+            <!-- 서비스내역 테이블 -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 font-bold text-slate-900 text-sm">
+                    서비스 내역
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 w-1/4 bg-slate-50/50">FCL 서비스</td>
+                                <td class="py-4 px-6 text-slate-600">세계전지역 FCL 서비스제공</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50">LCL 서비스</td>
+                                <td class="py-4 px-6 text-slate-600">세계전지역 LCL서비스 제공</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50">BREAK BULK 서비스</td>
+                                <td class="py-4 px-6 text-slate-600">HEAVY CARGO 물품에 대한 SPECIAL HANDLING 서비스제공</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50">특화서비스</td>
+                                <td class="py-4 px-6 text-slate-600">중국 전지역으로의 특화서비스 제공 (퓨처지엘스 / 등기수책 서비스제공)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 해상수입 섹션 -->
+        <section>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-xl font-black text-orange-600">2.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">해상수입</h2>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base mb-8">
+                해외지사 및 전세계 긴밀한 파트너 네트워크를 통하여 귀사의 귀중한 수입화물을 신속, 정확하게 운송하고 있습니다.
+            </p>
+
+            <!-- 업무절차 박스 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">업무절차 (Import Workflow)</h3>
+                <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    선적지선택 <span class="text-orange-600">→</span> 도착전 서류수취 <span class="text-orange-600">→</span> 도착 <span class="text-orange-600">→</span> 수입통관 <span class="text-orange-600">→</span> 내륙운송 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D
                 </p>
             </div>
-            <div class="border-t border-slate-100 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
-                    <h3 class="font-bold text-slate-900 text-lg mb-2 flex items-center gap-2">
-                        <i class="ri-box-3-line text-orange-600"></i> FCL 서비스
-                    </h3>
-                    <p class="text-slate-600 text-sm">전용 컨테이너를 사용하여 대량 화물을 신속하고 안전하게 단독 운송합니다.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
-                    <h3 class="font-bold text-slate-900 text-lg mb-2 flex items-center gap-2">
-                        <i class="ri-stack-line text-orange-600"></i> LCL 서비스
-                    </h3>
-                    <p class="text-slate-600 text-sm">소량의 화물을 가진 화주들을 위해 컨테이너를 공유하여 합리적인 비용으로 운송합니다.</p>
-                </div>
-            </div>
-        </div>
+        </section>
 
     </main>
 
@@ -128,10 +152,7 @@
         </div>
     </footer>
 
-    <!-- 구글 번역기 숨김 위젯 영역 -->
-    <div id="google_translate_element" style="display:none;"></div>
-
-    <!-- 로그인 상태 반영 및 언어 드롭다운 생성 스크립트 -->
+    <!-- 로그인 상태 반영 스크립트 -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
@@ -142,13 +163,13 @@
                 adminBtn.remove();
 
                 const nameSpan = document.createElement('span');
-                nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 whitespace-nowrap";
-                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자`;
+                nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
+                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
                 authButtons.appendChild(nameSpan);
 
                 const logoutBtn = document.createElement('button');
-                logoutBtn.innerHTML = `로그아웃`;
-                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0 whitespace-nowrap";
+                logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
+                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
                 logoutBtn.onclick = () => {
                     localStorage.removeItem('isAdminLoggedIn');
                     localStorage.removeItem('adminName');
@@ -156,73 +177,7 @@
                 };
                 authButtons.appendChild(logoutBtn);
             }
-
-            // Language 드롭다운 메뉴 동적 생성
-            if (authButtons) {
-                const langContainer = document.createElement('div');
-                langContainer.className = "relative inline-block text-left notranslate";
-                langContainer.innerHTML = `
-                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md whitespace-nowrap">
-                        <i class="ri-global-line text-orange-400"></i> Lang <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-1.5 z-50 text-xs font-medium text-slate-200">
-                        <a href="javascript:void(0);" onclick="changeLanguage('ko')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">한국어</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('en')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">English</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">中文</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('ja')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">日本語</a>
-                    </div>
-                `;
-                authButtons.appendChild(langContainer);
-            }
         });
     </script>
-
-    <!-- 구글 번역 엔진 스크립트 -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ko',
-                includedLanguages: 'ko,en,zh-CN,ja',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function toggleLangMenu(e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('langDropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        window.addEventListener('click', () => {
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown && !dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden');
-            }
-        });
-
-        function changeLanguage(langCode) {
-            const selectField = document.querySelector('.goog-te-combo');
-            if (selectField) {
-                selectField.value = langCode;
-                selectField.dispatchEvent(new Event('change'));
-                
-                setTimeout(() => {
-                    document.documentElement.setAttribute('lang', langCode);
-                }, 300);
-            }
-        }
-
-        setInterval(() => {
-            const htmlTag = document.documentElement;
-            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            if (googCookie) {
-                const langVal = googCookie.split('=')[1].split('/')[2];
-                if (langVal && htmlTag.getAttribute('lang') !== langVal) {
-                    htmlTag.setAttribute('lang', langVal);
-                }
-            }
-        }, 1000);
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
