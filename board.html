@@ -251,40 +251,33 @@
         }
 
         let currentPostId = null;
-        let globalTargetFontSize = "14px"; // 전역 상태로 현재 지정된 글자 크기 유지
-
         const editor = document.getElementById('postContentEditor');
 
-        // 드롭다운에서 글자 크기를 변경할 때
+        // 드롭다운에서 글자 크기를 변경할 때 (드래그한 영역만 크기가 바뀜, 전체 영향 없음)
         function changeFontSize(selectElem) {
             const size = selectElem.value;
             if (!size) return;
-            globalTargetFontSize = size; // 크기 기억
 
             editor.focus();
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
                 
-                // 1. 드래그해서 선택한 글자가 있다면 그 영역만 즉시 크기 변경
                 if (!range.collapsed) {
+                    // 드래그해서 선택한 텍스트가 있는 경우: 해당 영역만 콕 집어서 크기 변경
                     const span = document.createElement('span');
                     span.style.fontSize = size;
                     span.appendChild(range.extractContents());
                     range.insertNode(span);
                     selection.removeAllRanges();
-                } 
-                else {
-                    // 2. 드래그 없이 커서만 있는 경우: 
-                    // 현재 커서가 속한 기존 span이나 태그의 글자 크기를 즉시 변경하거나 감쌈
+                } else {
+                    // 드래그 없이 커서만 깜빡이는 경우: 현재 커서가 속한 단어/태그나 빈 span을 만들어 적용
                     let container = range.commonAncestorContainer;
                     let targetNode = container.nodeType === 3 ? container.parentElement : container;
 
                     if (targetNode && targetNode !== editor && targetNode.tagName === 'SPAN') {
-                        // 이미 span 안에 있다면 스타일만 바로 수정 (지우지 않고 즉시 변경 가능!)
                         targetNode.style.fontSize = size;
                     } else {
-                        // 일반 영역이면 새로운 span을 삽입하여 이후 타이핑에 적용
                         const span = document.createElement('span');
                         span.style.fontSize = size;
                         span.innerHTML = '&#8203;';
@@ -297,34 +290,8 @@
                     }
                 }
             }
+            selectElem.value = ""; // 드롭다운 초기화
         }
-
-        // 키를 입력하거나 글을 쓸 때 현재 설정된 크기가 실시간으로 유지되도록 보정
-        editor.addEventListener('input', (e) => {
-            const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-            const range = selection.getRangeAt(0);
-            let container = range.startContainer;
-
-            // 방금 입력된 텍스트 노드가 스타일 없는 일반 상태라면 현재 설정된 크기 span으로 감싸기
-            if (container.nodeType === 3) {
-                let parent = container.parentElement;
-                if (parent && parent === editor || (parent && !parent.style.fontSize)) {
-                    const text = container.textContent;
-                    if (text.length > 0) {
-                        const span = document.createElement('span');
-                        span.style.fontSize = globalTargetFontSize;
-                        span.textContent = text;
-                        container.parentNode.replaceChild(span, container);
-
-                        range.setStartAfter(span);
-                        range.collapse(true);
-                        selection.removeAllRanges();
-                        selection.addRange(range);
-                    }
-                }
-            }
-        });
 
         // 글꼴 변경 함수
         function changeFontFamily(selectElem) {
@@ -454,7 +421,6 @@
             document.getElementById('writeForm').reset();
             editor.innerHTML = '';
             document.getElementById('fontSizeSelect').value = "";
-            globalTargetFontSize = "14px";
         }
 
         // 새 글 등록 제출
