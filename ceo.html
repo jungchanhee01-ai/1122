@@ -28,6 +28,10 @@
             font-size: 0.75rem;
             gap: 0.75rem;
         }
+
+        /* 번역 완료 전 깜빡임 방지를 위한 초기 투명도 설정 */
+        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
+        body.translated { opacity: 1; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -218,5 +222,14 @@
         }, 1000);
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // 페이지 로드 및 번역 적용 후 화면 표시
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('translated');
+            }, 300);
+        });
+    </script>
 </body>
-</html>2
+</html>
