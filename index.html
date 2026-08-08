@@ -47,7 +47,8 @@
                     <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase">Global Logistics</span>
                 </div>
             </a>
-            <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm text-slate-600">
+            <!-- 상단 메뉴 글씨 크기(text-base) 및 간격(gap-10) 확대 적용 -->
+            <nav class="hidden lg:flex items-center gap-10 font-bold text-base text-slate-700">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
@@ -512,22 +513,19 @@
             fetchExchangeRates();
             fetchBoardData();
 
-            // [추가됨] 로그인 상태에 따른 헤더 UI 변경 처리
+            // 로그인 상태에 따른 헤더 UI 변경 처리
             const adminBtn = document.getElementById('adminBtn');
             const authButtons = document.getElementById('authButtons');
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
 
             if (isLoggedIn === 'true' && adminBtn && authButtons) {
-                // 기존 '관리자 로그인' 버튼 제거
                 adminBtn.remove();
 
-                // 관리자 이름 표시 (관리자(FUTURE))
                 const nameSpan = document.createElement('span');
                 nameSpan.className = "text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200";
                 nameSpan.innerText = "관리자(FUTURE)";
                 authButtons.appendChild(nameSpan);
 
-                // 로그아웃 버튼 생성
                 const logoutBtn = document.createElement('button');
                 logoutBtn.innerText = "로그아웃";
                 logoutBtn.className = "text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md";
