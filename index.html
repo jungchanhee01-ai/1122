@@ -15,6 +15,10 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        /* 구글 번역바 기본 UI 숨기기 (깔끔한 커스텀 드롭다운 연동용) */
+        .goog-te-banner-frame,.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -395,6 +399,9 @@
         </div>
     </footer>
 
+    <!-- 구글 번역기 숨김 위젯 영역 -->
+    <div id="google_translate_element" style="display:none;"></div>
+
     <!-- Firebase SDK 연동 및 공통 기능 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -536,8 +543,62 @@
                 };
                 authButtons.appendChild(logoutBtn);
             }
+
+            // [추가] LANGUAGE 드롭다운 UI 동적 생성 (로그아웃 버튼 옆)
+            if (authButtons) {
+                const langContainer = document.createElement('div');
+                langContainer.className = "relative inline-block text-left";
+                langContainer.innerHTML = `
+                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md">
+                        <i class="ri-global-line text-orange-400"></i> Language <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-36 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-1.5 z-50 text-xs font-medium text-slate-200">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">中文版</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">日本語</a>
+                    </div>
+                `;
+                authButtons.appendChild(langContainer);
+            }
         });
     </script>
+
+    <!-- 구글 번역 엔진 및 언어 전환 스크립트 -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                includedLanguages: 'ko,en,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // 드롭다운 열고 닫기 토글
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // 화면 다른 곳 클릭하면 드롭다운 닫기
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // 언어 변경 실행 함수
+        function changeLanguage(langCode) {
+            const selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         /* 환율 및 트래킹 공통 스크립트 */
