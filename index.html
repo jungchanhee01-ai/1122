@@ -55,7 +55,7 @@
                 <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
                 <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
             </nav>
- <div class="flex items-center gap-3">
+            <div id="authButtons" class="flex items-center gap-3">
                 <!-- 1. 화물 추적 버튼 -->
                 <a href="#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                     <i class="ri-search-line"></i> 화물 추적
@@ -66,8 +66,8 @@
                     견적 요청 <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <!-- 3. 관리자 로그인 버튼 (가장 맨 오른쪽) -->
-                <a href="login/login.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                <!-- 3. 관리자 로그인 버튼 (로그인 시 동적으로 변경됨) -->
+                <a id="adminBtn" href="login/login.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
                     <i class="ri-user-settings-line"></i> 관리자 로그인
                 </a>
             </div>  
@@ -394,8 +394,6 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK 연동 스크립트 (모듈 타입) -->
-    
     <!-- Firebase SDK 연동 및 공통 기능 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -509,10 +507,37 @@
             }
         }
 
-        // 페이지 로드 시 실행
+        // 페이지 로드 시 실행 (환율, 게시판 데이터, 그리고 로그인 상태 확인)
         window.addEventListener('DOMContentLoaded', () => {
             fetchExchangeRates();
             fetchBoardData();
+
+            // [추가됨] 로그인 상태에 따른 헤더 UI 변경 처리
+            const adminBtn = document.getElementById('adminBtn');
+            const authButtons = document.getElementById('authButtons');
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+
+            if (isLoggedIn === 'true' && adminBtn && authButtons) {
+                // 기존 '관리자 로그인' 버튼 제거
+                adminBtn.remove();
+
+                // 관리자 이름 표시 (관리자(FUTURE))
+                const nameSpan = document.createElement('span');
+                nameSpan.className = "text-xs font-bold text-slate-800 bg-slate-100 px-3.5 py-2.5 rounded-xl border border-slate-200";
+                nameSpan.innerText = "관리자(FUTURE)";
+                authButtons.appendChild(nameSpan);
+
+                // 로그아웃 버튼 생성
+                const logoutBtn = document.createElement('button');
+                logoutBtn.innerText = "로그아웃";
+                logoutBtn.className = "text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md";
+                logoutBtn.onclick = () => {
+                    localStorage.removeItem('isAdminLoggedIn');
+                    localStorage.removeItem('adminName');
+                    window.location.reload();
+                };
+                authButtons.appendChild(logoutBtn);
+            }
         });
     </script>
 
