@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 통관업무 서비스</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- 상단 네비게이션 -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider">FUTURE <span class="text-orange-600">GLS</span></a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
+                <a href="customs.html" class="text-orange-600 transition-colors">통관업무</a>
+                <a href="index.html#tracking" class="hover:text-orange-600 transition-colors">화물추적</a>
+                <a href="index.html#exchange" class="hover:text-orange-600 transition-colors">환율/계산기</a>
+                <a href="index.html#quote" class="hover:text-orange-600 transition-colors">견적문의</a>
+            </nav>
+
+            <a href="index.html#quote" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                견적 문의
+            </a>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+        
+        <!-- 페이지 타이틀 헤더 -->
+        <div class="mb-14 border-b border-slate-200 pb-8">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
+                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-slate-900 font-bold">서비스안내</span>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-orange-600 font-bold">통관업무</span>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C U S T O M S &nbsp; C L E A R A N C E</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+                신속하고 정확한 법규 준수 <span class="text-orange-600">수출입 통관 서비스</span>
+            </h1>
+        </div>
+
+        <!-- 1. 수출 통관 섹션 -->
+        <section class="mb-20">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-xl font-black text-orange-600">1.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">수출 통관 절차</h2>
+            </div>
+            
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <!-- 수출 흐름도 박스 -->
+                <div class="overflow-x-auto py-4">
+                    <div class="min-w-[650px] flex flex-col gap-6">
+                        <!-- 메인 프로세스 단계 -->
+                        <div class="flex items-center justify-between text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">수출계약체결</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">신용장내도</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">수출물품확보</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">적재항운송</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">적재</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm">출항</div>
+                            </div>
+                        </div>
+
+                        <!-- 서브 연계 박스 -->
+                        <div class="flex justify-center mt-2">
+                            <div class="bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold px-6 py-2 rounded-xl shadow-sm">
+                                적재 스케줄 확정
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-1">
+                            <span class="text-orange-600 font-bold text-xs bg-orange-50 px-4 py-1.5 rounded-full border border-orange-200 inline-block">
+                                수출신고가능 (3일이내)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 수입 통관 섹션 -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-xl font-black text-orange-600">2.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">수입 통관 절차</h2>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                
+                <!-- 상단 첨부서류 안내 박스 -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">수입신고 첨부서류</h3>
+                        <ul class="text-xs sm:text-sm font-semibold text-slate-700 space-y-1">
+                            <li>- 송품장 (Invoice)</li>
+                            <li>- 선하증권 (B/L)</li>
+                            <li>- 포장명세서 (Packing List)</li>
+                            <li>- 기타서류</li>
+                        </ul>
+                    </div>
+                    <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200 flex flex-col justify-center">
+                        <h3 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">통관 진행 프로세스 요약</h3>
+                        <p class="text-xs sm:text-sm text-emerald-900 leading-relaxed">
+                            입항 <span class="text-emerald-600">→</span> 보세창고 입고 <span class="text-emerald-600">→</span> 세관 심사 (감면/검사) <span class="text-emerald-600">→</span> 세금납부 <span class="text-emerald-600">→</span> 반출 완료
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 상세 흐름 구조 시각화 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs sm:text-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center items-center">
+                        <!-- 부두/입항 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-blue-600">[부두 영역]</span>
+                            <div class="bg-blue-50 py-2 rounded font-semibold text-blue-800">입항 / 보세창고</div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600">부두직통관</div>
+                        </div>
+
+                        <!-- 세관 심사 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-purple-600">[세관 심사 영역]</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-purple-50 p-2 rounded text-purple-800 font-semibold">감면</div>
+                                <div class="bg-purple-50 p-2 rounded text-purple-800 font-semibold">검사</div>
+                            </div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600">신고수리정보 / 담보 / 사전납부</div>
+                        </div>
+
+                        <!-- 신고 및 대행 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-emerald-600">[통관 대행 영역]</span>
+                            <div class="bg-emerald-50 py-2 rounded font-semibold text-emerald-800">관세사등 / 자가통관</div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600">통관의뢰</div>
+                        </div>
+
+                        <!-- 납부 및 반출 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-orange-600">[납부 및 반출]</span>
+                            <div class="bg-orange-50 py-2 rounded font-semibold text-orange-800">은행 (영수필통지)</div>
+                            <div class="bg-orange-600 text-white py-1.5 rounded font-bold">화물 반출 완료</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
+            <p>&copy; FUTURE GLS. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

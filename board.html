@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 업계소식</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- 상단 네비게이션 -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider">FUTURE <span class="text-orange-600">GLS</span></a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
+                <a href="board.html" class="text-orange-600 transition-colors">업계소식</a>
+                <a href="index.html#quote" class="hover:text-orange-600 transition-colors">견적문의</a>
+            </nav>
+
+            <a href="index.html#quote" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                견적 문의
+            </a>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+        
+        <!-- 페이지 타이틀 헤더 -->
+        <div class="mb-14 border-b border-slate-200 pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
+                    <a href="index.html" class="hover:text-orange-600">홈</a>
+                    <i class="ri-arrow-right-s-line"></i>
+                    <span class="text-slate-900 font-bold">고객센터</span>
+                    <i class="ri-arrow-right-s-line"></i>
+                    <span class="text-orange-600 font-bold">업계소식</span>
+                </div>
+                
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C U S T O M E R &nbsp; C E N T E R</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+                    물류 산업의 최신 <span class="text-orange-600">업계 소식</span>을 전해드립니다.
+                </h1>
+            </div>
+            
+            <!-- 글쓰기 버튼 -->
+            <button onclick="openWriteModal()" class="bg-slate-900 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0">
+                <i class="ri-pencil-line"></i> 글쓰기
+            </button>
+        </div>
+
+        <!-- 게시판 컨테이너 -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm" id="boardTable">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold text-center">
+                            <th class="py-4 px-4 w-16">번호</th>
+                            <th class="py-4 px-6 text-left">제목</th>
+                            <th class="py-4 px-4 w-24">작성자</th>
+                            <th class="py-4 px-4 w-28">작성일자</th>
+                            <th class="py-4 px-4 w-20">조회</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-center text-slate-600" id="boardBody">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">210</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">팬오션, 2분기 영업이익 57.4% 증가한 1,937억 원 기록</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2026-08-03</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">132</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">209</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">피격 HMM 나무호 수리 완료…‘출항 계획 수립 중’</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2026-07-14</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">151</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">208</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">해진공, 해운·항만·물류 AI 전환 선도</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2026-06-11</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">248</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">207</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">중동전쟁 중소기업 피해 756건‥물류비 상승·계약 취소</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2026-05-07</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">389</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">206</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">올 인천항 컨 물동량 357만TEU 전망</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2026-01-22</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">559</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">205</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">칭다오 잇는 화물선 매주 수요일 제주 입항</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2025-10-14</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">693</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">204</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">대만 완하이라인, 1.3만TEU급 컨선 도입 매듭…남미항로 취항</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2025-09-02</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">707</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">203</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">"美 관세 부과 '선주문 효과' 끝"…아시아 ..</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2025-08-05</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">760</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">202</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">하루에 컨테이너선 단 3척…美 최대 아시아 무역항도 '텅텅'</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2025-07-02</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">773</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 text-slate-400 font-medium">201</td>
+                            <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">美관세 50% 날벼락에 한국 철강업계 '멘붕'</td>
+                            <td class="py-4 px-4">관리자</td>
+                            <td class="py-4 px-4 text-xs text-slate-500">2025-06-05</td>
+                            <td class="py-4 px-4 text-xs text-slate-400">759</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="py-6 bg-slate-50 border-t border-slate-200 flex justify-center items-center gap-1.5 text-sm font-semibold">
+                <button class="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center shadow-sm">1</button>
+                <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">2</button>
+                <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">3</button>
+                <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">4</button>
+                <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">5</button>
+                <button class="w-8 h-8 rounded-lg hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors"><i class="ri-arrow-right-s-line"></i></button>
+            </div>
+        </div>
+
+        <!-- 검색 영역 -->
+        <div class="flex justify-center items-center gap-2">
+            <select id="searchType" class="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 outline-none focus:border-orange-600 shadow-sm">
+                <option value="title">제목</option>
+                <option value="writer">작성자</option>
+            </select>
+            <div class="relative w-full max-w-sm">
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm text-slate-800 outline-none focus:border-orange-600 shadow-sm">
+            </div>
+            <button onclick="searchBoard()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm px-6 py-2.5 rounded-xl shadow-md transition-all shrink-0">
+                검색
+            </button>
+        </div>
+
+    </main>
+
+    <!-- 글쓰기 모달 팝업 -->
+    <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 업계소식 글쓰기
+                </h3>
+                <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="writeForm" onsubmit="submitPost(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">제목</label>
+                    <input type="text" id="postTitle" required placeholder="제목을 입력하세요" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">작성자</label>
+                    <input type="text" id="postWriter" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">내용</label>
+                    <textarea id="postContent" rows="5" required placeholder="내용을 입력하세요" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600 resize-none"></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100 transition-colors">취소</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md transition-all">등록하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
+            <p>&copy; FUTURE GLS. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 게시판 스크립트 (검색 및 글등록 기능 구현) -->
+    <script>
+        // 기본 게시글 배열 데이터
+        let posts = [
+            { id: 210, title: "팬오션, 2분기 영업이익 57.4% 증가한 1,937억 원 기록", writer: "관리자", date: "2026-08-03", views: 132 },
+            { id: 209, title: "피격 HMM 나무호 수리 완료…‘출항 계획 수립 중’", writer: "관리자", date: "2026-07-14", views: 151 },
+            { id: 208, title: "해진공, 해운·항만·물류 AI 전환 선도", writer: "관리자", date: "2026-06-11", views: 248 },
+            { id: 207, title: "중동전쟁 중소기업 피해 756건‥물류비 상승·계약 취소", writer: "관리자", date: "2026-05-07", views: 389 },
+            { id: 206, title: "올 인천항 컨 물동량 357만TEU 전망", writer: "관리자", date: "2026-01-22", views: 559 },
+            { id: 205, title: "칭다오 잇는 화물선 매주 수요일 제주 입항", writer: "관리자", date: "2025-10-14", views: 693 },
+            { id: 204, title: "대만 완하이라인, 1.3만TEU급 컨선 도입 매듭…남미항로 취항", writer: "관리자", date: "2025-09-02", views: 707 },
+            { id: 203, title: "\"美 관세 부과 '선주문 효과' 끝\"…아시아 ..", writer: "관리자", date: "2025-08-05", views: 760 },
+            { id: 202, title: "하루에 컨테이너선 단 3척…美 최대 아시아 무역항도 '텅텅'", writer: "관리자", date: "2025-07-02", views: 773 },
+            { id: 201, title: "美관세 50% 날벼락에 한국 철강업계 '멘붕'", writer: "관리자", date: "2025-06-05", views: 759 }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('boardBody');
+            tbody.innerHTML = '';
+            
+            if(data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-slate-400">검색된 결과가 없습니다.</td></tr>`;
+                return;
+            }
+
+            data.forEach(post => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-4 text-slate-400 font-medium">${post.id}</td>
+                    <td class="py-4 px-6 text-left font-semibold text-slate-900 hover:text-orange-600 cursor-pointer">${post.title}</td>
+                    <td class="py-4 px-4">${post.writer}</td>
+                    <td class="py-4 px-4 text-xs text-slate-500">${post.date}</td>
+                    <td class="py-4 px-4 text-xs text-slate-400">${post.views}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 검색 기능
+        function searchBoard() {
+            const type = document.getElementById('searchType').value;
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = posts.filter(post => {
+                if(type === 'title') {
+                    return post.title.toLowerCase().includes(keyword);
+                } else if(type === 'writer') {
+                    return post.writer.toLowerCase().includes(keyword);
+                }
+            });
+            renderTable(filtered);
+        }
+
+        // 모달 제어 함수
+        function openWriteModal() {
+            document.getElementById('writeModal').classList.remove('hidden');
+        }
+        function closeWriteModal() {
+            document.getElementById('writeModal').classList.add('hidden');
+            document.getElementById('writeForm').reset();
+        }
+
+        // 새 글 등록 제출 함수
+        function submitPost(event) {
+            event.preventDefault();
+            const title = document.getElementById('postTitle').value;
+            const writer = document.getElementById('postWriter').value;
+            
+            // 오늘 날짜 구하기 (YYYY-MM-DD)
+            const today = new Date().toISOString().split('T')[0];
+
+            const newPost = {
+                id: posts.length > 0 ? posts[0].id + 1 : 1,
+                title: title,
+                writer: writer,
+                date: today,
+                views: 1
+            };
+
+            posts.unshift(newPost); // 배열 맨 앞에 추가
+            renderTable(posts);
+            closeWriteModal();
+            alert('성공적으로 등록되었습니다.');
+        }
+    </script>
+</body>
+</html>
