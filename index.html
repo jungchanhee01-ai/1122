@@ -20,7 +20,7 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
     <!-- Top Bar -->
-    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-200">
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
@@ -175,18 +175,22 @@
         </div>
     </section>
 
-    <!-- Cargo Tracking Section -->
-    <section id="tracking" class="py-24 bg-white text-slate-800 relative overflow-hidden border-y border-slate-200">
-        <div class="text-center my-6 px-4 max-w-4xl mx-auto">
-            <span class="text-xs font-bold tracking-widest text-orange-600 uppercase">REAL-TIME VISIBILITY</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2 mb-3">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
-            <p class="text-slate-500 text-base mb-8">선사를 선택하고 B/L 번호를 입력하시면, 번호 복사와 함께 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
+    <!-- Cargo Tracking Section (딥 네이비 포인트 컬러 적용) -->
+    <section id="tracking" class="py-24 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800">
+        <!-- 배경 장식용 패턴 및 블러 효과 -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block mb-3">REAL-TIME VISIBILITY</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
+            <p class="text-slate-400 text-sm sm:text-base mb-10">선사를 선택하고 B/L 번호를 입력하시면, 번호 복사와 함께 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
 
             <!-- 입력 틀 박스 -->
-            <div class="bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-xl">
+            <div class="bg-slate-800/90 border border-slate-700/80 p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-md">
                 <div class="flex flex-col md:flex-row items-center gap-4">
                     <!-- 선사 선택 드롭다운 -->
-                    <select id="carrierSelect" class="w-full md:w-56 bg-white text-slate-800 text-base font-bold px-5 py-4 rounded-2xl border border-slate-300 focus:outline-none focus:border-orange-600">
+                    <select id="carrierSelect" class="w-full md:w-56 bg-slate-900 text-white text-base font-bold px-5 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500">
                         <option value="KMTC">고려해운 (KMTC)</option>
                         <option value="SINOKOR">장금상선 (Sinokor)</option>
                         <option value="DOOWOO">두우해운 (Doowoo)</option>
@@ -195,7 +199,7 @@
 
                     <!-- B/L 번호 입력창 -->
                     <div class="relative flex-1 w-full">
-                        <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="w-full bg-white text-slate-800 text-base px-6 py-4 rounded-2xl border border-slate-300 focus:outline-none focus:border-orange-600 placeholder-slate-400">
+                        <input type="text" id="blInput" placeholder="B/L 번호 입력 (예: KMTC123456)" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 placeholder-slate-500">
                     </div>
 
                     <!-- 실시간 조회 버튼 -->
@@ -204,88 +208,90 @@
                     </button>
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-slate-500 mt-6 px-2 border-t border-slate-200 pt-5 gap-2">
-                    <span class="flex items-center gap-1.5">✓ 조회 버튼 클릭 시 B/L 번호 자동 클립보드 복사</span>
-                    <span class="flex items-center gap-1.5">🛡️ 24/7 안전한 트래킹 서비스</span>
+                <div class="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-slate-400 mt-6 px-2 border-t border-slate-700/60 pt-5 gap-2">
+                    <span class="flex items-center gap-1.5 text-slate-300">✓ 조회 버튼 클릭 시 B/L 번호 자동 클립보드 복사</span>
+                    <span class="flex items-center gap-1.5 text-slate-400">🛡️ 24/7 안전한 트래킹 서비스</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Live Exchange Rates Section -->
-    <section id="exchange" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12">
-            <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">LIVE EXCHANGE RATES</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">오늘의 환율 및 물류비 계산기</h2>
-            <p class="text-slate-500 text-xs sm:text-sm mt-2">유럽중앙은행(ECB) 및 글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Exchange Rates Table -->
-            <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-                <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-                    <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
-                        <i class="ri-money-dollar-circle-line text-orange-600 text-xl"></i> 주요 통화 환율 정보 (KRW 기준)
-                    </h3>
-                    <span id="rateUpdateTime" class="text-xs text-slate-500 font-medium bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">실시간 불러오는 중...</span>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs sm:text-sm">
-                        <thead>
-                            <tr class="border-b border-slate-200 text-slate-500 font-semibold bg-slate-50">
-                                <th class="p-3.5">통화명 (Code)</th>
-                                <th class="p-3.5">매매기준율</th>
-                                <th class="p-3.5">현찰 살 때</th>
-                                <th class="p-3.5">현찰 팔 때</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="rateTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
-                            <!-- Rates injected via JS -->
-                        </tbody>
-                    </table>
-                </div>
+    <!-- Live Exchange Rates Section (연한 샌드 그레이톤 틴트 적용) -->
+    <section id="exchange" class="py-24 bg-slate-100/70 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">LIVE EXCHANGE RATES</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">오늘의 환율 및 물류비 계산기</h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2">유럽중앙은행(ECB) 및 글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
             </div>
 
-            <!-- Currency Calculator -->
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-base text-slate-900 mb-6 flex items-center gap-2">
-                        <i class="ri-calculator-fill text-orange-600"></i> 실시간 통화 변환기
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs text-slate-500 mb-2 font-medium">외화 금액 입력</label>
-                            <div class="flex gap-2">
-                                <input type="number" id="calcAmount" value="1000" oninput="calculateExchange()" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                                <select id="calcCurrency" onchange="calculateExchange()" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-xl px-3 py-3 focus:outline-none">
-                                    <option value="USD">USD ($)</option>
-                                    <option value="EUR">EUR (€)</option>
-                                    <option value="JPY">JPY (¥)</option>
-                                    <option value="CNY">CNY (¥)</option>
-                                    <option value="GBP">GBP (£)</option>
-                                </select>
-                            </div>
-                        </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Exchange Rates Table -->
+                <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
+                            <i class="ri-money-dollar-circle-line text-orange-600 text-xl"></i> 주요 통화 환율 정보 (KRW 기준)
+                        </h3>
+                        <span id="rateUpdateTime" class="text-xs text-slate-500 font-medium bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">실시간 불러오는 중...</span>
+                    </div>
 
-                        <div class="pt-6 border-t border-slate-100">
-                            <span class="block text-xs text-slate-500 mb-1">원화 환산 금액 (KRW)</span>
-                            <div id="calcResult" class="text-2xl sm:text-3xl font-black text-orange-600">₩ 0</div>
-                            <span class="text-[11px] text-slate-400 mt-1.5 block">* 실시간 기준율 적용 금액 (참고용)</span>
-                        </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs sm:text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-slate-500 font-semibold bg-slate-50">
+                                    <th class="p-3.5">통화명 (Code)</th>
+                                    <th class="p-3.5">매매기준율</th>
+                                    <th class="p-3.5">현찰 살 때</th>
+                                    <th class="p-3.5">현찰 팔 때</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="rateTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                                <!-- Rates injected via JS -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <div class="mt-8 pt-4 border-t border-slate-100 text-[11px] text-slate-500">
-                    <p><i class="ri-information-line text-orange-600"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
+                <!-- Currency Calculator -->
+                <div class="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-base text-slate-900 mb-6 flex items-center gap-2">
+                            <i class="ri-calculator-fill text-orange-600"></i> 실시간 통화 변환기
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs text-slate-500 mb-2 font-medium">외화 금액 입력</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="calcAmount" value="1000" oninput="calculateExchange()" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
+                                    <select id="calcCurrency" onchange="calculateExchange()" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-xl px-3 py-3 focus:outline-none">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="JPY">JPY (¥)</option>
+                                        <option value="CNY">CNY (¥)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 border-t border-slate-100">
+                                <span class="block text-xs text-slate-500 mb-1">원화 환산 금액 (KRW)</span>
+                                <div id="calcResult" class="text-2xl sm:text-3xl font-black text-orange-600">₩ 0</div>
+                                <span class="text-[11px] text-slate-400 mt-1.5 block">* 실시간 기준율 적용 금액 (참고용)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-slate-100 text-[11px] text-slate-500">
+                        <p><i class="ri-information-line text-orange-600"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Customs Information Section -->
-    <section id="customs" class="py-24 bg-white border-t border-slate-200">
+    <section id="customs" class="py-24 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">CUSTOMS CLEARANCE</span>
@@ -313,61 +319,65 @@
         </div>
     </section>
 
-    <!-- Quote Request Form Section -->
-    <section id="quote" class="py-24 max-w-5xl mx-auto px-4">
-        <div class="bg-white border border-slate-200 shadow-xl rounded-3xl p-8 sm:p-12">
-            <div class="text-center max-w-xl mx-auto mb-12">
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">FAST & EASY QUOTE</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">맞춤형 물류 견적 요청하기</h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-2">상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.</p>
+    <!-- Quote Request Form Section (라이트 다크 톤 배경으로 전환하여 주목도 강화) -->
+    <section id="quote" class="py-28 bg-slate-800 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="bg-slate-900/90 border border-slate-700 shadow-2xl rounded-3xl p-8 sm:p-12 backdrop-blur-md">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2 bg-orange-500/10 border border-orange-500/20 py-1 px-3 rounded-full inline-block">FAST & EASY QUOTE</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">맞춤형 물류 견적 요청하기</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-2">상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.</p>
+                </div>
+
+                <form onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">회사명 / 담당자명 *</label>
+                            <input type="text" required placeholder="(주)퓨처글로벌 / 홍길동 팀장" class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">연락처 *</label>
+                            <input type="tel" required placeholder="010-1234-5678" class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">운송 모드</label>
+                            <select class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500">
+                                <option class="bg-slate-900">해상 운송 (FCL)</option>
+                                <option class="bg-slate-900">해상 운송 (LCL)</option>
+                                <option class="bg-slate-900">항공 운송 (Air)</option>
+                                <option class="bg-slate-900">통관/창고 대행만</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">출발지 (POL)</label>
+                            <input type="text" placeholder="예: Shanghai, China" class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-2">도착지 (POD)</label>
+                            <input type="text" placeholder="예: Busan, Korea" class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">화물 정보 및 문의사항</label>
+                        <textarea rows="4" placeholder="화물 종류, CBM/중량, 출하 예상 일정 등을 작성해 주세요." class="w-full px-4 py-3.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-600/30 transition-all">
+                        무료 견적 신청 제출하기
+                    </button>
+                </form>
             </div>
-
-            <form onsubmit="handleQuoteSubmit(event)" class="space-y-6">
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-2">회사명 / 담당자명 *</label>
-                        <input type="text" required placeholder="(주)퓨처글로벌 / 홍길동 팀장" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-2">연락처 *</label>
-                        <input type="tel" required placeholder="010-1234-5678" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                    </div>
-                </div>
-
-                <div class="grid sm:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-2">운송 모드</label>
-                        <select class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                            <option>해상 운송 (FCL)</option>
-                            <option>해상 운송 (LCL)</option>
-                            <option>항공 운송 (Air)</option>
-                            <option>통관/창고 대행만</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-2">출발지 (POL)</label>
-                        <input type="text" placeholder="예: Shanghai, China" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-2">도착지 (POD)</label>
-                        <input type="text" placeholder="예: Busan, Korea" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-2">화물 정보 및 문의사항</label>
-                    <textarea rows="4" placeholder="화물 종류, CBM/중량, 출하 예상 일정 등을 작성해 주세요." class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600"></textarea>
-                </div>
-
-                <button type="submit" class="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-600/30 transition-all">
-                    무료 견적 신청 제출하기
-                </button>
-            </form>
         </div>
     </section> 
 
     <!-- Footer -->
-    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200 mt-20">
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
