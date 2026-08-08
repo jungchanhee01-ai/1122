@@ -124,7 +124,7 @@
         </div>
     </section>
 
-    <!-- Services Section & News Board Combined Layout -->
+    <!-- Services Section & Interactive Dynamic Board -->
     <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl my-12 border border-slate-200/80 shadow-sm">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2">OUR CORE SERVICES & NEWS</span>
@@ -175,61 +175,21 @@
             </div>
         </div>
 
-        <!-- 요청하신 업계소식 및 공지사항 게시판 컴포넌트 (참고 이미지 스타일 반영) -->
+        <!-- 동적 연동 공지사항 & 업계소식 게시판 컴포넌트 -->
         <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
             <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
                 <div class="flex items-center gap-8">
-                    <button class="text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1">공지사항</button>
-                    <button class="text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 transition-colors pb-1">업계소식</button>
+                    <button type="button" id="tabNotice" onclick="switchBoardTab('notice')" class="text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all">공지사항</button>
+                    <button type="button" id="tabNews" onclick="switchBoardTab('news')" class="text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all">업계소식</button>
                 </div>
                 <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
                     More <i class="ri-arrow-right-s-line"></i>
                 </a>
             </div>
 
-            <!-- 게시글 리스트 영역 (홈페이지에 올린 업계소식/공지사항 데이터 연동부) -->
-            <div class="divide-y divide-slate-200">
-                <!-- 아이템 1 -->
-                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div class="text-left w-16 shrink-0">
-                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">07.28</span>
-                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
-                        </div>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
-                            일본 오봉절 기간 위험물 및 특수화물 선적 제한 사항 안내
-                        </span>
-                    </div>
-                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
-                </a>
-
-                <!-- 아이템 2 -->
-                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div class="text-left w-16 shrink-0">
-                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">07.02</span>
-                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
-                        </div>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
-                            [안내] 부산 감만 CFS 종료 및 투엠글로벌 감만 CFS 이전 안내 (2026년 7월 1일부)
-                        </span>
-                    </div>
-                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
-                </a>
-
-                <!-- 아이템 3 -->
-                <a href="board.html" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div class="text-left w-16 shrink-0">
-                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">06.18</span>
-                            <span class="text-[11px] text-slate-400 font-medium">2026</span>
-                        </div>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
-                            &lt;한국발 수출 Low Sulphur Fuel Surcharge 요율 변경 안내&gt;
-                        </span>
-                    </div>
-                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
-                </a>
+            <!-- 실제 데이터에 따라 동적으로 렌더링되는 게시글 리스트 영역 -->
+            <div id="boardContainer" class="divide-y divide-slate-200 min-h-[120px] flex flex-col justify-center">
+                <!-- JS로 자동 주입됩니다 -->
             </div>
         </div>
     </section>
@@ -476,6 +436,70 @@
     </footer>
 
     <script>
+        /* ==========================================================
+           게시글 데이터 연동 관리 영역 (현재 등록된 글이 없으므로 빈 배열 상태)
+           - 나중에 글을 작성하시면 아래 배열에 { date: "MM.DD", year: "YYYY", title: "제목", link: "상세주소" } 형태로 추가하세요.
+           ========================================================== */
+        const notices = [
+            // { date: "07.28", year: "2026", title: "일본 오봉절 기간 위험물 및 특수화물 선적 제한 사항 안내", link: "board.html" }
+        ];
+
+        const industryNews = [
+            // { date: "07.02", year: "2026", title: "[안내] 부산 감만 CFS 종료 및 투엠글로벌 감만 CFS 이전 안내", link: "board.html" }
+        ];
+
+        let currentBoardTab = 'notice';
+
+        function switchBoardTab(tabType) {
+            currentBoardTab = tabType;
+            const tabNotice = document.getElementById('tabNotice');
+            const tabNews = document.getElementById('tabNews');
+
+            if (tabType === 'notice') {
+                tabNotice.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
+                tabNews.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
+            } else {
+                tabNews.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
+                tabNotice.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
+            }
+            renderBoardList();
+        }
+
+        function renderBoardList() {
+            const container = document.getElementById('boardContainer');
+            if (!container) return;
+
+            const targetData = currentBoardTab === 'notice' ? notices : industryNews;
+
+            if (targetData.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center text-slate-400 text-sm font-medium">
+                        <i class="ri-file-list-3-line text-2xl block mb-2 text-slate-300"></i>
+                        등록된 ${currentBoardTab === 'notice' ? '공지사항' : '업계소식'}이 없습니다.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = targetData.map(item => `
+                <a href="${item.link || 'board.html'}" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div class="text-left w-16 shrink-0">
+                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">${item.date}</span>
+                            <span class="text-[11px] text-slate-400 font-medium">${item.year}</span>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
+                            ${item.title}
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
+                </a>
+            `).join('');
+        }
+
+        /* ==========================================================
+           기존 환율 및 기타 로직
+           ========================================================== */
         let currentRates = {
             USD: 1380.5,
             EUR: 1502.2,
@@ -609,7 +633,10 @@
             e.target.reset();
         }
 
-        window.addEventListener('DOMContentLoaded', fetchExchangeRates);
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchExchangeRates();
+            renderBoardList(); // 초기 게시판 렌더링
+        });
     </script>
 </body>
 </html>
