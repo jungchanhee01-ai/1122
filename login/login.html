@@ -101,7 +101,7 @@
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 직전 페이지로 복귀 (없으면 메인 index.html로)
+                // 루트 경로 기준으로 확실하게 반영되도록 세션 스토리지 정리 및 이동 준비
                 const returnUrl = sessionStorage.getItem('returnUrl') || '../index.html';
                 
                 setTimeout(() => {
@@ -114,4 +114,3 @@
     </script>
 </body>
 </html>
-
