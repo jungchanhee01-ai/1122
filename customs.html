@@ -275,6 +275,12 @@
                 setTimeout(() => {
                     document.documentElement.setAttribute('lang', langCode);
                 }, 300);
+            } else {
+                // 만약 위젯 로딩 직전이거나 selectField가 안 잡힐 경우 쿠키를 강제로 설정하고 리로드
+                let expireDate = new Date();
+                expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
+                document.cookie = "googtrans=/ko/" + langCode + ";expires=" + expireDate.toUTCString() + ";path=/";
+                window.location.reload();
             }
             const dropdown = document.getElementById('langDropdown');
             if (dropdown) dropdown.classList.add('hidden');
@@ -313,6 +319,17 @@
                     nameSpan.className = "inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
                     nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
                     authButtons.appendChild(nameSpan);
+                }
+            }
+
+            // 페이지 로드 시 기존 구글 번역 쿠키가 있다면 버튼 레이블 동기화
+            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            if (googCookie) {
+                const langVal = googCookie.split('=')[1].split('/')[2];
+                const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+                const textEl = document.getElementById('langBtnText');
+                if (textEl && map[langVal]) {
+                    textEl.innerText = map[langVal];
                 }
             }
 
