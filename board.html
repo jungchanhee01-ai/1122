@@ -13,6 +13,7 @@
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .dynamic-nav { font-size: 1rem; gap: 2rem; }
+        body { background-color: #f8fafc; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -95,8 +96,7 @@
                 <span class="w-2 h-2 rounded-full bg-orange-600"></span>
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest" data-i18n="page_sub_tag">C U S T O M E R &nbsp; C E N T E R</span>
             </div>
-            
-            <!-- h1 전체를 통째로 번역 -->
+            <!-- 번역 이슈 해결을 위해 h1 전체를 data-i18n으로 지정 -->
             <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="page_main_title">
                 Latest News & Notices <span class="text-orange-600">of Logistics Industry</span>를 전해드립니다.
             </h1>
@@ -181,7 +181,7 @@
                 breadcrumb_home: "Home",
                 breadcrumb_current: "Industry News",
                 page_sub_tag: "C U S T O M E R &nbsp; C E N T E R",
-                page_main_title: "Latest News & Notices <span class=\"text-orange-600\">of Logistics Industry</span>",
+                page_main_title: "We deliver <span class=\"text-orange-600\">Latest News & Notices of Logistics Industry</span>.",
                 filter_all: "All",
                 filter_notice: "Notice",
                 filter_news: "News",
@@ -216,7 +216,7 @@
                 breadcrumb_home: "首页",
                 breadcrumb_current: "行业动态",
                 page_sub_tag: "C U S T O M E R &nbsp; C E N T E R",
-                page_main_title: "为您带来<span class=\"text-orange-600\">物流行业的最新动态与公告</span>",
+                page_main_title: "为您传递<span class=\"text-orange-600\">物流行业的最新动态与公告</span>。",
                 filter_all: "全部",
                 filter_notice: "公告",
                 filter_news: "资讯",
@@ -251,7 +251,7 @@
                 breadcrumb_home: "ホーム",
                 breadcrumb_current: "業界ニュース",
                 page_sub_tag: "C U S T O M E R &nbsp; C E N T E R",
-                page_main_title: "Latest News & Notices <span class=\"text-orange-600\">of Logistics Industry</span>をお届けします。",
+                page_main_title: "<span class=\"text-orange-600\">物流業界の最新ニュースとお知らせ</span>をお届けします。",
                 filter_all: "すべて",
                 filter_notice: "お知らせ",
                 filter_news: "ニュース",
@@ -320,11 +320,11 @@
             const dict = i18nData[lang];
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (dict[key] !== undefined) el.innerHTML = dict[key];
+                if (dict[key]) el.innerHTML = dict[key];
             });
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
-                if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+                if (dict[key]) el.setAttribute('placeholder', dict[key]);
             });
             loadBoardData();
         }
