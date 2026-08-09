@@ -324,7 +324,7 @@
                 sec1_title: "航空輸出",
                 sec1_desc: "20年以上の経験に基づき、最高のサービスを提供します。",
                 workflow_export_label: "業務プロセス",
-                workflow_export_text: "予約 → 集荷 → 書類作成 → 輸出通関 → 船積 → 도착 → 輸入通関 → 国内配送 → DELIVERY → P.O.D",
+                workflow_export_text: "予約 → 集荷 → 書類作成 → 輸出通関 → 船積 → 到着 → 輸入通関 → 国内配送 → DELIVERY → P.O.D",
                 table_title: "地域別サービス内訳",
                 table_row1_title: "米州サービス",
                 table_row1_desc: "米国内全域への迅速なDOORサービス。",
@@ -337,7 +337,7 @@
                 table_row5_title: "中国サービス",
                 table_row5_desc: "パートナーネットワークを通じた全域DOORサービス。",
                 sec2_title: "航空輸入",
-                sec2_desc: "世界中のネットワークで貴社の貨물을 安全に輸送します。",
+                sec2_desc: "世界中のネットワークで貴社の貨物を安全に輸送します。",
                 workflow_import_label: "業務プロセス",
                 workflow_import_text: "積地選択 → 到着前書類受取 → 到着 → 輸入通関 → 国内配送 → DELIVERY → P.O.D",
                 footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
@@ -366,15 +366,6 @@
             const savedLang = localStorage.getItem('site_lang') || 'ko';
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
-            }
-
-            // 관리자 로그인 상태 반영 (관리자 버튼 UI 디자인 및 텍스트 전환)
-            if (localStorage.getItem('isAdminLoggedIn') === 'true') {
-                const adminBtn = document.getElementById('adminBtn');
-                if (adminBtn) {
-                    adminBtn.innerHTML = `<i class="ri-user-star-line"></i> <span data-i18n="btn_admin">관리자(FUTURE)</span>`;
-                    adminBtn.className = "hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md whitespace-nowrap";
-                }
             }
 
             document.body.classList.add('translated');
