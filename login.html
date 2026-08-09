@@ -22,7 +22,7 @@
     <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
         <!-- 로고 및 타이틀 영역 -->
         <div class="text-center mb-8">
-            <a href="/index.html" class="inline-block text-2xl font-extrabold text-slate-900 tracking-tight">
+            <a href="../index.html" class="inline-block text-2xl font-extrabold text-slate-900 tracking-tight">
                 FUTURE <span class="text-orange-600">GLS</span>
             </a>
             <p class="text-slate-500 text-sm mt-2">관리자 전용 로그인 페이지입니다.</p>
@@ -63,14 +63,14 @@
 
         <!-- 홈으로 돌아가기 -->
         <div class="text-center mt-6">
-            <a href="/index.html" class="text-sm text-slate-500 hover:text-slate-800 transition">
+            <a href="../index.html" class="text-sm text-slate-500 hover:text-slate-800 transition">
                 &larr; 메인 화면으로 돌아가기
             </a>
         </div>
     </div>
 
     <script>
-        // 진입 시 직전 페이지(BOARD, AIR 등) 주소를 안전하게 세션에 기록
+        // 진입 시 직전 페이지 주소 안전하게 저장
         window.addEventListener('DOMContentLoaded', () => {
             const referrer = document.referrer;
             if (referrer && !referrer.includes('login.html')) {
@@ -97,13 +97,12 @@
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
                 
-                // 모든 서브 카테고리(AIR, BOARD, CEO, CUSTOMS, INDEXN, TRIANGLE)에서 
-                // 동일하게 인식하도록 localStorage 키 값을 정확히 설정
+                // 로그인 상태 공유를 위해 localStorage에 저장
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 직전 페이지로 돌아가기 (기록이 없으면 메인으로)
-                const returnUrl = sessionStorage.getItem('returnUrl') || '/index.html';
+                // 직전 페이지로 복귀 (없으면 메인 index.html로)
+                const returnUrl = sessionStorage.getItem('returnUrl') || '../index.html';
                 
                 setTimeout(() => {
                     window.location.href = returnUrl;
@@ -115,3 +114,4 @@
     </script>
 </body>
 </html>
+
