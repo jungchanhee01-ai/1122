@@ -15,14 +15,7 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-
-        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
-        .dynamic-nav {
-            font-size: 1rem; 
-            gap: 2rem;      
-        }
-
-body { background-color: #f8fafc; }
+        .dynamic-nav { font-size: 1rem; gap: 2rem; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -56,7 +49,6 @@ body { background-color: #f8fafc; }
                 </div>
             </a>
             
-            <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap text-orange-600" data-i18n="menu_air">항공운송</a>
@@ -67,7 +59,6 @@ body { background-color: #f8fafc; }
             </nav>
 
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
-                <!-- 언어 선택 드롭다운 -->
                 <div class="relative">
                     <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
@@ -88,14 +79,15 @@ body { background-color: #f8fafc; }
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
-                </a>
+                <div id="adminContainer" class="relative group">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+                </div>
             </div>  
         </div>
     </header>
 
-    <!-- Main Content (Air Content Preserved) -->
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
         <div class="mb-14 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
@@ -151,21 +143,15 @@ body { background-color: #f8fafc; }
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
                     <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white text-base">
-                            <i class="ri-ship-line"></i>
-                        </div>
+                        <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white text-base"><i class="ri-ship-line"></i></div>
                         FUTURE GLS
                     </div>
-                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
-                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
-                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
-                    </p>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">글로벌 물류의 새로운 기준, FUTURE GLS.<br>고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.</p>
                 </div>
                 <div>
                     <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
@@ -185,10 +171,7 @@ body { background-color: #f8fafc; }
                 </div>
                 <div>
                     <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
-                    <p class="leading-relaxed" data-i18n="footer_addr">
-                        서울특별시 강남구 테헤란로 415, 퓨처타워 12층 (삼성동)<br>
-                        사업자등록번호: 220-88-01234
-                    </p>
+                    <p class="leading-relaxed" data-i18n="footer_addr">서울특별시 강남구 테헤란로 415, 퓨처타워 12층 (삼성동)<br>사업자등록번호: 220-88-01234</p>
                 </div>
             </div>
             <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
@@ -197,7 +180,6 @@ body { background-color: #f8fafc; }
         </div>
     </footer>
 
-    <!-- 다국어 사전 데이터 및 자체 번역 엔진 스크립트 -->
     <script>
         const i18nData = {
             en: {
@@ -336,7 +318,7 @@ body { background-color: #f8fafc; }
                 table_row5_title: "中国サービス",
                 table_row5_desc: "パートナーネットワークを通じた全域DOORサービス。",
                 sec2_title: "航空輸入",
-                sec2_desc: "世界中のネットワークで貴社の貨物を安全に輸送します。",
+                sec2_desc: "世界中のネットワークで貴社の貨물을安全に輸送します。",
                 workflow_import_label: "業務プロセス",
                 workflow_import_text: "積地選択 → 到着前書類受取 → 到着 → 輸入通関 → 国内配送 → DELIVERY → P.O.D",
                 footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
@@ -358,38 +340,41 @@ body { background-color: #f8fafc; }
         const originalTextCache = new Map();
         
         window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                originalTextCache.set(el, el.innerHTML);
-            });
+            document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
 
             const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') {
-                applyCustomLanguage(savedLang);
-            }
+            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
 
-            // 로그인 상태 확인 및 관리자 버튼 스타일 변경 (흰색 배경)
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-            const adminBtn = document.getElementById('adminBtn');
-            const authButtons = document.getElementById('authButtons');
+            const adminContainer = document.getElementById('adminContainer');
 
-            if (isLoggedIn === 'true') {
-                if (adminBtn && authButtons) {
-                    adminBtn.remove();
-
-                    const nameSpan = document.createElement('span');
-                    nameSpan.className = "inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
-                    nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
-                    authButtons.appendChild(nameSpan);
+            if (adminContainer) {
+                if (isLoggedIn === 'true') {
+                    adminContainer.innerHTML = `
+                        <div class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full mt-1 w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center">로그아웃</a>
+                        </div>
+                    `;
+                } else {
+                    adminContainer.innerHTML = `
+                        <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        </a>
+                        <div class="hidden group-hover:block absolute right-0 top-full mt-1 w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                        </div>
+                    `;
                 }
             }
-
             document.body.classList.add('translated');
         });
 
         function toggleLangMenu(e) {
             e.stopPropagation();
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.toggle('hidden');
+            document.getElementById('langDropdown').classList.toggle('hidden');
         }
 
         window.addEventListener('click', () => {
@@ -402,8 +387,7 @@ body { background-color: #f8fafc; }
             document.documentElement.setAttribute('lang', langCode);
             updateLangButtonText(langCode);
             applyCustomLanguage(langCode);
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
+            document.getElementById('langDropdown').classList.add('hidden');
         }
 
         function applyCustomLanguage(lang) {
@@ -415,24 +399,18 @@ body { background-color: #f8fafc; }
                 updateLangButtonText('ko');
                 return;
             }
-
             const dict = i18nData[lang];
             if (!dict) return;
-
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (dict[key]) {
-                    el.innerHTML = dict[key];
-                }
+                if (dict[key]) el.innerHTML = dict[key];
             });
         }
 
         function updateLangButtonText(langCode) {
             const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
             const textEl = document.getElementById('langBtnText');
-            if (textEl && map[langCode]) {
-                textEl.innerText = map[langCode];
-            }
+            if (textEl && map[langCode]) textEl.innerText = map[langCode];
         }
     </script>
 </body>
