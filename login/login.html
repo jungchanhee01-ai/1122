@@ -70,6 +70,14 @@
     </div>
 
     <script>
+        // 페이지 진입 시, 직전 페이지 주소가 로그인 페이지가 아닐 경우에만 세션에 저장
+        window.addEventListener('DOMContentLoaded', () => {
+            const referrer = document.referrer;
+            if (referrer && !referrer.includes(window.location.pathname)) {
+                sessionStorage.setItem('redirectUrl', referrer);
+            }
+        });
+
         function showMessage(text, isSuccess) {
             const alertBox = document.getElementById('alertBox');
             alertBox.innerText = text;
@@ -89,12 +97,17 @@
             // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
+                
+                // AIR, BOARD, CEO, CUSTOMS, INDEXN, TRIANGLE 전체에서 공유할 수 있도록 설정
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 로그인 성공 후 메인 화면으로 이동하도록 수정
+                // 직전 페이지 주소 가져오기 (없으면 기본 메인 화면)
+                const redirectUrl = sessionStorage.getItem('redirectUrl') || '../index.html';
+                
+                // 로그인 성공 후 직전 페이지로 이동
                 setTimeout(() => {
-                    window.location.href = '../index.html';
+                    window.location.href = redirectUrl;
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);
