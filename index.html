@@ -852,7 +852,8 @@
                     newsContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 업계소식이 없습니다.</div>`;
                 } else {
                     newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
-                        <a href="board.html" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
+                        <!-- 수정됨: board.html 대신 개별 상세 페이지인 board-view.html?id=문서ID 로 이동 -->
+                        <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
                             <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
                                 ${item.title}
                             </span>
@@ -867,7 +868,8 @@
                     noticeContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 공지사항이 없습니다.</div>`;
                 } else {
                     noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
-                        <a href="board.html" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
+                        <!-- 수정됨: board.html 대신 개별 상세 페이지인 board-view.html?id=문서ID 로 이동 -->
+                        <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
                             <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
                                 ${item.title}
                             </span>
@@ -887,10 +889,13 @@
 
                 querySnapshot.forEach((docSnap) => {
                     const data = docSnap.data();
+                    // Firestore 문서의 고유 ID(docSnap.id)를 객체에 포함시킵니다.
+                    const postItem = { id: docSnap.id, ...data };
+                    
                     if (data.category === '공지사항') {
-                        notices.push(data);
+                        notices.push(postItem);
                     } else if (data.category === '업계소식') {
-                        industryNews.push(data);
+                        industryNews.push(postItem);
                     }
                 });
 
@@ -1031,7 +1036,7 @@
             alert('견적 문의가 성공적으로 접수되었습니다.\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
             event.target.reset();
         }
-//2
+
         document.addEventListener('DOMContentLoaded', () => {
             fetchMainBoardPosts();
             fetchExchangeRates();
