@@ -81,14 +81,14 @@
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
                 <!-- 언어 선택 드롭다운 -->
                 <div class="relative notranslate">
-                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
-                        <i class="ri-global-line"></i> KOR <i class="ri-arrow-down-s-line"></i>
+                    <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                        <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
                     </button>
                     <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
-                        <a href="javascript:void(0);" onclick="changeLanguage('ko')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">한국어</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('en')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">English</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">中文</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('ja')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko', 'KOR')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en', 'ENG')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN', 'CHN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">中文</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
                     </div>
                 </div>
 
@@ -538,7 +538,27 @@
     <!-- 구글 번역 및 기타 기능 스크립트 -->
     <script>
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'ko', includedLanguages: 'ko,en,zh-CN,ja', autoDisplay: false }, 'google_translate_element');
+            new google.translate.TranslateElement({ 
+                pageLanguage: 'ko', 
+                includedLanguages: 'ko,en,zh-CN,ja', 
+                autoDisplay: false 
+            }, 'google_translate_element');
+
+            // 페이지 로드 시 쿠키에 설정된 언어가 있다면 버튼 텍스트와 lang 속성 동기화
+            const cookieLang = getCookie('googtrans');
+            if (cookieLang) {
+                const langCode = cookieLang.split('/')[2];
+                if (langCode) {
+                    document.documentElement.setAttribute('lang', langCode);
+                    updateLangButtonText(langCode);
+                }
+            }
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
         function toggleLangMenu(e) {
@@ -552,12 +572,25 @@
             if (dropdown) dropdown.classList.add('hidden');
         });
 
-        function changeLanguage(langCode) {
-            const selectField = document.querySelector('.goog-te-combo');
-            if (selectField) {
-                selectField.value = langCode;
-                selectField.dispatchEvent(new Event('change'));
-                document.documentElement.setAttribute('lang', langCode);
+        // 언어 변경 함수 개선 (구글 번역 쿠키 강제 세팅 후 새로고침 방식으로 안정성 확보)
+        window.changeLanguage = function(langCode, labelText) {
+            // 구글 번역기가 인식하는 쿠키 형식 설정 (/ko/langCode)
+            document.cookie = `googtrans=/ko/${langCode}; path=/; domain=${domainName()}`;
+            document.cookie = `googtrans=/ko/${langCode}; path=/`;
+            
+            // 페이지 새로고침을 통해 구글 번역기가 쿠키를 읽고 즉시 번역 수행하도록 함
+            location.reload();
+        }
+
+        function domainName() {
+            return document.domain;
+        }
+
+        function updateLangButtonText(langCode) {
+            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            const textEl = document.getElementById('langBtnText');
+            if (textEl && map[langCode]) {
+                textEl.innerText = map[langCode];
             }
         }
 
