@@ -1,87 +1,118 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logistics Homepage</title>
-    <!-- Tailwind CSS CDN -->
+    <title>FUTURE GLS - Global Logistics & Freight Forwarding</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Remixicon -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .dynamic-nav { font-size: 1rem; gap: 2rem; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
-    <!-- Header, Hero, Services 섹션 등 상단 코드는 그대로 유지한다고 가정 -->
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-slate-300 py-2 text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between">
+            <span>Welcome to Future GLS</span>
+            <div class="flex gap-4">
+                <a href="#">Login</a>
+                <a href="#">Register</a>
+            </div>
+        </div>
+    </div>
 
-    <!-- [수정된] Services Section & Interactive Dynamic Board -->
+    <!-- Main Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-black text-orange-600">FUTURE GLS</h1>
+            <div class="dynamic-nav flex font-bold text-slate-700">
+                <a href="#services" class="hover:text-orange-600">Services</a>
+                <a href="board.html" class="hover:text-orange-600">Board</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 text-center">
+        <h2 class="text-5xl font-black mb-4">Global Logistics Solution</h2>
+        <p class="text-slate-500">Fast, Safe, and Reliable.</p>
+    </section>
+
+    <!-- Services Section & Interactive Dynamic Board -->
     <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl my-12 border border-slate-200/80 shadow-sm">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="svc_sub">OUR CORE SERVICES & NEWS</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="svc_title">해상부터 항공까지 통합 물류 솔루션</h2>
-            <p class="text-slate-500 text-sm mt-3" data-i18n="svc_desc">수출입 고객의 특성에 맞춘 최적의 물류 경로와 투명한 정산 체계를 지원합니다.</p>
-        </div>
-
-        <!-- 기존 서비스 카드 영역 (생략, 기존 코드 그대로 사용) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <!-- 서비스 카드들... -->
-        </div>
-
-        <!-- [수정됨] 공지사항 & 업계소식 좌우 분리 배치 -->
+        
+        <!-- 게시판 섹션 (요청사항 반영) -->
         <div class="grid md:grid-cols-2 gap-8">
-            <!-- 왼쪽: 업계소식 -->
-            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-8">
+            <!-- 업계소식 (왼쪽) -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
-                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_news">업계소식</h3>
-                    <a href="board.html" class="text-sm font-bold text-slate-500 hover:text-orange-600 transition-colors flex items-center gap-1">More <i class="ri-arrow-right-s-line"></i></a>
+                    <h3 class="text-lg font-black text-slate-900">업계소식</h3>
+                    <a href="board.html" class="text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors">More</a>
                 </div>
-                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[200px]">
-                    <!-- 자바스크립트로 데이터 주입 -->
-                </div>
+                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px]"></div>
             </div>
 
-            <!-- 오른쪽: 공지사항 -->
-            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-8">
+            <!-- 공지사항 (오른쪽) -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
-                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_notice">공지사항</h3>
-                    <a href="board.html" class="text-sm font-bold text-slate-500 hover:text-orange-600 transition-colors flex items-center gap-1">More <i class="ri-arrow-right-s-line"></i></a>
+                    <h3 class="text-lg font-black text-slate-900">공지사항</h3>
+                    <a href="board.html" class="text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors">More</a>
                 </div>
-                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[200px]">
-                    <!-- 자바스크립트로 데이터 주입 -->
-                </div>
+                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px]"></div>
             </div>
         </div>
     </section>
 
-    <!-- Script 영역 -->
-    <script>
-        // 데이터 샘플 (실제 연동 시 데이터 구조에 맞게 수정)
-        const industryNews = [
-            { title: "글로벌 해상 운임 동향 분석", date: "2026.08.09" },
-            { title: "항공 물류 자동화 도입 사례", date: "2026.08.08" }
-        ];
-        const notices = [
-            { title: "하계 휴가 기간 운영 안내", date: "2026.08.01" },
-            { title: "시스템 점검 공지", date: "2026.07.25" }
-        ];
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center text-sm">
+        <p>&copy; 2026 FUTURE GLS. All rights reserved.</p>
+    </footer>
 
-        // 렌더링 함수 수정
-        window.renderBoardList = function() {
-            const newsContainer = document.getElementById('newsContainer');
-            const noticeContainer = document.getElementById('noticeContainer');
+    <!-- Firebase 및 로직 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-            const renderItems = (items) => items.map(item => `
-                <a href="board.html" class="py-4 flex items-center justify-between hover:text-orange-600 transition-colors group">
-                    <span class="text-sm font-medium truncate pr-4">${item.title}</span>
-                    <span class="text-xs text-slate-400 shrink-0">${item.date}</span>
-                </a>
-            `).join('');
+        const firebaseConfig = { 
+            /* 기존 설정값 유지 */
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            newsContainer.innerHTML = industryNews.length > 0 ? renderItems(industryNews) : '<div class="py-10 text-center text-sm text-slate-400">등록된 소식이 없습니다.</div>';
-            noticeContainer.innerHTML = notices.length > 0 ? renderItems(notices) : '<div class="py-10 text-center text-sm text-slate-400">등록된 공지사항이 없습니다.</div>';
+        async function fetchBoardData() {
+            const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(10));
+            const querySnapshot = await getDocs(q);
+            
+            const newsList = [];
+            const noticeList = [];
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.category === '업계소식') newsList.push(data);
+                if (data.category === '공지사항') noticeList.push(data);
+            });
+
+            renderPosts('newsContainer', newsList.slice(0, 5));
+            renderPosts('noticeContainer', noticeList.slice(0, 5));
         }
 
-        // 페이지 로드 시 호출
-        document.addEventListener('DOMContentLoaded', renderBoardList);
+        function renderPosts(containerId, posts) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = posts.length > 0 ? '' : '<p class="text-sm text-slate-400 py-4">게시글이 없습니다.</p>';
+            posts.forEach(post => {
+                container.innerHTML += `
+                    <a href="board.html" class="block py-3 text-sm text-slate-700 hover:text-orange-600 truncate">
+                        ${post.title}
+                    </a>
+                `;
+            });
+        }
+
+        fetchBoardData();
     </script>
 </body>
 </html>
