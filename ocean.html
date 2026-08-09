@@ -306,11 +306,11 @@
             if (adminContainer) {
                 if (isLoggedIn === 'true') {
                     adminContainer.innerHTML = `
-                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none">
-                            로그아웃
+                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none w-full whitespace-nowrap">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
                         </div>
                         <div class="hidden group-hover:block absolute right-0 top-full w-full bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
-                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center">로그아웃</a>
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
                         </div>
                     `;
                 } else {
@@ -319,7 +319,7 @@
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                         </a>
                         <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
-                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center whitespace-nowrap">로그인</a>
                         </div>
                     `;
                 }
@@ -348,6 +348,7 @@
                 return;
             }
             const dict = i18nData[lang];
+            if (!dict) return;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
