@@ -70,6 +70,15 @@
     </div>
 
     <script>
+        // 페이지가 열릴 때 이전 페이지(referrer)가 존재하고 같은 도메인 내라면 저장해 둡니다.
+        // 단, 로그인 페이지 자체로 돌아가는 것을 방지하기 위해 referrer 체크를 합니다.
+        window.addEventListener('DOMContentLoaded', () => {
+            const referrer = document.referrer;
+            if (referrer && referrer.includes(window.location.hostname) && !referrer.includes('login.html')) {
+                sessionStorage.setItem('redirectUrl', referrer);
+            }
+        });
+
         function showMessage(text, isSuccess) {
             const alertBox = document.getElementById('alertBox');
             alertBox.innerText = text;
@@ -92,9 +101,16 @@
                 localStorage.setItem('isAdminLoggedIn', 'true'); // 로그인 상태 유지 키 설정
                 localStorage.setItem('adminName', '관리자');
                 
-                // 로그인 성공 후 메인 화면으로 이동
+                // 저장해 둔 이전 페이지가 있다면 그곳으로, 없으면 메인 화면으로 이동
+                const redirectUrl = sessionStorage.getItem('redirectUrl');
+                
                 setTimeout(() => {
-                    window.location.href = '../index.html';
+                    if (redirectUrl) {
+                        sessionStorage.removeItem('redirectUrl'); // 사용 후 제거
+                        window.location.href = redirectUrl;
+                    } else {
+                        window.location.href = '../index.html';
+                    }
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);
