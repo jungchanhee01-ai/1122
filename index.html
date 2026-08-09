@@ -87,10 +87,18 @@
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <!-- 로그인 상태에 따라 JS로 동적 제어되는 버튼 영역 -->
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i id="adminIcon" class="ri-user-settings-line"></i> <span id="adminText" data-i18n="btn_admin">관리자</span>
-                </a>
+                <!-- 관리자 마우스 호버 드롭다운 메뉴 영역 (로그인 상태에 따라 동적 변경) -->
+                <div class="relative group shrink-0">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+                    <!-- 마우스를 올렸을 때 아래로 나타나는 서브 메뉴 -->
+                    <div id="adminDropdownMenu" class="hidden group-hover:block absolute right-0 pt-1 w-32 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2 text-xs font-bold text-slate-700">
+                            <!-- JS로 동적 제어됨 -->
+                        </div>
+                    </div>
+                </div>
             </div>  
         </div>
     </header>
@@ -433,7 +441,6 @@
                 btn_tracking: "Cargo Tracking",
                 btn_quote: "Request Quote",
                 btn_admin: "Admin",
-                btn_logout: "Logout",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "From Sea to Sky,<br><span class=\"text-orange-500\">FUTURE GLS</span> Connects You.",
                 hero_desc: "Providing optimized rates for major global routes, AI real-time cargo tracking, and one-stop customs clearance.<br class=\"hidden sm:block\">Experience reliable logistics solutions for your global business.",
@@ -529,7 +536,6 @@
                 btn_tracking: "货物追踪",
                 btn_quote: "报价申请",
                 btn_admin: "管理员",
-                btn_logout: "退出登录",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "从海洋到天空，<br><span class=\"text-orange-500\">FUTURE GLS</span> 为您连结世界。",
                 hero_desc: "提供全球主要航线优化运费、AI实时货物追踪及一站式清关代理。<br class=\"hidden sm:block\">体验确保您全球业务成功的物流解决方案。",
@@ -625,7 +631,6 @@
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
                 btn_admin: "管理者",
-                btn_logout: "ログアウト",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "海から空へ、<br><span class=\"text-orange-500\">FUTURE GLS</span> が繋ぎます。",
                 hero_desc: "世界主要航路の最適化された運賃提供、AIリアルタイム貨物位置追跡、ワンストップ通関代行まで。<br class=\"hidden sm:block\">グローバルビジネスの確実な物流ソリューションをご体験ください。",
@@ -719,57 +724,15 @@
                 originalTextCache.set(el + '_ph', el.placeholder);
             });
 
-            // 1. 로그인 상태 확인 후 UI 업데이트 (LocalStorage에 토큰이나 로그인 상태 정보가 있다고 가정)
-            checkLoginState();
-
-            // 2. 저장된 언어 설정 복원
+            // 저장된 언어 설정 복원
             const savedLang = localStorage.getItem('site_lang') || 'ko';
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
             }
+
+            // 로그인 상태 확인 및 관리자 메뉴 렌더링
+            updateAdminMenuUI();
         });
-
-        // 로그인 상태에 따라 관리자 <-> 로그아웃 버튼 전환 함수
-        function checkLoginState() {
-            const adminBtn = document.getElementById('adminBtn');
-            const adminText = document.getElementById('adminText');
-            const adminIcon = document.getElementById('adminIcon');
-            if (!adminBtn || !adminText || !adminIcon) return;
-
-            // 예: 로컬 스토리지에 로그인 토큰(isLoggedIn 또는 token 등)이 있는 경우 로그인 상태로 판단
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; 
-
-            if (isLoggedIn) {
-                // 로그아웃 상태로 변경
-                adminBtn.href = "javascript:void(0);";
-                adminBtn.onclick = handleLogout;
-                adminIcon.className = "ri-logout-box-r-line"; // 로그아웃 아이콘으로 변경
-                adminText.setAttribute('data-i18n', 'btn_logout');
-                adminText.innerText = "로그아웃";
-            } else {
-                // 관리자(로그인) 상태로 유지
-                adminBtn.href = "login/login.html";
-                adminBtn.onclick = null;
-                adminIcon.className = "ri-user-settings-line"; // 관리자 아이콘
-                adminText.setAttribute('data-i18n', 'btn_admin');
-                adminText.innerText = "관리자";
-            }
-
-            // 언어 설정이 적용된 상태라면 변경된 텍스트도 즉시 번역 반영
-            const currentLang = localStorage.getItem('site_lang') || 'ko';
-            if (currentLang !== 'ko') {
-                applyCustomLanguage(currentLang);
-            }
-        }
-
-        // 로그아웃 수행 함수 예시
-        function handleLogout() {
-            if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.removeItem('isLoggedIn'); // 로그인 상태 제거
-                alert("성공적으로 로그아웃되었습니다.");
-                location.reload(); // 페이지 새로고침
-            }
-        }
 
         function toggleLangMenu(e) {
             e.stopPropagation();
@@ -792,12 +755,6 @@
         }
 
         function applyCustomLanguage(lang) {
-            // 동적으로 바뀐 버튼 텍스트(btn_admin 또는 btn_logout)의 캐시를 최신 상태로 갱신
-            const adminTextEl = document.getElementById('adminText');
-            if (adminTextEl) {
-                originalTextCache.set(adminTextEl, adminTextEl.getAttribute('data-i18n') === 'btn_logout' ? '로그아웃' : '관리자');
-            }
-
             if (lang === 'ko') {
                 document.documentElement.setAttribute('lang', 'ko');
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -834,6 +791,33 @@
             if (textEl && map[langCode]) {
                 textEl.innerText = map[langCode];
             }
+        }
+
+        // 로그인 상태 반영 및 마우스 호버 메뉴 동적 제어 함수
+        function updateAdminMenuUI() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const menuContainer = document.querySelector('#adminDropdownMenu > div');
+            if (!menuContainer) return;
+
+            if (isLoggedIn) {
+                // 로그인 상태일 때: 마우스 올리면 '로그아웃' 버튼 표시
+                menuContainer.innerHTML = `
+                    <a href="javascript:void(0);" onclick="handleLogout()" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그아웃</a>
+                `;
+            } else {
+                // 로그인 전일 때: 마우스 올리면 '로그인' 버튼 표시
+                menuContainer.innerHTML = `
+                    <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                `;
+            }
+        }
+
+        // 로그아웃 처리 함수
+        window.handleLogout = function() {
+            localStorage.removeItem('isLoggedIn');
+            alert('로그아웃 되었습니다.');
+            updateAdminMenuUI();
+            location.reload();
         }
     </script>
 
