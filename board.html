@@ -162,7 +162,7 @@
         </div>
 
         <div id="detailView" class="hidden">
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-6">
                 <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
                     <tbody class="divide-y divide-slate-200">
                         <tr>
@@ -193,26 +193,36 @@
                 </div>
             </div>
 
-            <!-- 하단 버튼 영역 수정됨 (삭제 / 중앙 목록 / 우측 수정) -->
+            <!-- 이전글 / 다음글 네비게이션 UI (이미지 레퍼런스 스타일 적용) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8 text-sm">
+                <div id="prevPostRow" class="flex items-center px-6 py-4 border-b border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer hidden" onclick="">
+                    <div class="w-24 font-bold text-slate-700 flex items-center gap-3 shrink-0">
+                        <span>이전글</span>
+                        <i class="ri-arrow-up-s-line text-slate-400"></i>
+                    </div>
+                    <div id="prevPostTitle" class="text-slate-600 truncate"></div>
+                </div>
+                <div id="nextPostRow" class="flex items-center px-6 py-4 hover:bg-slate-50 transition-colors cursor-pointer hidden" onclick="">
+                    <div class="w-24 font-bold text-slate-700 flex items-center gap-3 shrink-0">
+                        <span>다음글</span>
+                        <i class="ri-arrow-down-s-line text-slate-400"></i>
+                    </div>
+                    <div id="nextPostTitle" class="text-slate-600 truncate"></div>
+                </div>
+            </div>
+
+            <!-- 하단 버튼 영역 ("목록보기" 스타일 적용) -->
             <div class="flex justify-between items-center">
-                <!-- 좌측: 삭제하기 버튼 -->
                 <div id="deleteButtonContainer" class="hidden">
                     <button onclick="deletePost()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
                         <i class="ri-delete-bin-line"></i> <span data-i18n="btn_delete">삭제하기</span>
                     </button>
                 </div>
+                <div id="deleteButtonSpacer"></div>
                 
-                <!-- 중앙: 목록으로 버튼 -->
-                <div class="flex-1 flex justify-center">
-                    <button onclick="showListView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
-                        <i class="ri-list-unordered"></i> <span data-i18n="btn_list">목록으로</span>
-                    </button>
-                </div>
-
-                <!-- 우측: 수정 버튼 -->
-                <div id="editButtonContainer" class="hidden">
-                    <button onclick="openEditModal()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
-                        <i class="ri-edit-line"></i> <span>수정</span>
+                <div class="mx-auto">
+                    <button onclick="showListView()" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold text-sm px-8 py-3 rounded-xl shadow-sm transition-all">
+                        <span data-i18n="btn_list">목록보기</span>
                     </button>
                 </div>
             </div>
@@ -222,7 +232,7 @@
     <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
             <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-                <h3 id="modalTitleText" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-orange-600"></span> <span data-i18n="modal_title">게시글 작성</span>
                 </h3>
                 <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
@@ -275,7 +285,7 @@
 
                 <div class="flex justify-end gap-3 pt-4">
                     <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100" data-i18n="btn_cancel">취소</button>
-                    <button type="submit" id="modalSubmitBtn" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md" data-i18n="btn_submit">등록하기</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md" data-i18n="btn_submit">등록하기</button>
                 </div>
             </form>
         </div>
@@ -380,7 +390,7 @@
                 search_placeholder: "请输入搜索关键词",
                 btn_search: "搜索",
                 btn_delete: "删除",
-                btn_list: "列表",
+                btn_list: "목록보기",
                 modal_title: "发布文章",
                 modal_cat_label: "选择分类",
                 modal_title_label: "标题",
@@ -434,7 +444,7 @@
                 search_placeholder: "検索ワードを入力してください",
                 btn_search: "検索",
                 btn_delete: "削除する",
-                btn_list: "リストへ",
+                btn_list: "목록보기",
                 modal_title: "記事作成",
                 modal_cat_label: "カテゴリ選択",
                 modal_title_label: "タイトル",
@@ -537,7 +547,6 @@
 
         let posts = [];
         let currentPostId = null;
-        let isEditMode = false; // 수정 모드 여부 확인 변수
         let currentTab = 'all';
         const editor = document.getElementById('postContentEditor');
         let savedRange = null;
@@ -702,6 +711,30 @@
             document.getElementById('detailViews').innerText = newViews;
             document.getElementById('detailContent').innerHTML = post.content;
 
+            // 이전글 / 다음글 계산 및 바인딩
+            const currentIndex = posts.findIndex(p => p.docId === docId);
+            const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+            const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+
+            const prevRow = document.getElementById('prevPostRow');
+            const nextRow = document.getElementById('nextPostRow');
+
+            if (prevPost) {
+                prevRow.classList.remove('hidden');
+                document.getElementById('prevPostTitle').innerText = prevPost.title;
+                prevRow.onclick = () => viewDetail(prevPost.docId);
+            } else {
+                prevRow.classList.add('hidden');
+            }
+
+            if (nextPost) {
+                nextRow.classList.remove('hidden');
+                document.getElementById('nextPostTitle').innerText = nextPost.title;
+                nextRow.onclick = () => viewDetail(nextPost.docId);
+            } else {
+                nextRow.classList.add('hidden');
+            }
+
             document.getElementById('listView').classList.add('hidden');
             document.getElementById('detailView').classList.remove('hidden');
             document.getElementById('pageHeader').style.display = 'none';
@@ -724,37 +757,7 @@
             }
         }
 
-        window.openWriteModal = function() { 
-            isEditMode = false;
-            document.getElementById('modalTitleText').innerHTML = `<span class="w-2 h-2 rounded-full bg-orange-600"></span> <span>게시글 작성</span>`;
-            document.getElementById('modalSubmitBtn').innerText = "등록하기";
-            document.getElementById('writeForm').reset();
-            editor.innerHTML = '';
-            document.getElementById('postCategory').value = '공지사항';
-            document.getElementById('selectedCategoryText').innerText = '공지사항';
-            document.getElementById('writeModal').classList.remove('hidden'); 
-        }
-
-        window.openEditModal = async function() {
-            if (!currentPostId) return;
-            isEditMode = true;
-            document.getElementById('modalTitleText').innerHTML = `<span class="w-2 h-2 rounded-full bg-orange-600"></span> <span>게시글 수정</span>`;
-            document.getElementById('modalSubmitBtn').innerText = "수정하기";
-
-            const docRef = doc(db, "posts", currentPostId);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                const post = docSnap.data();
-                document.getElementById('postCategory').value = post.category;
-                document.getElementById('selectedCategoryText').innerText = post.category;
-                document.getElementById('postTitle').value = post.title;
-                document.getElementById('postWriter').value = post.writer;
-                editor.innerHTML = post.content;
-            }
-
-            document.getElementById('writeModal').classList.remove('hidden');
-        }
-
+        window.openWriteModal = function() { document.getElementById('writeModal').classList.remove('hidden'); }
         window.closeWriteModal = function() { 
             document.getElementById('writeModal').classList.add('hidden');
             document.getElementById('writeForm').reset();
@@ -773,33 +776,21 @@
             const today = new Date().toISOString().split('T')[0];
 
             try {
-                if (isEditMode && currentPostId) {
-                    await updateDoc(doc(db, "posts", currentPostId), {
-                        category,
-                        title,
-                        writer,
-                        content
-                    });
-                    alert('성공적으로 수정되었습니다.');
-                    closeWriteModal();
-                    viewDetail(currentPostId);
-                } else {
-                    await addDoc(collection(db, "posts"), {
-                        category,
-                        title,
-                        writer,
-                        date: today,
-                        views: 0,
-                        content,
-                        createdAt: Date.now()
-                    });
-                    alert('성공적으로 등록되었습니다.');
-                    closeWriteModal();
-                    fetchPosts();
-                }
+                await addDoc(collection(db, "posts"), {
+                    category,
+                    title,
+                    writer,
+                    date: today,
+                    views: 0,
+                    content,
+                    createdAt: Date.now()
+                });
+                alert('성공적으로 등록되었습니다.');
+                closeWriteModal();
+                fetchPosts();
             } catch (error) {
-                console.error("저장 실패:", error);
-                alert('처리 중 오류가 발생했습니다.');
+                console.error("등록 실패:", error);
+                alert('등록 중 오류가 발생했습니다.');
             }
         }
 
@@ -810,7 +801,6 @@
             const adminContainer = document.getElementById('adminContainer');
             const writeBtn = document.getElementById('writeBtn');
             const deleteButtonContainer = document.getElementById('deleteButtonContainer');
-            const editButtonContainer = document.getElementById('editButtonContainer');
 
             if (adminContainer) {
                 if (isLoggedIn === 'true') {
@@ -835,13 +825,11 @@
             }
 
             if (isLoggedIn === 'true') {
-                if (writeBtn) writeBtn.classList.remove('hidden');
+                if (writeBtn) writeBtn.classList.0('hidden') && writeBtn.classList.remove('hidden');
                 if (deleteButtonContainer) deleteButtonContainer.classList.remove('hidden');
-                if (editButtonContainer) editButtonContainer.classList.remove('hidden');
             } else {
                 if (writeBtn) writeBtn.classList.add('hidden');
                 if (deleteButtonContainer) deleteButtonContainer.classList.add('hidden');
-                if (editButtonContainer) editButtonContainer.classList.add('hidden');
             }
         });
     </script>
