@@ -360,16 +360,16 @@
             const adminContainer = document.getElementById('adminContainer');
             
             if (adminContainer) {
-                if (isLoggedIn === 'true') {
-                    adminContainer.innerHTML = `
-                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none w-full whitespace-nowrap">
-                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
-                        </div>
-                        <div class="hidden group-hover:block absolute right-0 top-full w-full bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
-                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
-                        </div>
-                    `;
-                } else {
+               if (isLoggedIn === 'true') {
+    adminContainer.innerHTML = `
+        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
+            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+        </div>
+        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
+        </div>
+    `;
+}
                     adminContainer.innerHTML = `
                         <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
