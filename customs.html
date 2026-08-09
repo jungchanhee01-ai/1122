@@ -239,10 +239,10 @@
         </div>
     </footer>
 
-    <!-- 구글 번역기 숨김 위젯 영역 -->
+    <!-- 구글 번역기 위젯 숨김 영역 -->
     <div id="google_translate_element" style="display:none;"></div>
 
-    <!-- 구글 번역 엔진 및 언어 감지/전환 스크립트 -->
+    <!-- 구글 번역 엔진 스크립트 -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -251,7 +251,11 @@
                 autoDisplay: false
             }, 'google_translate_element');
         }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- 드롭다운 메뉴 제어 및 번역 실행 스크립트 -->
+    <script type="text/javascript">
         function toggleLangMenu(e) {
             e.stopPropagation();
             const dropdown = document.getElementById('langDropdown');
@@ -264,48 +268,27 @@
         });
 
         function changeLanguage(langCode, labelText) {
+            // 구글 번역 쿠키 강제 설정 (googtrans=/원본언어/목표언어)
+            let expireDate = new Date();
+            expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
+            document.cookie = "googtrans=/ko/" + langCode + ";expires=" + expireDate.toUTCString() + ";path=/";
+            document.cookie = "googtrans=/ko/" + langCode + ";domain=" + document.domain + ";expires=" + expireDate.toUTCString() + ";path=/";
+
+            // 드롭다운 내부 셀렉트박스가 로드되어 있다면 직접 값 변경 시도
             const selectField = document.querySelector('.goog-te-combo');
             if (selectField) {
                 selectField.value = langCode;
                 selectField.dispatchEvent(new Event('change'));
-                
-                const textEl = document.getElementById('langBtnText');
-                if (textEl) textEl.innerText = labelText;
-
-                setTimeout(() => {
-                    document.documentElement.setAttribute('lang', langCode);
-                }, 300);
-            } else {
-                // 만약 위젯 로딩 직전이거나 selectField가 안 잡힐 경우 쿠키를 강제로 설정하고 리로드
-                let expireDate = new Date();
-                expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
-                document.cookie = "googtrans=/ko/" + langCode + ";expires=" + expireDate.toUTCString() + ";path=/";
-                window.location.reload();
             }
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
+
+            // 버튼 텍스트 변경 후 새로고침하여 즉시 번역 적용
+            const textEl = document.getElementById('langBtnText');
+            if (textEl) textEl.innerText = labelText;
+
+            window.location.reload();
         }
 
-        setInterval(() => {
-            const htmlTag = document.documentElement;
-            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            if (googCookie) {
-                const langVal = googCookie.split('=')[1].split('/')[2];
-                if (langVal && htmlTag.getAttribute('lang') !== langVal) {
-                    htmlTag.setAttribute('lang', langVal);
-                    const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
-                    const textEl = document.getElementById('langBtnText');
-                    if (textEl && map[langVal]) {
-                        textEl.innerText = map[langVal];
-                    }
-                }
-            }
-        }, 1000);
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- 로그인 상태 확인 스크립트 -->
-    <script>
+        // 페이지 로드 시 상태 초기화 및 관리자 UI 처리
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminBtn = document.getElementById('adminBtn');
@@ -322,7 +305,7 @@
                 }
             }
 
-            // 페이지 로드 시 기존 구글 번역 쿠키가 있다면 버튼 레이블 동기화
+            // 쿠키에 따른 언어 버튼 레이블 싱크 맞추기
             const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
             if (googCookie) {
                 const langVal = googCookie.split('=')[1].split('/')[2];
