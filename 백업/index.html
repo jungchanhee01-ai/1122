@@ -21,9 +21,7 @@
             font-size: 1rem; 
             gap: 2rem;      
         }
-
-        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
-        body.translated { opacity: 1; }
+        body { background-color: #f8fafc; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -89,9 +87,18 @@
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
-                </a>
+                <!-- 관리자 마우스 호버 드롭다운 메뉴 영역 (로그인 상태에 따라 동적 변경) -->
+                <div class="relative group shrink-0">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+                    <!-- 마우스를 올렸을 때 아래로 나타나는 서브 메뉴 -->
+                    <div id="adminDropdownMenu" class="hidden group-hover:block absolute right-0 pt-1 w-32 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2 text-xs font-bold text-slate-700">
+                            <!-- JS로 동적 제어됨 -->
+                        </div>
+                    </div>
+                </div>
             </div>  
         </div>
     </header>
@@ -686,7 +693,7 @@
                 form_pol: "出発地 (POL)",
                 form_pol_ph: "例: 上海, 中国",
                 form_pod: "到着地 (POD)",
-                form_pod_ph: "例: 釜山, 韓国",
+                form_pod_ph: "例: 釜山, 韩国",
                 form_memo: "貨物情報およびお問い合わせ",
                 form_memo_ph: "貨物の種類、CBM/重量、出荷予定日程などをご記入ください。",
                 form_submit: "無料お見積り申請を提出する",
@@ -722,6 +729,9 @@
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
             }
+
+            // 로그인 상태 확인 및 관리자 메뉴 렌더링
+            updateAdminMenuUI();
         });
 
         function toggleLangMenu(e) {
@@ -781,6 +791,33 @@
             if (textEl && map[langCode]) {
                 textEl.innerText = map[langCode];
             }
+        }
+
+        // 로그인 상태 반영 및 마우스 호버 메뉴 동적 제어 함수
+        function updateAdminMenuUI() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const menuContainer = document.querySelector('#adminDropdownMenu > div');
+            if (!menuContainer) return;
+
+            if (isLoggedIn) {
+                // 로그인 상태일 때: 마우스 올리면 '로그아웃' 버튼 표시
+                menuContainer.innerHTML = `
+                    <a href="javascript:void(0);" onclick="handleLogout()" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그아웃</a>
+                `;
+            } else {
+                // 로그인 전일 때: 마우스 올리면 '로그인' 버튼 표시
+                menuContainer.innerHTML = `
+                    <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                `;
+            }
+        }
+
+        // 로그아웃 처리 함수
+        window.handleLogout = function() {
+            localStorage.removeItem('isLoggedIn');
+            alert('로그아웃 되었습니다.');
+            updateAdminMenuUI();
+            location.reload();
         }
     </script>
 
@@ -935,7 +972,7 @@
                 document.getElementById('rateUpdateTime').innerText = "환율 정보 로드 실패";
             }
         }
-//1
+
         function calculateExchange() {
             const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
             const currency = document.getElementById('calcCurrency').value;
