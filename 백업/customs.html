@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 통관업무 서비스</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
+        .dynamic-nav {
+            font-size: 1rem; 
+            gap: 2rem;      
+        }
+
+        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
+        body.translated { opacity: 1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
+
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-6203-8800 (평일 09:00 - 18:00)</span>
+            </div>
+            <div class="flex items-center gap-4 font-medium">
+                <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
+                <a href="index.html#exchange" class="hover:text-orange-400 transition-colors" data-i18n="nav_exchange">환율 조회</a>
+                <a href="index.html#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold" data-i18n="nav_quote">견적 요청</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-6">
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
+                    <i class="ri-ship-line"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider block leading-none text-slate-900">FUTURE GLS</span>
+                    <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase mt-0.5 block" data-i18n="logo_sub">Global Logistics</span>
+                </div>
+            </a>
+            
+            <!-- 중앙 네비게이션 -->
+            <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
+                <a href="customs.html" class="text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
+            </nav>
+
+            <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
+                <!-- 언어 선택 드롭다운 -->
+                <div class="relative">
+                    <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                        <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko', 'KOR')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en', 'ENG')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN', 'CHN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">中文</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
+                    </div>
+                </div>
+
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
+                    <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물 추적</span>
+                </a>
+
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
+                    <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
+                </a>
+
+                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                </a>
+            </div>  
+        </div>
+    </header>
+    
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+        
+        <!-- 페이지 타이틀 헤더 -->
+        <div class="mb-14 border-b border-slate-200 pb-8">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
+                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-orange-600 font-bold" data-i18n="breadcrumb_current">통관업무</span>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest" data-i18n="page_sub_tag">C U S T O M S &nbsp; C L E A R A N C E</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="page_main_title">
+                신속하고 정확한 법규 준수 <span class="text-orange-600">수출입 통관 서비스</span>
+            </h1>
+        </div>
+
+        <!-- 1. 수출 통관 섹션 -->
+        <section class="mb-20">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-xl font-black text-orange-600">1.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec1_title">수출 통관 절차</h2>
+            </div>
+            
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <!-- 수출 흐름도 박스 -->
+                <div class="overflow-x-auto py-4">
+                    <div class="min-w-[650px] flex flex-col gap-6">
+                        <!-- 메인 프로세스 단계 -->
+                        <div class="flex items-center justify-between text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step1">수출계약체결</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step2">신용장내도</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step3">수출물품확보</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step4">적재항운송</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step5">적재</div>
+                            </div>
+                            <i class="ri-arrow-right-line text-slate-400 text-lg"></i>
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step6">출항</div>
+                            </div>
+                        </div>
+
+                        <!-- 서브 연계 박스 -->
+                        <div class="flex justify-center mt-2">
+                            <div class="bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold px-6 py-2 rounded-xl shadow-sm" data-i18n="exp_sub_box">
+                                적재 스케줄 확정
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-1">
+                            <span class="text-orange-600 font-bold text-xs bg-orange-50 px-4 py-1.5 rounded-full border border-orange-200 inline-block" data-i18n="exp_badge">
+                                수출신고가능 (3일이내)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 수입 통관 섹션 -->
+        <section>
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-xl font-black text-orange-600">2.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec2_title">수입 통관 절차</h2>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                
+                <!-- 상단 첨부서류 안내 박스 -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="imp_doc_title">수입신고 첨부서류</h3>
+                        <ul class="text-xs sm:text-sm font-semibold text-slate-700 space-y-1">
+                            <li data-i18n="imp_doc1">- 송품장 (Invoice)</li>
+                            <li data-i18n="imp_doc2">- 선하증권 (B/L)</li>
+                            <li data-i18n="imp_doc3">- 포장명세서 (Packing List)</li>
+                            <li data-i18n="imp_doc4">- 기타서류</li>
+                        </ul>
+                    </div>
+                    <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200 flex flex-col justify-center">
+                        <h3 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1" data-i18n="imp_summary_title">통관 진행 프로세스 요약</h3>
+                        <p class="text-xs sm:text-sm text-emerald-900 leading-relaxed" data-i18n="imp_summary_desc">
+                            입항 <span class="text-emerald-600">→</span> 보세창고 입고 <span class="text-emerald-600">→</span> 세관 심사 (감면/검사) <span class="text-emerald-600">→</span> 세금납부 <span class="text-emerald-600">→</span> 반출 완료
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 상세 흐름 구조 시각화 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs sm:text-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center items-center">
+                        <!-- 부두/입항 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-blue-600" data-i18n="flow_col1_title">[부두 영역]</span>
+                            <div class="bg-blue-50 py-2 rounded font-semibold text-blue-800" data-i18n="flow_col1_sub1">입항 / 보세창고</div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col1_sub2">부두직통관</div>
+                        </div>
+
+                        <!-- 세관 심사 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-purple-600" data-i18n="flow_col2_title">[세관 심사 영역]</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-purple-50 p-2 rounded text-purple-800 font-semibold" data-i18n="flow_col2_sub1">감면</div>
+                                <div class="bg-purple-50 p-2 rounded text-purple-800 font-semibold" data-i18n="flow_col2_sub2">검사</div>
+                            </div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col2_sub3">신고수리정보 / 담보 / 사전납부</div>
+                        </div>
+
+                        <!-- 신고 및 대행 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-emerald-600" data-i18n="flow_col3_title">[통관 대행 영역]</span>
+                            <div class="bg-emerald-50 py-2 rounded font-semibold text-emerald-800" data-i18n="flow_col3_sub1">관세사등 / 자가통관</div>
+                            <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col3_sub2">통관의뢰</div>
+                        </div>
+
+                        <!-- 납부 및 반출 -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
+                            <span class="font-bold text-orange-600" data-i18n="flow_col4_title">[납부 및 반출]</span>
+                            <div class="bg-orange-50 py-2 rounded font-semibold text-orange-800" data-i18n="flow_col4_sub1">은행 (영수필통지)</div>
+                            <div class="bg-orange-600 text-white py-1.5 rounded font-bold" data-i18n="flow_col4_sub2">화물 반출 완료</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white text-base">
+                            <i class="ri-ship-line"></i>
+                        </div>
+                        FUTURE GLS
+                    </div>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html#services" class="hover:text-orange-600 transition-colors" data-i18n="footer_s1">해상 운송 (FCL/LCL)</a></li>
+                        <li><a href="index.html#services" class="hover:text-orange-600 transition-colors" data-i18n="footer_s2">항공 화물 운송</a></li>
+                        <li><a href="index.html#services" class="hover:text-orange-600 transition-colors" data-i18n="footer_s3">수출입 통관 대행</a></li>
+                        <li><a href="index.html#services" class="hover:text-orange-600 transition-colors" data-i18n="footer_s4">보세 창고 관리</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-6203-8800</p>
+                    <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-6203-8801</p>
+                    <p class="mb-1.5" data-i18n="footer_email">이메일: docs@futuregls.com</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 18:00</p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
+                    <p class="leading-relaxed" data-i18n="footer_addr">
+                        서울특별시 강남구 테헤란로 415, 퓨처타워 12층 (삼성동)<br>
+                        사업자등록번호: 220-88-01234
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
+                <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 다국어 사전 데이터 및 자체 번역 엔진 -->
+    <script>
+        const i18nData = {
+            en: {
+                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                nav_tracking: "Cargo Tracking",
+                nav_exchange: "Exchange Rates",
+                nav_quote: "Get a Quote",
+                logo_sub: "Global Logistics",
+                menu_ceo: "About Us",
+                menu_air: "Air Freight",
+                menu_ocean: "Ocean Freight",
+                menu_triangle: "Triangle Trade",
+                menu_customs: "Customs",
+                menu_board: "Industry News",
+                btn_tracking: "Cargo Tracking",
+                btn_quote: "Request Quote",
+                btn_admin: "Admin",
+                breadcrumb_home: "Home",
+                breadcrumb_current: "Customs Clearance",
+                page_sub_tag: "C U S T O M S &nbsp; C L E A R A N C E",
+                page_main_title: "Fast and Accurate Compliant <span class=\"text-orange-600\">Import & Export Customs Service</span>",
+                sec1_title: "Export Customs Procedures",
+                exp_step1: "Export Contract",
+                exp_step2: "L/C Arrived",
+                exp_step3: "Secure Cargo",
+                exp_step4: "Transport to Port",
+                exp_step5: "Loading",
+                exp_step6: "Departure",
+                exp_sub_box: "Confirm Loading Schedule",
+                exp_badge: "Export Declaration Available (Within 3 days)",
+                sec2_title: "Import Customs Procedures",
+                imp_doc_title: "Import Declaration Documents",
+                imp_doc1: "- Invoice",
+                imp_doc2: "- Bill of Lading (B/L)",
+                imp_doc3: "- Packing List",
+                imp_doc4: "- Other Documents",
+                imp_summary_title: "Customs Process Summary",
+                imp_summary_desc: "Arrival <span class=\"text-emerald-600\">→</span> Bonded Warehouse In <span class=\"text-emerald-600\">→</span> Customs Inspection <span class=\"text-emerald-600\">→</span> Tax Payment <span class=\"text-emerald-600\">→</span> Cargo Release",
+                flow_col1_title: "[Port Area]",
+                flow_col1_sub1: "Arrival / Bonded Warehouse",
+                flow_col1_sub2: "Direct Port Clearance",
+                flow_col2_title: "[Customs Inspection]",
+                flow_col2_sub1: "Reduction",
+                flow_col2_sub2: "Inspection",
+                flow_col2_sub3: "Declaration Info / Collateral / Pre-payment",
+                flow_col3_title: "[Customs Agency]",
+                flow_col3_sub1: "Customs Broker / Self",
+                flow_col3_sub2: "Request Customs",
+                flow_col4_title: "[Payment & Release]",
+                flow_col4_sub1: "Bank (Receipt Notice)",
+                flow_col4_sub2: "Cargo Release Complete",
+                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Key Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Freight",
+                footer_s3: "Customs Clearance",
+                footer_s4: "Bonded Warehouse",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Phone: 02-6203-8800",
+                footer_fax: "Fax: 02-6203-8801",
+                footer_email: "Email: docs@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 18:00",
+                footer_col3_title: "Headquarters",
+                footer_addr: "12F Future Tower, 415 Teheran-ro, Gangnam-gu, Seoul (Samsung-dong)<br>Business Registration No: 220-88-01234"
+            },
+            "zh-CN": {
+                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                nav_tracking: "货物追踪",
+                nav_exchange: "汇率查询",
+                nav_quote: "报价申请",
+                logo_sub: "Global Logistics",
+                menu_ceo: "公司介绍",
+                menu_air: "航空运输",
+                menu_ocean: "海上运输",
+                menu_triangle: "三角贸易",
+                menu_customs: "清关业务",
+                menu_board: "行业动态",
+                btn_tracking: "货物追踪",
+                btn_quote: "报价申请",
+                btn_admin: "管理员",
+                breadcrumb_home: "首页",
+                breadcrumb_current: "清关业务",
+                page_sub_tag: "C U S T O M S &nbsp; C L E A R A N C E",
+                page_main_title: "迅速准确且合规的 <span class=\"text-orange-600\">进出口清关服务</span>",
+                sec1_title: "出口清关流程",
+                exp_step1: "签订出口合同",
+                exp_step2: "信用证到货",
+                exp_step3: "确保出口货物",
+                exp_step4: "运至装运港",
+                exp_step5: "装载",
+                exp_step6: "出港",
+                exp_sub_box: "确认装载日程",
+                exp_badge: "可进行出口申报 (3天以内)",
+                sec2_title: "进口清关流程",
+                imp_doc_title: "进口申报随附单证",
+                imp_doc1: "- 商业发票 (Invoice)",
+                imp_doc2: "- 提单 (B/L)",
+                imp_doc3: "- 装箱单 (Packing List)",
+                imp_doc4: "- 其他文件",
+                imp_summary_title: "清关进行流程摘要",
+                imp_summary_desc: "到港 <span class=\"text-emerald-600\">→</span> 保税仓库入库 <span class=\"text-emerald-600\">→</span> 海关审单 (减免/查验) <span class=\"text-emerald-600\">→</span> 缴纳税款 <span class=\"text-emerald-600\">→</span> 提货完成",
+                flow_col1_title: "[码头区域]",
+                flow_col1_sub1: "到港 / 保税仓库",
+                flow_col1_sub2: "码头直通关",
+                flow_col2_title: "[海关审单区域]",
+                flow_col2_sub1: "减免",
+                flow_col2_sub2: "查验",
+                flow_col2_sub3: "申报审结信息 / 担保 / 预缴",
+                flow_col3_title: "[清关代理区域]",
+                flow_col3_sub1: "报关行等 / 自主清关",
+                flow_col3_sub2: "委托清关",
+                flow_col4_title: "[缴税及提货]",
+                flow_col4_sub1: "银行 (收税通知)",
+                flow_col4_sub2: "货物提货完成",
+                footer_desc: "全球物流新标准，FUTURE GLS。<br>安全地将您的商业价值传递至全球。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海上运输 (FCL/LCL)",
+                footer_s2: "航空货物运输",
+                footer_s3: "进出口清关代理",
+                footer_s4: "保税仓库管理",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-6203-8800",
+                footer_fax: "传真：02-6203-8801",
+                footer_email: "邮箱：docs@futuregls.com",
+                footer_hours: "工作时间：工作日 09:00 - 18:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔特别市江南区德黑兰路415，未来大厦12层（三成洞）<br>营业执照号：220-88-01234"
+            },
+            ja: {
+                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                nav_tracking: "貨物追跡",
+                nav_exchange: "為替照会",
+                nav_quote: "お見積り",
+                logo_sub: "Global Logistics",
+                menu_ceo: "会社紹介",
+                menu_air: "航空輸送",
+                menu_ocean: "海上輸送",
+                menu_triangle: "三国間輸送",
+                menu_customs: "通関業務",
+                menu_board: "業界ニュース",
+                btn_tracking: "貨物追跡",
+                btn_quote: "お見積り",
+                btn_admin: "管理者",
+                breadcrumb_home: "ホーム",
+                breadcrumb_current: "通関業務",
+                page_sub_tag: "C U S T O M S &nbsp; C L E A R A N C E",
+                page_main_title: "迅速かつ正確な法令遵守の <span class=\"text-orange-600\">輸出入通関サービス</span>",
+                sec1_title: "輸出通関手続",
+                exp_step1: "輸出契約締結",
+                exp_step2: "信用状到着",
+                exp_step3: "輸出物品確保",
+                exp_step4: "積出港輸送",
+                exp_step5: "積載",
+                exp_step6: "出港",
+                exp_sub_box: "積載スケジュール確定",
+                exp_badge: "輸出申告可能 (3日以内)",
+                sec2_title: "輸入通関手続",
+                imp_doc_title: "輸入申告添付書類",
+                imp_doc1: "- インボイス (Invoice)",
+                imp_doc2: "- 船荷証券 (B/L)",
+                imp_doc3: "- 梱包明細書 (Packing List)",
+                imp_doc4: "- その他書類",
+                imp_summary_title: "通関進行プロセス要約",
+                imp_summary_desc: "入港 <span class=\"text-emerald-600\">→</span> 保税倉庫入庫 <span class=\"text-emerald-600\">→</span> 税関審査 (減免/検査) <span class=\"text-emerald-600\">→</span> 税金納付 <span class=\"text-emerald-600\">→</span> 搬出完了",
+                flow_col1_title: "[ふ頭エリア]",
+                flow_col1_sub1: "入港 / 保税倉庫",
+                flow_col1_sub2: "ふ頭直通関",
+                flow_col2_title: "[税関審査エリア]",
+                flow_col2_sub1: "減免",
+                flow_col2_sub2: "検査",
+                flow_col2_sub3: "申告受理情報 / 担保 / 事前納付",
+                flow_col3_title: "[通関代行エリア]",
+                flow_col3_sub1: "通関士等 / 自家通関",
+                flow_col3_sub2: "通関依頼",
+                flow_col4_title: "[納付及び搬出]",
+                flow_col4_sub1: "銀行 (領収済通知)",
+                flow_col4_sub2: "貨物搬出完了",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_col1_title: "主要サービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "保税倉庫管理",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-6203-8800",
+                footer_fax: "ファックス：02-6203-8801",
+                footer_email: "メール：docs@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 18:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル特別市江南区テヘラン路415、フューチャータワー12階（三成洞）<br>事業者登録番号：220-88-01234"
+            }
+        };
+
+        const originalTextCache = new Map();
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            // 관리자 로그인 상태 확인 및 버튼 UI 처리
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminBtn = document.getElementById('adminBtn');
+            const authButtons = document.getElementById('authButtons');
+
+            if (isLoggedIn === 'true') {
+                if (adminBtn && authButtons) {
+                    adminBtn.remove();
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = "hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
+                    nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
+                    authButtons.appendChild(nameSpan);
+                }
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                originalTextCache.set(el, el.innerHTML);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                originalTextCache.set(el + '_ph', el.placeholder);
+            });
+
+            const savedLang = localStorage.getItem('site_lang') || 'ko';
+            if (savedLang !== 'ko') {
+                applyCustomLanguage(savedLang);
+            }
+
+            setTimeout(() => {
+                document.body.classList.add('translated');
+            }, 100);
+        });
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        });
+
+        window.changeLanguage = function(langCode, labelText) {
+            localStorage.setItem('site_lang', langCode);
+            document.documentElement.setAttribute('lang', langCode);
+            updateLangButtonText(langCode);
+            applyCustomLanguage(langCode);
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        function applyCustomLanguage(lang) {
+            if (lang === 'ko') {
+                document.documentElement.setAttribute('lang', 'ko');
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    if (originalTextCache.has(el + '_ph')) el.placeholder = originalTextCache.get(el + '_ph');
+                });
+                updateLangButtonText('ko');
+                return;
+            }
+
+            const dict = i18nData[lang];
+            if (!dict) return;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) {
+                    el.placeholder = dict[key];
+                }
+            });
+        }
+
+        function updateLangButtonText(langCode) {
+            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            const textEl = document.getElementById('langBtnText');
+            if (textEl && map[langCode]) {
+                textEl.innerText = map[langCode];
+            }
+        }
+    </script>
+</body>
+</html>
