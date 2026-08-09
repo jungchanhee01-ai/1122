@@ -49,7 +49,7 @@
 
             <div class="flex items-center justify-between text-sm">
                 <label class="flex items-center text-slate-600 cursor-pointer">
-                    <input type="checkbox" class="rounded border-slate-300 text-orange-600 focus:ring-orange-500 mr-2">
+                    <input type="checkbox" id="keepLogin" class="rounded border-slate-300 text-orange-600 focus:ring-orange-500 mr-2">
                     로그인 상태 유지
                 </label>
                 <a href="#" class="text-orange-600 hover:underline font-medium">비밀번호 찾기</a>
@@ -70,12 +70,11 @@
     </div>
 
     <script>
-        // 페이지 진입 시 직전 페이지(업계소식 등) 저장하기
+        // 진입 시 직전 페이지(BOARD, AIR 등) 주소를 안전하게 세션에 기록
         window.addEventListener('DOMContentLoaded', () => {
             const referrer = document.referrer;
-            // 현재 로그인 페이지 주소가 아니고, 외부가 아닐 경우 세션에 저장
             if (referrer && !referrer.includes('login.html')) {
-                sessionStorage.setItem('prevPageUrl', referrer);
+                sessionStorage.setItem('returnUrl', referrer);
             }
         });
 
@@ -98,16 +97,16 @@
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
                 
-                // localStorage에 로그인 정보 저장 (모든 하위 페이지에서 공유됨)
+                // 모든 서브 카테고리(AIR, BOARD, CEO, CUSTOMS, INDEXN, TRIANGLE)에서 
+                // 동일하게 인식하도록 localStorage 키 값을 정확히 설정
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 직전 페이지 주소가 있으면 그곳으로, 없으면 메인으로 이동
-                const prevPage = sessionStorage.getItem('prevPageUrl');
-                const targetUrl = prevPage ? prevPage : '/index.html';
+                // 직전 페이지로 돌아가기 (기록이 없으면 메인으로)
+                const returnUrl = sessionStorage.getItem('returnUrl') || '/index.html';
                 
                 setTimeout(() => {
-                    window.location.href = targetUrl;
+                    window.location.href = returnUrl;
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);
