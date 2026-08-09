@@ -69,7 +69,6 @@
                         <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
                     </div>
                 </div>
-
                 <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                     <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                 </a>
@@ -77,7 +76,6 @@
         </div>
     </header>
 
-    <!-- 메인 컨텐츠 영역 -->
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
         <div class="mb-14 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
@@ -96,6 +94,7 @@
                 <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec1_title">항공수출 운송</h2>
             </div>
             <p class="text-slate-600 text-sm sm:text-base mb-8" data-i18n="sec1_desc">20년 이상 국제항공 운송 수출분야에서 축적한 Know-how를 바탕으로 최고의 서비스를 제공하고 있습니다.</p>
+
             <div class="grid md:grid-cols-12 gap-8 items-center mb-10">
                 <div class="md:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="workflow_export_label">업무절차 (Export Workflow)</h3>
@@ -104,119 +103,80 @@
                     </p>
                 </div>
             </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 font-bold text-slate-900 text-sm" data-i18n="table_title">지역별 서비스 내역</div>
+                <table class="w-full text-left border-collapse text-sm">
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="py-4 px-6 font-bold text-slate-900 bg-slate-50" data-i18n="table_row1_title">미주서비스</td><td class="py-4 px-6 text-slate-600" data-i18n="table_row1_desc">LA/NYC를 거점으로한 미국내 전역 신속한 DOOR서비스구현</td></tr>
+                        <tr><td class="py-4 px-6 font-bold text-slate-900 bg-slate-50" data-i18n="table_row2_title">중남미서비스</td><td class="py-4 px-6 text-slate-600" data-i18n="table_row2_desc">MIAMI를 거점으로 한 특화된 중남미 서비스 제공</td></tr>
+                        <tr><td class="py-4 px-6 font-bold text-slate-900 bg-slate-50" data-i18n="table_row3_title">유럽서비스</td><td class="py-4 px-6 text-slate-600" data-i18n="table_row3_desc">유럽계 항공사를 통한 유럽 전지역 DTD 서비스 제공</td></tr>
+                        <tr><td class="py-4 px-6 font-bold text-slate-900 bg-slate-50" data-i18n="table_row4_title">아시아서비스</td><td class="py-4 px-6 text-slate-600" data-i18n="table_row4_desc">매일 출발 당일 통관 서비스 제공</td></tr>
+                        <tr><td class="py-4 px-6 font-bold text-slate-900 bg-slate-50" data-i18n="table_row5_title">중국서비스</td><td class="py-4 px-6 text-slate-600" data-i18n="table_row5_desc">중국 전 주요도시에 지사망을 보유한 1급 면허를 가진 PARTNER와의 업무협조를 통한 전지역 DOOR서비스제공</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-xl font-black text-orange-600">2.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec2_title">항공수입 운송</h2>
+            </div>
+            <p class="text-slate-600 text-sm sm:text-base mb-8" data-i18n="sec2_desc">해외지사 및 전세계 긴밀한 파트너 네트워크를 통하여 귀사의 귀중한 수입화물을 신속, 정확하게 운송하고 있습니다.</p>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-6">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="workflow_import_label">업무절차 (Import Workflow)</h3>
+                <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100" data-i18n="workflow_import_text">선적지선택 → 도착전 서류수취 → 도착 → 수입통관 → 내륙운송 → DELIVERY → P.O.D</p>
+            </div>
         </section>
     </main>
 
-    <!-- 푸터 -->
     <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
-            <p>&copy; 2026 FUTURE GLS. All Rights Reserved.</p>
-        </div>
+        <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
+        <p>&copy; 2026 FUTURE GLS. All Rights Reserved.</p>
     </footer>
 
-    <!-- 스크립트 -->
     <script>
         const i18nData = {
             en: {
-                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
-                nav_tracking: "Cargo Tracking",
-                nav_exchange: "Exchange Rates",
-                nav_quote: "Get a Quote",
-                logo_sub: "Global Logistics",
-                menu_ceo: "About Us",
-                menu_air: "Air Freight",
-                menu_ocean: "Ocean Freight",
-                menu_triangle: "Triangle Trade",
-                menu_customs: "Customs",
-                menu_board: "Industry News",
-                btn_admin: "Admin",
-                nav_home: "Home",
-                page_title_main: "Fast and Safe Global",
-                page_title_sub: "Air Freight Solution",
-                sec1_title: "Air Export",
-                sec1_desc: "We provide top services based on over 20 years of know-how in international air export.",
-                workflow_export_label: "Export Workflow",
-                workflow_export_text: "Booking → P/U → Docs → Customs → Shipment → Arrival → Import Customs → Inland Transport → DELIVERY → P.O.D"
+                cs_center: "Customer Center: 02-6203-8800", nav_tracking: "Tracking", nav_exchange: "Exchange", nav_quote: "Quote",
+                logo_sub: "Global Logistics", menu_ceo: "Company", menu_air: "Air", menu_ocean: "Ocean", menu_triangle: "Triangle", menu_customs: "Customs", menu_board: "News", btn_admin: "Admin",
+                nav_home: "Home", page_title_main: "Fast & Safe Global", page_title_sub: "Air Freight Solution", sec1_title: "Air Export", sec1_desc: "20+ years of experience providing top-tier service.",
+                workflow_export_label: "Export Workflow", workflow_export_text: "Booking → P/U → Docs → Customs → Shipment → Arrival → Import Customs → Delivery → P.O.D",
+                table_title: "Service by Region", table_row1_title: "Americas", table_row1_desc: "Rapid door-to-door service across the US.",
+                table_row2_title: "Latin America", table_row2_desc: "Specialized service via Miami.",
+                table_row3_title: "Europe", table_row3_desc: "Full European DTD service via major airlines.",
+                table_row4_title: "Asia", table_row4_desc: "Daily departure & customs clearance.",
+                table_row5_title: "China", table_row5_desc: "Door-to-door service via partner network.",
+                sec2_title: "Air Import", sec2_desc: "Accurate import freight via global network.",
+                workflow_import_label: "Import Workflow", workflow_import_text: "Select Port → Docs Receipt → Arrival → Import Customs → Delivery → P.O.D"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
-                nav_tracking: "货物追踪",
-                nav_exchange: "汇率查询",
-                nav_quote: "报价申请",
-                logo_sub: "Global Logistics",
-                menu_ceo: "公司介绍",
-                menu_air: "航空运输",
-                menu_ocean: "海上运输",
-                menu_triangle: "三角贸易",
-                menu_customs: "清关业务",
-                menu_board: "行业动态",
-                btn_admin: "管理员",
-                nav_home: "首页",
-                page_title_main: "快速且安全的全球",
-                page_title_sub: "航空货运解决方案",
-                sec1_title: "航空出口运输",
-                sec1_desc: "凭借20多年来在国际航空运输出口领域积累的专业知识，为您提供最优质的服务。",
-                workflow_export_label: "业务流程 (Export Workflow)",
-                workflow_export_text: "预约受理 → 提货 → 制作单证 → 出口报关 → 装船/机 → 到达 → 进口报关 → 内陆运输 → 派送 → 签收"
+                cs_center: "客服中心：02-6203-8800", nav_tracking: "货物追踪", nav_exchange: "汇率查询", nav_quote: "报价申请",
+                logo_sub: "Global Logistics", menu_ceo: "公司介绍", menu_air: "航空运输", menu_ocean: "海运", menu_triangle: "三角贸易", menu_customs: "清关", menu_board: "行业动态", btn_admin: "管理员",
+                nav_home: "首页", page_title_main: "快速安全的全球", page_title_sub: "航空货物运输方案", sec1_title: "航空出口", sec1_desc: "基于20多年国际运输经验提供顶级服务。",
+                workflow_export_label: "出口流程", workflow_export_text: "预约 → 提货 → 单证 → 报关 → 装船 → 到达 → 清关 → 内陆运输 → 派送 → 签收",
+                table_title: "区域服务详情", table_row1_title: "美洲服务", table_row1_desc: "美国全境快速门到门服务。",
+                table_row2_title: "拉美服务", table_row2_desc: "以迈阿密为枢纽的特色拉美服务。",
+                table_row3_title: "欧洲服务", table_row3_desc: "通过欧洲航空公司的全境DTD服务。",
+                table_row4_title: "亚洲服务", table_row4_desc: "每日出发，当天清关。",
+                table_row5_title: "中国服务", table_row5_desc: "通过合作伙伴网络提供全境门到门服务。",
+                sec2_title: "航空进口", sec2_desc: "通过全球网络实现准确的进口货物运输。",
+                workflow_import_label: "进口流程", workflow_import_text: "选择发货地 → 收取单证 → 到达 → 报关 → 内陆运输 → 派送 → 签收"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
-                nav_tracking: "貨物追跡",
-                nav_exchange: "為替照会",
-                nav_quote: "お見積り",
-                logo_sub: "Global Logistics",
-                menu_ceo: "会社紹介",
-                menu_air: "航空輸送",
-                menu_ocean: "海上輸送",
-                menu_triangle: "三国間輸送",
-                menu_customs: "通関業務",
-                menu_board: "業界ニュース",
-                btn_admin: "管理者",
-                nav_home: "ホーム",
-                page_title_main: "迅速かつ安全なグローバル",
-                page_title_sub: "航空貨物輸送ソリューション",
-                sec1_title: "航空輸出輸送",
-                sec1_desc: "20年以上の国際航空輸送輸出分野で蓄積されたノウハウに基づき、最高のサービスを提供しています。",
-                workflow_export_label: "業務手順 (Export Workflow)",
-                workflow_export_text: "予約受付 → P/U → 書類作成 → 輸出通関 → 船積み → 到着 → 輸入通関 → 内陸輸送 → DELIVERY → P.O.D"
+                cs_center: "カスタマーセンター：02-6203-8800", nav_tracking: "貨物追跡", nav_exchange: "為替", nav_quote: "お見積り",
+                logo_sub: "Global Logistics", menu_ceo: "会社紹介", menu_air: "航空輸送", menu_ocean: "海上輸送", menu_triangle: "三国間", menu_customs: "通関", menu_board: "ニュース", btn_admin: "管理者",
+                nav_home: "ホーム", page_title_main: "迅速・安全なグローバル", page_title_sub: "航空貨物輸送ソリューション", sec1_title: "航空輸出", sec1_desc: "20年以上の経験に基づき、最高のサービスを提供します。",
+                workflow_export_label: "業務プロセス", workflow_export_text: "予約 → 集荷 → 書類作成 → 輸出通関 → 船積 → 到着 → 輸入通関 → 国内配送 → DELIVERY → P.O.D",
+                table_title: "地域別サービス内訳", table_row1_title: "米州サービス", table_row1_desc: "米国内全域への迅速なDOORサービス。",
+                table_row2_title: "中南米サービス", table_row2_desc: "マイアミを拠点とした中南米特化サービス。",
+                table_row3_title: "欧州サービス", table_row3_desc: "欧州系航空会社による全域DTDサービス。",
+                table_row4_title: "アジアサービス", table_row4_desc: "毎日出発、当日通関サービス。",
+                table_row5_title: "中国サービス", table_row5_desc: "パートナーネットワークを通じた全域DOORサービス。",
+                sec2_title: "航空輸入", sec2_desc: "世界中のネットワークで貴社の貨物を安全に輸送します。",
+                workflow_import_label: "業務プロセス", workflow_import_text: "積地選択 → 到着前書類受取 → 到着 → 輸入通関 → 国内配送 → DELIVERY → P.O.D"
             }
-        };
-
-        const originalTextCache = new Map();
-
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                originalTextCache.set(el, el.innerHTML);
-            });
-
-            const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') {
-                applyCustomLanguage(savedLang);
-            }
-
-            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-            const adminBtn = document.getElementById('adminBtn');
-            const authButtons = document.getElementById('authButtons');
-
-            if (isLoggedIn === 'true' && adminBtn) {
-                adminBtn.innerHTML = `<i class="ri-user-star-line"></i> 관리자(FUTURE)`;
-                const logoutBtn = document.createElement('button');
-                logoutBtn.innerText = "로그아웃";
-                logoutBtn.className = "text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-200 text-slate-800 hover:bg-slate-300 transition-all";
-                logoutBtn.onclick = () => { localStorage.removeItem('isAdminLoggedIn'); window.location.reload(); };
-                authButtons.appendChild(logoutBtn);
-            }
-        });
-
-        function toggleLangMenu(e) { 
-            e.stopPropagation(); 
-            document.getElementById('langDropdown').classList.toggle('hidden'); 
-        }
-
-        window.onclick = () => {
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
         };
 
         function changeLanguage(lang, label) {
@@ -224,40 +184,27 @@
             location.reload();
         }
 
-        function applyCustomLanguage(lang) {
-            if (lang === 'ko') {
-                document.documentElement.setAttribute('lang', 'ko');
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = localStorage.getItem('site_lang') || 'ko';
+            if (lang !== 'ko' && i18nData[lang]) {
                 document.querySelectorAll('[data-i18n]').forEach(el => {
-                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                    const key = el.getAttribute('data-i18n');
+                    if (i18nData[lang][key]) el.innerText = i18nData[lang][key];
                 });
-                updateLangButtonText('ko');
-                return;
             }
-
-            const dict = i18nData[lang];
-            if (!dict) return;
-
-            document.documentElement.setAttribute('lang', lang);
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key]) {
-                    el.innerHTML = dict[key];
-                }
-            });
-            updateLangButtonText(lang);
-        }
-
-        function updateLangButtonText(langCode) {
-            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
-            const textEl = document.getElementById('langBtnText');
-            if (textEl && map[langCode]) {
-                textEl.innerText = map[langCode];
-            }
-        }
-
-        window.addEventListener('load', () => {
             document.body.classList.add('translated');
+            
+            // 관리자 버튼 로직
+            if (localStorage.getItem('isAdminLoggedIn') === 'true') {
+                const adminBtn = document.getElementById('adminBtn');
+                if (adminBtn) {
+                    adminBtn.innerHTML = `<i class="ri-user-star-line"></i> 관리자(FUTURE)`;
+                    adminBtn.classList.replace('bg-slate-900', 'bg-orange-600');
+                }
+            }
         });
+        function toggleLangMenu(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('hidden'); }
+        window.onclick = () => document.getElementById('langDropdown').classList.add('hidden');
     </script>
 </body>
 </html>
