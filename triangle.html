@@ -74,17 +74,17 @@
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
                 
-                <!-- 관리자 버튼 영역 (로그인 전/후 분기) -->
-                <div class="relative inline-block">
+                <!-- 관리자 버튼 영역 (마우스 호버 드롭다운 적용) -->
+                <div class="relative inline-block group">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                         <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                     </a>
                     
                     <div id="adminUserMenu" class="hidden">
-                        <button type="button" onclick="toggleAdminMenu(event)" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer">
+                        <button type="button" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-default">
                             <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE) <i class="ri-arrow-down-s-line"></i>
                         </button>
-                        <div id="adminDropdown" class="hidden absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
+                        <div id="adminDropdown" class="hidden group-hover:block absolute right-0 mt-0 w-36 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
                             <a href="javascript:void(0);" onclick="handleLogout()" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 flex items-center gap-2">
                                 <i class="ri-logout-box-line"></i> 로그아웃
                             </a>
@@ -344,7 +344,7 @@
                 page_main_title: "第3国間の効率的な貨物移動のための<span class=\"text-orange-600\">三国間輸送ソリューション</span>",
                 sec1_title: "三国間輸送",
                 sec1_desc1: "韓国以外の国家、すなわち第3国間で動く貨物輸送を言い、賃加工などに多く使用される輸送形態です。",
-                sec1_desc2: "世界主要地域とつながっている弊社のNetworkを通지、第3国から目的国へ貨物を直接輸送することで運送料節減の効果およびSwitch B/L発行などの簡単な業務手順を介して現地通関および韓国国内本社の迅速な業務controlを実現しています。",
+                sec1_desc2: "世界主要地域とつながっている弊社のNetworkを通じて、第3国から目的国へ貨物を直接輸送することで運送料節減の効果およびSwitch B/L発行などの簡単な業務手順を介して現地通関および韓国国内本社の迅速な業務controlを実現しています。",
                 sec1_desc3: "このような三国間輸送のSpecialistとして、私ども（株）フューチャージーエルスはお客様の満足を極大化するきめ細かなサービスを提供しています。",
                 sec2_title: "三国間貿易の形態",
                 sec2_diagram_caption: "▲ 三国間貿易トライアングル構造 (Buyer - Supplier - Seller)",
@@ -387,7 +387,6 @@
         });
 
         function toggleLangMenu(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('hidden'); }
-        function toggleAdminMenu(e) { e.stopPropagation(); document.getElementById('adminDropdown').classList.toggle('hidden'); }
 
         function handleLogout() {
             localStorage.removeItem('isAdminLoggedIn');
@@ -414,11 +413,9 @@
                 if (dict[key]) el.innerHTML = dict[key];
             });
         }
-//S
+
         window.addEventListener('click', () => {
             document.getElementById('langDropdown').classList.add('hidden');
-            const adminDropdown = document.getElementById('adminDropdown');
-            if (adminDropdown) adminDropdown.classList.add('hidden');
         });
     </script>
 </body>
