@@ -240,7 +240,7 @@
     </footer>
 
     <!-- 구글 번역기 위젯 숨김 영역 -->
-    <div id="google_translate_element" style="display:none;"></div>
+    <div id="google_translate_element"></div>
 
     <!-- 구글 번역 엔진 스크립트 -->
     <script type="text/javascript">
@@ -268,20 +268,19 @@
         });
 
         function changeLanguage(langCode, labelText) {
-            // 구글 번역 쿠키 강제 설정 (googtrans=/원본언어/목표언어)
+            // 구글 번역 쿠키 강제 설정
             let expireDate = new Date();
             expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
             document.cookie = "googtrans=/ko/" + langCode + ";expires=" + expireDate.toUTCString() + ";path=/";
             document.cookie = "googtrans=/ko/" + langCode + ";domain=" + document.domain + ";expires=" + expireDate.toUTCString() + ";path=/";
 
-            // 드롭다운 내부 셀렉트박스가 로드되어 있다면 직접 값 변경 시도
+            // 구글 번역 컴보박스 직접 제어 시도
             const selectField = document.querySelector('.goog-te-combo');
             if (selectField) {
                 selectField.value = langCode;
                 selectField.dispatchEvent(new Event('change'));
             }
 
-            // 버튼 텍스트 변경 후 새로고침하여 즉시 번역 적용
             const textEl = document.getElementById('langBtnText');
             if (textEl) textEl.innerText = labelText;
 
