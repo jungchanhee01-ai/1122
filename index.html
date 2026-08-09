@@ -16,16 +16,10 @@
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
-        /* 평소(한·중·일 등)에는 한층 더 큼직하고 여유 있는 메뉴 스타일 적용 */
+        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
         .dynamic-nav {
-            font-size: 1.05rem; 
-            gap: 2.75rem;      
-        }
-
-        /* 오직 영어(en)로 전환되었을 때만 글자와 간격을 줄여서 오버플로우 방지 */
-        html[lang*="en"] .dynamic-nav {
-            font-size: 0.75rem; 
-            gap: 0.75rem;      
+            font-size: 1rem; 
+            gap: 2rem;      
         }
 
         body { opacity: 0; transition: opacity 0.3s ease-in-out; }
