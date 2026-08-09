@@ -97,11 +97,11 @@
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
                 
-                // 로그인 상태 공유를 위해 localStorage에 저장
+                // 모든 창에서 공통으로 인식할 수 있도록 localStorage 설정
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 루트 경로 기준으로 확실하게 반영되도록 세션 스토리지 정리 및 이동 준비
+                // 직전 페이지 주소가 존재하면 해당 페이지로 복귀, 없으면 메인으로 이동
                 const returnUrl = sessionStorage.getItem('returnUrl') || '../index.html';
                 
                 setTimeout(() => {
@@ -114,3 +114,4 @@
     </script>
 </body>
 </html>
+```[cite: 11]
