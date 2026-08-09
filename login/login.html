@@ -89,10 +89,10 @@
             // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
-                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isAdminLoggedIn', 'true'); // 로그인 상태 유지 키 설정
                 localStorage.setItem('adminName', '관리자');
                 
-                // 로그인 성공 후 메인 화면으로 이동하도록 수정
+                // 로그인 성공 후 메인 화면으로 이동
                 setTimeout(() => {
                     window.location.href = '../index.html';
                 }, 800);
