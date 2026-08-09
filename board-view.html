@@ -67,20 +67,79 @@
                 </h1>
             </div>
 
-            <!-- 본문 내용 영역 (innerHTML로 변경하여 이미지 및 HTML 태그 정상 출력) -->
+            <!-- 본문 내용 영역 -->
             <div id="postContent" class="text-slate-700 text-sm sm:text-base leading-relaxed min-h-[250px]">
                 잠시만 기다려주세요. 데이터를 안전하게 불러오고 있습니다.
             </div>
 
-            <!-- 하단 목록 버튼 -->
+            <!-- 하단 버튼 영역 -->
             <div class="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center">
-                <a href="board.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2">
-                    <i class="ri-list-check"></i> 목록으로
-                </a>
+                <div class="flex items-center gap-3">
+                    <a href="board.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2">
+                        <i class="ri-list-check"></i> 목록으로
+                    </a>
+                </div>
+                
+                <!-- 관리자 전용 수정/삭제 버튼 컨테이너 -->
+                <div id="adminActionButtons" class="hidden flex items-center gap-3">
+                    <button onclick="openEditModal()" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
+                        <i class="ri-edit-line"></i> 수정하기
+                    </button>
+                    <button onclick="deletePost()" class="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
+                        <i class="ri-delete-bin-line"></i> 삭제하기
+                    </button>
+                </div>
             </div>
 
         </div>
     </main>
+
+    <!-- 게시글 수정 모달창 -->
+    <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 게시글 수정
+                </h3>
+                <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="writeForm" onsubmit="submitEditPost(event)" class="space-y-4">
+                <div class="relative">
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">카테고리 선택</label>
+                    <input type="hidden" id="postCategoryInput" value="공지사항">
+                    <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer">
+                        <span id="selectedCategoryText">공지사항</span>
+                        <i id="dropdownIcon" class="ri-arrow-down-s-line text-slate-400 transition-transform"></i>
+                    </div>
+                    <div id="dropdownMenu" class="hidden absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-20">
+                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">공지사항</div>
+                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">업계소식</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">제목</label>
+                    <input type="text" id="postTitleInput" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">작성자</label>
+                    <input type="text" id="postWriterInput" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">내용</label>
+                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[200px] max-h-[300px] overflow-y-auto"></div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100">취소</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md">수정완료</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-white text-slate-500 text-xs py-12 border-t border-slate-200">
@@ -89,10 +148,10 @@
         </div>
     </footer>
 
-    <!-- Firebase를 통한 상세 데이터 로드 스크립트 -->
+    <!-- Firebase를 통한 상세 데이터 로드 및 수정/삭제 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBPwNp7-Yrl6LwAqaReC3ht1JKwSnTTEcI",
@@ -107,9 +166,13 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        let currentPostId = null;
+        let currentPostData = null;
+
         async function loadPostDetail() {
             const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('id');
+            postId = urlParams.get('id');
+            currentPostId = postId;
 
             const titleEl = document.getElementById('postTitle');
             const categoryEl = document.getElementById('postCategory');
@@ -127,13 +190,14 @@
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    titleEl.innerText = data.title || "제목 없음";
-                    categoryEl.innerText = data.category || "일반";
-                    dateEl.innerText = `작성일: ${data.date || '-'}`;
-                    
-                    // 핵심 수정: innerHTML을 사용하여 HTML 태그(<img>, <p> 등)가 마크업으로 해석되도록 처리
-                    contentEl.innerHTML = data.content || "등록된 내용이 없습니다.";
+                    currentPostData = docSnap.data();
+                    titleEl.innerText = currentPostData.title || "제목 없음";
+                    categoryEl.innerText = currentPostData.category || "일반";
+                    dateEl.innerText = `작성일: ${currentPostData.date || '-'}`;
+                    contentEl.innerHTML = currentPostData.content || "등록된 내용이 없습니다.";
+
+                    // 관리자 로그인 상태 확인 후 버튼 노출 처리
+                    checkAdminStatus();
                 } else {
                     titleEl.innerText = "게시글을 찾을 수 없습니다.";
                     contentEl.innerHTML = "요청하신 게시글이 서버에서 삭제되었거나 존재하지 않습니다.";
@@ -142,6 +206,80 @@
                 console.error("상세글 로딩 에러:", error);
                 titleEl.innerText = "데이터 로딩 오류";
                 contentEl.innerHTML = "게시글을 불러오는 중 오류가 발생했습니다. 네트워크 상태를 확인해 주세요.";
+            }
+        }
+
+        function checkAdminStatus() {
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminActionButtons = document.getElementById('adminActionButtons');
+            if (isLoggedIn === 'true' && adminActionButtons) {
+                adminActionButtons.classList.remove('hidden');
+            }
+        }
+
+        window.openEditModal = function() {
+            if (!currentPostData) return;
+            document.getElementById('postCategoryInput').value = currentPostData.category || '공지사항';
+            document.getElementById('selectedCategoryText').innerText = currentPostData.category || '공지사항';
+            document.getElementById('postTitleInput').value = currentPostData.title || '';
+            document.getElementById('postWriterInput').value = currentPostData.writer || '관리자';
+            document.getElementById('postContentEditor').innerHTML = currentPostData.content || '';
+            
+            document.getElementById('writeModal').classList.remove('hidden');
+        }
+
+        window.closeWriteModal = function() {
+            document.getElementById('writeModal').classList.add('hidden');
+        }
+
+        window.toggleDropdown = function() {
+            document.getElementById('dropdownMenu').classList.toggle('hidden');
+            document.getElementById('dropdownIcon').classList.toggle('rotate-180');
+        }
+
+        window.selectCategory = function(category) {
+            document.getElementById('postCategoryInput').value = category;
+            document.getElementById('selectedCategoryText').innerText = category;
+            toggleDropdown();
+        }
+
+        window.submitEditPost = async function(event) {
+            event.preventDefault();
+            if (!currentPostId) return;
+
+            const category = document.getElementById('postCategoryInput').value;
+            const title = document.getElementById('postTitleInput').value;
+            const writer = document.getElementById('postWriterInput').value;
+            const content = document.getElementById('postContentEditor').innerHTML;
+
+            try {
+                const docRef = doc(db, "posts", currentPostId);
+                await updateDoc(docRef, {
+                    category,
+                    title,
+                    writer,
+                    content
+                });
+                alert('게시글이 성공적으로 수정되었습니다.');
+                closeWriteModal();
+                loadPostDetail(); // 화면 갱신
+            } catch (error) {
+                console.error("수정 실패:", error);
+                alert('게시글 수정 중 오류가 발생했습니다.');
+            }
+        }
+
+        window.deletePost = async function() {
+            if (!currentPostId) return;
+            if (confirm('정말 이 게시글을 삭제하시겠습니까?')) {
+                try {
+                    await deleteDoc(doc(db, "posts", currentPostId));
+                    alert('게시글이 삭제되었습니다.');
+                    window.location.href = 'board.html';
+                } catch (error) {
+                    console.error("삭제 실패:", error);
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
             }
         }
 
