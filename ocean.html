@@ -1,61 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURE GLS - 해상운송 서비스</title>
+    <title>Ocean Freight - FUTURE</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Remix Icons -->
+    <!-- Remixicon CDN -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- Google Fonts (Pretendard) -->
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
-    <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .dynamic-nav { font-size: 1rem; gap: 2rem; }
-    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
-
-    <!-- Top Bar -->
-    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-        <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
-            <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
-                <span class="hidden md:inline text-slate-700">|</span>
-                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-6203-8800 (평일 09:00 - 18:00)</span>
+<body class="bg-slate-50 text-slate-800 antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-xl font-black tracking-tighter text-slate-900">FUTURE</a>
+                <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 font-bold rounded-md">OCEAN</span>
             </div>
-            <div class="flex items-center gap-4 font-medium">
-                <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
-                <a href="index.html#exchange" class="hover:text-orange-400 transition-colors" data-i18n="nav_exchange">환율 조회</a>
-                <a href="index.html#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold" data-i18n="nav_quote">견적 요청</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Header -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-6">
-            <a href="index.html" class="flex items-center gap-2.5 shrink-0">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
-                    <i class="ri-ship-line"></i>
-                </div>
-                <div>
-                    <span class="text-lg font-black tracking-wider block leading-none text-slate-900">FUTURE GLS</span>
-                    <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase mt-0.5 block" data-i18n="logo_sub">Global Logistics</span>
-                </div>
-            </a>
             
-            <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
-                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap text-orange-600" data-i18n="menu_ocean">해상운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
-            </nav>
-
+            <!-- Auth Buttons & Navigation -->
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
+                <!-- 언어 선택 버튼 -->
                 <div class="relative">
                     <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
@@ -67,278 +32,86 @@
                         <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
                     </div>
                 </div>
+                
                 <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
                     <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물 추적</span>
                 </a>
                 <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
-                </a>
-            </div>  
+
+                <!-- 관리자 로그인 상태에 따라 동적으로 변경될 영역 -->
+                <div id="adminAuthContainer" class="relative">
+                    <!-- 로그아웃 상태일 때 -->
+                    <a id="adminLoginBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+
+                    <!-- 로그인 상태일 때 드롭다운 메뉴 -->
+                    <div id="adminUserMenu" class="hidden relative sm:inline-block">
+                        <button type="button" onclick="toggleAdminMenu(event)" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE) <i class="ri-arrow-down-s-line"></i>
+                        </button>
+                        <div id="adminDropdown" class="hidden absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="handleLogout()" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 flex items-center gap-2">
+                                <i class="ri-logout-box-line"></i> 로그아웃
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- 메인 컨텐츠 영역 -->
-    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
-        
-        <!-- 페이지 타이틀 헤더 -->
-        <div class="mb-14 border-b border-slate-200 pb-8">
-            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
-                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
-                <i class="ri-arrow-right-s-line"></i>
-                <span class="text-orange-600 font-bold" data-i18n="breadcrumb_current">해상운송</span>
-            </div>
-            
-            <div class="flex items-center gap-2 mb-3">
-                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest" data-i18n="page_sub_tag">O C E A N &nbsp; T R A F F I C &nbsp; S E R V I C E</span>
-            </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="page_main_title">
-                전 세계를 연결하는 안정적인 <span class="text-orange-600">해상 화물 운송 솔루션</span>
-            </h1>
-        </div>
-
-        <!-- 1. 해상수출 섹션 -->
-        <section class="mb-20">
-            <div class="flex items-center gap-3 mb-4">
-                <span class="text-xl font-black text-orange-600">1.</span>
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec1_title">해상수출</h2>
-            </div>
-            <p class="text-slate-600 text-sm sm:text-base mb-8" data-i18n="sec1_desc">
-                적시 운송(JUST IN TIME)을 Motto로 (주)퓨처지엘스의 고객 맞춤 서비스는 항상 고객의 요구에 부응할 수 있도록 준비되어 있습니다.
-            </p>
-
-            <!-- 업무절차 & 이미지 Grid -->
-            <div class="grid md:grid-cols-12 gap-8 items-center mb-10">
-                <div class="md:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="export_workflow_title">업무절차 (Export Workflow)</h3>
-                    <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100" data-i18n="export_workflow_steps">
-                        예약접수 <span class="text-orange-600">→</span> P/U <span class="text-orange-600">→</span> 서류작성 <span class="text-orange-600">→</span> 수출통관 <span class="text-orange-600">→</span> 선적 <span class="text-orange-600">→</span> 도착 <span class="text-orange-600">→</span> 수입통관 <span class="text-orange-600">→</span> 내륙운송 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D
-                    </p>
-                </div>
-                <div class="md:col-span-5 bg-white p-2 rounded-2xl border border-slate-200 shadow-md">
-                    <img src="https://media.istockphoto.com/id/1339057752/ko/%EC%82%AC%EC%A7%84/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94-%EB%8C%80%ED%98%95-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%94%EB%AC%BC%EC%84%A0.jpg?s=612x612&w=0&k=20&c=4b2v3Vt4Zq1AA5ypT2PztefeR7PwMy-xpk7AKnE6PF4=" alt="해상화물선">
-                </div>
-            </div>
-
-            <!-- 서비스내역 테이블 -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 font-bold text-slate-900 text-sm" data-i18n="service_details_title">
-                    서비스 내역
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <tbody class="divide-y divide-slate-100">
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 w-1/4 bg-slate-50/50" data-i18n="table_fcl_title">FCL 서비스</td>
-                                <td class="py-4 px-6 text-slate-600" data-i18n="table_fcl_desc">세계전지역 FCL 서비스제공</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50" data-i18n="table_lcl_title">LCL 서비스</td>
-                                <td class="py-4 px-6 text-slate-600" data-i18n="table_lcl_desc">세계전지역 LCL서비스 제공</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50" data-i18n="table_bb_title">BREAK BULK 서비스</td>
-                                <td class="py-4 px-6 text-slate-600" data-i18n="table_bb_desc">HEAVY CARGO 물품에 대한 SPECIAL HANDLING 서비스제공</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50" data-i18n="table_special_title">특화서비스</td>
-                                <td class="py-4 px-6 text-slate-600" data-i18n="table_special_desc">중국 전지역으로의 특화서비스 제공 (퓨처지엘스 / 등기수책 서비스제공)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 해상수입 섹션 -->
-        <section>
-            <div class="flex items-center gap-3 mb-4">
-                <span class="text-xl font-black text-orange-600">2.</span>
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec2_title">해상수입</h2>
-            </div>
-            <p class="text-slate-600 text-sm sm:text-base mb-8" data-i18n="sec2_desc">
-                해외지사 및 전세계 긴밀한 파트너 네트워크를 통하여 귀사의 귀중한 수입화물을 신속, 정확하게 운송하고 있습니다.
-            </p>
-
-            <!-- 업무절차 박스 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="import_workflow_title">업무절차 (Import Workflow)</h3>
-                <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100" data-i18n="import_workflow_steps">
-                    선적지선택 <span class="text-orange-600">→</span> 도착전 서류수취 <span class="text-orange-600">→</span> 도착 <span class="text-orange-600">→</span> 수입통관 <span class="text-orange-600">→</span> 내륙운송 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D
-                </p>
-            </div>
-        </section>
-
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-3xl font-extrabold text-slate-900 mb-6">Ocean Freight Service</h1>
+        <p class="text-slate-600">해상 화물 운송 서비스 안내 페이지입니다[cite: 8].</p>
     </main>
 
-    <!-- 푸터 -->
-    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
-            <p>&copy; 2026 FUTURE GLS. All Rights Reserved.</p>
-        </div>
-    </footer>
-
+    <!-- JavaScript -->
     <script>
-        const i18nData = {
-            en: {
-                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
-                nav_tracking: "Cargo Tracking",
-                nav_exchange: "Exchange Rates",
-                nav_quote: "Get a Quote",
-                logo_sub: "Global Logistics",
-                menu_ceo: "About Us",
-                menu_air: "Air Freight",
-                menu_ocean: "Ocean Freight",
-                menu_triangle: "Triangle Trade",
-                menu_customs: "Customs",
-                menu_board: "Industry News",
-                btn_tracking: "Cargo Tracking",
-                btn_quote: "Request Quote",
-                btn_admin: "Admin",
-                breadcrumb_home: "Home",
-                breadcrumb_current: "Ocean Freight",
-                page_sub_tag: "O C E A N &nbsp; T R A F F I C &nbsp; S E R V I C E",
-                page_main_title: "Reliable <span class=\"text-orange-600\">Ocean Freight Solutions</span> Connecting the World",
-                sec1_title: "Ocean Export",
-                sec1_desc: "With JUST IN TIME as our motto, FUTURE GLS's customized services are always ready to meet customer demands.",
-                export_workflow_title: "Export Workflow",
-                export_workflow_steps: 'Booking <span class="text-orange-600">→</span> P/U <span class="text-orange-600">→</span> Doc Prep <span class="text-orange-600">→</span> Export Customs <span class="text-orange-600">→</span> Loading <span class="text-orange-600">→</span> Arrival <span class="text-orange-600">→</span> Import Customs <span class="text-orange-600">→</span> Inland Transport <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
-                service_details_title: "Service Details",
-                table_fcl_title: "FCL Service",
-                table_fcl_desc: "Providing FCL services to regions worldwide",
-                table_lcl_title: "LCL Service",
-                table_lcl_desc: "Providing LCL services to regions worldwide",
-                table_bb_title: "BREAK BULK Service",
-                table_bb_desc: "Providing special handling services for heavy cargo",
-                table_special_title: "Specialized Service",
-                table_special_desc: "Specialized service to all regions in China (Future GLS / Bookkeeping service)",
-                sec2_title: "Ocean Import",
-                sec2_desc: "Through our overseas branches and close partner network worldwide, we transport your valuable import cargo promptly and accurately.",
-                import_workflow_title: "Import Workflow",
-                import_workflow_steps: 'Port Selection <span class="text-orange-600">→</span> Pre-Arrival Doc Receipt <span class="text-orange-600">→</span> Arrival <span class="text-orange-600">→</span> Import Customs <span class="text-orange-600">→</span> Inland Transport <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
-            },
-            "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
-                nav_tracking: "货物追踪",
-                nav_exchange: "汇率查询",
-                nav_quote: "报价申请",
-                logo_sub: "Global Logistics",
-                menu_ceo: "公司介绍",
-                menu_air: "航空运输",
-                menu_ocean: "海上运输",
-                menu_triangle: "三角贸易",
-                menu_customs: "清关业务",
-                menu_board: "行业动态",
-                btn_tracking: "货物追踪",
-                btn_quote: "报价申请",
-                btn_admin: "管理员",
-                breadcrumb_home: "首页",
-                breadcrumb_current: "海上运输",
-                page_sub_tag: "O C E A N &nbsp; T R A F F I C &nbsp; S E R V I C E",
-                page_main_title: "连接全球的稳定<span class=\"text-orange-600\">海运物流解决方案</span>",
-                sec1_title: "海运出口",
-                sec1_desc: "以“准时交货(JUST IN TIME)”为座右铭，FUTURE GLS的定制服务随时准备满足客户的需求。",
-                export_workflow_title: "出口业务流程 (Export Workflow)",
-                export_workflow_steps: '订舱受理 <span class="text-orange-600">→</span> P/U <span class="text-orange-600">→</span> 单证制作 <span class="text-orange-600">→</span> 出口报关 <span class="text-orange-600">→</span> 装船 <span class="text-orange-600">→</span> 抵港 <span class="text-orange-600">→</span> 进口清关 <span class="text-orange-600">→</span> 内陆运输 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
-                service_details_title: "服务详情",
-                table_fcl_title: "FCL服务",
-                table_fcl_desc: "提供全球各地的FCL整箱服务",
-                table_lcl_title: "LCL服务",
-                table_lcl_desc: "提供全球各地的LCL拼箱服务",
-                table_bb_title: "散杂货服务 (BREAK BULK)",
-                table_bb_desc: "为重吊货/超限货物提供特殊处理服务",
-                table_special_title: "特色服务",
-                table_special_desc: "中国全境特色服务 (提供账册等专项服务)",
-                sec2_title: "海运进口",
-                sec2_desc: "通过海外分公司及全球紧密的合作伙伴网络，迅速、准确地运输您宝贵的进口货物。",
-                import_workflow_title: "进口业务流程 (Import Workflow)",
-                import_workflow_steps: '选择装运地 <span class="text-orange-600">→</span> 抵港前收单 <span class="text-orange-600">→</span> 抵港 <span class="text-orange-600">→</span> 进口清关 <span class="text-orange-600">→</span> 内陆运输 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
-            },
-            ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
-                nav_tracking: "貨物追跡",
-                nav_exchange: "為替照会",
-                nav_quote: "お見積り",
-                logo_sub: "Global Logistics",
-                menu_ceo: "会社紹介",
-                menu_air: "航空輸送",
-                menu_ocean: "海上輸送",
-                menu_triangle: "三国間輸送",
-                menu_customs: "通関業務",
-                menu_board: "業界ニュース",
-                btn_tracking: "貨物追跡",
-                btn_quote: "お見積り",
-                btn_admin: "管理者",
-                breadcrumb_home: "ホーム",
-                breadcrumb_current: "海上輸送",
-                page_sub_tag: "O C E A N &nbsp; T R A F F I C &nbsp; S E R V I C E",
-                page_main_title: "世界を結ぶ安定した<span class=\"text-orange-600\">海上貨物輸送ソリューション</span>",
-                sec1_title: "海上輸出",
-                sec1_desc: "ジャスト・イン・タイム（JUST IN TIME）をモットーに、FUTURE GLSのカスタムサービスはお客様のニーズにお応えします。",
-                export_workflow_title: "業務手順 (Export Workflow)",
-                export_workflow_steps: '予約受付 <span class="text-orange-600">→</span> P/U <span class="text-orange-600">→</span> 書類作成 <span class="text-orange-600">→</span> 輸出通関 <span class="text-orange-600">→</span> 船積み <span class="text-orange-600">→</span> 到着 <span class="text-orange-600">→</span> 輸入通関 <span class="text-orange-600">→</span> 内陸輸送 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
-                service_details_title: "サービス内容",
-                table_fcl_title: "FCLサービス",
-                table_fcl_desc: "世界全地域のFCLサービス提供",
-                table_lcl_title: "LCLサービス",
-                table_lcl_desc: "世界全地域のLCLサービス提供",
-                table_bb_title: "ブレイクバルクサービス",
-                table_bb_desc: "ヘビーカーゴに対するスペシャルハンドリングサービス提供",
-                table_special_title: "特化サービス",
-                table_special_desc: "中国全地域への特化サービス提供",
-                sec2_title: "海上輸入",
-                sec2_desc: "海外支社および世界中の緊密なパートナーネットワークを通じ、大切な輸入貨物を迅速かつ正確に輸送します。",
-                import_workflow_title: "業務手順 (Import Workflow)",
-                import_workflow_steps: '積地選択 <span class="text-orange-600">→</span> 到着前書類受取 <span class="text-orange-600">→</span> 到着 <span class="text-orange-600">→</span> 輸入通関 <span class="text-orange-600">→</span> 内陸輸送 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
-            }
-        };
-
         const originalTextCache = new Map();
-        
+
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-            const authButtons = document.getElementById('authButtons');
-            if (isLoggedIn === 'true' && authButtons) {
-                const adminBtn = document.getElementById('adminBtn');
-                if (adminBtn) adminBtn.remove();
-                const nameSpan = document.createElement('span');
-                nameSpan.className = "hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
-                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
-                authButtons.appendChild(nameSpan);
+            const adminLoginBtn = document.getElementById('adminLoginBtn');
+            const adminUserMenu = document.getElementById('adminUserMenu');
+
+            if (isLoggedIn === 'true') {
+                if (adminLoginBtn) adminLoginBtn.style.display = 'none';
+                if (adminUserMenu) adminUserMenu.classList.remove('hidden');
+            } else {
+                if (adminLoginBtn) adminLoginBtn.style.display = 'inline-flex';
+                if (adminUserMenu) adminUserMenu.classList.add('hidden');
             }
 
             document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
-            const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
-            setTimeout(() => document.body.classList.add('translated'), 100);
         });
 
-        function toggleLangMenu(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('hidden'); }
-        window.addEventListener('click', () => document.getElementById('langDropdown').classList.add('hidden'));
-
-        function changeLanguage(langCode, labelText) {
-            localStorage.setItem('site_lang', langCode);
-            document.documentElement.setAttribute('lang', langCode);
-            document.getElementById('langBtnText').innerText = labelText;
-            applyCustomLanguage(langCode);
-            document.getElementById('langDropdown').classList.add('hidden');
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
         }
 
-        function applyCustomLanguage(lang) {
-            if (lang === 'ko') {
-                document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = originalTextCache.get(el));
-                return;
-            }
-            const dict = i18nData[lang];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key]) el.innerHTML = dict[key];
-            });
+        function toggleAdminMenu(e) { 
+            e.stopPropagation(); 
+            document.getElementById('adminDropdown').classList.toggle('hidden'); 
         }
+
+        function handleLogout() {
+            localStorage.removeItem('isAdminLoggedIn');
+            alert('로그아웃 되었습니다.');
+            location.reload();
+        }
+
+        window.addEventListener('click', () => {
+            const langDropdown = document.getElementById('langDropdown');
+            if (langDropdown) langDropdown.classList.add('hidden');
+            
+            const adminDropdown = document.getElementById('adminDropdown');
+            if (adminDropdown) adminDropdown.classList.add('hidden');
+        });
     </script>
 </body>
 </html>
