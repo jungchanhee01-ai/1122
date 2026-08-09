@@ -12,16 +12,24 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+        
+        /* 구글 번역바 기본 UI 숨기기 및 레이아웃 밀림 방지 */
+        .goog-te-banner-frame, .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+
+        /* 번역 완료 전 깜빡임 방지를 위한 초기 투명도 설정 */
+        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
+        body.translated { opacity: 1; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
     <!-- 상단 네비게이션 -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <!-- 로고 -->
-            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0">FUTURE <span class="text-orange-600">GLS</span></a>
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0 notranslate">FUTURE <span class="text-orange-600">GLS</span></a>
             
             <!-- 중앙 네비게이션 메뉴 -->
             <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
@@ -118,7 +126,10 @@
         </div>
     </footer>
 
-    <!-- 로그인 상태 반영 스크립트 -2->
+    <!-- 구글 번역기 숨김 위젯 영역 -->
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <!-- 로그인 상태 및 언어 설정 스크립트 -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
@@ -143,6 +154,81 @@
                 };
                 authButtons.appendChild(logoutBtn);
             }
+
+            // Language 드롭다운 메뉴 동적 생성
+            if (authButtons) {
+                const langContainer = document.createElement('div');
+                langContainer.className = "relative inline-block text-left notranslate";
+                langContainer.innerHTML = `
+                    <button type="button" onclick="toggleLangMenu(event)" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-global-line text-orange-400"></i> Lang <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-1.5 z-50 text-xs font-medium text-slate-200">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">中文</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja')" class="block px-4 py-2 hover:bg-slate-800 hover:text-orange-400 transition-colors">日本語</a>
+                    </div>
+                `;
+                authButtons.appendChild(langContainer);
+            }
+        });
+    </script>
+
+    <!-- 구글 번역 엔진 및 언어 감지/전환 스크립트 -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                includedLanguages: 'ko,en,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function changeLanguage(langCode) {
+            const selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+                
+                setTimeout(() => {
+                    document.documentElement.setAttribute('lang', langCode);
+                }, 300);
+            }
+        }
+
+        setInterval(() => {
+            const htmlTag = document.documentElement;
+            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            if (googCookie) {
+                const langVal = googCookie.split('=')[1].split('/')[2];
+                if (langVal && htmlTag.getAttribute('lang') !== langVal) {
+                    htmlTag.setAttribute('lang', langVal);
+                }
+            }
+        }, 1000);
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // 페이지 로드 및 번역 적용 후 화면 표시
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('translated');
+            }, 300);
         });
     </script>
 </body>
