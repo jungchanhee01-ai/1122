@@ -162,7 +162,7 @@
         </div>
 
         <div id="detailView" class="hidden">
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
                 <table class="w-full text-left border-collapse text-sm sm:text-base border-b border-slate-200">
                     <tbody class="divide-y divide-slate-200">
                         <tr>
@@ -193,25 +193,6 @@
                 </div>
             </div>
 
-            <!-- 이전글 / 다음글 네비게이션 UI (이미지 레퍼런스 스타일 적용) -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8 text-sm">
-                <div id="prevPostRow" class="flex items-center px-6 py-4 border-b border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer hidden" onclick="">
-                    <div class="w-24 font-bold text-slate-700 flex items-center gap-3 shrink-0">
-                        <span>이전글</span>
-                        <i class="ri-arrow-up-s-line text-slate-400"></i>
-                    </div>
-                    <div id="prevPostTitle" class="text-slate-600 truncate"></div>
-                </div>
-                <div id="nextPostRow" class="flex items-center px-6 py-4 hover:bg-slate-50 transition-colors cursor-pointer hidden" onclick="">
-                    <div class="w-24 font-bold text-slate-700 flex items-center gap-3 shrink-0">
-                        <span>다음글</span>
-                        <i class="ri-arrow-down-s-line text-slate-400"></i>
-                    </div>
-                    <div id="nextPostTitle" class="text-slate-600 truncate"></div>
-                </div>
-            </div>
-
-            <!-- 하단 버튼 영역 ("목록보기" 스타일 적용) -->
             <div class="flex justify-between items-center">
                 <div id="deleteButtonContainer" class="hidden">
                     <button onclick="deletePost()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
@@ -220,11 +201,9 @@
                 </div>
                 <div id="deleteButtonSpacer"></div>
                 
-                <div class="mx-auto">
-                    <button onclick="showListView()" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold text-sm px-8 py-3 rounded-xl shadow-sm transition-all">
-                        <span data-i18n="btn_list">목록보기</span>
-                    </button>
-                </div>
+                <button onclick="showListView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 ml-auto">
+                    <i class="ri-list-unordered"></i> <span data-i18n="btn_list">목록으로</span>
+                </button>
             </div>
         </div>
     </main>
@@ -390,7 +369,7 @@
                 search_placeholder: "请输入搜索关键词",
                 btn_search: "搜索",
                 btn_delete: "删除",
-                btn_list: "목록보기",
+                btn_list: "列表",
                 modal_title: "发布文章",
                 modal_cat_label: "选择分类",
                 modal_title_label: "标题",
@@ -444,7 +423,7 @@
                 search_placeholder: "検索ワードを入力してください",
                 btn_search: "検索",
                 btn_delete: "削除する",
-                btn_list: "목록보기",
+                btn_list: "リストへ",
                 modal_title: "記事作成",
                 modal_cat_label: "カテゴリ選択",
                 modal_title_label: "タイトル",
@@ -711,30 +690,6 @@
             document.getElementById('detailViews').innerText = newViews;
             document.getElementById('detailContent').innerHTML = post.content;
 
-            // 이전글 / 다음글 계산 및 바인딩
-            const currentIndex = posts.findIndex(p => p.docId === docId);
-            const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
-            const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
-
-            const prevRow = document.getElementById('prevPostRow');
-            const nextRow = document.getElementById('nextPostRow');
-
-            if (prevPost) {
-                prevRow.classList.remove('hidden');
-                document.getElementById('prevPostTitle').innerText = prevPost.title;
-                prevRow.onclick = () => viewDetail(prevPost.docId);
-            } else {
-                prevRow.classList.add('hidden');
-            }
-
-            if (nextPost) {
-                nextRow.classList.remove('hidden');
-                document.getElementById('nextPostTitle').innerText = nextPost.title;
-                nextRow.onclick = () => viewDetail(nextPost.docId);
-            } else {
-                nextRow.classList.add('hidden');
-            }
-
             document.getElementById('listView').classList.add('hidden');
             document.getElementById('detailView').classList.remove('hidden');
             document.getElementById('pageHeader').style.display = 'none';
@@ -825,7 +780,7 @@
             }
 
             if (isLoggedIn === 'true') {
-                if (writeBtn) writeBtn.classList.0('hidden') && writeBtn.classList.remove('hidden');
+                if (writeBtn) writeBtn.classList.remove('hidden');
                 if (deleteButtonContainer) deleteButtonContainer.classList.remove('hidden');
             } else {
                 if (writeBtn) writeBtn.classList.add('hidden');
