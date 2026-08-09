@@ -15,24 +15,19 @@
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        
-        /* 구글 번역바 기본 UI 숨기기 및 레이아웃 밀림 방지 */
-        .goog-te-banner-frame, .skiptranslate { display: none !important; }
-        body { top: 0px !important; }
 
         /* 평소(한·중·일 등)에는 한층 더 큼직하고 여유 있는 메뉴 스타일 적용 */
         .dynamic-nav {
-            font-size: 1.05rem; /* 기존보다 더 큼직하게 */
-            gap: 2.75rem;      /* 시원한 간격 */
+            font-size: 1.05rem; 
+            gap: 2.75rem;      
         }
 
-        /* 오직 영어(en)로 번역되었을 때만 글자와 간격을 줄여서 오버플로우 방지 */
+        /* 오직 영어(en)로 전환되었을 때만 글자와 간격을 줄여서 오버플로우 방지 */
         html[lang*="en"] .dynamic-nav {
-            font-size: 0.75rem; /* text-xs */
-            gap: 0.75rem;      /* 좁은 간격 */
+            font-size: 0.75rem; 
+            gap: 0.75rem;      
         }
 
-        /* 번역 완료 전 깜빡임 방지를 위한 초기 투명도 설정 */
         body { opacity: 0; transition: opacity 0.3s ease-in-out; }
         body.translated { opacity: 1; }
     </style>
@@ -58,7 +53,7 @@
     <!-- Main Header -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-6">
-            <a href="index.html" class="flex items-center gap-2.5 shrink-0 notranslate">
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0">
                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
                     <i class="ri-ship-line"></i>
                 </div>
@@ -80,7 +75,7 @@
 
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
                 <!-- 언어 선택 드롭다운 -->
-                <div class="relative notranslate">
+                <div class="relative">
                     <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
                     </button>
@@ -386,7 +381,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4 notranslate">
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-4">
                         <div class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-white text-base">
                             <i class="ri-ship-line"></i>
                         </div>
@@ -427,11 +422,7 @@
         </div>
     </footer>
 
-    <!-- 구글 번역기 숨김 위젯 영역 -->
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- 다국어 사전 데이터 -->
+    <!-- 다국어 사전 데이터 및 자체 번역 엔진 -->
     <script>
         const i18nData = {
             en: {
@@ -721,23 +712,81 @@
             }
         };
 
-        function applyTranslations(lang) {
-            if (lang === 'ko' || !i18nData[lang]) {
+        // 원본 한국어 텍스트 백업 (한국어로 돌아올 때 사용)
+        const originalTextCache = new Map();
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                originalTextCache.set(el, el.innerHTML);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                originalTextCache.set(el + '_ph', el.placeholder);
+            });
+
+            // 저장된 언어 설정 복원
+            const savedLang = localStorage.getItem('site_lang') || 'ko';
+            if (savedLang !== 'ko') {
+                applyCustomLanguage(savedLang);
+            }
+        });
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        });
+
+        window.changeLanguage = function(langCode, labelText) {
+            localStorage.setItem('site_lang', langCode);
+            document.documentElement.setAttribute('lang', langCode);
+            updateLangButtonText(langCode);
+            applyCustomLanguage(langCode);
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        function applyCustomLanguage(lang) {
+            if (lang === 'ko') {
+                document.documentElement.setAttribute('lang', 'ko');
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    if (originalTextCache.has(el + '_ph')) el.placeholder = originalTextCache.get(el + '_ph');
+                });
+                updateLangButtonText('ko');
                 return;
             }
+
             const dict = i18nData[lang];
+            if (!dict) return;
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) {
                     el.innerHTML = dict[key];
                 }
             });
+
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (dict[key]) {
                     el.placeholder = dict[key];
                 }
             });
+        }
+
+        function updateLangButtonText(langCode) {
+            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            const textEl = document.getElementById('langBtnText');
+            if (textEl && map[langCode]) {
+                textEl.innerText = map[langCode];
+            }
         }
     </script>
 
@@ -845,76 +894,8 @@
         fetchBoardData();
     </script>
 
-    <!-- 구글 번역 및 기타 기능 스크립트 -->
+    <!-- 기타 기능 스크립트 -->
     <script>
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ 
-                pageLanguage: 'ko', 
-                includedLanguages: 'ko,en,zh-CN,ja', 
-                autoDisplay: false 
-            }, 'google_translate_element');
-
-            // 페이지 로드 시 쿠키에 설정된 언어가 있다면 버튼 텍스트와 UI 동기화
-            const cookieLang = getCookie('googtrans');
-            if (cookieLang) {
-                const langCode = cookieLang.split('/')[2];
-                if (langCode) {
-                    document.documentElement.setAttribute('lang', langCode);
-                    updateLangButtonText(langCode);
-                    applyTranslations(langCode);
-                }
-            }
-        }
-
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        function toggleLangMenu(e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.toggle('hidden');
-        }
-
-        window.addEventListener('click', () => {
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
-        });
-
-        // 언어 변경 함수 (쿠키 세팅 후 즉시 UI 치환 및 새로고침)
-        window.changeLanguage = function(langCode, labelText) {
-            if (langCode === 'ko') {
-                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${document.domain};`;
-            } else {
-                document.cookie = `googtrans=/ko/${langCode}; path=/; domain=${document.domain}`;
-                document.cookie = `googtrans=/ko/${langCode}; path=/`;
-            }
-            updateLangButtonText(langCode);
-            location.reload();
-        }
-
-        function updateLangButtonText(langCode) {
-            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
-            const textEl = document.getElementById('langBtnText');
-            if (textEl && map[langCode]) {
-                textEl.innerText = map[langCode];
-            }
-        }
-
-        // 페이지 최초 진입 직후 쿠키 상태를 확인하여 즉시 버튼 글자 동기화 (깜빡임 방지)
-        (function() {
-            const cookieLang = getCookie('googtrans');
-            if (cookieLang) {
-                const langCode = cookieLang.split('/')[2];
-                if (langCode) {
-                    updateLangButtonText(langCode);
-                }
-            }
-        })();
-
         function openCarrierTracking() {
             const carrier = document.getElementById('carrierSelect').value;
             const bl = document.getElementById('blInput').value.trim();
