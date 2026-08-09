@@ -723,7 +723,6 @@
 
         function applyTranslations(lang) {
             if (lang === 'ko' || !i18nData[lang]) {
-                // 한국어일 경우 페이지 새로고침 또는 원래 텍스트 복원을 위해 쿠키 삭제 후 리로드 처리 권장
                 return;
             }
             const dict = i18nData[lang];
@@ -893,6 +892,7 @@
                 document.cookie = `googtrans=/ko/${langCode}; path=/; domain=${document.domain}`;
                 document.cookie = `googtrans=/ko/${langCode}; path=/`;
             }
+            updateLangButtonText(langCode);
             location.reload();
         }
 
@@ -903,6 +903,17 @@
                 textEl.innerText = map[langCode];
             }
         }
+
+        // 페이지 최초 진입 직후 쿠키 상태를 확인하여 즉시 버튼 글자 동기화 (깜빡임 방지)
+        (function() {
+            const cookieLang = getCookie('googtrans');
+            if (cookieLang) {
+                const langCode = cookieLang.split('/')[2];
+                if (langCode) {
+                    updateLangButtonText(langCode);
+                }
+            }
+        })();
 
         function openCarrierTracking() {
             const carrier = document.getElementById('carrierSelect').value;
