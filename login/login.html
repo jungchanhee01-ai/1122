@@ -22,7 +22,7 @@
     <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
         <!-- 로고 및 타이틀 영역 -->
         <div class="text-center mb-8">
-            <a href="../index.html" class="inline-block text-2xl font-extrabold text-slate-900 tracking-tight">
+            <a href="/index.html" class="inline-block text-2xl font-extrabold text-slate-900 tracking-tight">
                 FUTURE <span class="text-orange-600">GLS</span>
             </a>
             <p class="text-slate-500 text-sm mt-2">관리자 전용 로그인 페이지입니다.</p>
@@ -63,18 +63,19 @@
 
         <!-- 홈으로 돌아가기 -->
         <div class="text-center mt-6">
-            <a href="../index.html" class="text-sm text-slate-500 hover:text-slate-800 transition">
+            <a href="/index.html" class="text-sm text-slate-500 hover:text-slate-800 transition">
                 &larr; 메인 화면으로 돌아가기
             </a>
         </div>
     </div>
 
     <script>
-        // 페이지 진입 시, 직전 페이지 주소가 로그인 페이지가 아닐 경우에만 세션에 저장
+        // 페이지 진입 시 직전 페이지(업계소식 등) 저장하기
         window.addEventListener('DOMContentLoaded', () => {
             const referrer = document.referrer;
-            if (referrer && !referrer.includes(window.location.pathname)) {
-                sessionStorage.setItem('redirectUrl', referrer);
+            // 현재 로그인 페이지 주소가 아니고, 외부가 아닐 경우 세션에 저장
+            if (referrer && !referrer.includes('login.html')) {
+                sessionStorage.setItem('prevPageUrl', referrer);
             }
         });
 
@@ -94,20 +95,19 @@
             const id = document.getElementById('adminId').value;
             const pw = document.getElementById('adminPassword').value;
 
-            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
                 
-                // AIR, BOARD, CEO, CUSTOMS, INDEXN, TRIANGLE 전체에서 공유할 수 있도록 설정
+                // localStorage에 로그인 정보 저장 (모든 하위 페이지에서 공유됨)
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 직전 페이지 주소 가져오기 (없으면 기본 메인 화면)
-                const redirectUrl = sessionStorage.getItem('redirectUrl') || '../index.html';
+                // 직전 페이지 주소가 있으면 그곳으로, 없으면 메인으로 이동
+                const prevPage = sessionStorage.getItem('prevPageUrl');
+                const targetUrl = prevPage ? prevPage : '/index.html';
                 
-                // 로그인 성공 후 직전 페이지로 이동
                 setTimeout(() => {
-                    window.location.href = redirectUrl;
+                    window.location.href = targetUrl;
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);
