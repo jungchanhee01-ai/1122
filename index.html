@@ -1016,13 +1016,13 @@
                 
                 let trackingUrl = '';
                 if (carrier === 'KMTC') {
-                    trackingUrl = 'https://www.kmtc.co.kr/';
+                    trackingUrl = 'https://www.ekmtc.com/index.html#/cargo-tracking';
                 } else if (carrier === 'SINOKOR') {
-                    trackingUrl = 'https://www.sinokor.co.kr/';
+                    trackingUrl = 'https://api.sitcline.com/app/cargoTrackSearch';
                 } else if (carrier === 'DOOWOO') {
-                    trackingUrl = 'https://www.doowoo.co.kr/';
+                    trackingUrl = 'https://www.doowoo.co.kr/pst_webapp/ExpBookingSearchMove.do';
                 } else {
-                    trackingUrl = 'https://www.sitc.com/';
+                    trackingUrl = 'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
                 }
                 window.open(trackingUrl, '_blank');
             }).catch(err => {
