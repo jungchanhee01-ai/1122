@@ -97,11 +97,10 @@
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
                 
-                // 모든 창에서 공통으로 인식할 수 있도록 localStorage 설정
+                // 로그인 상태를 확실히 기록
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 직전 페이지 주소가 존재하면 해당 페이지로 복귀, 없으면 메인으로 이동
                 const returnUrl = sessionStorage.getItem('returnUrl') || '../index.html';
                 
                 setTimeout(() => {
