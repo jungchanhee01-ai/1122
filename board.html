@@ -296,7 +296,7 @@
         </div>
     </footer>
 
-    <!-- 다국어 사전 데이터 및 자체 번역 엔진 스크립트 -->
+    <!-- 다국어 데이터 및 번역 스크립트 -->
     <script>
         const i18nData = {
             en: {
@@ -540,7 +540,7 @@
         }
     </script>
 
-    <!-- Firebase SDK 로드 -->
+    <!-- Firebase 스크립트 및 관리자 상태 반영 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -786,7 +786,6 @@
             }
         }
 
-        // 페이지 로드 시 로그인 상태 확인 및 UI 반영 (글쓰기, 삭제 버튼 제어)
         window.addEventListener('DOMContentLoaded', () => {
             fetchPosts();
 
@@ -797,28 +796,19 @@
             const deleteButtonContainer = document.getElementById('deleteButtonContainer');
 
             if (isLoggedIn === 'true') {
-                if (writeBtn) {
-                    writeBtn.classList.remove('hidden');
-                }
-                if (deleteButtonContainer) {
-                    deleteButtonContainer.classList.remove('hidden');
-                }
+                if (writeBtn) writeBtn.classList.remove('hidden');
+                if (deleteButtonContainer) deleteButtonContainer.classList.remove('hidden');
 
                 if (adminBtn && authButtons) {
                     adminBtn.remove();
-
                     const nameSpan = document.createElement('span');
                     nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
                     nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
                     authButtons.appendChild(nameSpan);
                 }
             } else {
-                if (writeBtn) {
-                    writeBtn.classList.add('hidden');
-                }
-                if (deleteButtonContainer) {
-                    deleteButtonContainer.classList.add('hidden');
-                }
+                if (writeBtn) writeBtn.classList.add('hidden');
+                if (deleteButtonContainer) deleteButtonContainer.classList.add('hidden');
             }
         });
     </script>
