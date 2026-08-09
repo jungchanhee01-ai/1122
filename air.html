@@ -289,7 +289,7 @@
                 sec2_desc: "通过全球网络实现准确的进口货物运输。",
                 workflow_import_label: "进口流程",
                 workflow_import_text: "选择发货地 → 收取单证 → 到达 → 报关 → 内陆运输 → 派送 → 签收",
-                footer_desc: "全球物流新标准，FUTURE GLS。<br>安全地将您的商业价值传递至全球。",
+                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
                 footer_col1_title: "主要服务",
                 footer_s1: "海上运输 (FCL/LCL)",
                 footer_s2: "航空货物运输",
@@ -366,6 +366,22 @@
             const savedLang = localStorage.getItem('site_lang') || 'ko';
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
+            }
+
+            // 로그인 상태 확인 및 관리자 버튼 스타일 변경 (흰색 배경)
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminBtn = document.getElementById('adminBtn');
+            const authButtons = document.getElementById('authButtons');
+
+            if (isLoggedIn === 'true') {
+                if (adminBtn && authButtons) {
+                    adminBtn.remove();
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = "inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
+                    nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
+                    authButtons.appendChild(nameSpan);
+                }
             }
 
             document.body.classList.add('translated');
