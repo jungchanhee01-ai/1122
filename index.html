@@ -87,9 +87,19 @@ body { background-color: #f8fafc; }
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
-                </a>
+                <!-- 관리자 버튼 및 호버 로그인 UI 드롭다운 -->
+                <div class="relative group inline-block">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+                    <!-- 마우스 호버 시 나타나는 로그인 UI 드롭다운 -->
+                    <div class="absolute right-0 top-full pt-2 w-36 hidden group-hover:block z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-200 py-2 text-xs font-bold text-slate-700">
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">로그인</a>
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">회원가입</a>
+                        </div>
+                    </div>
+                </div>
             </div>  
         </div>
     </header>
