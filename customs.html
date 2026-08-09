@@ -16,7 +16,6 @@
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
-        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
         .dynamic-nav {
             font-size: 1rem; 
             gap: 2rem;      
@@ -24,6 +23,7 @@
 
 body { background-color: #f8fafc; }
     </style>
+    <script src="/auth.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
@@ -56,7 +56,6 @@ body { background-color: #f8fafc; }
                 </div>
             </a>
             
-            <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
@@ -67,7 +66,6 @@ body { background-color: #f8fafc; }
             </nav>
 
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
-                <!-- 언어 선택 드롭다운 -->
                 <div class="relative">
                     <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
@@ -95,10 +93,8 @@ body { background-color: #f8fafc; }
         </div>
     </header>
     
-    <!-- 메인 컨텐츠 영역 -->
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
         
-        <!-- 페이지 타이틀 헤더 -->
         <div class="mb-14 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
                 <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
@@ -115,7 +111,6 @@ body { background-color: #f8fafc; }
             </h1>
         </div>
 
-        <!-- 1. 수출 통관 섹션 -->
         <section class="mb-20">
             <div class="flex items-center gap-3 mb-6">
                 <span class="text-xl font-black text-orange-600">1.</span>
@@ -123,10 +118,8 @@ body { background-color: #f8fafc; }
             </div>
             
             <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-                <!-- 수출 흐름도 박스 -->
                 <div class="overflow-x-auto py-4">
                     <div class="min-w-[650px] flex flex-col gap-6">
-                        <!-- 메인 프로세스 단계 -->
                         <div class="flex items-center justify-between text-center">
                             <div class="flex flex-col items-center">
                                 <div class="w-16 h-16 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center text-xs font-bold p-2 justify-center shadow-sm" data-i18n="exp_step1">수출계약체결</div>
@@ -153,7 +146,6 @@ body { background-color: #f8fafc; }
                             </div>
                         </div>
 
-                        <!-- 서브 연계 박스 -->
                         <div class="flex justify-center mt-2">
                             <div class="bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold px-6 py-2 rounded-xl shadow-sm" data-i18n="exp_sub_box">
                                 적재 스케줄 확정
@@ -170,7 +162,6 @@ body { background-color: #f8fafc; }
             </div>
         </section>
 
-        <!-- 2. 수입 통관 섹션 -->
         <section>
             <div class="flex items-center gap-3 mb-6">
                 <span class="text-xl font-black text-orange-600">2.</span>
@@ -179,7 +170,6 @@ body { background-color: #f8fafc; }
 
             <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
                 
-                <!-- 상단 첨부서류 안내 박스 -->
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
                         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2" data-i18n="imp_doc_title">수입신고 첨부서류</h3>
@@ -198,17 +188,14 @@ body { background-color: #f8fafc; }
                     </div>
                 </div>
 
-                <!-- 상세 흐름 구조 시각화 -->
                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs sm:text-sm">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center items-center">
-                        <!-- 부두/입항 -->
                         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
                             <span class="font-bold text-blue-600" data-i18n="flow_col1_title">[부두 영역]</span>
                             <div class="bg-blue-50 py-2 rounded font-semibold text-blue-800" data-i18n="flow_col1_sub1">입항 / 보세창고</div>
                             <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col1_sub2">부두직통관</div>
                         </div>
 
-                        <!-- 세관 심사 -->
                         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
                             <span class="font-bold text-purple-600" data-i18n="flow_col2_title">[세관 심사 영역]</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -218,14 +205,12 @@ body { background-color: #f8fafc; }
                             <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col2_sub3">신고수리정보 / 담보 / 사전납부</div>
                         </div>
 
-                        <!-- 신고 및 대행 -->
                         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
                             <span class="font-bold text-emerald-600" data-i18n="flow_col3_title">[통관 대행 영역]</span>
                             <div class="bg-emerald-50 py-2 rounded font-semibold text-emerald-800" data-i18n="flow_col3_sub1">관세사등 / 자가통관</div>
                             <div class="bg-slate-100 py-1.5 rounded text-slate-600" data-i18n="flow_col3_sub2">통관의뢰</div>
                         </div>
 
-                        <!-- 납부 및 반출 -->
                         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-2">
                             <span class="font-bold text-orange-600" data-i18n="flow_col4_title">[납부 및 반출]</span>
                             <div class="bg-orange-50 py-2 rounded font-semibold text-orange-800" data-i18n="flow_col4_sub1">은행 (영수필통지)</div>
@@ -239,7 +224,6 @@ body { background-color: #f8fafc; }
 
     </main>
 
-    <!-- 푸터 -->
     <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -285,7 +269,6 @@ body { background-color: #f8fafc; }
         </div>
     </footer>
 
-    <!-- 다국어 사전 데이터 및 자체 번역 엔진 -->
     <script>
         const i18nData = {
             en: {
@@ -463,7 +446,7 @@ body { background-color: #f8fafc; }
                 flow_col4_title: "[納付及び搬出]",
                 flow_col4_sub1: "銀行 (領収済通知)",
                 flow_col4_sub2: "貨物搬出完了",
-                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
                 footer_col1_title: "主要サービス",
                 footer_s1: "海上輸送 (FCL/LCL)",
                 footer_s2: "航空貨物輸送",
@@ -482,7 +465,6 @@ body { background-color: #f8fafc; }
         const originalTextCache = new Map();
         
         window.addEventListener('DOMContentLoaded', () => {
-            // 관리자 로그인 상태 확인 및 버튼 UI 처리
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminBtn = document.getElementById('adminBtn');
             const authButtons = document.getElementById('authButtons');

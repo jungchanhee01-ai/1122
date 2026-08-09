@@ -17,6 +17,7 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         .dynamic-nav { font-size: 1rem; gap: 2rem; }
     </style>
+    <script src="/auth.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
@@ -412,14 +413,11 @@
             const textEl = document.getElementById('langBtnText');
             if (textEl && map[langCode]) textEl.innerText = map[langCode];
         }
-        
     </script>
     <script>
-    // 페이지가 로드될 때 localStorage의 로그인 상태를 확인하여 UI 반영
     window.addEventListener('DOMContentLoaded', () => {
         const isLoggedIn = localStorage.getItem('isLoggedIn');
         if (isLoggedIn === 'true') {
-            // 만약 페이지 내에 로그인 버튼이나 텍스트를 변경하고 싶다면 여기서 처리할 수 있습니다.
             console.log("로그인 유지 중");
         }
     });
