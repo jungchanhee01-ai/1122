@@ -12,7 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        /* 본문 내 이미지 크기 자동 조절 및 정렬 스타일 */
         #postContent img {
             max-width: 100%;
             height: auto;
@@ -56,7 +55,6 @@
     <main class="py-16 max-w-4xl mx-auto px-4 flex-1 w-full">
         <div class="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm">
             
-            <!-- 상단 분류 및 제목 영역 -->
             <div class="border-b border-slate-200 pb-6 mb-8">
                 <div class="flex items-center gap-3 mb-3">
                     <span id="postCategory" class="px-3 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-200">카테고리</span>
@@ -67,12 +65,10 @@
                 </h1>
             </div>
 
-            <!-- 본문 내용 영역 -->
             <div id="postContent" class="text-slate-700 text-sm sm:text-base leading-relaxed min-h-[250px]">
                 잠시만 기다려주세요. 데이터를 안전하게 불러오고 있습니다.
             </div>
 
-            <!-- 하단 버튼 영역 -->
             <div class="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <a href="board.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2">
@@ -80,7 +76,6 @@
                     </a>
                 </div>
                 
-                <!-- 관리자 전용 수정/삭제 버튼 컨테이너 -->
                 <div id="adminActionButtons" class="hidden flex items-center gap-3">
                     <button onclick="openEditModal()" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
                         <i class="ri-edit-line"></i> 수정하기
@@ -148,7 +143,7 @@
         </div>
     </footer>
 
-    <!-- Firebase를 통한 상세 데이터 로드 및 수정/삭제 스크립트 -->
+    <!-- Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -171,7 +166,7 @@
 
         async function loadPostDetail() {
             const urlParams = new URLSearchParams(window.location.search);
-            postId = urlParams.get('id');
+            const postId = urlParams.get('id');
             currentPostId = postId;
 
             const titleEl = document.getElementById('postTitle');
@@ -196,7 +191,6 @@
                     dateEl.innerText = `작성일: ${currentPostData.date || '-'}`;
                     contentEl.innerHTML = currentPostData.content || "등록된 내용이 없습니다.";
 
-                    // 관리자 로그인 상태 확인 후 버튼 노출 처리
                     checkAdminStatus();
                 } else {
                     titleEl.innerText = "게시글을 찾을 수 없습니다.";
@@ -262,7 +256,7 @@
                 });
                 alert('게시글이 성공적으로 수정되었습니다.');
                 closeWriteModal();
-                loadPostDetail(); // 화면 갱신
+                loadPostDetail();
             } catch (error) {
                 console.error("수정 실패:", error);
                 alert('게시글 수정 중 오류가 발생했습니다.');
