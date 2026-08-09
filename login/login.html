@@ -86,15 +86,15 @@
             const id = document.getElementById('adminId').value;
             const pw = document.getElementById('adminPassword').value;
 
-            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)[cite: 5]
+            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
-                localStorage.setItem('isAdminLoggedIn', 'true');
+                localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('adminName', '관리자');
                 
-                // 0.8초 후 부드럽게 페이지 이동[cite: 5]
+                // 로그인 성공 후 메인 화면으로 이동하도록 수정
                 setTimeout(() => {
-                    window.location.href = '../board.html';
+                    window.location.href = '../index.html';
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);
