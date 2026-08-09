@@ -74,7 +74,7 @@
       position: absolute;
       right: 0;
       top: calc(100% + 6px);
-      background-color: #ffffff;
+      background-color: #ffffff; 쿠키
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -154,9 +154,6 @@
         includedLanguages: 'ko,en',
         autoDisplay: false
       }, 'google_translate_element');
-
-      // 초기 로드 시 저장된 언어 상태 반영
-      syncLanguageUI();
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -177,12 +174,20 @@
       }
     });
 
+    // 구글 번역 쿠키 설정 함수 (번역 상태를 완벽하게 유지하기 위함)
+    function setCookie(name, val, days) {
+      let expires = "";
+      if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (val || "") + expires + "; path=/";
+    }
+
     // 언어 선택 함수
     function selectLanguage(langCode, langText) {
-      // 1. UI 텍스트 업데이트 및 저장
-      localStorage.setItem('selectedLangCode', langCode);
-      localStorage.setItem('selectedLangText', langText);
-      
+      // 1. UI 텍스트 즉시 변경
       const currentLangSpan = document.getElementById('currentLangText');
       if (currentLangSpan) {
         currentLangSpan.innerText = langText;
@@ -194,49 +199,31 @@
         wrapper.classList.remove('active');
       }
 
-      // 2. Google Translate 실행
-      changeGoogleTranslate(langCode);
-    }
-
-    // Google Translate 셀렉트박스 변경 연동
-    function changeGoogleTranslate(langCode) {
-      const gtCombo = document.querySelector('.goog-te-combo');
-      if (gtCombo) {
-        gtCombo.value = langCode;
-        gtCombo.dispatchEvent(new Event('change'));
+      // 2. 구글 번역 쿠키 설정 (ko 혹은 en/ko)
+      if (langCode === 'en') {
+        setCookie('googtrans', '/ko/en', 1);
       } else {
-        // 스크립트가 아직 로드되지 않은 경우 재시도
-        setTimeout(function() {
-          changeGoogleTranslate(langCode);
-        }, 300);
+        setCookie('googtrans', '/ko/ko', 1);
       }
+
+      // 3. 페이지 새로고침을 통해 구글 번역 엔진이 쿠키를 읽어 완벽하게 번역 상태를 유지하도록 적용
+      window.location.reload();
     }
 
-    // 동기화 함수 (페이지 로드 또는 구글 번역 로드 완료 시 적용)2
-    function syncLanguageUI() {
-      const savedLangCode = localStorage.getItem('selectedLangCode');
-      const savedLangText = localStorage.getItem('selectedLangText');
-
-      if (savedLangCode && savedLangText) {
-        const currentLangSpan = document.getElementById('currentLangText');
+    // 페이지 로드 시 쿠키를 검사하여 현재 언어 표기 및 번역 상태 동기화
+    window.addEventListener('DOMContentLoaded', function() {
+      const cookie = document.cookie;
+      const currentLangSpan = document.getElementById('currentLangText');
+      
+      if (cookie.includes('googtrans=/ko/en')) {
         if (currentLangSpan) {
-          currentLangSpan.innerText = savedLangText;
+          currentLangSpan.innerText = 'ENGLISH';
         }
-
-        // Google Translate 상태도 유지
-        setTimeout(function() {
-          const gtCombo = document.querySelector('.goog-te-combo');
-          if (gtCombo && gtCombo.value !== savedLangCode) {
-            gtCombo.value = savedLangCode;
-            gtCombo.dispatchEvent(new Event('change'));
-          }
-        }, 500);
+      } else {
+        if (currentLangSpan) {
+          currentLangSpan.innerText = 'KOR';
+        }
       }
-    }
-
-    // DOM 준비 시 초기 UI 상태 맞춤
-    document.addEventListener('DOMContentLoaded', function() {
-      syncLanguageUI();
     });
   </script>
 </body>
