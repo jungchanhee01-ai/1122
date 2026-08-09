@@ -203,7 +203,6 @@
             
             if (adminContainer) {
                 if (isLoggedIn === 'true') {
-                    // 로그인 상태: 흰색 관리자 UI 및 마우스오버 시 로그아웃 기능
                     adminContainer.innerHTML = `
                         <div class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none">
                             <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
@@ -213,7 +212,6 @@
                         </div>
                     `;
                 } else {
-                    // 로그아웃 상태: 검정 관리자 버튼 및 마우스오버 시 로그인 페이지 이동 기능
                     adminContainer.innerHTML = `
                         <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
