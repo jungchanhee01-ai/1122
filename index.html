@@ -196,32 +196,20 @@
             </div>
         </div>
 
-        <!-- 업계소식(왼쪽) & 공지사항(오른쪽) 2열 분리 배치 영역 -->
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- 업계소식 (왼쪽) -->
-            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
-                <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
-                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_news">업계소식</h3>
-                    <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
-                        <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
-                    </a>
+        <!-- 동적 연동 공지사항 & 업계소식 게시판 컴포넌트 -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
+                <div class="flex items-center gap-8">
+                    <button type="button" id="tabNotice" onclick="switchBoardTab('notice')" class="text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all" data-i18n="tab_notice">공지사항</button>
+                    <button type="button" id="tabNews" onclick="switchBoardTab('news')" class="text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all" data-i18n="tab_news">업계소식</button>
                 </div>
-                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
-                    <!-- 업계소식 동적 주입 영역 -->
-                </div>
+                <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
+                    <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
+                </a>
             </div>
 
-            <!-- 공지사항 (오른쪽) -->
-            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
-                <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
-                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_notice">공지사항</h3>
-                    <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
-                        <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
-                    </a>
-                </div>
-                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
-                    <!-- 공지사항 동적 주입 영역 -->
-                </div>
+            <div id="boardContainer" class="divide-y divide-slate-200 min-h-[120px] flex flex-col justify-center">
+                <!-- 동적 주입 영역 -->
             </div>
         </div>
     </section>
@@ -682,7 +670,7 @@
                 th_sell: "現金売却時",
                 calc_title: "リアルタイム通貨コンバーター",
                 calc_label: "外貨金額入力",
-                calc_result_label: "韓国ウォン換算金額 (KRW)",
+                calc_result_label: "韓国ウォン換산金額 (KRW)",
                 calc_notice: "* リアルタイム基準レート適用金額（参考用）",
                 calc_footer_note: "実際の物流費清算時の為替レートは、船会社および税関の適用時点により微細な差が生じる場合があります。",
                 quote_tag: "FAST & EASY QUOTE",
@@ -822,7 +810,7 @@
         }
     </script>
 
-    <!-- Firebase SDK 연동 및 공지사항/업계소식 분리 렌더링 스크립트 -->
+    <!-- Firebase SDK 연동 및 공통 기능 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -842,40 +830,53 @@
 
         let notices = [];
         let industryNews = [];
+        let currentBoardTab = 'notice';
 
-        window.renderBoardLists = function() {
-            const newsContainer = document.getElementById('newsContainer');
-            const noticeContainer = document.getElementById('noticeContainer');
+        window.switchBoardTab = function(tabType) {
+            currentBoardTab = tabType;
+            const tabNotice = document.getElementById('tabNotice');
+            const tabNews = document.getElementById('tabNews');
 
-            if (newsContainer) {
-                if (industryNews.length === 0) {
-                    newsContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 업계소식이 없습니다.</div>`;
-                } else {
-                    newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
-                        <a href="${item.link || 'board.html'}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
-                                ${item.title}
-                            </span>
-                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
-                        </a>
-                    `).join('');
-                }
+            if (tabType === 'notice') {
+                tabNotice.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
+                tabNews.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
+            } else {
+                tabNews.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
+                tabNotice.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
+            }
+            renderBoardList();
+        }
+
+        window.renderBoardList = function() {
+            const container = document.getElementById('boardContainer');
+            if (!container) return;
+
+            const targetData = currentBoardTab === 'notice' ? notices : industryNews;
+
+            if (targetData.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center text-slate-400 text-sm font-medium">
+                        <i class="ri-file-list-3-line text-2xl block mb-2 text-slate-300"></i>
+                        등록된 ${currentBoardTab === 'notice' ? '공지사항' : '업계소식'}이 없습니다.
+                    </div>
+                `;
+                return;
             }
 
-            if (noticeContainer) {
-                if (notices.length === 0) {
-                    noticeContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 공지사항이 없습니다.</div>`;
-                } else {
-                    noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
-                        <a href="${item.link || 'board.html'}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
-                                ${item.title}
-                            </span>
-                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
-                        </a>
-                    `).join('');
-                }
-            }
+            container.innerHTML = targetData.map(item => `
+                <a href="${item.link || 'board.html'}" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
+                    <div class="flex items-center gap-6">
+                        <div class="text-left w-16 shrink-0">
+                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">${item.date}</span>
+                            <span class="text-[11px] text-slate-400 font-medium">${item.year}</span>
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
+                            ${item.title}
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
+                </a>
+            `).join('');
         }
 
         async function fetchBoardData() {
@@ -904,7 +905,7 @@
                     }
                 });
 
-                renderBoardLists();
+                renderBoardList();
             } catch (error) {
                 console.error("게시글 데이터 로드 실패:", error);
             }
