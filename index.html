@@ -58,8 +58,8 @@
             <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
                 <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
                 <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
                 <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
@@ -196,20 +196,32 @@
             </div>
         </div>
 
-        <!-- 동적 연동 공지사항 & 업계소식 게시판 컴포넌트 -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
-            <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
-                <div class="flex items-center gap-8">
-                    <button type="button" id="tabNotice" onclick="switchBoardTab('notice')" class="text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all" data-i18n="tab_notice">공지사항</button>
-                    <button type="button" id="tabNews" onclick="switchBoardTab('news')" class="text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all" data-i18n="tab_news">업계소식</button>
+        <!-- 업계소식(왼쪽) & 공지사항(오른쪽) 2열 분리 배치 영역 -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- 업계소식 (왼쪽) -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
+                <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
+                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_news">업계소식</h3>
+                    <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
+                        <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
+                    </a>
                 </div>
-                <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
-                    <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
-                </a>
+                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
+                    <!-- 업계소식 동적 주입 영역 -->
+                </div>
             </div>
 
-            <div id="boardContainer" class="divide-y divide-slate-200 min-h-[120px] flex flex-col justify-center">
-                <!-- 동적 주입 영역 -->
+            <!-- 공지사항 (오른쪽) -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
+                <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
+                    <h3 class="text-lg font-black text-slate-900" data-i18n="tab_notice">공지사항</h3>
+                    <a href="board.html" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-orange-600 transition-colors flex items-center gap-1">
+                        <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
+                    </a>
+                </div>
+                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
+                    <!-- 공지사항 동적 주입 영역 -->
+                </div>
             </div>
         </div>
     </section>
@@ -670,7 +682,7 @@
                 th_sell: "現金売却時",
                 calc_title: "リアルタイム通貨コンバーター",
                 calc_label: "外貨金額入力",
-                calc_result_label: "韓国ウォン換산金額 (KRW)",
+                calc_result_label: "韓国ウォン換算金額 (KRW)",
                 calc_notice: "* リアルタイム基準レート適用金額（参考用）",
                 calc_footer_note: "実際の物流費清算時の為替レートは、船会社および税関の適用時点により微細な差が生じる場合があります。",
                 quote_tag: "FAST & EASY QUOTE",
@@ -810,7 +822,7 @@
         }
     </script>
 
-    <!-- Firebase SDK 연동 및 공통 기능 스크립트 -->
+    <!-- Firebase SDK 연동 및 공지사항/업계소식 분리 렌더링 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -830,157 +842,199 @@
 
         let notices = [];
         let industryNews = [];
-        let currentBoardTab = 'notice';
 
-        window.switchBoardTab = function(tabType) {
-            currentBoardTab = tabType;
-            const tabNotice = document.getElementById('tabNotice');
-            const tabNews = document.getElementById('tabNews');
+        window.renderBoardLists = function() {
+            const newsContainer = document.getElementById('newsContainer');
+            const noticeContainer = document.getElementById('noticeContainer');
 
-            if (tabType === 'notice') {
-                tabNotice.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
-                tabNews.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
-            } else {
-                tabNews.className = "text-base sm:text-lg font-black text-slate-900 border-b-2 border-slate-900 pb-1 transition-all";
-                tabNotice.className = "text-base sm:text-lg font-medium text-slate-400 hover:text-slate-700 pb-1 transition-all";
-            }
-            renderBoardList();
-        }
-
-        window.renderBoardList = function() {
-            const container = document.getElementById('boardContainer');
-            if (!container) return;
-
-            const targetData = currentBoardTab === 'notice' ? notices : industryNews;
-
-            if (targetData.length === 0) {
-                container.innerHTML = `
-                    <div class="py-12 text-center text-slate-400 text-sm font-medium">
-                        <i class="ri-file-list-3-line text-2xl block mb-2 text-slate-300"></i>
-                        등록된 ${currentBoardTab === 'notice' ? '공지사항' : '업계소식'}이 없습니다.
-                    </div>
-                `;
-                return;
+            if (newsContainer) {
+                if (industryNews.length === 0) {
+                    newsContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 업계소식이 없습니다.</div>`;
+                } else {
+                    newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
+                        <a href="board.html" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
+                                ${item.title}
+                            </span>
+                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
+                        </a>
+                    `).join('');
+                }
             }
 
-            container.innerHTML = targetData.map(item => `
-                <a href="${item.link || 'board.html'}" class="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-100/60 px-4 rounded-xl transition-colors group">
-                    <div class="flex items-center gap-6">
-                        <div class="text-left w-16 shrink-0">
-                            <span class="text-lg font-extrabold text-blue-900 block leading-tight">${item.date}</span>
-                            <span class="text-[11px] text-slate-400 font-medium">${item.year}</span>
-                        </div>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800 group-hover:text-orange-600 transition-colors">
-                            ${item.title}
-                        </span>
-                    </div>
-                    <span class="text-xs text-slate-400 hidden lg:inline">FUTURE GLS</span>
-                </a>
-            `).join('');
-        }
+            if (noticeContainer) {
+                if (notices.length === 0) {
+                    noticeContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 공지사항이 없습니다.</div>`;
+                } else {
+                    noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
+                        <a href="board.html" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
+                                ${item.title}
+                            </span>
+                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
+                        </a>
+                    `).join('');
+                }
+            }
+        };
 
-        async function fetchBoardData() {
+        async function fetchMainBoardPosts() {
             try {
                 const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
                 const querySnapshot = await getDocs(q);
-                
                 notices = [];
                 industryNews = [];
 
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const item = {
-                        id: doc.id,
-                        title: data.title || '제목 없음',
-                        date: data.date || '01.01',
-                        year: data.year || '2026',
-                        link: data.link || 'board.html',
-                        category: data.category || 'notice'
-                    };
-
-                    if (item.category === 'news') {
-                        industryNews.push(item);
-                    } else {
-                        notices.push(item);
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    if (data.category === '공지사항') {
+                        notices.push(data);
+                    } else if (data.category === '업계소식') {
+                        industryNews.push(data);
                     }
                 });
 
-                renderBoardList();
+                renderBoardLists();
             } catch (error) {
-                console.error("게시글 데이터 로드 실패:", error);
+                console.error("메인 게시글 로딩 실패:", error);
+                const newsContainer = document.getElementById('newsContainer');
+                const noticeContainer = document.getElementById('noticeContainer');
+                if (newsContainer) newsContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
+                if (noticeContainer) noticeContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
             }
         }
 
-        fetchBoardData();
-    </script>
+        // 환율 및 트래킹 관련 스크립트 기능
+        let liveRates = {};
 
-    <!-- 기타 기능 스크립트 -->
-    <script>
-        function openCarrierTracking() {
-            const carrier = document.getElementById('carrierSelect').value;
-            const bl = document.getElementById('blInput').value.trim();
-            if(!bl) {
-                alert('B/L 번호를 입력해주세요.');
-                return;
-            }
-            navigator.clipboard.writeText(bl).then(() => {
-                alert(`B/L 번호 [${bl}]가 클립보드에 복사되었습니다.`);
-                let url = '';
-                if(carrier === 'KMTC') url = `https://www.kmtc.co.kr/tracking?blNo=${bl}`;
-                else if(carrier === 'SINOKOR') url = `https://www.sinokor.co.kr/tracking?blNo=${bl}`;
-                else url = `https://www.google.com/search?q=${carrier}+${bl}`;
-                window.open(url, '_blank');
-            });
-        }
-
-        let exchangeRates = {};
         async function fetchExchangeRates() {
             try {
                 const res = await fetch('https://open.er-api.com/v6/latest/KRW');
                 const data = await res.json();
-                if(data && data.rates) {
-                    exchangeRates = data.rates;
-                    const krwToUsd = 1 / exchangeRates['USD'];
-                    const krwToEur = 1 / exchangeRates['EUR'];
-                    const krwToJpy = (1 / exchangeRates['JPY']) * 100;
-                    const krwToCny = 1 / exchangeRates['CNY'];
-                    const krwToGbp = 1 / exchangeRates['GBP'];
+                if (data && data.rates) {
+                    liveRates = data.rates;
+                    const r = data.rates;
+                    
+                    const usdKrw = (1 / r.USD).toFixed(2);
+                    const eurKrw = (1 / r.EUR).toFixed(2);
+                    const jpyKrw = ((1 / r.JPY) * 100).toFixed(2); // 100엔 기준
+                    const cnyKrw = (1 / r.CNY).toFixed(2);
+                    const gbpKrw = (1 / r.GBP).toFixed(2);
 
                     const tbody = document.getElementById('rateTableBody');
-                    tbody.innerHTML = `
-                        <tr><td class="p-3.5 font-bold">미국 달러 (USD)</td><td class="p-3.5">${krwToUsd.toFixed(2)} 원</td><td class="p-3.5">${(krwToUsd*1.005).toFixed(2)} 원</td><td class="p-3.5">${(krwToUsd*0.995).toFixed(2)} 원</td></tr>
-                        <tr><td class="p-3.5 font-bold">유럽 유로 (EUR)</td><td class="p-3.5">${krwToEur.toFixed(2)} 원</td><td class="p-3.5">${(krwToEur*1.005).toFixed(2)} 원</td><td class="p-3.5">${(krwToEur*0.995).toFixed(2)} 원</td></tr>
-                        <tr><td class="p-3.5 font-bold">일본 엔 (JPY 100)</td><td class="p-3.5">${krwToJpy.toFixed(2)} 원</td><td class="p-3.5">${(krwToJpy*1.005).toFixed(2)} 원</td><td class="p-3.5">${(krwToJpy*0.995).toFixed(2)} 원</td></tr>
-                        <tr><td class="p-3.5 font-bold">중국 위안 (CNY)</td><td class="p-3.5">${krwToCny.toFixed(2)} 원</td><td class="p-3.5">${(krwToCny*1.005).toFixed(2)} 원</td><td class="p-3.5">${(krwToCny*0.995).toFixed(2)} 원</td></tr>
-                        <tr><td class="p-3.5 font-bold">영국 파운드 (GBP)</td><td class="p-3.5">${krwToGbp.toFixed(2)} 원</td><td class="p-3.5">${(krwToGbp*1.005).toFixed(2)} 원</td><td class="p-3.5">${(krwToGbp*0.995).toFixed(2)} 원</td></tr>
-                    `;
-                    document.getElementById('rateUpdateTime').innerText = new Date().toLocaleDateString() + " 기준";
+                    if (tbody) {
+                        tbody.innerHTML = `
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> 미국 USD</td>
+                                <td class="p-3.5 font-bold text-slate-900">₩ ${usdKrw}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(usdKrw) * 1.015).toFixed(2)}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(usdKrw) * 0.985).toFixed(2)}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> 유럽연합 EUR</td>
+                                <td class="p-3.5 font-bold text-slate-900">₩ ${eurKrw}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(eurKrw) * 1.015).toFixed(2)}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(eurKrw) * 0.985).toFixed(2)}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> 일본 JPY (100엔)</td>
+                                <td class="p-3.5 font-bold text-slate-900">₩ ${jpyKrw}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(jpyKrw) * 1.015).toFixed(2)}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(jpyKrw) * 0.985).toFixed(2)}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> 중국 CNY</td>
+                                <td class="p-3.5 font-bold text-slate-900">₩ ${cnyKrw}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 1.015).toFixed(2)}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 0.985).toFixed(2)}</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500"></span> 영국 GBP</td>
+                                <td class="p-3.5 font-bold text-slate-900">₩ ${gbpKrw}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(gbpKrw) * 1.015).toFixed(2)}</td>
+                                <td class="p-3.5 text-slate-600">₩ ${(Number(gbpKrw) * 0.985).toFixed(2)}</td>
+                            </tr>
+                        `;
+                    }
+
+                    const timeEl = document.getElementById('rateUpdateTime');
+                    if (timeEl) {
+                        const now = new Date();
+                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
+                    }
+
                     calculateExchange();
                 }
-            } catch(e) {
-                document.getElementById('rateUpdateTime').innerText = "환율 정보 로드 실패";
+            } catch (e) {
+                console.error("환율 정보 로드 실패:", e);
+                const timeEl = document.getElementById('rateUpdateTime');
+                if (timeEl) timeEl.innerText = "환율 정보 로드 실패";
             }
         }
 
-        function calculateExchange() {
-            const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
-            const currency = document.getElementById('calcCurrency').value;
-            if(!exchangeRates[currency]) return;
-            const rateInKrw = 1 / exchangeRates[currency];
-            let totalKrw = amount * rateInKrw;
-            if(currency === 'JPY') totalKrw = (amount / 100) * rateInKrw;
-            document.getElementById('calcResult').innerText = "₩ " + Math.round(totalKrw).toLocaleString();
+        window.calculateExchange = function() {
+            const amountInput = document.getElementById('calcAmount');
+            const currencySelect = document.getElementById('calcCurrency');
+            const resultEl = document.getElementById('calcResult');
+
+            if (!amountInput || !currencySelect || !resultEl || !liveRates.KRW) return;
+
+            const amount = parseFloat(amountInput.value) || 0;
+            const cur = currencySelect.value;
+
+            let rateToKrw = 0;
+            if (cur === 'JPY') {
+                const jpyPerKrw = liveRates.JPY;
+                const oneJpyToKrw = 1 / jpyPerKrw;
+                rateToKrw = oneJpyToKrw;
+            } else {
+                const curPerKrw = liveRates[cur];
+                rateToKrw = 1 / curPerKrw;
+            }
+
+            const converted = amount * rateToKrw;
+            resultEl.innerText = '₩ ' + Math.round(converted).toLocaleString();
         }
 
-        function handleQuoteSubmit(e) {
-            e.preventDefault();
-            alert('견적 요청이 성공적으로 접수되었습니다. 2시간 이내에 연락드리겠습니다.');
-            e.target.reset();
+        window.openCarrierTracking = function() {
+            const carrier = document.getElementById('carrierSelect').value;
+            const blNo = document.getElementById('blInput').value.trim();
+
+            if (!blNo) {
+                alert('B/L 번호를 입력해주세요.');
+                document.getElementById('blInput').focus();
+                return;
+            }
+
+            navigator.clipboard.writeText(blNo).then(() => {
+                alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.\n선사 공식 트래킹 페이지로 이동합니다.`);
+                
+                let trackingUrl = '';
+                if (carrier === 'KMTC') {
+                    trackingUrl = 'https://www.kmtc.co.kr/';
+                } else if (carrier === 'SINOKOR') {
+                    trackingUrl = 'https://www.sinokor.co.kr/';
+                } else if (carrier === 'DOOWOO') {
+                    trackingUrl = 'https://www.doowoo.co.kr/';
+                } else {
+                    trackingUrl = 'https://www.sitc.com/';
+                }
+                window.open(trackingUrl, '_blank');
+            }).catch(err => {
+                console.error('클립보드 복사 실패:', err);
+                alert('클립보드 복사에 실패하였습니다.');
+            });
         }
 
-        fetchExchangeRates();
-        window.addEventListener('load', () => {
-            document.body.classList.add('translated');
+        window.handleQuoteSubmit = function(event) {
+            event.preventDefault();
+            alert('견적 문의가 성공적으로 접수되었습니다.\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
+            event.target.reset();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchMainBoardPosts();
+            fetchExchangeRates();
         });
     </script>
 </body>
