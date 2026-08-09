@@ -115,7 +115,7 @@
             </div>
 
         </div>
-//1
+
     </main>
 
     <!-- 푸터 -->
@@ -143,6 +143,16 @@
                 nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
                 nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
                 authButtons.appendChild(nameSpan);
+
+                const logoutBtn = document.createElement('button');
+                logoutBtn.innerHTML = `로그아웃 <i class="ri-logout-box-r-line"></i>`;
+                logoutBtn.className = "inline-flex items-center gap-1 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md shrink-0";
+                logoutBtn.onclick = () => {
+                    localStorage.removeItem('isAdminLoggedIn');
+                    localStorage.removeItem('adminName');
+                    window.location.reload();
+                };
+                authButtons.appendChild(logoutBtn);
             }
 
             // 언어 선택 드롭다운 버튼 생성
