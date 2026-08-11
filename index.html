@@ -14,7 +14,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // EmailJS 퍼블릭 키 입력 (필요시 본인의 Public Key로 수정)
+            // EmailJS 퍼블릭 키 입력
             emailjs.init("tSyCvqlAeDIBshdo5");
         })();
     </script>
@@ -781,7 +781,6 @@
     </script>
 
     <!-- Firebase SDK 및 견적 신청 이메일 전송 로직 -->
-   <!-- Firebase SDK 및 견적 신청 이메일 전송 로직 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -956,21 +955,19 @@
             });
         }
 
-        // 💡 견적 제출 시 이메일 전송 기능 연동 함수
+        // 견적 제출 시 이메일 전송 기능 연동 함수
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.innerText = "전송 중...";
             submitBtn.disabled = true;
 
-            // 현재 날짜 및 시간 포맷팅
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}시 ${String(now.getMinutes()).padStart(2,'0')}분`;
 
             const formElement = document.getElementById('quoteForm');
             const formData = new FormData(formElement);
 
-            // EmailJS 전송 파라미터 매핑
             const templateParams = {
                 submission_time: dateStr,
                 user_name: formData.get('user_name'),
@@ -982,7 +979,6 @@
                 to_email: 'jch011212@naver.com'
             };
 
-            // 실제 이메일 전송 실행
             emailjs.send('service_d5h280b', 'template_aiw9x2d', templateParams)
                 .then(function(response) {
                     alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
