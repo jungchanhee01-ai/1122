@@ -261,69 +261,84 @@
         </div>
     </section>
 
-    <!-- Live Exchange Rates Section -->
+    <!-- Live Exchange Rates & White Schedule Section (통화 변환기를 제거하고 흰색 테마 선박 스케줄 조회로 대체) -->
     <section id="exchange" class="py-24 bg-slate-100/80 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES</span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 물류비 계산기</h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES & SCHEDULES</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 실시간 선박 스케줄</h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2">글로벌 금융 시장 환율 정보와 전문 수출입 선박 운항 일정을 한눈에 확인하세요.</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-                    <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
-                        <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
-                            <i class="ri-money-dollar-circle-line text-orange-600 text-xl"></i> <span data-i18n="rate_table_title">주요 통화 환율 정보 (KRW 기준)</span>
-                        </h3>
-                        <span id="rateUpdateTime" class="text-xs text-slate-500 font-medium bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200" data-i18n="rate_loading">실시간 불러오는 중...</span>
-                    </div>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- 환율 조회 테이블 영역 -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
+                                <i class="ri-money-dollar-circle-line text-orange-600 text-xl"></i> <span data-i18n="rate_table_title">주요 통화 환율 정보 (KRW 기준)</span>
+                            </h3>
+                            <span id="rateUpdateTime" class="text-xs text-slate-500 font-medium bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200" data-i18n="rate_loading">실시간 불러오는 중...</span>
+                        </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs sm:text-sm">
-                            <thead>
-                                <tr class="border-b border-slate-200 text-slate-500 font-semibold bg-slate-50">
-                                    <th class="p-3.5" data-i18n="th_currency">통화명 (Code)</th>
-                                    <th class="p-3.5" data-i18n="th_base">매매기준율</th>
-                                    <th class="p-3.5" data-i18n="th_buy">현찰 살 때</th>
-                                    <th class="p-3.5" data-i18n="th_sell">현찰 팔 때</th>
-                                </tr>
-                            </thead>
-                            <tbody id="rateTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
-                        </table>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="border-b border-slate-200 text-slate-500 font-semibold bg-slate-50">
+                                        <th class="p-3.5" data-i18n="th_currency">통화명 (Code)</th>
+                                        <th class="p-3.5" data-i18n="th_base">매매기준율</th>
+                                        <th class="p-3.5" data-i18n="th_buy">현찰 살 때</th>
+                                        <th class="p-3.5" data-i18n="th_sell">현찰 팔 때</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rateTableBody" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-500">
+                        <p><i class="ri-information-line text-orange-600"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
                     </div>
                 </div>
 
-                <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+                <!-- 실시간 선박 스케줄 조회 영역 (흰색 UI 테마 맞춤형) -->
+                <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h3 class="font-bold text-base text-slate-900 mb-6 flex items-center gap-2">
-                            <i class="ri-calculator-fill text-orange-600"></i> <span data-i18n="calc_title">실시간 통화 변환기</span>
-                        </h3>
+                        <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
+                                <i class="ri-ship-line text-blue-600 text-xl"></i> 실시간 선박 스케줄 조회
+                            </h3>
+                         
+                        </div>
+
+                        <!-- 수출/수입 전환 탭 -->
+                        <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-5 border border-slate-200">
+                            <button onclick="setMode('export')" id="btnExport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md">수출 (Export)</button>
+                            <button onclick="setMode('import')" id="btnImport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900">수입 (Import)</button>
+                        </div>
+
+                        <!-- 입력 폼 영역 -->
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-xs text-slate-500 mb-2 font-medium" data-i18n="calc_label">외화 금액 입력</label>
-                                <div class="flex gap-2">
-                                    <input type="number" id="calcAmount" value="1000" oninput="calculateExchange()" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-orange-600">
-                                    <select id="calcCurrency" onchange="calculateExchange()" class="bg-slate-50 border border-slate-300 text-slate-800 text-xs rounded-xl px-3 py-3 focus:outline-none">
-                                        <option value="USD">USD ($)</option>
-                                        <option value="EUR">EUR (€)</option>
-                                        <option value="JPY">JPY (¥)</option>
-                                        <option value="CNY">CNY (¥)</option>
-                                        <option value="GBP">GBP (£)</option>
-                                    </select>
-                                </div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">출항지 (POL)</label>
+                                <select id="pol" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition"></select>
                             </div>
-
-                            <div class="pt-6 border-t border-slate-100">
-                                <span class="block text-xs text-slate-500 mb-1" data-i18n="calc_result_label">원화 환산 금액 (KRW)</span>
-                                <div id="calcResult" class="text-2xl sm:text-3xl font-black text-orange-600">₩ 0</div>
-                                <span class="text-[11px] text-slate-400 mt-1.5 block" data-i18n="calc_notice">* 실시간 기준율 적용 금액 (참고용)</span>
+                            
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">입항지 (POD)</label>
+                                <select id="pod" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition"></select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">조회 기준일 (ETD)</label>
+                                <input type="date" id="scheduleDate" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition">
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 pt-4 border-t border-slate-100 text-[11px] text-slate-500">
-                        <p><i class="ri-information-line text-orange-600"></i> <span data-i18n="calc_footer_note">실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</span></p>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="openTradlinxSchedule()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm shadow-md transition-all">
+                            스케줄 조회하기 ↗
+                        </button>
                     </div>
                 </div>
             </div>
@@ -332,15 +347,15 @@
 
     <!-- Quote Request Form Section -->
     <section id="quote" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <div class="bg-slate-800/90 border border-slate-700 shadow-2xl rounded-3xl p-8 sm:p-12">
-                <div class="text-center max-w-xl mx-auto mb-12">
-                    <span class="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2 bg-orange-500/10 border border-orange-500/20 py-1 px-3 rounded-full inline-block" data-i18n="quote_tag">FAST & EASY QUOTE</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white" data-i18n="quote_title">맞춤형 물류 견적 요청하기</h2>
-                    <p class="text-slate-400 text-xs sm:text-sm mt-2" data-i18n="quote_desc">상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.</p>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <span class="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2 bg-orange-500/10 border border-orange-500/20 py-1 px-3 rounded-full inline-block" data-i18n="quote_tag">FAST & EASY QUOTE</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white" data-i18n="quote_title">맞춤형 물류 견적 요청하기</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2" data-i18n="quote_desc">상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.</p>
+            </div>
 
-                <!-- 폼 ID 부여 (이메일 전송용) -->
+            <!-- 폼 ID 부여 (이메일 전송용) -->
+            <div class="max-w-4xl mx-auto bg-slate-800/90 border border-slate-700 shadow-2xl rounded-3xl p-8 sm:p-12">
                 <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
@@ -476,19 +491,14 @@
                 track_btn: "Real-Time Search ↗",
                 track_info1: "✓ B/L number is automatically copied to clipboard on search",
                 exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "Today's Exchange Rates & Logistics Calculator",
-                exch_desc: "Accurately calculate logistics costs based on real-time rates.",
+                exch_title: "Today's Exchange Rates & Ship Schedules",
+                exch_desc: "Accurately check exchange rates and vessel schedules.",
                 rate_table_title: "Major Currency Exchange Rates (vs KRW)",
                 rate_loading: "Loading real-time rates...",
                 th_currency: "Currency (Code)",
                 th_base: "Base Rate",
                 th_buy: "Cash Buy",
                 th_sell: "Cash Sell",
-                calc_title: "Real-Time Currency Converter",
-                calc_label: "Enter Foreign Currency Amount",
-                calc_result_label: "Converted KRW Amount",
-                calc_notice: "* Applied with real-time base rate",
-                calc_footer_note: "Actual logistics settlement exchange rates may vary slightly.",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "Request Custom Logistics Quote",
                 quote_desc: "Leave your details and our forwarder will provide an optimal quote.",
@@ -556,19 +566,14 @@
                 track_btn: "实时查询 ↗",
                 track_info1: "✓ 点击查询按钮时将自动复制B/L单号",
                 exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "今日汇率及物流费计算器",
-                exch_desc: "准确计算物流费用。",
+                exch_title: "今日汇率及船期查询",
+                exch_desc: "准确计算物流费用并查询船期。",
                 rate_table_title: "主要货币汇率信息",
                 rate_loading: "正在实时加载...",
                 th_currency: "币种名称",
                 th_base: "基准汇率",
                 th_buy: "现钞买入价",
                 th_sell: "现钞卖出价",
-                calc_title: "实时汇率换算器",
-                calc_label: "输入外币金额",
-                calc_result_label: "折合韩元金额",
-                calc_notice: "* 应用实时基准汇率计算",
-                calc_footer_note: "实际结算时的物流费汇率可能会有差异。",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "申请定制物流报价",
                 quote_desc: "请留下详细信息。",
@@ -636,19 +641,14 @@
                 track_btn: "リアルタイム照会 ↗",
                 track_info1: "✓ 照会ボタンクリック時にB/L番号が自動コピーされます",
                 exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "本日の為替レートおよび物流費計算機",
-                exch_desc: "物流費を正確に算定します。",
+                exch_title: "本日の為替レートおよび船便スケジュール",
+                exch_desc: "為替情報と運항スケジュールを正確に確認できます。",
                 rate_table_title: "主要通貨為替情報",
                 rate_loading: "リアルタイム読込中...",
                 th_currency: "通貨名",
                 th_base: "売買基準レート",
                 th_buy: "現金購入時",
                 th_sell: "現金売却時",
-                calc_title: "リアルタイム通貨コンバーター",
-                calc_label: "外貨金額入力",
-                calc_result_label: "韓国ウォン換算金額",
-                calc_notice: "* リアルタイム基準レート適用",
-                calc_footer_note: "実際の物流費清算時の為替レートは変動する場合があります。",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "カスタム物流お見積り依頼",
                 quote_desc: "詳細な内容を残してください。",
@@ -851,13 +851,11 @@
             }
         }
 
-        let liveRates = {};
         async function fetchExchangeRates() {
             try {
                 const res = await fetch('https://open.er-api.com/v6/latest/KRW');
                 const data = await res.json();
                 if (data && data.rates) {
-                    liveRates = data.rates;
                     const r = data.rates;
                     const usdKrw = (1 / r.USD).toFixed(2);
                     const eurKrw = (1 / r.EUR).toFixed(2);
@@ -905,23 +903,10 @@
                         const now = new Date();
                         timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
                     }
-                    calculateExchange();
                 }
             } catch (e) {
                 console.error("환율 정보 로드 실패:", e);
             }
-        }
-
-        window.calculateExchange = function() {
-            const amountInput = document.getElementById('calcAmount');
-            const currencySelect = document.getElementById('calcCurrency');
-            const resultEl = document.getElementById('calcResult');
-            if (!amountInput || !currencySelect || !resultEl || !liveRates.KRW) return;
-
-            const amount = parseFloat(amountInput.value) || 0;
-            const cur = currencySelect.value;
-            let rateToKrw = (cur === 'JPY') ? (1 / liveRates.JPY) : (1 / liveRates[cur]);
-            resultEl.innerText = '₩ ' + Math.round(amount * rateToKrw).toLocaleString();
         }
 
         window.openCarrierTracking = function() {
@@ -955,8 +940,7 @@
             });
         }
 
-        // 견적 제출 시 이메일 전송 기능 연동 함수 (디버깅 로그 보완)
-       // 견적 제출 시 이메일 전송 기능 연동 함수
+        // 견적 제출 시 이메일 전송 기능 연동 함수
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -972,7 +956,7 @@
             const userName = formData.get('user_name');
 
             const templateParams = {
-                name: userName, // EmailJS 템플릿의 {{name}}에 매칭
+                name: userName,
                 submission_time: dateStr,
                 user_name: userName,
                 user_phone: formData.get('user_phone'),
@@ -1002,6 +986,58 @@
             fetchMainBoardPosts();
             fetchExchangeRates();
         });
+    </script>
+
+    <!-- 스케줄 조회 UI용 스크립트 추가 -->
+    <script>
+        const koreaPorts = [
+            {name: "인천 (Incheon)", id: "105162"}, {name: "평택 (Pyeongtaek)", id: "105168"}, 
+            {name: "부산 (Busan)", id: "105169"}, {name: "광양 (Gwangyang)", id: "105165"}, {name: "울산 (Ulsan)", id: "105172"}
+        ];
+        const worldPorts = [
+            {name: "닝보 (Ningbo)", id: "104939"}, {name: "상해 (Shanghai)", id: "104947"}, {name: "샤먼 (Xiamen)", id: "104955"},
+            {name: "칭따오 (Qingdao)", id: "104944"}, {name: "텐진 (Tianjin)", id: "104952"}, {name: "웨이하이 (Weihai)", id: "104953"},
+            {name: "신강 (Xinjiang/Other)", id: "104956"}, {name: "홍콩 (Hong Kong)", id: "105038"}, {name: "호치민 (Ho Chi Minh)", id: "105407"},
+            {name: "하이퐁 (Haiphong)", id: "105405"}, {name: "자카르타 (Jakarta)", id: "105046"}
+        ];
+
+        function setMode(mode) {
+            const polSelect = document.getElementById('pol');
+            const podSelect = document.getElementById('pod');
+            
+            const btnExport = document.getElementById('btnExport');
+            const btnImport = document.getElementById('btnImport');
+
+            polSelect.innerHTML = '';
+            podSelect.innerHTML = '';
+
+            if (mode === 'export') {
+                btnExport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md";
+                btnImport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900";
+                
+                koreaPorts.forEach(p => polSelect.add(new Option(p.name, p.id)));
+                worldPorts.forEach(p => podSelect.add(new Option(p.name, p.id)));
+            } else {
+                btnImport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md";
+                btnExport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900";
+                
+                worldPorts.forEach(p => polSelect.add(new Option(p.name, p.id)));
+                koreaPorts.forEach(p => podSelect.add(new Option(p.name, p.id)));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('scheduleDate');
+            if (dateInput) {
+                dateInput.value = new Date().toISOString().substring(0, 10);
+            }
+            setMode('export');
+        });
+
+        function openTradlinxSchedule() {
+            const url = `https://www.tradlinx.com/ko/ocean-schedule-fcl?org=${document.getElementById('pol').value}&des=${document.getElementById('pod').value}&day=${document.getElementById('scheduleDate').value}`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
