@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 삼국간운송 서비스</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+
+        /* 구글 번역바 기본 UI 숨기기 및 레이아웃 밀림 방지 */
+        .goog-te-banner-frame, .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+
+        /* 번역 완료 전 깜빡임 방지를 위한 초기 투명도 설정 */
+        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
+        body.translated { opacity: 1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
+
+    <!-- 상단 네비게이션 -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- 로고 -->
+            <a href="index.html" class="text-2xl font-black text-slate-900 tracking-wider shrink-0 notranslate">FUTURE <span class="text-orange-600">GLS</span></a>
+            
+            <!-- 중앙 네비게이션 메뉴 -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors">항공운송</a>
+                <a href="triangle.html" class="text-orange-600 transition-colors">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors">업계소식</a>
+            </nav>
+
+            <!-- 우측 버튼 영역 -->
+            <div class="flex items-center gap-2 shrink-0" id="authButtons">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                    <i class="ri-search-line"></i> 화물추적
+                </a>
+                <a href="index.html#quote" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20">
+                    견적요청 <i class="ri-arrow-right-line"></i>
+                </a>
+                
+                <!-- 관리자 로그인 버튼 (비로그인 시 표시) -->
+                <a href="login/login.html" id="adminBtn" class="inline-flex items-center gap-1 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md">
+                    <i class="ri-user-settings-line"></i> 관리자로그인
+                </a>
+            </div>  
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+        
+        <!-- 페이지 타이틀 헤더 -->
+        <div class="mb-14 border-b border-slate-200 pb-8">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
+                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-orange-600 font-bold">삼국간운송</span>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+                제3국간 효율적인 화물 이동을 위한 <span class="text-orange-600">삼국간운송 솔루션</span>
+            </h1>
+        </div>
+
+        <!-- 1. 삼국간운송 소개 섹션 -->
+        <section class="mb-16">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-xl font-black text-orange-600">1.</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">삼국간운송</h2>
+            </div>
+            <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <p>
+                    한국 이외의 국가 즉, 제 삼국간에 움직이는 화물 운송을 말하며, 임가공 등에 많이 사용되는 운송형태입니다.
+                </p>
+                <p>
+                    세계주요지역과 연결되어 있는 폐사의 Network를 통해 제 삼국에서 목적국가로 화물을 바로 운송함으로써 운송료 절감의 효과 및 Switch B/L 발행 등의 간편한 업무절차를 통하여 현지 통관 및 한국내 본사의 신속한 업무 control을 구현하고 있습니다.
+                </p>
+                <p>
+                     이러한 삼국간 운송의 Specialist로써 저희 (주)퓨처지엘스는 고객의 만족을 극대화하는 섬세한 서비스를 제공하고 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. 삼국간 무역의 형태 섹션 -->
+        <section class="mb-16">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                삼국간 무역의 형태
+            </h3>
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <!-- 다이어그램 구조 시각화 -->
+                <div class="max-w-md mx-auto py-8 relative flex flex-col items-center justify-center">
+                    <div class="bg-orange-50 border border-orange-200 text-orange-700 font-bold px-6 py-3 rounded-xl mb-12 shadow-sm">
+                        (A) Buyer
+                    </div>
+                    <div class="flex justify-between w-full px-8">
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                            (B) Supplier
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                            (C) Seller
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">▲ 삼국간 무역 트라이앵글 구조 (Buyer - Supplier - Seller)</p>
+            </div>
+        </section>
+
+        <!-- 3. 화물의 흐름 섹션 -->
+        <section class="mb-16">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                화물의 흐름
+            </h3>
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                        (B)지역에서 물건 생산
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                        (B)지역 단위의 파트너/지사를 통하여
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                        (A)지역으로 물건선적
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                        (A)지역 단위의 파트너/지사를 통하여 화물을 인도함
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. 서비스내역 섹션 -->
+        <section class="mb-16">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                서비스내역
+            </h3>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 w-1/3 bg-slate-50/50">1) 선적지 서류 발급</td>
+                                <td class="py-4 px-6 text-slate-600">(B)지역에서 original or surrender B/L발행 한 후 (A)지역으로 서류 인도하는 과거의 방법</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50">2) Switch 서류 발급</td>
+                                <td class="py-4 px-6 text-slate-600">(C)지역에서 Switch B/L발행 한 후 (A)지역으로 서류 인도(기일이 짧고 통관상 용이)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 업무의 특성 섹션 -->
+        <section>
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                업무의 특성
+            </h3>
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
+                    <li class="flex items-center gap-2">
+                        <span class="text-orange-600 font-bold">1.</span> 전반적인 통제를 한국에서 control 할 수 있음
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-orange-600 font-bold">2.</span> 운임 및 기타 비용등의 정산을 한국에서 처리가 가능함
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-orange-600 font-bold">3.</span> 서류 Switch가 용이
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
+            <p>&copy; FUTURE GLS. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 구글 번역기 숨김 위젯 영역 -->
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <!-- 로그인 상태 및 언어 설정 스크립트 -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminBtn = document.getElementById('adminBtn');
+            const authButtons = document.getElementById('authButtons');
+
+            if (isLoggedIn === 'true' && adminBtn && authButtons) {
+                adminBtn.remove();
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
+                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
+                authButtons.appendChild(nameSpan);
+            }
+
+            // 언어 선택 드롭다운 버튼 생성
+            if (authButtons) {
+                const langContainer = document.createElement('div');
+                langContainer.className = "relative inline-block text-left notranslate";
+                langContainer.innerHTML = `
+                    <button type="button" onclick="toggleLangMenu(event)" id="langBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-all shadow-sm whitespace-nowrap">
+                        <i class="ri-global-line text-slate-500 text-sm"></i> <span id="currentLangText">KOR</span> <i class="ri-arrow-down-s-line text-slate-400"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-50 text-xs font-semibold text-slate-700">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko', 'KOR')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">한국어 (KOR)</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en', 'ENG')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">English (ENG)</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN', 'CHN')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">中文 (CHN)</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">日本語 (JPN)</a>
+                    </div>
+                `;
+                authButtons.prepend(langContainer);
+            }
+        });
+    </script>
+
+    <!-- 구글 번역 엔진 및 언어 감지/전환 스크립트 -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                includedLanguages: 'ko,en,zh-CN,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function changeLanguage(langCode, langLabel) {
+            const selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change'));
+                
+                const langTextElem = document.getElementById('currentLangText');
+                if (langTextElem) {
+                    langTextElem.innerText = langLabel;
+                }
+
+                setTimeout(() => {
+                    document.documentElement.setAttribute('lang', langCode);
+                }, 300);
+            }
+        }
+
+        setInterval(() => {
+            const htmlTag = document.documentElement;
+            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            if (googCookie) {
+                const langVal = googCookie.split('=')[1].split('/')[2];
+                if (langVal && htmlTag.getAttribute('lang') !== langVal) {
+                    htmlTag.setAttribute('lang', langVal);
+                    
+                    const langTextElem = document.getElementById('currentLangText');
+                    if (langTextElem) {
+                        if (langVal === 'en') langTextElem.innerText = 'ENG';
+                        else if (langVal === 'zh-CN') langTextElem.innerText = 'CHN';
+                        else if (langVal === 'ja') langTextElem.innerText = 'JPN';
+                        else langTextElem.innerText = 'KOR';
+                    }
+                }
+            }
+        }, 1000);
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('translated');
+            }, 300);
+        });
+    </script>
+</body>
+</html>
