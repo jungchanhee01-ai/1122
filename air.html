@@ -75,8 +75,9 @@
                 </a>
 
                 <div id="adminContainer" class="relative group py-2">
-                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                 <a id="adminBtn" href="login/login.html" onclick="sessionStorage.setItem('redirectUrl', window.location.href);" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+    <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+</a>
                     </a>
                 </div>
             </div>  
