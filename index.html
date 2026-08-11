@@ -16,10 +16,12 @@
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
+        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
         .dynamic-nav {
             font-size: 1rem; 
             gap: 2rem;      
         }
+        body { background-color: #f8fafc; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -85,6 +87,7 @@
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
+                <!-- 관리자 마우스 호버 드롭다운 메뉴 영역 (AIR/CEO와 동일하게 연동) -->
                 <div id="adminContainer" class="relative group py-2 shrink-0">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                         <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
@@ -193,7 +196,9 @@
             </div>
         </div>
 
+        <!-- 업계소식(왼쪽) & 공지사항(오른쪽) 2열 분리 배치 영역 -->
         <div class="grid md:grid-cols-2 gap-8">
+            <!-- 업계소식 (왼쪽) -->
             <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
                     <h3 class="text-lg font-black text-slate-900" data-i18n="tab_news">업계소식</h3>
@@ -201,9 +206,12 @@
                         <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
                     </a>
                 </div>
-                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center"></div>
+                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
+                    <!-- 업계소식 동적 주입 영역 -->
+                </div>
             </div>
 
+            <!-- 공지사항 (오른쪽) -->
             <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
                     <h3 class="text-lg font-black text-slate-900" data-i18n="tab_notice">공지사항</h3>
@@ -211,7 +219,9 @@
                         <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
                     </a>
                 </div>
-                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center"></div>
+                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
+                    <!-- 공지사항 동적 주입 영역 -->
+                </div>
             </div>
         </div>
     </section>
@@ -223,7 +233,9 @@
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3" data-i18n="track_title">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
             <p class="text-slate-400 text-sm sm:text-base mb-10" data-i18n="track_desc">선사를 선택하고 B/L 번호를 입력하시면, 번호 복사와 함께 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
 
+            <!-- 두 조회 UI를 가로로 배치하기 위한 래퍼 추가 -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- 1. 화물 실시간 추적 UI (선사 선택 영문 제거 및 폭 축소, B/L 입력칸 확장) -->
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
@@ -233,6 +245,7 @@
                         <p class="text-xs text-slate-400 mb-6">선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
                         
                         <div class="flex flex-col md:flex-row items-center gap-4">
+                            <!-- 선사 선택 영문 제거 및 너비를 더 좁게 조정 (w-full md:w-28) -->
                             <select id="carrierSelect" class="w-full md:w-28 bg-slate-900 text-white text-base font-bold px-3 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
                                 <option value="KMTC" data-i18n="opt_kmtc">고려해운</option>
                                 <option value="SINOKOR" data-i18n="opt_sinokor">장금상선</option>
@@ -240,6 +253,7 @@
                                 <option value="SITC">SITC</option>
                             </select>
 
+                            <!-- B/L 입력칸 flex-1 부여 및 너비 극대화 -->
                             <div class="relative flex-1 w-full">
                                 <input type="text" id="blInput" placeholder="B/L 번호 입력" data-i18n-placeholder="track_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 placeholder-slate-500">
                             </div>
@@ -256,6 +270,7 @@
                     </div>
                 </div>
 
+                <!-- 2. 선박 스케줄 연동 조회 UI -->
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
@@ -263,7 +278,7 @@
                             <span class="text-xs text-slate-400">터미널항차, 출항일, 도착일 정보 연동</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">선박 스케줄 연동 조회</h3>
-                        <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 Tradlinx 터미널 스케줄 페이지로 연동되며 정보를 바로 확인하실 수 있습니다.</p>
+                        <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 Tradlinx 터미널 스케줄 페이지로 연동되며, "출항지, 터미널, 선박이름, 터미널항차, 출항일, 도착일" 정보를 바로 확인하실 수 있습니다.</p>
 
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <div class="relative flex-1 w-full">
@@ -289,7 +304,7 @@
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 물류비 계산기</h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">유럽중앙은행(ECB) 및 글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
@@ -507,7 +522,7 @@
                 track_info2: "🛡️ 24/7 Secure Tracking Service",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "Today's Exchange Rates & Logistics Calculator",
-                exch_desc: "Accurately calculate logistics costs based on real-time global financial market exchange rates.",
+                exch_desc: "Accurately calculate logistics costs based on real-time ECB and global financial market exchange rates.",
                 rate_table_title: "Major Currency Exchange Rates (vs KRW)",
                 rate_loading: "Loading real-time rates...",
                 th_currency: "Currency (Code)",
@@ -602,7 +617,7 @@
                 track_info2: "🛡️ 24/7 安全追踪服务",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "今日汇率及物流费计算器",
-                exch_desc: "基于全球金融市场实时汇率，准确计算物流费用。",
+                exch_desc: "基于欧洲央行(ECB)及全球金融市场实时汇率，准确计算物流费用。",
                 rate_table_title: "主要货币汇率信息 (以KRW为准)",
                 rate_loading: "正在实时加载...",
                 th_currency: "币种名称 (Code)",
@@ -697,7 +712,7 @@
                 track_info2: "🛡️ 24/7 安全なトラッキングサービス",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "本日の為替レートおよび物流費計算機",
-                exch_desc: "グローバル金融市場のリアルタイム為替レートを基準に物流費を正確に算定します。",
+                exch_desc: "欧州中央銀行（ECB）およびグローバル金融市場のリアルタイム為替レートを基準に物流費を正確に算定します。",
                 rate_table_title: "主要通貨為替情報（KRW基準）",
                 rate_loading: "リアルタイム読込中...",
                 th_currency: "通貨名 (Code)",
@@ -753,11 +768,13 @@
                 originalTextCache.set(el + '_ph', el.placeholder);
             });
 
+            // 저장된 언어 설정 복원
             const savedLang = localStorage.getItem('site_lang') || 'ko';
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
             }
 
+            // AIR 및 CEO 페이지와 동일한 관리자 로그인 세션 연동 로직 적용
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminContainer = document.getElementById('adminContainer');
 
@@ -844,7 +861,7 @@
         }
     </script>
 
-    <!-- Firebase SDK 및 환율/게시판 스크립트 -->
+    <!-- Firebase SDK 연동 및 공지사항/업계소식 분리 렌더링 스크립트 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -921,33 +938,29 @@
                 renderBoardLists();
             } catch (error) {
                 console.error("메인 게시글 로딩 실패:", error);
+                const newsContainer = document.getElementById('newsContainer');
+                const noticeContainer = document.getElementById('noticeContainer');
+                if (newsContainer) newsContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
+                if (noticeContainer) noticeContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
             }
         }
 
+        // 환율 및 트래킹 관련 스크립트 기능
         let liveRates = {};
 
         async function fetchExchangeRates() {
             try {
-                const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                const res = await fetch('https://open.er-api.com/v6/latest/KRW');
                 const data = await res.json();
                 if (data && data.rates) {
-                    const rates = data.rates;
-                    const krwPerUsd = rates.KRW; 
-
-                    liveRates = {
-                        USD: krwPerUsd,
-                        EUR: krwPerUsd / rates.EUR,
-                        JPY: (krwPerUsd / rates.JPY) * 100,
-                        CNY: krwPerUsd / rates.CNY,
-                        GBP: krwPerUsd / rates.GBP,
-                        KRW: 1
-                    };
-
-                    const usdKrw = liveRates.USD.toFixed(2);
-                    const eurKrw = liveRates.EUR.toFixed(2);
-                    const jpyKrw = liveRates.JPY.toFixed(2);
-                    const cnyKrw = liveRates.CNY.toFixed(2);
-                    const gbpKrw = liveRates.GBP.toFixed(2);
+                    liveRates = data.rates;
+                    const r = data.rates;
+                    
+                    const usdKrw = (1 / r.USD).toFixed(2);
+                    const eurKrw = (1 / r.EUR).toFixed(2);
+                    const jpyKrw = ((1 / r.JPY) * 100).toFixed(2);
+                    const cnyKrw = (1 / r.CNY).toFixed(2);
+                    const gbpKrw = (1 / r.GBP).toFixed(2);
 
                     const tbody = document.getElementById('rateTableBody');
                     if (tbody) {
@@ -976,7 +989,7 @@
                                 <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 1.015).toFixed(2)}</td>
                                 <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 0.985).toFixed(2)}</td>
                             </tr>
-                            <tr class="hover:bg-slate-50 transition-cols">
+                            <tr class="hover:bg-slate-50 transition-colors">
                                 <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500"></span> 영국 GBP</td>
                                 <td class="p-3.5 font-bold text-slate-900">₩ ${gbpKrw}</td>
                                 <td class="p-3.5 text-slate-600">₩ ${(Number(gbpKrw) * 1.015).toFixed(2)}</td>
@@ -988,13 +1001,15 @@
                     const timeEl = document.getElementById('rateUpdateTime');
                     if (timeEl) {
                         const now = new Date();
-                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} 기준`;
+                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
                     }
 
                     calculateExchange();
                 }
             } catch (e) {
                 console.error("환율 정보 로드 실패:", e);
+                const timeEl = document.getElementById('rateUpdateTime');
+                if (timeEl) timeEl.innerText = "환율 정보 로드 실패";
             }
         }
 
@@ -1003,14 +1018,19 @@
             const currencySelect = document.getElementById('calcCurrency');
             const resultEl = document.getElementById('calcResult');
 
-            if (!amountInput || !currencySelect || !resultEl || !liveRates.USD) return;
+            if (!amountInput || !currencySelect || !resultEl || !liveRates.KRW) return;
 
             const amount = parseFloat(amountInput.value) || 0;
             const cur = currencySelect.value;
 
-            let rateToKrw = liveRates[cur] || 0;
+            let rateToKrw = 0;
             if (cur === 'JPY') {
-                rateToKrw = liveRates['JPY'] / 100;
+                const jpyPerKrw = liveRates.JPY;
+                const oneJpyToKrw = 1 / jpyPerKrw;
+                rateToKrw = oneJpyToKrw;
+            } else {
+                const curPerKrw = liveRates[cur];
+                rateToKrw = 1 / curPerKrw;
             }
 
             const converted = amount * rateToKrw;
@@ -1029,6 +1049,7 @@
 
             navigator.clipboard.writeText(blNo).then(() => {
                 alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.\n선사 공식 트래킹 페이지로 이동합니다.`);
+                
                 let trackingUrl = '';
                 if (carrier === 'KMTC') {
                     trackingUrl = 'https://www.ekmtc.com/index.html#/cargo-tracking';
@@ -1040,12 +1061,17 @@
                     trackingUrl = 'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
                 }
                 window.open(trackingUrl, '_blank');
+            }).catch(err => {
+                console.error('클립보드 복사 실패:', err);
+                alert('클립보드 복사에 실패하였습니다.');
             });
         }
 
+        // 선박 스케줄 연동 함수 추가
         window.openVesselSchedule = function() {
             const vesselName = document.getElementById('vesselNameInput').value.trim();
-            if (!vesselName) {
+
+            if (!vesselName) {f
                 alert('선박명을 입력해주세요.');
                 document.getElementById('vesselNameInput').focus();
                 return;
@@ -1054,9 +1080,12 @@
             navigator.clipboard.writeText(vesselName).then(() => {
                 alert(`선박명 [${vesselName}]이(가) 클립보드에 복사되었습니다.\nTradlinx 터미널 스케줄 페이지로 이동합니다.`);
                 window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
+            }).catch(err => {
+                console.error('클립보드 복사 실패:', err);
+                window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
             });
         }
-//ㄴ
+
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             alert('견적 문의가 성공적으로 접수되었습니다.\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
@@ -1066,7 +1095,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             fetchMainBoardPosts();
             fetchExchangeRates();
-            setInterval(fetchExchangeRates, 60000);
         });
     </script>
 </body>
