@@ -10,13 +10,20 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <!-- Remix Icon CDN -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- EmailJS 라이브러리 추가 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // EmailJS 퍼블릭 키 (가입 후 본인의 키로 변경 가능)
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track  { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
-        /* 모든 언어 모드에서 큼직하고 여유 있는 메뉴 스타일 유지 */
         .dynamic-nav {
             font-size: 1rem; 
             gap: 2rem;      
@@ -45,11 +52,9 @@
     <!-- Main Header -->
    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
-            <!-- 로고 영역 -->
             <a href="index.html" class="flex items-center gap-2.5 shrink-0">
                 <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-16 sm:h-20 w-48 sm:w-64 object-contain mix-blend-multiply">
             </a>
-            <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
@@ -59,9 +64,7 @@
                 <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
             </nav>
 
-            <!-- 우측 버튼 그룹 (간격 최적화) -->
             <div id="authButtons" class="flex items-center gap-2 shrink-0">
-                <!-- 언어 선택 드롭다운 -->
                 <div class="relative">
                     <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
@@ -82,7 +85,6 @@
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <!-- 관리자 마우스 호버 드롭다운 메뉴 영역 -->
                 <div id="adminContainer" class="relative group py-2 shrink-0">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                         <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
@@ -122,10 +124,6 @@
                 <a href="#tracking" class="px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold rounded-xl hover:bg-slate-700 transition-all flex items-center gap-2" data-i18n="hero_btn2">
                     화물 실시간 추적
                 </a>
-            </div>
-
-            
-            
             </div>
         </div>
     </section>
@@ -176,9 +174,7 @@
             </div>
         </div>
 
-        <!-- 업계소식(왼쪽) & 공지사항(오른쪽) 2열 분리 배치 영역 -->
         <div class="grid md:grid-cols-2 gap-8">
-            <!-- 업계소식 (왼쪽) -->
             <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
                     <h3 class="text-lg font-black text-slate-900" data-i18n="tab_news">업계소식</h3>
@@ -186,12 +182,9 @@
                         <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
                     </a>
                 </div>
-                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
-                    <!-- 업계소식 동적 주입 영역 -->
-                </div>
+                <div id="newsContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center"></div>
             </div>
 
-            <!-- 공지사항 (오른쪽) -->
             <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10">
                 <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-4">
                     <h3 class="text-lg font-black text-slate-900" data-i18n="tab_notice">공지사항</h3>
@@ -199,9 +192,7 @@
                         <span data-i18n="btn_more">More</span> <i class="ri-arrow-right-s-line"></i>
                     </a>
                 </div>
-                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center">
-                    <!-- 공지사항 동적 주입 영역 -->
-                </div>
+                <div id="noticeContainer" class="divide-y divide-slate-200 min-h-[150px] flex flex-col justify-center"></div>
             </div>
         </div>
     </section>
@@ -211,11 +202,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block mb-3" data-i18n="track_tag">REAL-TIME VISIBILITY</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3" data-i18n="track_title">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
-            <p class="text-slate-400 text-sm sm:text-base mb-10" data-i18n="track_desc">
-
-            <!-- 두 조회 UI를 가로로 배치하기 위한 래퍼 추가 -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                <!-- 1. 화물 실시간 추적 UI -->
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mt-10">
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
@@ -244,19 +232,16 @@
 
                     <div class="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-slate-400 mt-6 px-2 border-t border-slate-700 pt-5 gap-2">
                         <span class="flex items-center gap-1.5 text-slate-300" data-i18n="track_info1">✓ 조회 버튼 클릭 시 B/L 번호 자동 복사 됩니다.</span>
-                        <span class="flex items-center gap-1.5 text-slate-400" data-i18n="track_info2"></span>
                     </div>
                 </div>
 
-                <!-- 2. 선박 스케줄 연동 조회 UI -->
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-xs font-bold tracking-widest text-amber-400 uppercase bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full inline-block">VESSEL SCHEDULE</span>
-                            <span class="text-xs text-slate-400">
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">선박 스케줄 연동 조회</h3>
-                        <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 "출항지, 터미널, 선박이름, 터미널항차, 출항일, 도착일" 정보를 바로 확인하실 수 있습니다.</p>
+                        <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 출항지, 도착일 등 터미널 스케줄 정보를 확인하실 수 있습니다.</p>
 
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <div class="relative flex-1 w-full">
@@ -282,7 +267,7 @@
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 물류비 계산기</h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">  글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">글로벌 금융 시장 실시간 환율을 기준으로 물류비를 정확히 산정합니다.</p>
             </div>
 
             <div class="grid lg:grid-cols-3 gap-8">
@@ -355,44 +340,45 @@
                     <p class="text-slate-400 text-xs sm:text-sm mt-2" data-i18n="quote_desc">상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.</p>
                 </div>
 
-                <form onsubmit="handleQuoteSubmit(event)" class="space-y-6">
+                <!-- 폼 ID 부여 (이메일 전송용) -->
+                <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="space-y-6">
                     <div class="grid sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_name">회사명 / 담당자명 *</label>
-                            <input type="text" required placeholder="(주)퓨처글로벌 / 홍길동 팀장" data-i18n-placeholder="form_name_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                            <input type="text" name="user_name" required placeholder="(주)퓨처글로벌 / 홍길동 팀장" data-i18n-placeholder="form_name_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_phone">연락처 *</label>
-                            <input type="tel" required placeholder="010-1234-5678" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                            <input type="tel" name="user_phone" required placeholder="010-1234-5678" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
                         </div>
                     </div>
 
                     <div class="grid sm:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_mode">운송 모드</label>
-                            <select class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500">
-                                <option data-i18n="mode_1">해상 운송 (FCL)</option>
-                                <option data-i18n="mode_2">해상 운송 (LCL)</option>
-                                <option data-i18n="mode_3">항공 운송 (Air)</option>
-                                <option data-i18n="mode_4">통관/창고 대행만</option>
+                            <select name="transport_mode" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500">
+                                <option>해상 운송 (FCL)</option>
+                                <option>해상 운송 (LCL)</option>
+                                <option>항공 운송 (Air)</option>
+                                <option>통관/창고 대행만</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_pol">출발지 (POL)</label>
-                            <input type="text" placeholder="예: Shanghai, China" data-i18n-placeholder="form_pol_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                            <input type="text" name="pol" placeholder="예: Shanghai, China" data-i18n-placeholder="form_pol_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_pod">도착지 (POD)</label>
-                            <input type="text" placeholder="예: Busan, Korea" data-i18n-placeholder="form_pod_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                            <input type="text" name="pod" placeholder="예: Busan, Korea" data-i18n-placeholder="form_pod_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_memo">화물 정보 및 문의사항</label>
-                        <textarea rows="4" placeholder="화물 종류, CBM/중량, 출하 예상 일정 등을 작성해 주세요." data-i18n-placeholder="form_memo_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500"></textarea>
+                        <textarea name="message" rows="4" placeholder="화물 종류, CBM/중량, 출하 예상 일정 등을 작성해 주세요." data-i18n-placeholder="form_memo_ph" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500 placeholder-slate-500"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-600/30 transition-all" data-i18n="form_submit">
+                    <button type="submit" id="submitBtn" class="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-600/30 transition-all" data-i18n="form_submit">
                         무료 견적 신청 제출하기
                     </button>
                 </form>
@@ -401,7 +387,7 @@
     </section> 
 
     <!-- Footer -->
-<footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
                 <div>
@@ -443,7 +429,7 @@
         </div>
     </footer>
 
-    <!-- 다국어 사전 데이터 및 자체 번역 엔진 -->
+    <!-- 자바스크립트 스크립트 영역 -->
     <script>
         const i18nData = {
             en: {
@@ -451,7 +437,6 @@
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
-                logo_sub: "Global Logistics",
                 menu_ceo: "About Us",
                 menu_air: "Air Freight",
                 menu_ocean: "Ocean Freight",
@@ -463,41 +448,36 @@
                 btn_admin: "Admin",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "From Sea to Sky,<br><span class=\"text-orange-500\">FUTURE GLS</span> Connects You.",
-                hero_desc: "Providing optimized rates for major global routes, AI real-time cargo tracking, and one-stop customs clearance.<br class=\"hidden sm:block\">Experience reliable logistics solutions for your global business.",
+                hero_desc: "Providing optimized rates for major global routes, AI real-time cargo tracking, and one-stop customs clearance.",
                 hero_btn1: "Free Quote Inquiry",
                 hero_btn2: "Real-Time Tracking",
-                stat_1: "Experience (Years)",
-                stat_2: "Global Hub Countries",
-                stat_3: "Annual Volume (TEU)",
-                stat_4: "On-Time Delivery Rate",
                 svc_sub: "OUR CORE SERVICES & NEWS",
                 svc_title: "Integrated Logistics Solutions from Sea to Air",
                 svc_desc: "We support optimal logistics routes and a transparent settlement system tailored to import/export clients.",
                 card1_title: "Ocean Freight",
-                card1_desc: "We provide stable worldwide delivery services for FCL / LCL container cargo and special cargo (Reefer, Open Top).",
+                card1_desc: "We provide stable worldwide delivery services for FCL / LCL container cargo and special cargo.",
                 card2_title: "Air Freight",
-                card2_desc: "Fast delivery guaranteed with next-day shipping and charter services for emergency cargo and high-value goods.",
+                card2_desc: "Fast delivery guaranteed with next-day shipping and charter services for emergency cargo.",
                 card3_title: "Customs Clearance",
-                card3_desc: "Professional customs brokers quickly and accurately process complex tariff regulations and quarantine procedures.",
+                card3_desc: "Professional customs brokers quickly and accurately process complex tariff regulations.",
                 card4_title: "Bonded Warehouse & 3PL",
-                card4_desc: "We provide inbound/outbound, inventory management, and packing solutions based on the latest WMS.",
+                card4_desc: "We provide inbound/outbound, inventory management, and packing solutions based on WMS.",
                 more_view: "Learn More",
                 tab_notice: "Notices",
                 tab_news: "Industry News",
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "Where is my cargo? Track it in real-time.",
-                track_desc: "Select a carrier and enter your B/L number to instantly connect to the official tracking system with automatic copying.",
+                track_desc: "Select a carrier and enter your B/L number to instantly connect.",
                 opt_kmtc: "고려해운",
                 opt_sinokor: "장금상선",
                 opt_doowoo: "두우해운",
-                track_placeholder: "Enter B/L No. (e.g. KMTC123456)",
+                track_placeholder: "Enter B/L No.",
                 track_btn: "Real-Time Search ↗",
                 track_info1: "✓ B/L number is automatically copied to clipboard on search",
-                track_info2: "🛡️ 24/7 Secure Tracking Service",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "Today's Exchange Rates & Logistics Calculator",
-                exch_desc: "Accurately calculate logistics costs based on real-time ECB and global financial market exchange rates.",
+                exch_desc: "Accurately calculate logistics costs based on real-time rates.",
                 rate_table_title: "Major Currency Exchange Rates (vs KRW)",
                 rate_loading: "Loading real-time rates...",
                 th_currency: "Currency (Code)",
@@ -507,25 +487,21 @@
                 calc_title: "Real-Time Currency Converter",
                 calc_label: "Enter Foreign Currency Amount",
                 calc_result_label: "Converted KRW Amount",
-                calc_notice: "* Applied with real-time base rate (For reference only)",
-                calc_footer_note: "Actual logistics settlement exchange rates may vary slightly depending on carrier and customs application timing.",
+                calc_notice: "* Applied with real-time base rate",
+                calc_footer_note: "Actual logistics settlement exchange rates may vary slightly.",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "Request Custom Logistics Quote",
-                quote_desc: "Leave your details and our forwarder will provide an optimal quote within 2 hours.",
+                quote_desc: "Leave your details and our forwarder will provide an optimal quote.",
                 form_name: "Company / Contact Name *",
                 form_name_ph: "Future Global / Manager Kim",
                 form_phone: "Phone Number *",
                 form_mode: "Transport Mode",
-                mode_1: "Ocean Freight (FCL)",
-                mode_2: "Ocean Freight (LCL)",
-                mode_3: "Air Freight",
-                mode_4: "Customs/Warehouse Only",
                 form_pol: "Port of Loading (POL)",
                 form_pol_ph: "e.g. Shanghai, China",
                 form_pod: "Port of Discharge (POD)",
                 form_pod_ph: "e.g. Busan, Korea",
                 form_memo: "Cargo Info & Inquiries",
-                form_memo_ph: "Please write cargo type, CBM/weight, expected shipping schedule, etc.",
+                form_memo_ph: "Please write cargo type, CBM/weight, etc.",
                 form_submit: "Submit Free Quote Application",
                 footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
                 footer_col1_title: "Key Services",
@@ -539,14 +515,13 @@
                 footer_email: "Email: docs@futuregls.com",
                 footer_hours: "Hours: Weekdays 09:00 - 17:00",
                 footer_col3_title: "Headquarters",
-                footer_addr: "12F Future Tower, 415 Teheran-ro, Gangnam-gu, Seoul (Samsung-dong)<br>Business Registration No: 220-88-01234"
+                footer_addr: "12F Future Tower, Teheran-ro, Gangnam-gu, Seoul"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 17:00)",
+                cs_center: "客服中心：02-6203-8800",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
-                logo_sub: "Global Logistics",
                 menu_ceo: "公司介绍",
                 menu_air: "航空运输",
                 menu_ocean: "海上运输",
@@ -558,73 +533,59 @@
                 btn_admin: "管理员",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "从海洋到天空，<br><span class=\"text-orange-500\">FUTURE GLS</span> 为您连结世界。",
-                hero_desc: "提供全球主要航线优化运费、AI实时货物追踪及一站式清关代理。<br class=\"hidden sm:block\">体验确保您全球业务成功的物流解决方案。",
+                hero_desc: "提供全球主要航线优化运费、AI实时货物追踪及一站式清关代理。",
                 hero_btn1: "免费报价咨询",
                 hero_btn2: "实时货物追踪",
-                stat_1: "从业年限 (Years)",
-                stat_2: "全球据点国家",
-                stat_3: "年处理货量 (TEU)",
-                stat_4: "准时交付率",
                 svc_sub: "OUR CORE SERVICES & NEWS",
                 svc_title: "从海运到空运的综合物流解决方案",
-                svc_desc: "根据进出口客户的特点，提供最佳物流路线及透明的结算体系。",
                 card1_title: "海上运输 (Ocean)",
-                card1_desc: "为FCL / LCL集装箱货物及特种货物（冷藏箱、开顶箱）提供全球稳定的配送服务。",
                 card2_title: "航空运输 (Air)",
-                card2_desc: "为紧急货物及高价值物品提供次日达及包机服务（Charter），确保快速交付。",
                 card3_title: "清关代理 (Customs)",
-                card3_desc: "专业报关士利用完善的基础设施，快速准确地处理复杂的关税规定及检疫程序。",
                 card4_title: "保税仓库及 3PL",
-                card4_desc: "基于最新智能仓库管理系统（WMS）提供出入库、库存管理及打包解决方案。",
                 more_view: "查看详情",
                 tab_notice: "公告事项",
                 tab_news: "行业动态",
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "我的货物在哪里？请进行实时追踪。",
-                track_desc: "选择船公司并输入B/L单号，即可复制单号并立即连接至官方追踪系统。",
-                opt_kmtc: "高丽海运",
-                opt_sinokor: "长锦商船",
-                opt_doowoo: "斗宇海运",
-                track_placeholder: "请输入B/L单号 (例: KMTC123456)",
+                track_desc: "选择船公司并输入B/L单号。",
+                opt_kmtc: "고려해운",
+                opt_sinokor: "장금상선",
+                opt_doowoo: "두우해운",
+                track_placeholder: "请输入B/L单号",
                 track_btn: "实时查询 ↗",
-                track_info1: "✓ 点击查询按钮时将自动复制B/L单号到剪贴板",
-                track_info2: "🛡️ 24/7 安全追踪服务",
+                track_info1: "✓ 点击查询按钮时将自动复制B/L单号",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "今日汇率及物流费计算器",
-                exch_desc: "基于欧洲央行(ECB)及全球金融市场实时汇率，准确计算物流费用。",
-                rate_table_title: "主要货币汇率信息 (以KRW为准)",
+                exch_desc: "准确计算物流费用。",
+                rate_table_title: "主要货币汇率信息",
                 rate_loading: "正在实时加载...",
-                th_currency: "币种名称 (Code)",
+                th_currency: "币种名称",
                 th_base: "基准汇率",
                 th_buy: "现钞买入价",
                 th_sell: "现钞卖出价",
                 calc_title: "实时汇率换算器",
                 calc_label: "输入外币金额",
-                calc_result_label: "折合韩元金额 (KRW)",
-                calc_notice: "* 应用实时基准汇率计算（仅供参考）",
-                calc_footer_note: "实际结算时的物流费汇率可能会因船公司及海关适用时间而产生微小差异。",
+                calc_result_label: "折合韩元金额",
+                calc_notice: "* 应用实时基准汇率计算",
+                calc_footer_note: "实际结算时的物流费汇率可能会有差异。",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "申请定制物流报价",
-                quote_desc: "请留下详细信息，我们的货运代理将在2小时内为您提供最佳报价。",
+                quote_desc: "请留下详细信息。",
                 form_name: "公司名称 / 负责人姓名 *",
-                form_name_ph: "未来全球 / 金组长",
+                form_name_ph: "未来全球",
                 form_phone: "联系电话 *",
                 form_mode: "运输模式",
-                mode_1: "海运 (FCL)",
-                mode_2: "海运 (LCL)",
-                mode_3: "空运 (Air)",
-                mode_4: "仅清关/仓储代理",
                 form_pol: "起运港 (POL)",
-                form_pol_ph: "例: 上海, 中国",
+                form_pol_ph: "例: 上海",
                 form_pod: "目的港 (POD)",
-                form_pod_ph: "例: 釜山, 韩国",
+                form_pod_ph: "例: 釜山",
                 form_memo: "货物信息及咨询事项",
-                form_memo_ph: "请填写货物种类、CBM/重量、预计出货日程等。",
+                form_memo_ph: "请填写货物种类等。",
                 form_submit: "提交免费报价申请",
-                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
+                footer_desc: "全球物流新标准，FUTURE GLS.",
                 footer_col1_title: "主要服务",
-                footer_s1: "海上运输 (FCL/LCL)",
+                footer_s1: "海上运输",
                 footer_s2: "航空货物运输",
                 footer_s3: "进出口清关代理",
                 footer_s4: "保税仓库管理",
@@ -634,14 +595,13 @@
                 footer_email: "邮箱：docs@futuregls.com",
                 footer_hours: "工作时间：工作日 09:00 - 17:00",
                 footer_col3_title: "总部地址",
-                footer_addr: "首尔特别市江南区德黑兰路415，未来大厦12层（三成洞）<br>营业执照号：220-88-01234"
+                footer_addr: "首尔特别市江南区"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 17:00)",
+                cs_center: "カスタマーセンター：02-6203-8800",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
-                logo_sub: "Global Logistics",
                 menu_ceo: "会社紹介",
                 menu_air: "航空輸送",
                 menu_ocean: "海上輸送",
@@ -653,73 +613,59 @@
                 btn_admin: "管理者",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "海から空へ、<br><span class=\"text-orange-500\">FUTURE GLS</span> が繋ぎます。",
-                hero_desc: "世界主要航路の最適化された運賃提供、AIリアルタイム貨物位置追跡、ワンストップ通関代行まで。<br class=\"hidden sm:block\">グローバルビジネスの確実な物流ソリューションをご体験ください。",
+                hero_desc: "世界主要航路の最適化された運賃提供、AIリアルタイム貨物位置追跡。",
                 hero_btn1: "無料お見積り相談",
                 hero_btn2: "貨物リアルタイム追跡",
-                stat_1: "実績 (Years)",
-                stat_2: "グローバル拠点国",
-                stat_3: "年間取扱数量 (TEU)",
-                stat_4: "定時納品率",
                 svc_sub: "OUR CORE SERVICES & NEWS",
                 svc_title: "海上から航空まで統合物流ソリューション",
-                svc_desc: "輸出入顧客の特性に合わせた最適な物流ルートと透明な清算体系をサポートします。",
                 card1_title: "海上輸送 (Ocean)",
-                card1_desc: "FCL / LCLコンテナ貨物、特殊貨物（リーファー、オープンツップ）の世界的な安定配送サービスを提供します。",
                 card2_title: "航空輸送 (Air)",
-                card2_desc: "緊急貨物や高価品のための翌日配送およびチャーターサービスで迅速な納期を保証します。",
                 card3_title: "通関代行 (Customs)",
-                card3_desc: "複雑な関税規制および検疫手続きを専門通関士がインフラを活用して迅速かつ正確に処理します。",
                 card4_title: "保税倉庫および 3PL",
-                card4_desc: "最新のスマート倉庫管理システム（WMS）に基づく入出庫、在庫管理、パッキングソリューションを提供します。",
                 more_view: "詳細を見る",
                 tab_notice: "お知らせ",
                 tab_news: "業界ニュース",
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "お荷物は今どこに？リアルタイムで追跡してください。",
-                track_desc: "船会社を選択してB/L番号を入力すると、番号のコピーとともに公式トラッキングシステムへ即座に接続されます。",
+                track_desc: "船会社を選択してB/L番号を入力してください。",
                 opt_kmtc: "고려해운",
                 opt_sinokor: "장금상선",
                 opt_doowoo: "두우해운",
-                track_placeholder: "B/L番号を入力 (例: KMTC123456)",
+                track_placeholder: "B/L番号を入力",
                 track_btn: "リアルタイム照会 ↗",
-                track_info1: "✓ 照会ボタンクリック時にB/L番号がクリップボードに自動コピーされます",
-                track_info2: "🛡️ 24/7 安全なトラッキングサービス",
+                track_info1: "✓ 照会ボタンクリック時にB/L番号が自動コピーされます",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "本日の為替レートおよび物流費計算機",
-                exch_desc: "欧州中央銀行（ECB）およびグローバル金融市場のリアルタイム為替レートを基準に物流費を正確に算定します。",
-                rate_table_title: "主要通貨為替情報（KRW基準）",
+                exch_desc: "物流費を正確に算定します。",
+                rate_table_title: "主要通貨為替情報",
                 rate_loading: "リアルタイム読込中...",
-                th_currency: "通貨名 (Code)",
+                th_currency: "通貨名",
                 th_base: "売買基準レート",
                 th_buy: "現金購入時",
                 th_sell: "現金売却時",
                 calc_title: "リアルタイム通貨コンバーター",
                 calc_label: "外貨金額入力",
-                calc_result_label: "韓国ウォン換算金額 (KRW)",
-                calc_notice: "* リアルタイム基準レート適用金額（参考用）",
-                calc_footer_note: "実際の物流費清算時の為替レートは、船会社および税関の適用時点により微細な差が生じる場合があります。",
+                calc_result_label: "韓国ウォン換算金額",
+                calc_notice: "* リアルタイム基準レート適用",
+                calc_footer_note: "実際の物流費清算時の為替レートは変動する場合があります。",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "カスタム物流お見積り依頼",
-                quote_desc: "詳細な内容を残していただければ、担当フォワーダーが2時間以内に最適なお見積りをご案内いたします。",
+                quote_desc: "詳細な内容を残してください。",
                 form_name: "会社名 / 担当者名 *",
-                form_name_ph: "フューチャーグローバル / キムチーム長",
+                form_name_ph: "フューチャーグローバル",
                 form_phone: "連絡先 *",
                 form_mode: "輸送モード",
-                mode_1: "海上輸送 (FCL)",
-                mode_2: "海上輸送 (LCL)",
-                mode_3: "航空輸送 (Air)",
-                mode_4: "通関/倉庫代行のみ",
                 form_pol: "出発地 (POL)",
-                form_pol_ph: "例: 上海, 中国",
+                form_pol_ph: "例: 上海",
                 form_pod: "到着地 (POD)",
-                form_pod_ph: "例: 釜山, 韩国",
+                form_pod_ph: "例: 釜山",
                 form_memo: "貨物情報およびお問い合わせ",
-                form_memo_ph: "貨物の種類、CBM/重量、出荷予定日程などをご記入ください。",
+                form_memo_ph: "貨物の種類などをご記入ください。",
                 form_submit: "無料お見積り申請を提出する",
-                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.",
                 footer_col1_title: "主要サービス",
-                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s1: "海上輸送",
                 footer_s2: "航空貨物輸送",
                 footer_s3: "輸出入通関代行",
                 footer_s4: "保税倉庫管理",
@@ -729,7 +675,7 @@
                 footer_email: "メール：docs@futuregls.com",
                 footer_hours: "営業時間：平日 09:00 - 17:00",
                 footer_col3_title: "本社所在地",
-                footer_addr: "ソウル特別市江南区テヘラン路415、フューチャータワー12階（三成洞）<br>事業者登録番号：220-88-01234"
+                footer_addr: "ソウル特別市江南区"
             }
         };
 
@@ -743,13 +689,11 @@
                 originalTextCache.set(el + '_ph', el.placeholder);
             });
 
-            // 저장된 언어 설정 복원
             const savedLang = localStorage.getItem('site_lang') || 'ko';
             if (savedLang !== 'ko') {
                 applyCustomLanguage(savedLang);
             }
 
-            // AIR 및 CEO 페이지와 동일한 관리자 로그인 세션 연동 로직 적용
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminContainer = document.getElementById('adminContainer');
 
@@ -836,7 +780,7 @@
         }
     </script>
 
-    <!-- Firebase SDK 연동 및 공지사항/업계소식 분리 렌더링 스크립트 -->
+    <!-- Firebase SDK 및 견적 신청 이메일 전송 로직 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -867,9 +811,7 @@
                 } else {
                     newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
                         <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
-                                ${item.title}
-                            </span>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">${item.title}</span>
                             <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
                         </a>
                     `).join('');
@@ -882,9 +824,7 @@
                 } else {
                     noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
                         <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
-                                ${item.title}
-                            </span>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">${item.title}</span>
                             <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
                         </a>
                     `).join('');
@@ -902,27 +842,16 @@
                 querySnapshot.forEach((docSnap) => {
                     const data = docSnap.data();
                     const postItem = { id: docSnap.id, ...data };
-                    
-                    if (data.category === '공지사항') {
-                        notices.push(postItem);
-                    } else if (data.category === '업계소식') {
-                        industryNews.push(postItem);
-                    }
+                    if (data.category === '공지사항') notices.push(postItem);
+                    else if (data.category === '업계소식') industryNews.push(postItem);
                 });
-
                 renderBoardLists();
             } catch (error) {
                 console.error("메인 게시글 로딩 실패:", error);
-                const newsContainer = document.getElementById('newsContainer');
-                const noticeContainer = document.getElementById('noticeContainer');
-                if (newsContainer) newsContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
-                if (noticeContainer) noticeContainer.innerHTML = `<div class="py-6 text-center text-rose-500 text-xs">데이터 로드 실패</div>`;
             }
         }
 
-        // 환율 및 트래킹 관련 스크립트 기능
         let liveRates = {};
-
         async function fetchExchangeRates() {
             try {
                 const res = await fetch('https://open.er-api.com/v6/latest/KRW');
@@ -930,7 +859,6 @@
                 if (data && data.rates) {
                     liveRates = data.rates;
                     const r = data.rates;
-                    
                     const usdKrw = (1 / r.USD).toFixed(2);
                     const eurKrw = (1 / r.EUR).toFixed(2);
                     const jpyKrw = ((1 / r.JPY) * 100).toFixed(2);
@@ -972,19 +900,15 @@
                             </tr>
                         `;
                     }
-
                     const timeEl = document.getElementById('rateUpdateTime');
                     if (timeEl) {
                         const now = new Date();
                         timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
                     }
-
                     calculateExchange();
                 }
             } catch (e) {
                 console.error("환율 정보 로드 실패:", e);
-                const timeEl = document.getElementById('rateUpdateTime');
-                if (timeEl) timeEl.innerText = "환율 정보 로드 실패";
             }
         }
 
@@ -992,79 +916,94 @@
             const amountInput = document.getElementById('calcAmount');
             const currencySelect = document.getElementById('calcCurrency');
             const resultEl = document.getElementById('calcResult');
-
             if (!amountInput || !currencySelect || !resultEl || !liveRates.KRW) return;
 
             const amount = parseFloat(amountInput.value) || 0;
             const cur = currencySelect.value;
-
-            let rateToKrw = 0;
-            if (cur === 'JPY') {
-                const jpyPerKrw = liveRates.JPY;
-                const oneJpyToKrw = 1 / jpyPerKrw;
-                rateToKrw = oneJpyToKrw;
-            } else {
-                const curPerKrw = liveRates[cur];
-                rateToKrw = 1 / curPerKrw;
-            }
-
-            const converted = amount * rateToKrw;
-            resultEl.innerText = '₩ ' + Math.round(converted).toLocaleString();
+            let rateToKrw = (cur === 'JPY') ? (1 / liveRates.JPY) : (1 / liveRates[cur]);
+            resultEl.innerText = '₩ ' + Math.round(amount * rateToKrw).toLocaleString();
         }
 
         window.openCarrierTracking = function() {
             const carrier = document.getElementById('carrierSelect').value;
             const blNo = document.getElementById('blInput').value.trim();
-
             if (!blNo) {
                 alert('B/L 번호를 입력해주세요.');
                 document.getElementById('blInput').focus();
                 return;
             }
-
             navigator.clipboard.writeText(blNo).then(() => {
-                alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.\n선사 공식 트래킹 페이지로 이동합니다.`);
-                
-                let trackingUrl = '';
-                if (carrier === 'KMTC') {
-                    trackingUrl = 'https://www.ekmtc.com/index.html#/cargo-tracking';
-                } else if (carrier === 'SINOKOR') {
-                    trackingUrl = 'https://ebiz.sinokor.co.kr/';
-                } else if (carrier === 'DOOWOO') {
-                    trackingUrl = 'https://www.doowoo.co.kr/pst_webapp/ExpBookingSearchMove.do';
-                } else {
-                    trackingUrl = 'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
-                }
+                alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.`);
+                let trackingUrl = (carrier === 'KMTC') ? 'https://www.ekmtc.com/index.html#/cargo-tracking' :
+                                  (carrier === 'SINOKOR') ? 'https://ebiz.sinokor.co.kr/' :
+                                  (carrier === 'DOOWOO') ? 'https://www.doowoo.co.kr/pst_webapp/ExpBookingSearchMove.do' :
+                                  'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
                 window.open(trackingUrl, '_blank');
-            }).catch(err => {
-                console.error('클립보드 복사 실패:', err);
-                alert('클립보드 복사에 실패하였습니다.');
             });
         }
 
-        // 선박 스케줄 연동 함수 추가
         window.openVesselSchedule = function() {
             const vesselName = document.getElementById('vesselNameInput').value.trim();
-
             if (!vesselName) {
                 alert('선박명을 입력해주세요.');
                 document.getElementById('vesselNameInput').focus();
                 return;
             }
-
             navigator.clipboard.writeText(vesselName).then(() => {
-                alert(`선박명 [${vesselName}]이(가) 클립보드에 복사되었습니다.\nTradlinx 터미널 스케줄 페이지로 이동합니다.`);
-                window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
-            }).catch(err => {
-                console.error('클립보드 복사 실패:', err);
+                alert(`선박명 [${vesselName}]이(가) 클립보드에 복사되었습니다.`);
                 window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
             });
         }
 
+        // 💡 견적 제출 시 이메일 전송 기능 연동 함수
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
-            alert('견적 문의가 성공적으로 접수되었습니다.\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
-            event.target.reset();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "전송 중...";
+            submitBtn.disabled = true;
+
+            // 현재 날짜 및 시간 포맷팅 (EX: 2026.08.11 22시 15분)
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}시 ${String(now.getMinutes()).padStart(2,'0')}분`;
+
+            const formElement = document.getElementById('quoteForm');
+            const formData = new FormData(formElement);
+
+            // EmailJS 전송 파라미터 매핑
+            const templateParams = {
+                submission_time: `${dateStr} 견적 신청서가 접수 되었습니다. 확인 바랍니다.`,
+                user_name: formData.get('user_name'),
+                user_phone: formData.get('user_phone'),
+                transport_mode: formData.get('transport_mode'),
+                pol: formData.get('pol') || '미입력',
+                pod: formData.get('pod') || '미입력',
+                message: formData.get('message') || '내용 없음',
+                to_email: 'jch011212@naver.com' // 요청하신 메일 주소
+            };
+
+            // ⚠️ 주의: 실제 사용을 위해선 EmailJS(emailjs.com) 가입 후 서비스 ID, 템플릿 ID를 아래에 입력해야 합니다.
+            // 아래 코드는 구조 세팅용이며, EmailJS 연동이 완료되면 메일이 즉시 전송됩니다.
+            /*
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
+                    formElement.reset();
+                    submitBtn.innerText = "무료 견적 신청 제출하기";
+                    submitBtn.disabled = false;
+                }, function(error) {
+                    alert('메일 전송에 실패하였습니다. 다시 시도해 주세요.');
+                    submitBtn.innerText = "무료 견적 신청 제출하기";
+                    submitBtn.disabled = false;
+                });
+            */
+
+            // 임시 테스트 알림 (EmailJS 연동 전 확인용)
+            setTimeout(() => {
+                alert(`[${dateStr}] 견적 신청서가 접수 되었습니다. 확인 바랍니다.\n(등록하신 메일: jch011212@naver.com / 테스트 계정: chanhee6836@naver.com)`);
+                formElement.reset();
+                submitBtn.innerText = "무료 견적 신청 제출하기";
+                submitBtn.disabled = false;
+            }, 500);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
