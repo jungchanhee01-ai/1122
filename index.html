@@ -956,6 +956,7 @@
         }
 
         // 💡 견적 제출 시 이메일 전송 기능 연동 함수
+      // 💡 견적 제출 시 이메일 전송 기능 연동 함수
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -981,7 +982,7 @@
                 to_email: 'jch011212@naver.com'
             };
 
-           
+            // 🟢 [수정] 실제 이메일 전송 코드를 활성화합니다.
             emailjs.send('service_d5h280b', 'template_aiw9x2d', templateParams)
                 .then(function(response) {
                     alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
@@ -993,7 +994,7 @@
                     submitBtn.innerText = "무료 견적 신청 제출하기";
                     submitBtn.disabled = false;
                 });
-           
+        }
 
             // 현재 테스트용 알림 (EmailJS 연동 코드 주석 해제 시 위 코드가 작동합니다)
             setTimeout(() => {
