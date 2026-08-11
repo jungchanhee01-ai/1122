@@ -256,6 +256,28 @@
                     <span class="flex items-center gap-1.5 text-slate-400" data-i18n="track_info2">🛡️ 24/7 안전한 트래킹 서비스</span>
                 </div>
             </div>
+
+            <!-- 새로 추가된 선박 스케줄 (출항지 터미널 선박이름) 조회 연동 UI -->
+            <div class="mt-8 bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl text-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-bold tracking-widest text-amber-400 uppercase bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full inline-block">VESSEL SCHEDULE</span>
+                    <span class="text-xs text-slate-400">터미널항차, 출항일, 도착일 정보 연동</span>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">선박 스케줄 연동 조회</h3>
+                <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 Tradlinx 터미널 스케줄 페이지로 연동되며, "출항지, 터미널, 선박이름, 터미널항차, 출항일, 도착일" 정보를 바로 확인하실 수 있습니다.</p>
+
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <div class="relative flex-1 w-full">
+                        <input type="text" id="vesselNameInput" placeholder="선박명을 입력하세요 (예: GLOBAL LEADER)" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                    </div>
+                    <button type="button" onclick="openVesselSchedule()" class="w-full md:w-auto bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                        <span>선박 스케줄 조회 ↗</span>
+                    </button>
+                </div>
+                <div class="text-xs text-slate-400 mt-4 px-2 border-t border-slate-700 pt-4">
+                    <span>✓ 조회 버튼 클릭 시 선박명이 자동 복사되며 Tradlinx 터미널 스케줄 사이트로 이동합니다.</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -852,7 +874,6 @@
                     newsContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 업계소식이 없습니다.</div>`;
                 } else {
                     newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
-                        <!-- 수정됨: board.html 대신 개별 상세 페이지인 board-view.html?id=문서ID 로 이동 -->
                         <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
                             <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
                                 ${item.title}
@@ -868,7 +889,6 @@
                     noticeContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 공지사항이 없습니다.</div>`;
                 } else {
                     noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
-                        <!-- 수정됨: board.html 대신 개별 상세 페이지인 board-view.html?id=문서ID 로 이동 -->
                         <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
                             <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
                                 ${item.title}
@@ -889,7 +909,6 @@
 
                 querySnapshot.forEach((docSnap) => {
                     const data = docSnap.data();
-                    // Firestore 문서의 고유 ID(docSnap.id)를 객체에 포함시킵니다.
                     const postItem = { id: docSnap.id, ...data };
                     
                     if (data.category === '공지사항') {
@@ -922,7 +941,7 @@
                     
                     const usdKrw = (1 / r.USD).toFixed(2);
                     const eurKrw = (1 / r.EUR).toFixed(2);
-                    const jpyKrw = ((1 / r.JPY) * 100).toFixed(2); // 100엔 기준
+                    const jpyKrw = ((1 / r.JPY) * 100).toFixed(2);
                     const cnyKrw = (1 / r.CNY).toFixed(2);
                     const gbpKrw = (1 / r.GBP).toFixed(2);
 
@@ -1030,7 +1049,26 @@
                 alert('클립보드 복사에 실패하였습니다.');
             });
         }
-//l
+
+        // 선박 스케줄 연동 함수 추가
+        window.openVesselSchedule = function() {
+            const vesselName = document.getElementById('vesselNameInput').value.trim();
+
+            if (!vesselName) {
+                alert('선박명을 입력해주세요.');
+                document.getElementById('vesselNameInput').focus();
+                return;
+            }
+
+            navigator.clipboard.writeText(vesselName).then(() => {
+                alert(`선박명 [${vesselName}]이(가) 클립보드에 복사되었습니다.\nTradlinx 터미널 스케줄 페이지로 이동합니다.`);
+                window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
+            }).catch(err => {
+                console.error('클립보드 복사 실패:', err);
+                window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
+            });
+        }
+
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             alert('견적 문의가 성공적으로 접수되었습니다.\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
