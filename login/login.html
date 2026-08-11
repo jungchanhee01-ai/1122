@@ -70,12 +70,13 @@
     </div>
 
     <script>
-        // 페이지가 열릴 때 이전 페이지(referrer)가 존재하고 같은 도메인 내라면 저장해 둡니다.
-        // 단, 로그인 페이지 자체로 돌아가는 것을 방지하기 위해 referrer 체크를 합니다.
+        // 페이지 진입 시 이전 페이지 주소를 안전하게 기록 (이미 저장된 값이 없을 때만 최초 기록)
         window.addEventListener('DOMContentLoaded', () => {
-            const referrer = document.referrer;
-            if (referrer && referrer.includes(window.location.hostname) && !referrer.includes('login.html')) {
-                sessionStorage.setItem('redirectUrl', referrer);
+            if (!sessionStorage.getItem('redirectUrl')) {
+                const referrer = document.referrer;
+                if (referrer && !referrer.includes('login.html')) {
+                    sessionStorage.setItem('redirectUrl', referrer);
+                }
             }
         });
 
@@ -98,7 +99,7 @@
             // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
-                localStorage.setItem('isAdminLoggedIn', 'true'); // 로그인 상태 유지 키 설정
+                localStorage.setItem('isAdminLoggedIn', 'true'); 
                 localStorage.setItem('adminName', '관리자');
                 
                 // 저장해 둔 이전 페이지가 있다면 그곳으로, 없으면 메인 화면으로 이동
