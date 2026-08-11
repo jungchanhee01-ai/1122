@@ -1001,7 +1001,7 @@
                     const timeEl = document.getElementById('rateUpdateTime');
                     if (timeEl) {
                         const now = new Date();
-                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
+                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} 기준`;
                     }
 
                     calculateExchange();
@@ -1071,7 +1071,7 @@
         window.openVesselSchedule = function() {
             const vesselName = document.getElementById('vesselNameInput').value.trim();
 
-            if (!vesselName) {f
+            if (!vesselName) {
                 alert('선박명을 입력해주세요.');
                 document.getElementById('vesselNameInput').focus();
                 return;
@@ -1095,6 +1095,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             fetchMainBoardPosts();
             fetchExchangeRates();
+            // 환율 정보가 분 단위로 자동 갱신되도록 설정 (60초마다 갱신)
+            setInterval(fetchExchangeRates, 60000);
         });
     </script>
 </body>
