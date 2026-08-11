@@ -956,6 +956,7 @@
         }
 
         // 견적 제출 시 이메일 전송 기능 연동 함수 (디버깅 로그 보완)
+       // 견적 제출 시 이메일 전송 기능 연동 함수
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -968,9 +969,12 @@
             const formElement = document.getElementById('quoteForm');
             const formData = new FormData(formElement);
 
+            const userName = formData.get('user_name');
+
             const templateParams = {
+                name: userName, // EmailJS 템플릿의 {{name}}에 매칭
                 submission_time: dateStr,
-                user_name: formData.get('user_name'),
+                user_name: userName,
                 user_phone: formData.get('user_phone'),
                 transport_mode: formData.get('transport_mode'),
                 pol: formData.get('pol') || '미입력',
