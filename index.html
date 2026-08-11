@@ -235,7 +235,7 @@
 
             <!-- 두 조회 UI를 가로로 배치하기 위한 래퍼 추가 -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                <!-- 1. 화물 실시간 추적 UI (선사 선택 폭 축소, B/L 입력칸 확장) -->
+                <!-- 1. 화물 실시간 추적 UI (선사 선택 영문 제거 및 폭 축소, B/L 입력칸 확장) -->
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
@@ -245,11 +245,11 @@
                         <p class="text-xs text-slate-400 mb-6">선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
                         
                         <div class="flex flex-col md:flex-row items-center gap-4">
-                            <!-- 선사 선택 너비를 줄임 (w-full md:w-40) -->
-                            <select id="carrierSelect" class="w-full md:w-40 bg-slate-900 text-white text-base font-bold px-4 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
-                                <option value="KMTC" data-i18n="opt_kmtc">고려해운 (KMTC)</option>
-                                <option value="SINOKOR" data-i18n="opt_sinokor">장금상선 (Sinokor)</option>
-                                <option value="DOOWOO" data-i18n="opt_doowoo">두우해운 (Doowoo)</option>
+                            <!-- 선사 선택 영문 제거 및 너비를 더 좁게 조정 (w-full md:w-28) -->
+                            <select id="carrierSelect" class="w-full md:w-28 bg-slate-900 text-white text-base font-bold px-3 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
+                                <option value="KMTC" data-i18n="opt_kmtc">고려해운</option>
+                                <option value="SINOKOR" data-i18n="opt_sinokor">장금상선</option>
+                                <option value="DOOWOO" data-i18n="opt_doowoo">두우해운</option>
                                 <option value="SITC">SITC</option>
                             </select>
 
@@ -513,9 +513,9 @@
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "Where is my cargo? Track it in real-time.",
                 track_desc: "Select a carrier and enter your B/L number to instantly connect to the official tracking system with automatic copying.",
-                opt_kmtc: "KMTC",
-                opt_sinokor: "Sinokor",
-                opt_doowoo: "Doowoo",
+                opt_kmtc: "고려해운",
+                opt_sinokor: "장금상선",
+                opt_doowoo: "두우해운",
                 track_placeholder: "Enter B/L No. (e.g. KMTC123456)",
                 track_btn: "Real-Time Search ↗",
                 track_info1: "✓ B/L number is automatically copied to clipboard on search",
@@ -608,9 +608,9 @@
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "我的货物在哪里？请进行实时追踪。",
                 track_desc: "选择船公司并输入B/L单号，即可复制单号并立即连接至官方追踪系统。",
-                opt_kmtc: "高丽海运 (KMTC)",
-                opt_sinokor: "长锦商船 (Sinokor)",
-                opt_doowoo: "斗宇海运 (Doowoo)",
+                opt_kmtc: "高丽海运",
+                opt_sinokor: "长锦商船",
+                opt_doowoo: "斗宇海运",
                 track_placeholder: "请输入B/L单号 (例: KMTC123456)",
                 track_btn: "实时查询 ↗",
                 track_info1: "✓ 点击查询按钮时将自动复制B/L单号到剪贴板",
@@ -703,9 +703,9 @@
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "お荷物は今どこに？リアルタイムで追跡してください。",
                 track_desc: "船会社を選択してB/L番号を入力すると、番号のコピーとともに公式トラッキングシステムへ即座に接続されます。",
-                opt_kmtc: "高麗海運 (KMTC)",
-                opt_sinokor: "長錦商船 (Sinokor)",
-                opt_doowoo: "斗宇海運 (Doowoo)",
+                opt_kmtc: "고려해운",
+                opt_sinokor: "장금상선",
+                opt_doowoo: "두우해운",
                 track_placeholder: "B/L番号を入力 (例: KMTC123456)",
                 track_btn: "リアルタイム照会 ↗",
                 track_info1: "✓ 照会ボタンクリック時にB/L番号がクリップボードに自動コピーされます",
