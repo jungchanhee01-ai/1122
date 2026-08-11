@@ -14,8 +14,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // EmailJS 퍼블릭 키 (가입 후 본인의 키로 변경 가능)
-            emailjs.init("YOUR_PUBLIC_KEY");
+            // EmailJS 퍼블릭 키 입력 (필요시 본인의 Public Key로 수정)
+            emailjs.init("tSyCvqlAeDIBshdo5");
         })();
     </script>
     <style>
@@ -962,7 +962,7 @@
             submitBtn.innerText = "전송 중...";
             submitBtn.disabled = true;
 
-            // 현재 날짜 및 시간 포맷팅 (EX: 2026.08.11 22시 15분)
+            // 현재 날짜 및 시간 포맷팅
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}시 ${String(now.getMinutes()).padStart(2,'0')}분`;
 
@@ -971,20 +971,18 @@
 
             // EmailJS 전송 파라미터 매핑
             const templateParams = {
-                submission_time: `${dateStr} 견적 신청서가 접수 되었습니다. 확인 바랍니다.`,
+                submission_time: dateStr,
                 user_name: formData.get('user_name'),
                 user_phone: formData.get('user_phone'),
                 transport_mode: formData.get('transport_mode'),
                 pol: formData.get('pol') || '미입력',
                 pod: formData.get('pod') || '미입력',
                 message: formData.get('message') || '내용 없음',
-                to_email: 'jch011212@naver.com' // 요청하신 메일 주소
+                to_email: 'jch011212@naver.com'
             };
 
-            // ⚠️ 주의: 실제 사용을 위해선 EmailJS(emailjs.com) 가입 후 서비스 ID, 템플릿 ID를 아래에 입력해야 합니다.
-            // 아래 코드는 구조 세팅용이며, EmailJS 연동이 완료되면 메일이 즉시 전송됩니다.
-            /*
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+           
+            emailjs.send('service_d5h280b', 'template_aiw9x2d', templateParams)
                 .then(function(response) {
                     alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
                     formElement.reset();
@@ -995,11 +993,11 @@
                     submitBtn.innerText = "무료 견적 신청 제출하기";
                     submitBtn.disabled = false;
                 });
-            */
+           
 
-            // 임시 테스트 알림 (EmailJS 연동 전 확인용)
+            // 현재 테스트용 알림 (EmailJS 연동 코드 주석 해제 시 위 코드가 작동합니다)
             setTimeout(() => {
-                alert(`[${dateStr}] 견적 신청서가 접수 되었습니다. 확인 바랍니다.\n(등록하신 메일: jch011212@naver.com / 테스트 계정: chanhee6836@naver.com)`);
+                alert(`[${dateStr}] 견적 신청서가 접수 되었습니다. 확인 바랍니다.\n(등록하신 메일: jch011212@naver.com)`);
                 formElement.reset();
                 submitBtn.innerText = "무료 견적 신청 제출하기";
                 submitBtn.disabled = false;
