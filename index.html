@@ -955,7 +955,7 @@
             });
         }
 
-        // 견적 제출 시 이메일 전송 기능 연동 함수
+        // 견적 제출 시 이메일 전송 기능 연동 함수 (디버깅 로그 보완)
         window.handleQuoteSubmit = function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -981,12 +981,14 @@
 
             emailjs.send('service_d5h280b', 'template_aiw9x2d', templateParams)
                 .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
                     alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
                     formElement.reset();
                     submitBtn.innerText = "무료 견적 신청 제출하기";
                     submitBtn.disabled = false;
                 }, function(error) {
-                    alert('메일 전송에 실패하였습니다. 다시 시도해 주세요.');
+                    console.error('FAILED...', error);
+                    alert('메일 전송에 실패하였습니다. (콘솔창의 에러 내용을 확인해 주세요)');
                     submitBtn.innerText = "무료 견적 신청 제출하기";
                     submitBtn.disabled = false;
                 });
