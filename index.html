@@ -35,7 +35,7 @@
 
     <!-- Top Bar -->
     <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-        <div class="max-w-[1700px] mx-auto flex justify-between items-center px-4">
+        <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
@@ -50,11 +50,13 @@
     </div>
 
     <!-- Main Header -->
-   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
+            <!-- 로고 영역 -->
             <a href="index.html" class="flex items-center gap-2.5 shrink-0">
                 <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-16 sm:h-20 w-48 sm:w-64 object-contain mix-blend-multiply">
             </a>
+            <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
@@ -64,9 +66,9 @@
                 <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
             </nav>
 
-            <div id="authButtons" class="flex items-center gap-2 shrink-0">
+            <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
                 <div class="relative">
-                    <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                    <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
                         <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
                     </button>
                     <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
@@ -77,16 +79,16 @@
                     </div>
                 </div>
 
-                <a href="#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
                     <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물 추적</span>
                 </a>
 
-                <a href="#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
                     <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
 
-                <div id="adminContainer" class="relative group py-2 shrink-0">
-                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                <div id="adminContainer" class="relative group py-2">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                         <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                     </a>
                 </div>
@@ -95,14 +97,14 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-slate-900 text-white overflow-hidden py-24 sm:py-36 px-4 sm:px-12 lg:px-16">
+    <section class="relative bg-slate-900 text-white overflow-hidden py-24 sm:py-36 px-4">
         <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
             <source src="video/main-video.mp4" type="video/mp4">
             동영상을 지원하지 않는 브라우저입니다.
         </video>
         <div class="absolute inset-0 bg-slate-950/20"></div>
         
-        <div class="max-w-[1700px] mx-auto relative z-10 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto relative z-10 text-center sm:text-left">
             <span class="px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-orange-500/30">
                 <i class="ri-sparkling-fill"></i> <span data-i18n="hero_tag">SMART GLOBAL FORWARDING PARTNER</span>
             </span>
@@ -129,7 +131,7 @@
     </section>
 
     <!-- Services Section & Interactive Dynamic Board -->
-    <section id="services" class="py-24 max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-12 bg-white rounded-3xl my-12 border border-slate-200/80 shadow-sm">
+    <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl my-12 border border-slate-200/80 shadow-sm">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="svc_sub">OUR CORE SERVICES & NEWS</span>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="svc_title">해상부터 항공까지 통합 물류 솔루션</h2>
@@ -198,8 +200,8 @@
     </section>
 
     <!-- Cargo Tracking Section -->
-    <section id="tracking" class="py-24 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800 px-4 sm:px-8 lg:px-12">
-        <div class="max-w-[1700px] mx-auto relative z-10 text-center">
+    <section id="tracking" class="py-24 bg-slate-900 text-white relative overflow-hidden border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block mb-3" data-i18n="track_tag">REAL-TIME VISIBILITY</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3" data-i18n="track_title">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
             
@@ -261,9 +263,9 @@
         </div>
     </section>
 
-    <!-- Live Exchange Rates & White Schedule Section -->
-    <section id="exchange" class="py-24 bg-slate-100/80 border-b border-slate-200 px-4 sm:px-8 lg:px-12">
-        <div class="max-w-[1700px] mx-auto">
+    <!-- Live Exchange Rates & White Schedule Section (통화 변환기를 제거하고 흰색 테마 선박 스케줄 조회로 대체) -->
+    <section id="exchange" class="py-24 bg-slate-100/80 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES & SCHEDULES</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 실시간 선박 스케줄</h2>
@@ -300,7 +302,7 @@
                     </div>
                 </div>
 
-                <!-- 실시간 선박 스케줄 조회 영역 -->
+                <!-- 실시간 선박 스케줄 조회 영역 (흰색 UI 테마 맞춤형) -->
                 <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
@@ -346,8 +348,8 @@
     </section>
 
     <!-- Quote Request Form Section -->
-    <section id="quote" class="py-24 bg-slate-900 text-white relative overflow-hidden px-4 sm:px-8 lg:px-12">
-        <div class="max-w-[1700px] mx-auto relative z-10">
+    <section id="quote" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="text-center max-w-xl mx-auto mb-12">
                 <span class="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2 bg-orange-500/10 border border-orange-500/20 py-1 px-3 rounded-full inline-block" data-i18n="quote_tag">FAST & EASY QUOTE</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-white" data-i18n="quote_title">맞춤형 물류 견적 요청하기</h2>
@@ -403,7 +405,7 @@
 
     <!-- Footer -->
     <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
-        <div class="max-w-[1700px] mx-auto px-12 sm:px-16 lg:px-20">
+        <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
                 <div>
                     <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-2">
