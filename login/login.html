@@ -70,9 +70,15 @@
     </div>
 
     <script>
-        // 페이지 진입 시 이전 페이지 주소를 안전하게 기록 (이미 저장된 값이 없을 때만 최초 기록)
+        // 만약 이전 페이지 정보가 없다면 파라미터나 document.referrer를 보조로 활용하되,
+        // 확실하게 세션에 담기도록 정비했습니다.
         window.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem('redirectUrl')) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramRedirect = urlParams.get('redirect');
+            
+            if (paramRedirect) {
+                sessionStorage.setItem('redirectUrl', paramRedirect);
+            } else if (!sessionStorage.getItem('redirectUrl')) {
                 const referrer = document.referrer;
                 if (referrer && !referrer.includes('login.html')) {
                     sessionStorage.setItem('redirectUrl', referrer);
