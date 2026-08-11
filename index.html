@@ -928,18 +928,16 @@
 
         async function fetchExchangeRates() {
             try {
-                // USD 기준으로 변경하여 정확도 향상 및 실시간 소수점 반영
                 const res = await fetch('https://open.er-api.com/v6/latest/USD');
                 const data = await res.json();
                 if (data && data.rates) {
                     const rates = data.rates;
-                    const krwPerUsd = rates.KRW; // 1 USD 당 KRW
+                    const krwPerUsd = rates.KRW; 
 
-                    // KRW 기준 각 통화의 매매기준율 환산 (역산 오차 최소화)
                     liveRates = {
                         USD: krwPerUsd,
                         EUR: krwPerUsd / rates.EUR,
-                        JPY: (krwPerUsd / rates.JPY) * 100, // 100엔 기준
+                        JPY: (krwPerUsd / rates.JPY) * 100,
                         CNY: krwPerUsd / rates.CNY,
                         GBP: krwPerUsd / rates.GBP,
                         KRW: 1
@@ -1012,7 +1010,7 @@
 
             let rateToKrw = liveRates[cur] || 0;
             if (cur === 'JPY') {
-                rateToKrw = liveRates['JPY'] / 100; // 1엔당 가격으로 변환 후 계산
+                rateToKrw = liveRates['JPY'] / 100;
             }
 
             const converted = amount * rateToKrw;
@@ -1073,4 +1071,3 @@
     </script>
 </body>
 </html>
-```[cite: 7]
