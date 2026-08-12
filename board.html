@@ -24,8 +24,8 @@
             display: block;
         }
         html {
-    overflow-y: scroll; /* 스크롤바 영역을 항상 고정하여 레이아웃 흔들림 방지 */
-}
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -36,7 +36,7 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-       <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
+                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Main Header -->
- <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
             <!-- 로고 영역 -->
             <a href="index.html" class="flex items-center gap-2.5 shrink-0">
@@ -273,7 +273,7 @@
         </div>
     </div>
 
-   <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
                 <div>
@@ -318,29 +318,28 @@
     <script>
         const i18nData = {
             en: {
-                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                cs_center: "Customer Center: 02-712-0410(Rep) | Fax: 02-712-0411 (Weekdays 09:00 - 17:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
-                logo_sub: "Global Logistics",
                 menu_ceo: "About Us",
-                menu_air: "Air Freight",
                 menu_ocean: "Ocean Freight",
+                menu_air: "Air Freight",
                 menu_triangle: "Triangle Trade",
                 menu_customs: "Customs",
                 menu_board: "Industry News",
                 btn_tracking: "Cargo Tracking",
                 btn_quote: "Request Quote",
-                btn_admin: "관리자",
+                btn_admin: "Admin",
                 nav_home: "Home",
                 customer_center_label: "C U S T O M E R &nbsp; C E N T E R",
                 page_title_main: "Latest News & Notices",
                 page_title_sub: "of Logistics Industry",
-                page_title_end: "",
+                page_title_end: " delivered to you.",
                 btn_write: "Write",
                 tab_all: "All",
                 tab_notice: "Notice",
-                tab_news: "News",
+                tab_news: "Industry News",
                 table_th_no: "No",
                 table_th_category: "Category",
                 table_th_title: "Title",
@@ -371,26 +370,37 @@
                 btn_img_attach: "Attach Image",
                 btn_cancel: "Cancel",
                 btn_submit: "Submit",
-                footer_company: "FUTURE GLS Co., Ltd."
+                footer_desc: "New standard for global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Main Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Cargo Freight",
+                footer_s3: "Customs Clearance Agency",
+                footer_s4: "Bonded Warehouse Management",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Tel: 02-712-0410",
+                footer_fax: "Fax: 02-712-0411",
+                footer_email: "Email: future@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 17:00",
+                footer_col3_title: "Head Office",
+                footer_addr: "9F, 13, Teheran-ro 64-gil, Gangnam-gu, Seoul<br>(Daechi-dong, Purigrim I-Won Lemon)<br>Business Reg No: 105-87-87676 | CEO: Jung Joo-man"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                cs_center: "客服中心：02-712-0410(Rep) | 传真：02-712-0411 (工作日 09:00 - 17:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
-                logo_sub: "Global Logistics",
                 menu_ceo: "公司介绍",
-                menu_air: "航空运输",
                 menu_ocean: "海上运输",
+                menu_air: "航空运输",
                 menu_triangle: "三角贸易",
                 menu_customs: "清关业务",
                 menu_board: "行业动态",
                 btn_tracking: "货物追踪",
                 btn_quote: "报价申请",
-                btn_admin: "관리자",
+                btn_admin: "管理员",
                 nav_home: "首页",
                 customer_center_label: "C U S T O M E R &nbsp; C E N T E R",
-                page_title_main: "为您提供物流行业的",
+                page_title_main: "为您传递物流行业的",
                 page_title_sub: "最新动态与公告",
                 page_title_end: "",
                 btn_write: "写文章",
@@ -427,23 +437,34 @@
                 btn_img_attach: "添加图片",
                 btn_cancel: "取消",
                 btn_submit: "提交",
-                footer_company: "FUTURE GLS 株式会社"
+                footer_desc: "全球物流的新标准，FUTURE GLS。<br>安全地将您的商业价值传递至世界各地。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海上运输 (FCL/LCL)",
+                footer_s2: "航空货物运输",
+                footer_s3: "进出口清关代理",
+                footer_s4: "保税仓库管理",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-712-0410",
+                footer_fax: "传真：02-712-0411",
+                footer_email: "邮箱：future@futuregls.com",
+                footer_hours: "营业时间：工作日 09:00 - 17:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔市江南区德黑兰路64街13，9楼<br>(大峙동)<br>营业执照号：105-87-87676 | 代表理事：郑柱万"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                cs_center: "カスタマーセンター：02-712-0410(Rep) | FAX：02-712-0411 (平日 09:00 - 17:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
-                logo_sub: "Global Logistics",
                 menu_ceo: "会社紹介",
-                menu_air: "航空輸送",
                 menu_ocean: "海上輸送",
+                menu_air: "航空輸送",
                 menu_triangle: "三国間輸送",
                 menu_customs: "通関業務",
                 menu_board: "業界ニュース",
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
-                btn_admin: "관리자",
+                btn_admin: "管理者",
                 nav_home: "ホーム",
                 customer_center_label: "C U S T O M E R &nbsp; C E N T E R",
                 page_title_main: "物流業界の最新",
@@ -483,7 +504,19 @@
                 btn_img_attach: "画像添付",
                 btn_cancel: "キャンセル",
                 btn_submit: "登録する",
-                footer_company: "FUTURE GLS 株式会社"
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_col1_title: "主要サービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "保税倉庫管理",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-712-0410",
+                footer_fax: "FAX：02-712-0411",
+                footer_email: "メール：future@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 17:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル市江南区テヘラン로 64길 13, 9階<br>事業者登録番号：105-87-87676 | 代表取締役：チョン・ジュマン"
             }
         };
 
@@ -571,7 +604,7 @@
         let posts = [];
         let currentPostId = null;
         let currentTab = 'all';
-        let isEditing = false; // 수정 모드 여부 플래그
+        let isEditing = false;
         const editor = document.getElementById('postContentEditor');
         let savedRange = null;
 
@@ -682,9 +715,8 @@
                 tr.className = "hover:bg-slate-50/80 transition-colors cursor-pointer";
                 tr.onclick = () => viewDetail(post.docId);
                 
-                const badge = post.category === '공지사항' 
-                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600" data-i18n="tab_notice">공지사항</span>`
-                    : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600" data-i18n="tab_news">업계소식</span>`;
+                const badgeI18nKey = post.category === '공지사항' ? 'tab_notice' : 'tab_news';
+                const badge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold ${post.category === '공지사항' ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-600'}" data-i18n="${badgeI18nKey}">${post.category}</span>`;
 
                 tr.innerHTML = `
                     <td class="py-4 px-4 text-slate-400 font-medium">${data.length - index}</td>
@@ -797,7 +829,6 @@
             document.getElementById('modalTitleText').innerText = "게시글 수정";
             document.getElementById('submitBtnText').innerText = "수정하기";
 
-            // 기존 데이터 채우기
             const cat = post.category || '공지사항';
             const i18nKey = cat === '공지사항' ? 'tab_notice' : 'tab_news';
             document.getElementById('postCategory').value = cat;
@@ -846,7 +877,7 @@
                     });
                     alert('성공적으로 수정되었습니다.');
                     closeWriteModal();
-                    viewDetail(currentPostId); // 수정된 상세 내용 다시 로드
+                    viewDetail(currentPostId);
                 } else {
                     await addDoc(collection(db, "posts"), {
                         category,
