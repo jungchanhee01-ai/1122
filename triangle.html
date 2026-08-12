@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURE GLS - 해상운송 서비스</title>
+    <title>FUTURE GLS - 삼국간운송 서비스</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Remix Icons -->
@@ -85,16 +85,16 @@
         <!-- 페이지 타이틀 헤더 -->
         <div class="mb-14 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
-                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
                 <i class="ri-arrow-right-s-line"></i>
-                <span class="text-orange-600 font-bold">삼국간운송</span>
+                <span class="text-orange-600 font-bold" data-i18n="breadcrumb_current">삼국간운송</span>
             </div>
             
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E</span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest" data-i18n="page_sub_tag">T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E</span>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="page_main_title">
                 제3국간 효율적인 화물 이동을 위한 <span class="text-orange-600">삼국간운송 솔루션</span>
             </h1>
         </div>
@@ -103,16 +103,16 @@
         <section class="mb-16">
             <div class="flex items-center gap-3 mb-4">
                 <span class="text-xl font-black text-orange-600">1.</span>
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">삼국간운송</h2>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="sec1_title">삼국간운송</h2>
             </div>
             <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-                <p>
+                <p data-i18n="sec1_desc1">
                     한국 이외의 국가 즉, 제 삼국간에 움직이는 화물 운송을 말하며, 임가공 등에 많이 사용되는 운송형태입니다.
                 </p>
-                <p>
+                <p data-i18n="sec1_desc2">
                     세계주요지역과 연결되어 있는 폐사의 Network를 통해 제 삼국에서 목적국가로 화물을 바로 운송함으로써 운송료 절감의 효과 및 Switch B/L 발행 등의 간편한 업무절차를 통하여 현지 통관 및 한국내 본사의 신속한 업무 control을 구현하고 있습니다.
                 </p>
-                <p>
+                <p data-i18n="sec1_desc3">
                      이러한 삼국간 운송의 Specialist로써 저희 (주)퓨처지엘스는 고객의 만족을 극대화하는 섬세한 서비스를 제공하고 있습니다.
                 </p>
             </div>
@@ -122,24 +122,24 @@
         <section class="mb-16">
             <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
-                삼국간 무역의 형태
+                <span data-i18n="sec2_title">삼국간 무역의 형태</span>
             </h3>
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
                 <!-- 다이어그램 구조 시각화 -->
                 <div class="max-w-md mx-auto py-8 relative flex flex-col items-center justify-center">
-                    <div class="bg-orange-50 border border-orange-200 text-orange-700 font-bold px-6 py-3 rounded-xl mb-12 shadow-sm">
+                    <div class="bg-orange-50 border border-orange-200 text-orange-700 font-bold px-6 py-3 rounded-xl mb-12 shadow-sm" data-i18n="diag_buyer">
                         (A) Buyer
                     </div>
                     <div class="flex justify-between w-full px-8">
-                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm" data-i18n="diag_supplier">
                             (B) Supplier
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm" data-i18n="diag_seller">
                             (C) Seller
                         </div>
                     </div>
                 </div>
-                <p class="text-xs text-slate-400 mt-2">▲ 삼국간 무역 트라이앵글 구조 (Buyer - Supplier - Seller)</p>
+                <p class="text-xs text-slate-400 mt-2" data-i18n="diag_caption">▲ 삼국간 무역 트라이앵글 구조 (Buyer - Supplier - Seller)</p>
             </div>
         </section>
 
@@ -147,25 +147,25 @@
         <section class="mb-16">
             <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
-                화물의 흐름
+                <span data-i18n="sec3_title">화물의 흐름</span>
             </h3>
             <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
                 <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        (B)지역에서 물건 생산
+                        <span data-i18n="flow_1">(B)지역에서 물건 생산</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        (B)지역 단위의 파트너/지사를 통하여
+                        <span data-i18n="flow_2">(B)지역 단위의 파트너/지사를 통하여</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        (A)지역으로 물건선적
+                        <span data-i18n="flow_3">(A)지역으로 물건선적</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        (A)지역 단위의 파트너/지사를 통하여 화물을 인도함
+                        <span data-i18n="flow_4">(A)지역 단위의 파트너/지사를 통하여 화물을 인도함</span>
                     </li>
                 </ul>
             </div>
@@ -175,19 +175,19 @@
         <section class="mb-16">
             <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
-                서비스내역
+                <span data-i18n="sec4_title">서비스내역</span>
             </h3>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <tbody class="divide-y divide-slate-100">
                             <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 w-1/3 bg-slate-50/50">1) 선적지 서류 발급</td>
-                                <td class="py-4 px-6 text-slate-600">(B)지역에서 original or surrender B/L발행 한 후 (A)지역으로 서류 인도하는 과거의 방법</td>
+                                <td class="py-4 px-6 font-bold text-slate-900 w-1/3 bg-slate-50/50" data-i18n="table_row1_title">1) 선적지 서류 발급</td>
+                                <td class="py-4 px-6 text-slate-600" data-i18n="table_row1_desc">(B)지역에서 original or surrender B/L발행 한 후 (A)지역으로 서류 인도하는 과거의 방법</td>
                             </tr>
                             <tr class="hover:bg-slate-50">
-                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50">2) Switch 서류 발급</td>
-                                <td class="py-4 px-6 text-slate-600">(C)지역에서 Switch B/L발행 한 후 (A)지역으로 서류 인도(기일이 짧고 통관상 용이)</td>
+                                <td class="py-4 px-6 font-bold text-slate-900 bg-slate-50/50" data-i18n="table_row2_title">2) Switch 서류 발급</td>
+                                <td class="py-4 px-6 text-slate-600" data-i18n="table_row2_desc">(C)지역에서 Switch B/L발행 한 후 (A)지역으로 서류 인도(기일이 짧고 통관상 용이)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -199,18 +199,18 @@
         <section>
             <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
-                업무의 특성
+                <span data-i18n="sec5_title">업무의 특성</span>
             </h3>
             <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
                 <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">1.</span> 전반적인 통제를 한국에서 control 할 수 있음
+                        <span class="text-orange-600 font-bold">1.</span> <span data-i18n="char_1">전반적인 통제를 한국에서 control 할 수 있음</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">2.</span> 운임 및 기타 비용등의 정산을 한국에서 처리가 가능함
+                        <span class="text-orange-600 font-bold">2.</span> <span data-i18n="char_2">운임 및 기타 비용등의 정산을 한국에서 처리가 가능함</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">3.</span> 서류 Switch가 용이
+                        <span class="text-orange-600 font-bold">3.</span> <span data-i18n="char_3">서류 Switch가 용이</span>
                     </li>
                 </ul>
             </div>
@@ -219,104 +219,283 @@
     </main>
 
     <!-- 푸터 -->
-    <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500 mt-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-bold text-slate-800 text-sm mb-2">FUTURE GLS (주)퓨처지엘스</p>
-            <p>&copy; FUTURE GLS. All Rights Reserved.</p>
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
+                <div>
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-2">
+                        <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-20 w-auto object-contain">
+                    </div>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s1">해상 운송 (FCL/LCL)</a></li>
+                        <li><a href="air.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s2">항공 화물 운송</a></li>
+                        <li><a href="customs.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s3">수출입 통관 대행</a></li>
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s4">보세 창고 관리</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410</p>
+                    <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
+                    <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
+                    <p class="leading-relaxed" data-i18n="footer_addr">
+                        서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br>
+                        사업자등록번호: 105-87-87676 | 대표이사: 정주만
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
+                <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- 구글 번역기 숨김 위젯 영역 -->
-    <div id="google_translate_element" style="display:none;"></div>
-
-    <!-- 로그인 상태 및 언어 설정 스크립트 -->
     <script>
+        const i18nData = {
+            en: {
+                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                nav_tracking: "Cargo Tracking",
+                nav_exchange: "Exchange Rates",
+                nav_quote: "Get a Quote",
+                logo_sub: "Global Logistics",
+                menu_ceo: "About Us",
+                menu_air: "Air Freight",
+                menu_ocean: "Ocean Freight",
+                menu_triangle: "Triangle Trade",
+                menu_customs: "Customs",
+                menu_board: "Industry News",
+                btn_tracking: "Cargo Tracking",
+                btn_quote: "Request Quote",
+                btn_admin: "Admin",
+                breadcrumb_home: "Home",
+                breadcrumb_current: "Triangle Trade",
+                page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
+                page_main_title: "Efficient Cargo Movement Solutions for <span class=\"text-orange-600\">Triangle Trade</span>",
+                sec1_title: "Triangle Trade",
+                sec1_desc1: "Refers to cargo transportation moving between countries other than Korea, frequently used for processing and manufacturing.",
+                sec1_desc2: "Through our network connected to major global regions, we transport cargo directly from third countries to destination countries, reducing freight costs and simplifying procedures such as Switch B/L issuance for local customs clearance and rapid headquarters control in Korea.",
+                sec1_desc3: "As a specialist in triangle trade, FUTURE GLS provides delicate services to maximize customer satisfaction.",
+                sec2_title: "Triangle Trade Structure",
+                diag_buyer: "(A) Buyer",
+                diag_supplier: "(B) Supplier",
+                diag_seller: "(C) Seller",
+                diag_caption: "▲ Triangle Trade Structure (Buyer - Supplier - Seller)",
+                sec3_title: "Cargo Flow",
+                flow_1: "Goods produced in region (B)",
+                flow_2: "Through partners/branches in region (B)",
+                flow_3: "Cargo shipped to region (A)",
+                flow_4: "Cargo delivered through partners/branches in region (A)",
+                sec4_title: "Service Details",
+                table_row1_title: "1) Loading Port Doc Issuance",
+                table_row1_desc: "Traditional method of issuing original or surrender B/L in region (B) and delivering documents to region (A)",
+                table_row2_title: "2) Switch Doc Issuance",
+                table_row2_desc: "Issuing Switch B/L in region (C) and delivering documents to region (A) (Shorter period, easier customs clearance)",
+                sec5_title: "Business Characteristics",
+                char_1: "Overall control can be managed from Korea",
+                char_2: "Freight and other expenses can be settled in Korea",
+                char_3: "Easy document switching",
+                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Key Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Freight",
+                footer_s3: "Customs Clearance",
+                footer_s4: "Bonded Warehouse",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Phone: 02-6203-8800",
+                footer_fax: "Fax: 02-6203-8801",
+                footer_email: "Email: docs@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 18:00",
+                footer_col3_title: "Headquarters",
+                footer_addr: "12F Future Tower, 415 Teheran-ro, Gangnam-gu, Seoul (Samsung-dong)<br>Business Registration No: 220-88-01234"
+            },
+            "zh-CN": {
+                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                nav_tracking: "货物追踪",
+                nav_exchange: "汇率查询",
+                nav_quote: "报价申请",
+                logo_sub: "Global Logistics",
+                menu_ceo: "公司介绍",
+                menu_air: "航空运输",
+                menu_ocean: "海上运输",
+                menu_triangle: "三角贸易",
+                menu_customs: "清关业务",
+                menu_board: "行业动态",
+                btn_tracking: "货物追踪",
+                btn_quote: "报价申请",
+                btn_admin: "管理员",
+                breadcrumb_home: "首页",
+                breadcrumb_current: "三角贸易",
+                page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
+                page_main_title: "实现第三国间高效货物运输的<span class=\"text-orange-600\">三角贸易解决方案</span>",
+                sec1_title: "三角贸易",
+                sec1_desc1: "指在韩国以外的国家（即第三国之间）流动的货物运输，常用于来料加工等运输形态。",
+                sec1_desc2: "通过与全球主要地区相连的网络，直接从第三国向目的国运送货物，从而实现运费节约，并通过签发Switch B/L等简便业务流程，实现当地清关及韩国总部对业务的迅速管控。",
+                sec1_desc3: "作为三角贸易的专家，FUTURE GLS提供最大限度满足客户满意度的细致服务。",
+                sec2_title: "三角贸易的形态",
+                diag_buyer: "(A) Buyer (买方)",
+                diag_supplier: "(B) Supplier (供应商)",
+                diag_seller: "(C) Seller (卖方)",
+                diag_caption: "▲ 三角贸易三角形结构 (Buyer - Supplier - Seller)",
+                sec3_title: "货物流向",
+                flow_1: "在(B)地区生产产品",
+                flow_2: "通过(B)地区的合作伙伴/分公司",
+                flow_3: "将货物装船运往(A)地区",
+                flow_4: "通过(A)地区的合作伙伴/分公司交付货物",
+                sec4_title: "服务详情",
+                table_row1_title: "1) 装运地单证签发",
+                table_row1_desc: "在(B)地区签发original或surrender B/L后向(A)地区转交单证的传统方法",
+                table_row2_title: "2) 换单 (Switch) 签发",
+                table_row2_desc: "在(C)地区签发Switch B/L后向(A)地区转交单证（周期短且利于清关）",
+                sec5_title: "业务特性",
+                char_1: "可在韩国进行整体管控",
+                char_2: "运费及其他费用等可在韩国结算",
+                char_3: "单证转换 (Switch) 简便",
+                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海上运输 (FCL/LCL)",
+                footer_s2: "航空货物运输",
+                footer_s3: "进出口清关代理",
+                footer_s4: "保税仓库管理",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-6203-8800",
+                footer_fax: "传真：02-6203-8801",
+                footer_email: "邮箱：docs@futuregls.com",
+                footer_hours: "工作时间：工作日 09:00 - 18:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔特别市江南区德黑兰路415，未来大厦12层（三成洞）<br>营业执照号：220-88-01234"
+            },
+            ja: {
+                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                nav_tracking: "貨物追跡",
+                nav_exchange: "為替照会",
+                nav_quote: "お見積り",
+                logo_sub: "Global Logistics",
+                menu_ceo: "会社紹介",
+                menu_air: "航空輸送",
+                menu_ocean: "海上輸送",
+                menu_triangle: "三国間輸送",
+                menu_customs: "通関業務",
+                menu_board: "業界ニュース",
+                btn_tracking: "貨物追跡",
+                btn_quote: "お見積り",
+                btn_admin: "管理者",
+                breadcrumb_home: "ホーム",
+                breadcrumb_current: "三国間輸送",
+                page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
+                page_main_title: "第三国間の効率的な貨物移動のための<span class=\"text-orange-600\">三国間輸送ソリューション</span>",
+                sec1_title: "三国間輸送",
+                sec1_desc1: "韓国以外の国、すなわち第三国間で動く貨物輸送を指し、賃加工等に多く使用される輸送形態です。",
+                sec1_desc2: "世界主要地域と繋がっている弊社のNetworkを通じ、第三国から目的地へ貨物を直接輸送することで運賃節約の効果およびSwitch B/L発行等の簡単な業務手順を通じて、現地通関および韓国国内本社の迅速な業務controlを実現しています。",
+                sec1_desc3: "このような三国間輸送のSpecialistとして、株式会社フューチャー지엘스はお客様の満足を極大化するきめ細やかなサービスを提供しています。",
+                sec2_title: "三国間貿易の形態",
+                diag_buyer: "(A) Buyer",
+                diag_supplier: "(B) Supplier",
+                diag_seller: "(C) Seller",
+                diag_caption: "▲ 三国間貿易トライアングル構造 (Buyer - Supplier - Seller)",
+                sec3_title: "貨物の流れ",
+                flow_1: "(B)地域での生産",
+                flow_2: "(B)地域のパートナー/支社を通じて",
+                flow_3: "(A)地域へ貨物積出",
+                flow_4: "(A)地域のパートナー/支社を通じて貨物を引渡し",
+                sec4_title: "サービス内容",
+                table_row1_title: "1) 積地書類発給",
+                table_row1_desc: "(B)地域でoriginal or surrender B/L発行後、(A)地域へ書類を引き渡す従来の方法",
+                table_row2_title: "2) Switch書類発給",
+                table_row2_desc: "(C)地域でSwitch B/L発行後、(A)地域へ書類を引き渡し（期日が短く通関上容易）",
+                sec5_title: "業務の特性",
+                char_1: "全般的な統制を韓国からcontrol可能",
+                char_2: "運賃およびその他の費用等の精算を韓国で処理可能",
+                char_3: "書類Switchが容易",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_col1_title: "主要サービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "保税倉庫管理",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-6203-8800",
+                footer_fax: "ファックス：02-6203-8801",
+                footer_email: "メール：docs@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 18:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル特別市江南区テヘラン路415、フューチャータワー12階（三成洞）<br>事業者登録番号：220-88-01234"
+            }
+        };
+
+        const originalTextCache = new Map();
+        
         window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
-            const adminBtn = document.getElementById('adminBtn');
-            const authButtons = document.getElementById('authButtons');
-
-            if (isLoggedIn === 'true' && adminBtn && authButtons) {
-                adminBtn.remove();
-
-                const nameSpan = document.createElement('span');
-                nameSpan.className = "inline-flex items-center gap-1 text-xs font-bold text-slate-800 bg-slate-100 px-3 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0";
-                nameSpan.innerHTML = `<i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)`;
-                authButtons.appendChild(nameSpan);
-            }
-
-            // 언어 선택 드롭다운 버튼 생성
-           
-        });
-    </script>
-
-    <!-- 구글 번역 엔진 및 언어 감지/전환 스크립트 -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ko',
-                includedLanguages: 'ko,en,zh-CN,ja',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function toggleLangMenu(e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('langDropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        window.addEventListener('click', () => {
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown && !dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden');
-            }
-        });
-
-        function changeLanguage(langCode, langLabel) {
-            const selectField = document.querySelector('.goog-te-combo');
-            if (selectField) {
-                selectField.value = langCode;
-                selectField.dispatchEvent(new Event('change'));
-                
-                const langTextElem = document.getElementById('currentLangText');
-                if (langTextElem) {
-                    langTextElem.innerText = langLabel;
-                }
-
-                setTimeout(() => {
-                    document.documentElement.setAttribute('lang', langCode);
-                }, 300);
-            }
-        }
-
-        setInterval(() => {
-            const htmlTag = document.documentElement;
-            const googCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            if (googCookie) {
-                const langVal = googCookie.split('=')[1].split('/')[2];
-                if (langVal && htmlTag.getAttribute('lang') !== langVal) {
-                    htmlTag.setAttribute('lang', langVal);
-                    
-                    const langTextElem = document.getElementById('currentLangText');
-                    if (langTextElem) {
-                        if (langVal === 'en') langTextElem.innerText = 'ENG';
-                        else if (langVal === 'zh-CN') langTextElem.innerText = 'CHN';
-                        else if (langVal === 'ja') langTextElem.innerText = 'JPN';
-                        else langTextElem.innerText = 'KOR';
-                    }
+            const adminContainer = document.getElementById('adminContainer');
+            
+            if (adminContainer) {
+                if (isLoggedIn === 'true') {
+                    adminContainer.innerHTML = `
+                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
+                        </div>
+                    `;
+                } else {
+                    adminContainer.innerHTML = `
+                        <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        </a>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center whitespace-nowrap">로그인</a>
+                        </div>
+                    `;
                 }
             }
-        }, 1000);
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.body.classList.add('translated');
-            }, 300);
+            document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
+            const savedLang = localStorage.getItem('site_lang') || 'ko';
+            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
+            setTimeout(() => document.body.classList.add('translated'), 100);
         });
+
+        function toggleLangMenu(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('hidden'); }
+        window.addEventListener('click', () => document.getElementById('langDropdown').classList.add('hidden'));
+
+        function changeLanguage(langCode, labelText) {
+            localStorage.setItem('site_lang', langCode);
+            document.documentElement.setAttribute('lang', langCode);
+            document.getElementById('langBtnText').innerText = labelText;
+            applyCustomLanguage(langCode);
+            document.getElementById('langDropdown').classList.add('hidden');
+        }
+
+        function applyCustomLanguage(lang) {
+            if (lang === 'ko') {
+                document.documentElement.setAttribute('lang', 'ko');
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+                document.getElementById('langBtnText').innerText = 'KOR';
+                return;
+            }
+            const dict = i18nData[lang];
+            if (!dict) return;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerHTML = dict[key];
+            });
+            const map = { 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            if (map[lang]) document.getElementById('langBtnText').innerText = map[lang];
+        }
     </script>
 </body>
 </html>
