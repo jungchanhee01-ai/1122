@@ -70,6 +70,22 @@
     </div>
 
     <script>
+        // 만약 이전 페이지 정보가 없다면 파라미터나 document.referrer를 보조로 활용하되,
+        // 확실하게 세션에 담기도록 정비했습니다.
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramRedirect = urlParams.get('redirect');
+            
+            if (paramRedirect) {
+                sessionStorage.setItem('redirectUrl', paramRedirect);
+            } else if (!sessionStorage.getItem('redirectUrl')) {
+                const referrer = document.referrer;
+                if (referrer && !referrer.includes('login.html')) {
+                    sessionStorage.setItem('redirectUrl', referrer);
+                }
+            }
+        });
+
         function showMessage(text, isSuccess) {
             const alertBox = document.getElementById('alertBox');
             alertBox.innerText = text;
@@ -86,15 +102,22 @@
             const id = document.getElementById('adminId').value;
             const pw = document.getElementById('adminPassword').value;
 
-            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)[cite: 5]
+            // 설정하신 관리자 계정 (아이디: FUTURE001, 비밀번호: FUTURE001)
             if (id === 'FUTURE001' && pw === 'FUTURE001') {
                 showMessage('관리자 로그인 성공! 환영합니다.', true);
-                localStorage.setItem('isAdminLoggedIn', 'true');
+                localStorage.setItem('isAdminLoggedIn', 'true'); 
                 localStorage.setItem('adminName', '관리자');
                 
-                // 0.8초 후 부드럽게 페이지 이동[cite: 5]
+                // 저장해 둔 이전 페이지가 있다면 그곳으로, 없으면 메인 화면으로 이동
+                const redirectUrl = sessionStorage.getItem('redirectUrl');
+                
                 setTimeout(() => {
-                    window.location.href = '../board.html';
+                    if (redirectUrl) {
+                        sessionStorage.removeItem('redirectUrl'); // 사용 후 제거
+                        window.location.href = redirectUrl;
+                    } else {
+                        window.location.href = '../index.html';
+                    }
                 }, 800);
             } else {
                 showMessage('아이디 또는 비밀번호가 일치하지 않습니다.', false);

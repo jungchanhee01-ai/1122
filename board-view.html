@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 게시글 상세</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pretendard -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <!-- Remix Icon CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        #postContent img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            margin: 1.5rem auto;
+            display: block;
+        }
+        html {
+    overflow-y: scroll; /* 내용이 짧아도 항상 스크롤바 자리를 유지하여 좌우 흔들림 방지 */
+}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
+            <!-- 로고 영역 -->
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+                <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-16 sm:h-20 w-48 sm:w-64 object-contain mix-blend-multiply">
+            </a>
+            <!-- 중앙 네비게이션 -->
+            <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
+            </nav>
+            <div>
+                <a href="board.html" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                    <i class="ri-arrow-left-line"></i> 목록으로 돌아가기
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 max-w-4xl mx-auto px-4 flex-1 w-full">
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm">
+            
+            <div class="border-b border-slate-200 pb-6 mb-8">
+                <div class="flex items-center gap-3 mb-3">
+                    <span id="postCategory" class="px-3 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-200">카테고리</span>
+                    <span id="postDate" class="text-xs text-slate-400">작성일: -</span>
+                </div>
+                <h1 id="postTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                    게시글을 불러오는 중입니다...
+                </h1>
+            </div>
+
+            <div id="postContent" class="text-slate-700 text-sm sm:text-base leading-relaxed min-h-[250px]">
+                잠시만 기다려주세요. 데이터를 안전하게 불러오고 있습니다.
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <a href="board.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2">
+                        <i class="ri-list-check"></i> 목록으로
+                    </a>
+                </div>
+                
+                <div id="adminActionButtons" class="hidden flex items-center gap-3">
+                    <button onclick="openEditModal()" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
+                        <i class="ri-edit-line"></i> 수정하기
+                    </button>
+                    <button onclick="deletePost()" class="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-xl transition-all inline-flex items-center gap-2 shadow-md">
+                        <i class="ri-delete-bin-line"></i> 삭제하기
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 게시글 수정 모달창 -->
+    <div id="writeModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-orange-600"></span> 게시글 수정
+                </h3>
+                <button onclick="closeWriteModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <form id="writeForm" onsubmit="submitEditPost(event)" class="space-y-4">
+                <div class="relative">
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">카테고리 선택</label>
+                    <input type="hidden" id="postCategoryInput" value="공지사항">
+                    <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer">
+                        <span id="selectedCategoryText">공지사항</span>
+                        <i id="dropdownIcon" class="ri-arrow-down-s-line text-slate-400 transition-transform"></i>
+                    </div>
+                    <div id="dropdownMenu" class="hidden absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-20">
+                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">공지사항</div>
+                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer">업계소식</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">제목</label>
+                    <input type="text" id="postTitleInput" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">작성자</label>
+                    <input type="text" id="postWriterInput" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">내용</label>
+                    <div id="postContentEditor" contenteditable="true" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-base text-slate-800 outline-none focus:border-orange-600 min-h-[200px] max-h-[300px] overflow-y-auto"></div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeWriteModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-bold text-sm hover:bg-slate-100">취소</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md">수정완료</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
+                <div>
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-2">
+                        <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-20 w-auto object-contain">
+                    </div>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s1">해상 운송 (FCL/LCL)</a></li>
+                        <li><a href="air.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s2">항공 화물 운송</a></li>
+                        <li><a href="customs.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s3">수출입 통관 대행</a></li>
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s4">보세 창고 관리</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410</p>
+                    <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
+                    <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
+                    <p class="leading-relaxed" data-i18n="footer_addr">
+                        서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br>
+                        사업자등록번호: 105-87-87676 | 대표이사: 정주만
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
+                <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPwNp7-Yrl6LwAqaReC3ht1JKwSnTTEcI",
+            authDomain: "jch01-65141.firebaseapp.com",
+            projectId: "jch01-65141",
+            storageBucket: "jch01-65141.firebasestorage.app",
+            messagingSenderId: "885424801252",
+            appId: "1:885424801252:web:0b840323f160d0d4cc73f1",
+            measurementId: "G-3ECML2H6S6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let currentPostId = null;
+        let currentPostData = null;
+
+        async function loadPostDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            currentPostId = postId;
+
+            const titleEl = document.getElementById('postTitle');
+            const categoryEl = document.getElementById('postCategory');
+            const dateEl = document.getElementById('postDate');
+            const contentEl = document.getElementById('postContent');
+
+            if (!postId) {
+                titleEl.innerText = "잘못된 접근입니다.";
+                contentEl.innerHTML = "존재하지 않거나 삭제된 게시글입니다.";
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "posts", postId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    currentPostData = docSnap.data();
+                    titleEl.innerText = currentPostData.title || "제목 없음";
+                    categoryEl.innerText = currentPostData.category || "일반";
+                    dateEl.innerText = `작성일: ${currentPostData.date || '-'}`;
+                    contentEl.innerHTML = currentPostData.content || "등록된 내용이 없습니다.";
+
+                    checkAdminStatus();
+                } else {
+                    titleEl.innerText = "게시글을 찾을 수 없습니다.";
+                    contentEl.innerHTML = "요청하신 게시글이 서버에서 삭제되었거나 존재하지 않습니다.";
+                }
+            } catch (error) {
+                console.error("상세글 로딩 에러:", error);
+                titleEl.innerText = "데이터 로딩 오류";
+                contentEl.innerHTML = "게시글을 불러오는 중 오류가 발생했습니다. 네트워크 상태를 확인해 주세요.";
+            }
+        }
+
+        function checkAdminStatus() {
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminActionButtons = document.getElementById('adminActionButtons');
+            if (isLoggedIn === 'true' && adminActionButtons) {
+                adminActionButtons.classList.remove('hidden');
+            }
+        }
+
+        window.openEditModal = function() {
+            if (!currentPostData) return;
+            document.getElementById('postCategoryInput').value = currentPostData.category || '공지사항';
+            document.getElementById('selectedCategoryText').innerText = currentPostData.category || '공지사항';
+            document.getElementById('postTitleInput').value = currentPostData.title || '';
+            document.getElementById('postWriterInput').value = currentPostData.writer || '관리자';
+            document.getElementById('postContentEditor').innerHTML = currentPostData.content || '';
+            
+            document.getElementById('writeModal').classList.remove('hidden');
+        }
+
+        window.closeWriteModal = function() {
+            document.getElementById('writeModal').classList.add('hidden');
+        }
+
+        window.toggleDropdown = function() {
+            document.getElementById('dropdownMenu').classList.toggle('hidden');
+            document.getElementById('dropdownIcon').classList.toggle('rotate-180');
+        }
+
+        window.selectCategory = function(category) {
+            document.getElementById('postCategoryInput').value = category;
+            document.getElementById('selectedCategoryText').innerText = category;
+            toggleDropdown();
+        }
+
+        window.submitEditPost = async function(event) {
+            event.preventDefault();
+            if (!currentPostId) return;
+
+            const category = document.getElementById('postCategoryInput').value;
+            const title = document.getElementById('postTitleInput').value;
+            const writer = document.getElementById('postWriterInput').value;
+            const content = document.getElementById('postContentEditor').innerHTML;
+
+            try {
+                const docRef = doc(db, "posts", currentPostId);
+                await updateDoc(docRef, {
+                    category,
+                    title,
+                    writer,
+                    content
+                });
+                alert('게시글이 성공적으로 수정되었습니다.');
+                closeWriteModal();
+                loadPostDetail();
+            } catch (error) {
+                console.error("수정 실패:", error);
+                alert('게시글 수정 중 오류가 발생했습니다.');
+            }
+        }
+
+        window.deletePost = async function() {
+            if (!currentPostId) return;
+            if (confirm('정말 이 게시글을 삭제하시겠습니까?')) {
+                try {
+                    await deleteDoc(doc(db, "posts", currentPostId));
+                    alert('게시글이 삭제되었습니다.');
+                    window.location.href = 'board.html';
+                } catch (error) {
+                    console.error("삭제 실패:", error);
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPostDetail);
+    </script>
+</body>
+</html>

@@ -6,13 +6,13 @@
     <title>FUTURE GLS - CEO 인사말</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <!-- Remix Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .dynamic-nav { font-size: 1rem; gap: 2rem; }
-        body { opacity: 0; transition: opacity 0.3s ease-in-out; }
-        body.translated { opacity: 1; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
@@ -23,36 +23,31 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-                <span class="hidden md:inline text-slate-300">고객센터: 02-6203-8800 (평일 09:00 - 18:00)</span>
+    <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410 | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
-                <a href="index.html#tracking" class="hover:text-orange-400 transition-colors">화물 추적</a>
-                <a href="index.html#exchange" class="hover:text-orange-400 transition-colors">환율 조회</a>
-                <a href="index.html#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold">견적 요청</a>
+                <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
+                <a href="index.html#exchange" class="hover:text-orange-400 transition-colors" data-i18n="nav_exchange">환율 조회</a>
+                <a href="index.html#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold" data-i18n="nav_quote">견적 요청</a>
             </div>
         </div>
     </div>
 
     <!-- Main Header -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-6">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
+            <!-- 로고 영역 -->
             <a href="index.html" class="flex items-center gap-2.5 shrink-0">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-600/20">
-                    <i class="ri-ship-line"></i>
-                </div>
-                <div>
-                    <span class="text-lg font-black tracking-wider block leading-none text-slate-900">FUTURE GLS</span>
-                    <span class="text-[10px] tracking-widest text-orange-600 font-semibold uppercase mt-0.5 block">Global Logistics</span>
-                </div>
+                <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-16 sm:h-20 w-48 sm:w-64 object-contain mix-blend-multiply">
             </a>
-            
+            <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
-                <a href="ceo.html" class="text-orange-600 transition-colors whitespace-nowrap">회사소개</a>
-                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">항공운송</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">해상운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">삼국간운송</a>
-                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">통관업무</a>
-                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap">업계소식</a>
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
             </nav>
 
             <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
@@ -67,38 +62,37 @@
                         <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
                     </div>
                 </div>
-
                 <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
-                    <i class="ri-search-line"></i> 화물 추적
+                    <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물 추적</span>
                 </a>
-
                 <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
-                    견적 요청 <i class="ri-arrow-right-line"></i>
+                    <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
                 </a>
-
-                <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                    <i class="ri-user-settings-line"></i> 관리자
-                </a>
+                <!-- 관리자 버튼 영역 -->
+                <div id="adminContainer" class="relative group py-2">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                    </a>
+                </div>
             </div>  
         </div>
     </header>
-
-    <!-- 메인 컨텐츠 영역 (상세 내용 복구) -->
+    
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
-        <div class="mb-12 border-b border-slate-200 pb-8">
+        <div class="mb-14 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
-                <a href="index.html" class="hover:text-orange-600">홈</a>
+                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
                 <i class="ri-arrow-right-s-line"></i>
-                <span class="text-slate-900 font-bold">회사소개</span>
+                <span data-i18n="breadcrumb_p1">회사소개</span>
                 <i class="ri-arrow-right-s-line"></i>
-                <span class="text-orange-600 font-bold">CEO 인사말</span>
+                <span class="text-orange-600 font-bold" data-i18n="breadcrumb_current">CEO 인사말</span>
             </div>
             
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">C O M P A N Y &nbsp; I N T R O D U C T I O N</span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest" data-i18n="page_sub_tag">C O M P A N Y &nbsp; I N T R O D U C T I O N</span>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight" data-i18n="page_main_title">
                 고객의 입장에서 생각하는 <span class="text-orange-600">“최상의 물류 서비스”</span>를 제공하여 <br class="hidden sm:inline">
                 <span class="text-orange-600">“최고의 물류기업”</span>으로 거듭나겠습니다.
             </h1>
@@ -107,39 +101,186 @@
         <div class="grid md:grid-cols-12 gap-12 items-center mb-20">
             <div class="md:col-span-5 bg-white p-3 rounded-2xl border border-slate-200 shadow-lg">
                 <div class="relative overflow-hidden rounded-xl aspect-[4/5]">
-                    <img src="https://omgdesignmedia.com/wp-content/uploads/2025/06/2-5.webp" alt="CEO 이미지" class="w-full h-full object-cover">
+                    <img src="https://omgdesignmedia.com/wp-content/uploads/2025/06/2-5.webp" alt="CEO 이미지">
                 </div>
                 <div class="text-center py-3 text-xs font-bold text-slate-500 tracking-wider">WWW.FUTUREGLS.COM</div>
             </div>
 
-            <div class="md:col-span-7 space-y-6 text-slate-600 text-sm sm:text-base leading-relaxed">
-                <p>
-                    당사는 동남아 및 미국, 중남미 중심으로 전세계로 국제운송 Air &amp; Sea뿐만 아니라 Sea &amp; Air를 연계한 최상의 물류 서비스를 제공하고 있으며 앞으로도 세계를 대표하는 종합물류 회사로 발전하여 명실공히 업계 수위의 자리를 차지하고 있습니다.
-                </p>
-                <p>
-                    오랜 경험에서 축적된 풍부한 Know-how와 연구개발로 최고의 서비스를 자랑하는 저희 <strong class="text-slate-900 font-semibold">(주)퓨처지엘스</strong> 임직원 일동은 고객 여러분의 성원에 보답하기 위해 최선을 다할 것을 약속드립니다.
-                </p>
-                <div class="pt-6 border-t border-slate-200 flex justify-end items-center">
-                    <div class="text-right">
-                        <p class="text-base font-extrabold text-slate-900">(주)퓨처지엘스 임직원 일동</p>
-                    </div>
-                </div>
+            <div class="md:col-span-7 space-y-6 text-slate-600 text-sm sm:text-base leading-relaxed" data-i18n="ceo_content">
+                <p>당사는 동남아 및 미국, 중남미 중심으로 전세계 600개국으로 국제운송 Air & Sea뿐만 아니라 Sea & Air를 연계한 최상의 물류 서비스를 제공하고 있으며 앞으로도 세계를 대표하는 종합물류 회사로 발전하여 명실공히 업계 수위의 자리를 차지하고 하고 있습니다.</p>
+                <p>오랜 경험에서 축적된 풍부한 Know-how와 연구개발로 최고의 서비스를 자랑하는 저희 (주)퓨처지엘스는 3자 물류 서비스(Third Party Logistics) 제공업체로 사업영역을 확장하여, 경영환경이 갈수록 치열해지는 현재 상황에서 고객이 좀 더 저렴한 비용으로 최상의 서비스를 제공 받을 수 있도록 하기 위해 고객서비스는 한층 향상시키고, 물류비용은 절감함과 동시에 효율적인 물류운영에 힘쓰고 있으며, 고객이 원하는 것을 바로 고객의 입장에서 생각하는 최상의 물류 서비스를 제공하여 최고의 종합 물류기업으로 거듭나겠습니다.</p>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200 text-center">
-        <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+  <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
+                <div>
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-2">
+                        <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-20 w-auto object-contain">
+                    </div>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s1">해상 운송 (FCL/LCL)</a></li>
+                        <li><a href="air.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s2">항공 화물 운송</a></li>
+                        <li><a href="customs.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s3">수출입 통관 대행</a></li>
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s4">보세 창고 관리</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410</p>
+                    <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
+                    <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
+                    <p class="leading-relaxed" data-i18n="footer_addr">
+                        서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br>
+                        사업자등록번호: 105-87-87676 | 대표이사: 정주만
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
+                <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
+        const i18nData = {
+            en: {
+                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                nav_tracking: "Cargo Tracking",
+                nav_exchange: "Exchange Rates",
+                nav_quote: "Get a Quote",
+                logo_sub: "Global Logistics",
+                menu_ceo: "About Us",
+                menu_air: "Air Freight",
+                menu_ocean: "Ocean Freight",
+                menu_triangle: "Triangle Trade",
+                menu_customs: "Customs",
+                menu_board: "Industry News",
+                btn_tracking: "Cargo Tracking",
+                btn_quote: "Request Quote",
+                btn_admin: "Admin",
+                breadcrumb_home: "Home",
+                breadcrumb_p1: "Company",
+                breadcrumb_current: "CEO Message",
+                page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
+                page_main_title: "Providing the <span class=\"text-orange-600\">\"Best Logistics Service\"</span> from the customer's perspective, we will grow into the <span class=\"text-orange-600\">\"Top Logistics Company\"</span>.",
+                ceo_content: "<p>We provide the best logistics services by combining Air & Sea and Sea & Air transport to 600 countries worldwide, focusing on Southeast Asia, the US, and Latin America. We are evolving into a world-leading integrated logistics company.</p><p>With our rich know-how and R&D, FUTURE GLS Co., Ltd. is expanding its business as a 3PL provider. We strive for efficiency and cost reduction to provide top-tier services at lower costs, thinking from the customer's perspective.</p>"
+            },
+            "zh-CN": {
+                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                nav_tracking: "货物追踪",
+                nav_exchange: "汇率查询",
+                nav_quote: "报价申请",
+                logo_sub: "Global Logistics",
+                menu_ceo: "公司介绍",
+                menu_air: "航空运输",
+                menu_ocean: "海上运输",
+                menu_triangle: "三角贸易",
+                menu_customs: "清关业务",
+                menu_board: "行业动态",
+                btn_tracking: "货物追踪",
+                btn_quote: "报价申请",
+                btn_admin: "管理员",
+                breadcrumb_home: "首页",
+                breadcrumb_p1: "公司介绍",
+                breadcrumb_current: "CEO致辞",
+                page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
+                page_main_title: "从客户的角度思考，提供<span class=\"text-orange-600\">“最优物流服务”</span>，成为<span class=\"text-orange-600\">“顶级物流企业”</span>。",
+                ceo_content: "<p>我们以东南亚、美国及拉美为中心，提供连接海空联运（Sea & Air）及空运、海运服务，覆盖全球600个国家，正发展成为全球顶尖的综合物流公司。</p><p>凭借丰富的经验和研发能力，FUTURE GLS作为第三方物流（3PL）提供商不断扩张业务。在激烈的经营环境中，我们致力于降低物流成本，提升服务效率，始终站在客户立场，提供最优质的物流解决方案。</p>"
+            },
+            ja: {
+                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                nav_tracking: "貨物追跡",
+                nav_exchange: "為替照会",
+                nav_quote: "お見積り",
+                logo_sub: "Global Logistics",
+                menu_ceo: "会社紹介",
+                menu_air: "航空輸送",
+                menu_ocean: "海上輸送",
+                menu_triangle: "三国間輸送",
+                menu_customs: "通関業務",
+                menu_board: "業界ニュース",
+                btn_tracking: "貨物追跡",
+                btn_quote: "お見積り",
+                btn_admin: "管理者",
+                breadcrumb_home: "ホーム",
+                breadcrumb_p1: "会社紹介",
+                breadcrumb_current: "CEOメッセージ",
+                page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
+                page_main_title: "顧客の立場で考え、<span class=\"text-orange-600\">「最高の物流サービス」</span>を提供し、<span class=\"text-orange-600\">「トップ物流企業」</span>として生まれ変わります。",
+                ceo_content: "<p>当社は東南アジア、米国、中南米を中心に、世界600カ国へ国際輸送（Air & Sea、Sea & Air）を提供しており、世界を代表する総合物流会社へと成長を続けています。</p><p>長年の経験で培ったノウハウを誇る当社は、3PL事業へも領域を拡大しています。厳しい経営環境の中、コスト削減とサービス向上を両立し、顧客の視点に立った物流運営で、最高の総合物流企業を目指します。</p>"
+            }
+        };
+
+        const originalTextCache = new Map();
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            const adminContainer = document.getElementById('adminContainer');
+            
+            if (adminContainer) {
+                if (isLoggedIn === 'true') {
+                    adminContainer.innerHTML = `
+                        <div class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center">로그아웃</a>
+                        </div>
+                    `;
+                } else {
+                    adminContainer.innerHTML = `
+                        <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        </a>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                        </div>
+                    `;
+                }
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
+            const savedLang = localStorage.getItem('site_lang') || 'ko';
+            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
+            setTimeout(() => document.body.classList.add('translated'), 100);
+        });
+
         function toggleLangMenu(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('hidden'); }
-        window.addEventListener('click', () => { document.getElementById('langDropdown').classList.add('hidden'); });
-        window.changeLanguage = function(langCode, labelText) {
+        window.addEventListener('click', () => document.getElementById('langDropdown').classList.add('hidden'));
+
+        function changeLanguage(langCode, labelText) {
             localStorage.setItem('site_lang', langCode);
+            document.documentElement.setAttribute('lang', langCode);
             document.getElementById('langBtnText').innerText = labelText;
+            applyCustomLanguage(langCode);
+            document.getElementById('langDropdown').classList.add('hidden');
         }
-        window.addEventListener('load', () => document.body.classList.add('translated'));
+
+        function applyCustomLanguage(lang) {
+            if (lang === 'ko') {
+                document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = originalTextCache.get(el));
+                return;
+            }
+            const dict = i18nData[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerHTML = dict[key];
+            });
+        }
     </script>
 </body>
 </html>
