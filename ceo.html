@@ -255,7 +255,10 @@
 
             document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
             const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
+            if (savedLang !== 'ko') {
+                const map = { 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+                applyCustomLanguage(savedLang, map[savedLang] || 'KOR');
+            }
             setTimeout(() => document.body.classList.add('translated'), 100);
         });
 
@@ -266,16 +269,18 @@
             localStorage.setItem('site_lang', langCode);
             document.documentElement.setAttribute('lang', langCode);
             document.getElementById('langBtnText').innerText = labelText;
-            applyCustomLanguage(langCode);
+            applyCustomLanguage(langCode, labelText);
             document.getElementById('langDropdown').classList.add('hidden');
         }
 
-        function applyCustomLanguage(lang) {
+        function applyCustomLanguage(lang, labelText = 'KOR') {
+            document.getElementById('langBtnText').innerText = labelText;
             if (lang === 'ko') {
                 document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = originalTextCache.get(el));
                 return;
             }
             const dict = i18nData[lang];
+            if (!dict) return;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
