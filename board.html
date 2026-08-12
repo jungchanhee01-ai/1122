@@ -527,7 +527,11 @@
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => originalTextCache.set(el, el.getAttribute('placeholder')));
 
             const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
+            if (savedLang !== 'ko') {
+                applyCustomLanguage(savedLang);
+            } else {
+                updateLangButtonText('ko');
+            }
 
             document.body.classList.add('translated');
         });
@@ -551,6 +555,8 @@
         }
 
         function applyCustomLanguage(lang) {
+            updateLangButtonText(lang);
+
             if (lang === 'ko') {
                 document.documentElement.setAttribute('lang', 'ko');
                 document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -559,7 +565,6 @@
                 document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                     if (originalTextCache.has(el)) el.setAttribute('placeholder', originalTextCache.get(el));
                 });
-                updateLangButtonText('ko');
                 return;
             }
 
