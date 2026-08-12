@@ -355,7 +355,42 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadPostDetail);
+        // 언어 변경 및 드롭다운 토글 관련 함수 추가
+        window.toggleLangMenu = function(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        window.changeLanguage = function(langCode, langText) {
+            const btnText = document.getElementById('langBtnText');
+            if (btnText) {
+                btnText.innerText = langText;
+            }
+            localStorage.setItem('selectedLang', langCode);
+            localStorage.setItem('selectedLangText', langText);
+            document.getElementById('langDropdown').classList.add('hidden');
+        }
+
+        // 페이지 로드시 저장된 언어 설정 복원
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLangText = localStorage.getItem('selectedLangText');
+            if (savedLangText) {
+                const btnText = document.getElementById('langBtnText');
+                if (btnText) {
+                    btnText.innerText = savedLangText;
+                }
+            }
+            loadPostDetail();
+        });
+
+        // 외부 클릭시 언어 드롭다운 닫기
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
