@@ -411,6 +411,7 @@
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
             });
+            updateLangButtonText(lang);
         }
 
         function updateLangButtonText(langCode) {
