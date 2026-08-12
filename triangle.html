@@ -246,22 +246,7 @@
             }
 
             // 언어 선택 드롭다운 버튼 생성
-            if (authButtons) {
-                const langContainer = document.createElement('div');
-                langContainer.className = "relative inline-block text-left notranslate";
-                langContainer.innerHTML = `
-                    <button type="button" onclick="toggleLangMenu(event)" id="langBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 transition-all shadow-sm whitespace-nowrap">
-                        <i class="ri-global-line text-slate-500 text-sm"></i> <span id="currentLangText">KOR</span> <i class="ri-arrow-down-s-line text-slate-400"></i>
-                    </button>
-                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-50 text-xs font-semibold text-slate-700">
-                        <a href="javascript:void(0);" onclick="changeLanguage('ko', 'KOR')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">한국어 (KOR)</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('en', 'ENG')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">English (ENG)</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN', 'CHN')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">中文 (CHN)</a>
-                        <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-100 hover:text-orange-600 transition-colors">日本語 (JPN)</a>
-                    </div>
-                `;
-                authButtons.prepend(langContainer);
-            }
+           
         });
     </script>
 
