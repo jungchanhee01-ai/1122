@@ -227,12 +227,12 @@
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1" data-i18n="modal_cat_label">카테고리 선택</label>
                     <input type="hidden" id="postCategory" value="공지사항">
                     <div onclick="toggleDropdown()" id="dropdownToggle" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 flex justify-between items-center cursor-pointer">
-                        <span id="selectedCategoryText">공지사항</span>
+                        <span id="selectedCategoryText" data-i18n="tab_notice">공지사항</span>
                         <i id="dropdownIcon" class="ri-arrow-down-s-line text-slate-400 transition-transform"></i>
                     </div>
                     <div id="dropdownMenu" class="hidden absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden z-20">
-                        <div onclick="selectCategory('공지사항')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer" data-i18n="tab_notice">공지사항</div>
-                        <div onclick="selectCategory('업계소식')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer" data-i18n="tab_news">업계소식</div>
+                        <div onclick="selectCategory('공지사항', 'tab_notice')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer" data-i18n="tab_notice">공지사항</div>
+                        <div onclick="selectCategory('업계소식', 'tab_news')" class="px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 cursor-pointer" data-i18n="tab_news">업계소식</div>
                     </div>
                 </div>
 
@@ -595,9 +595,17 @@
             document.getElementById('dropdownIcon').classList.toggle('rotate-180');
         }
 
-        window.selectCategory = function(category) {
+        window.selectCategory = function(category, i18nKey) {
             document.getElementById('postCategory').value = category;
-            document.getElementById('selectedCategoryText').innerText = category;
+            const textSpan = document.getElementById('selectedCategoryText');
+            textSpan.setAttribute('data-i18n', i18nKey);
+            
+            const currentLang = localStorage.getItem('site_lang') || 'ko';
+            if (currentLang !== 'ko' && i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
+                textSpan.innerText = i18nData[currentLang][i18nKey];
+            } else {
+                textSpan.innerText = originalTextCache.get(textSpan) || (category === '공지사항' ? '공지사항' : '업계소식');
+            }
             toggleDropdown();
         }
 
@@ -675,8 +683,8 @@
                 tr.onclick = () => viewDetail(post.docId);
                 
                 const badge = post.category === '공지사항' 
-                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600">공지사항</span>`
-                    : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">업계소식</span>`;
+                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-600" data-i18n="tab_notice">공지사항</span>`
+                    : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600" data-i18n="tab_news">업계소식</span>`;
 
                 tr.innerHTML = `
                     <td class="py-4 px-4 text-slate-400 font-medium">${data.length - index}</td>
@@ -688,6 +696,11 @@
                 `;
                 tbody.appendChild(tr);
             });
+
+            const currentLang = localStorage.getItem('site_lang') || 'ko';
+            if (currentLang !== 'ko') {
+                applyCustomLanguage(currentLang);
+            }
         }
 
         window.searchBoard = function() {
@@ -728,7 +741,10 @@
             const newViews = (post.views || 0) + 1;
             await updateDoc(docRef, { views: newViews });
 
-            document.getElementById('detailCategory').innerText = post.category;
+            const catSpan = document.getElementById('detailCategory');
+            catSpan.innerText = post.category;
+            catSpan.setAttribute('data-i18n', post.category === '공지사항' ? 'tab_notice' : 'tab_news');
+
             document.getElementById('detailTitle').innerText = post.title;
             document.getElementById('detailWriter').innerText = post.writer;
             document.getElementById('detailDate').innerText = post.date;
@@ -739,6 +755,11 @@
             document.getElementById('detailView').classList.remove('hidden');
             document.getElementById('pageHeader').style.display = 'none';
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const currentLang = localStorage.getItem('site_lang') || 'ko';
+            if (currentLang !== 'ko') {
+                applyCustomLanguage(currentLang);
+            }
         }
 
         window.showListView = function() {
@@ -777,8 +798,19 @@
             document.getElementById('submitBtnText').innerText = "수정하기";
 
             // 기존 데이터 채우기
-            document.getElementById('postCategory').value = post.category || '공지사항';
-            document.getElementById('selectedCategoryText').innerText = post.category || '공지사항';
+            const cat = post.category || '공지사항';
+            const i18nKey = cat === '공지사항' ? 'tab_notice' : 'tab_news';
+            document.getElementById('postCategory').value = cat;
+            const textSpan = document.getElementById('selectedCategoryText');
+            textSpan.setAttribute('data-i18n', i18nKey);
+
+            const currentLang = localStorage.getItem('site_lang') || 'ko';
+            if (currentLang !== 'ko' && i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
+                textSpan.innerText = i18nData[currentLang][i18nKey];
+            } else {
+                textSpan.innerText = cat;
+            }
+
             document.getElementById('postTitle').value = post.title || '';
             document.getElementById('postWriter').value = post.writer || '관리자';
             editor.innerHTML = post.content || '';
