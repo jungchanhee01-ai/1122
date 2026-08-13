@@ -29,7 +29,7 @@
             gap: 2rem;      
         }
         body { background-color: #f8fafc; }
-</style>
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
@@ -39,7 +39,7 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-                  <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
+                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -410,8 +410,8 @@
                         <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-20 w-auto object-contain">
                     </div>
                     <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
-                        글로벌 물류의 새로운 기준, FUTURE GLS.
-                        고객의 <br>비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
                     </p>
                 </div>
                 <div>
@@ -444,17 +444,114 @@
         </div>
     </footer>
 
-    <!-- 자바스크립트 스크립트 영역 -->
     <script>
         const i18nData = {
+            ko: {
+                cs_center: "고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)",
+                nav_tracking: "화물 추적",
+                nav_exchange: "환율 조회",
+                nav_quote: "견적 요청",
+                menu_ceo: "회사소개",
+                menu_ocean: "해상운송",
+                menu_air: "항공운송",
+                menu_triangle: "삼국간운송",
+                menu_customs: "통관업무",
+                menu_board: "업계소식",
+                btn_tracking: "화물 추적",
+                btn_quote: "견적 요청",
+                btn_admin: "관리자",
+                hero_tag: "SMART GLOBAL FORWARDING PARTNER",
+                hero_title: "바다에서 하늘까지,<br><span class=\"text-orange-500\">FUTURE GLS</span>가 연결합니다.",
+                hero_desc: "전 세계 주요 항로 최적화 운임 제공, 실시간 화물 위치 추적 및 통관 대행까지.<br class=\"hidden sm:block\">글로벌 비즈니스의 확실한 물류 솔루션을 경험하세요.",
+                hero_btn1: "무상 견적 문의",
+                hero_btn2: "화물 실시간 추적",
+                svc_sub: "OUR CORE SERVICES & NEWS",
+                svc_title: "해상부터 항공까지 통합 물류 솔루션",
+                svc_desc: "수출입 고객의 특성에 맞춘 최적의 물류 경로와 투명한 정산 체계를 지원합니다.",
+                card1_title: "해상 운송 (Ocean)",
+                card1_desc: "FCL / LCL 컨테이너 화물, 특수화물(Reefer, Open Top)의 전 세계 안정적 배송 서비스를 제공합니다.",
+                card2_title: "항공 운송 (Air)",
+                card2_desc: "긴급 화물 및 고가품을 위한 익일 운송 및 전세기 서비스(Charter)로 빠른 납기를 보장합니다.",
+                card3_title: "통관 대행 (Customs)",
+                card3_desc: "복잡한 관세 규정 및 검역 절차를 전문 관세사가 인프라를 활용하여 신속 정확히 처리합니다.",
+                card4_title: "보세 창고 및 3PL",
+                card4_desc: "최신 스마트 창고 관리 시스템(WMS) 기반의 입출고, 재고 관리 및 패킹 솔루션을 제공합니다.",
+                more_view: "자세히 보기",
+                tab_news: "업계소식",
+                tab_notice: "공지사항",
+                btn_more: "More",
+                track_tag: "REAL-TIME VISIBILITY",
+                track_title: "내 화물, 지금 어디에? 실시간으로 추적하세요.",
+                track_box1_title: "화물 실시간 추적",
+                track_box1_desc: "선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.",
+                opt_kmtc: "고려해운",
+                opt_sinokor: "장금상선",
+                opt_doowoo: "두우해운",
+                track_placeholder: "B/L 번호 입력",
+                track_btn: "실시간 조회 ↗",
+                track_info1: "✓ 조회 버튼 클릭 시 B/L 번호 자동 복사 됩니다.",
+                vessel_box_title: "선박 조회",
+                vessel_box_desc: "선박명을 입력하시면 출항지, 도착일 등 터미널 스케줄 정보를 확인하실 수 있습니다.",
+                vessel_placeholder: "선박명을 입력하세요",
+                vessel_btn: "선박 스케줄 조회 ↗",
+                vessel_info1: "✓ 조회 버튼 클릭 시 선박명이 복사되며 터미널 스케줄 사이트로 이동합니다.",
+                exch_tag: "LIVE EXCHANGE RATES & SCHEDULES",
+                exch_title: "오늘의 환율 및 실시간 선박 스케줄",
+                exch_desc: "글로벌 금융 시장 환율 정보와 전문 수출입 선박 운항 일정을 한눈에 확인하세요.",
+                rate_table_title: "주요 통화 환율 정보 (KRW 기준)",
+                rate_loading: "실시간 불러오는 중...",
+                th_currency: "통화명 (Code)",
+                th_base: "매매기준율",
+                th_buy: "현찰 살 때",
+                th_sell: "현찰 팔 때",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.",
+                sched_box_title: "실시간 선박 스케줄 조회",
+                sched_export: "수출 (Export)",
+                sched_import: "수입 (Import)",
+                sched_pol: "출항지 (POL)",
+                sched_pod: "입항지 (POD)",
+                sched_date: "조회 기준일 (ETD)",
+                sched_btn: "스케줄 조회하기 ↗",
+                quote_tag: "FAST & EASY QUOTE",
+                quote_title: "맞춤형 물류 견적 요청하기",
+                quote_desc: "상세 내역을 남겨주시면 담당 포워더가 2시간 이내에 최적의 견적을 안내해 드립니다.",
+                form_name: "회사명 / 담당자명 *",
+                form_name_ph: "(주)퓨처글로벌 / 홍길동 팀장",
+                form_phone: "연락처 *",
+                form_mode: "운송 모드",
+                opt_mode1: "해상 운송 (FCL)",
+                opt_mode2: "해상 운송 (LCL)",
+                opt_mode3: "항공 운송 (Air)",
+                opt_mode4: "통관/창고 대행만",
+                form_pol: "출발지 (POL)",
+                form_pol_ph: "예: Shanghai, China",
+                form_pod: "도착지 (POD)",
+                form_pod_ph: "예: Busan, Korea",
+                form_memo: "화물 정보 및 문의사항",
+                form_memo_ph: "화물 종류, CBM/중량, 출하 예상 일정 등을 작성해 주세요.",
+                form_submit: "무료 견적 신청 제출하기",
+                footer_desc: "글로벌 물류의 새로운 기준, FUTURE GLS.<br>고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.",
+                footer_col1_title: "주요 서비스",
+                footer_s1: "해상 운송 (FCL/LCL)",
+                footer_s2: "항공 화물 운송",
+                footer_s3: "수출입 통관 대행",
+                footer_s4: "보세 창고 관리",
+                footer_col2_title: "고객 센터",
+                footer_tel: "전화: 02-712-0410(Rep)",
+                footer_fax: "팩스: 02-712-0411",
+                footer_email: "이메일: future@futuregls.com",
+                footer_hours: "운영시간: 평일 09:00 - 17:00",
+                footer_col3_title: "본사 위치",
+                footer_addr: "서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br> 사업자등록번호: 105-87-87676 | 대표이사: 정주만"
+            },
             en: {
                 cs_center: "Customer Center: 02-712-0410(Rep) (Weekdays 09:00 - 17:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
                 menu_ceo: "About Us",
-                menu_air: "Air Freight",
                 menu_ocean: "Ocean Freight",
+                menu_air: "Air Freight",
                 menu_triangle: "Triangle Trade",
                 menu_customs: "Customs",
                 menu_board: "Industry News",
@@ -462,97 +559,97 @@
                 btn_quote: "Request Quote",
                 btn_admin: "Admin",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
-                hero_title: "From Sea to Sky,<br><span class=\"text-orange-500\">FUTURE GLS</span> Connects You.",
-                hero_desc: "Providing optimized rates for major global routes, AI real-time cargo tracking, and one-stop customs clearance.",
-                hero_btn1: "Free Quote Inquiry",
-                hero_btn2: "Real-Time Tracking",
+                hero_title: "From Ocean to Air,<br><span class=\"text-orange-500\">FUTURE GLS</span> Connects You.",
+                hero_desc: "Providing optimal freight rates for major global routes, real-time cargo tracking, and customs clearance.<br class=\"hidden sm:block\">Experience reliable logistics solutions for global business.",
+                hero_btn1: "Free Quote Request",
+                hero_btn2: "Track Cargo Real-time",
                 svc_sub: "OUR CORE SERVICES & NEWS",
-                svc_title: "Integrated Logistics Solutions from Sea to Air",
-                svc_desc: "We support optimal logistics routes and a transparent settlement system tailored to import/export clients.",
+                svc_title: "Integrated Logistics Solutions from Ocean to Air",
+                svc_desc: "We support optimal logistics routes and transparent settlement tailored to customer needs.",
                 card1_title: "Ocean Freight",
-                card1_desc: "We provide stable worldwide delivery services for FCL / LCL container cargo and special cargo.",
+                card1_desc: "Reliable worldwide shipping services for FCL/LCL container cargo and special cargo (Reefer, Open Top).",
                 card2_title: "Air Freight",
-                card2_desc: "Fast delivery guaranteed with next-day shipping and charter services for emergency cargo.",
+                card2_desc: "Guaranteed fast delivery with next-day shipping and charter services for urgent and high-value goods.",
                 card3_title: "Customs Clearance",
-                card3_desc: "Professional customs brokers quickly and accurately process complex tariff regulations.",
+                card3_desc: "Licensed customs brokers process complex regulations and inspection procedures quickly and accurately.",
                 card4_title: "Bonded Warehouse & 3PL",
-                card4_desc: "We provide inbound/outbound, inventory management, and packing solutions based on WMS.",
+                card4_desc: "Inbound/outbound management, inventory control, and packing solutions based on smart WMS.",
                 more_view: "Learn More",
-                tab_notice: "Notices",
                 tab_news: "Industry News",
+                tab_notice: "Notice",
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
-                track_title: "Where is my cargo? Track it in real-time.",
-                track_box1_title: "Cargo Tracking",
-                track_box1_desc: "Select a carrier and enter your B/L number to instantly connect.",
-                vessel_box_title: "Vessel Schedule",
-                vessel_box_desc: "Enter the vessel name to check terminal schedule information such as departure and arrival dates.",
-                vessel_placeholder: "Enter vessel name",
-                vessel_btn: "Vessel Schedule ↗",
-                vessel_info1: "✓ Vessel name is copied and redirected to the schedule site on click.",
+                track_title: "Where is my cargo now? Track in real-time.",
+                track_box1_title: "Real-time Cargo Tracking",
+                track_box1_desc: "Select a carrier and enter your B/L number to connect directly to the official tracking system.",
                 opt_kmtc: "KMTC",
-                opt_sinokor: "Sinokor",
-                opt_doowoo: "Doowoo",
-                track_placeholder: "Enter B/L No.",
-                track_btn: "Real-Time Search ↗",
-                track_info1: "✓ B/L number is automatically copied to clipboard on search",
-                exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "Today's Exchange Rates & Ship Schedules",
-                exch_desc: "Accurately check exchange rates and vessel schedules.",
-                rate_table_title: "Major Currency Exchange Rates (vs KRW)",
-                rate_loading: "Loading real-time rates...",
-                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> Actual logistics settlement rates may slightly vary depending on carrier and customs application timing.",
+                opt_sinokor: "SINOKOR",
+                opt_doowoo: "DOOWOO",
+                track_placeholder: "Enter B/L Number",
+                track_btn: "Track Now ↗",
+                track_info1: "✓ Clicking the track button automatically copies the B/L number.",
+                vessel_box_title: "Vessel Search",
+                vessel_box_desc: "Enter the vessel name to check terminal schedule information including POL and ETA.",
+                vessel_placeholder: "Enter vessel name",
+                vessel_btn: "Check Vessel Schedule ↗",
+                vessel_info1: "✓ Clicking search copies the vessel name and navigates to terminal schedule.",
+                exch_tag: "LIVE EXCHANGE RATES & SCHEDULES",
+                exch_title: "Today's Exchange Rates & Live Vessel Schedules",
+                exch_desc: "Check global financial exchange rate information and professional shipping schedules at a glance.",
+                rate_table_title: "Major Currency Exchange Rates (Base: KRW)",
+                rate_loading: "Loading real-time data...",
                 th_currency: "Currency (Code)",
                 th_base: "Base Rate",
                 th_buy: "Cash Buy",
                 th_sell: "Cash Sell",
-                sched_box_title: "Real-Time Vessel Schedule",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> Minor differences may occur depending on carrier and customs application timing during settlement.",
+                sched_box_title: "Real-time Vessel Schedule Search",
                 sched_export: "Export",
                 sched_import: "Import",
                 sched_pol: "Port of Loading (POL)",
                 sched_pod: "Port of Discharge (POD)",
-                sched_date: "Schedule Date (ETD)",
+                sched_date: "Search Date (ETD)",
                 sched_btn: "Search Schedule ↗",
                 quote_tag: "FAST & EASY QUOTE",
-                quote_title: "Request Custom Logistics Quote",
-                quote_desc: "Leave your details and our forwarder will provide an optimal quote.",
+                quote_title: "Request a Customized Logistics Quote",
+                quote_desc: "Leave your details and an assigned forwarder will provide an optimal quote within 2 hours.",
                 form_name: "Company / Contact Name *",
-                form_name_ph: "Future Global / Manager Kim",
+                form_name_ph: "FUTURE GLS Co., Ltd. / Manager",
                 form_phone: "Phone Number *",
                 form_mode: "Transport Mode",
                 opt_mode1: "Ocean Freight (FCL)",
                 opt_mode2: "Ocean Freight (LCL)",
-                opt_mode3: "Air Freight (Air)",
-                opt_mode4: "Customs/Warehouse Only",
-                form_pol: "Port of Loading (POL)",
-                form_pol_ph: "e.g. Shanghai, China",
-                form_pod: "Port of Discharge (POD)",
-                form_pod_ph: "e.g. Busan, Korea",
+                opt_mode3: "Air Freight",
+                opt_mode4: "Customs / Warehouse Only",
+                form_pol: "Origin (POL)",
+                form_pol_ph: "e.g., Shanghai, China",
+                form_pod: "Destination (POD)",
+                form_pod_ph: "e.g., Busan, Korea",
                 form_memo: "Cargo Info & Inquiries",
-                form_memo_ph: "Please write cargo type, CBM/weight, etc.",
-                form_submit: "Submit Free Quote Application",
-                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
-                footer_col1_title: "Key Services",
+                form_memo_ph: "Please state cargo type, CBM/weight, expected shipping schedule, etc.",
+                form_submit: "Submit Quote Request",
+                footer_desc: "New standard for global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Main Services",
                 footer_s1: "Ocean Freight (FCL/LCL)",
-                footer_s2: "Air Freight",
-                footer_s3: "Customs Clearance",
-                footer_s4: "Bonded Warehouse",
+                footer_s2: "Air Cargo Freight",
+                footer_s3: "Customs Clearance Agency",
+                footer_s4: "Bonded Warehouse Management",
                 footer_col2_title: "Customer Center",
-                footer_tel: "Phone: 02-712-0410(Rep)",
+                footer_tel: "Tel: 02-712-0410(Rep)",
                 footer_fax: "Fax: 02-712-0411",
-                footer_email: "Email: docs@futuregls.com",
+                footer_email: "Email: future@futuregls.com",
                 footer_hours: "Hours: Weekdays 09:00 - 17:00",
-                footer_col3_title: "Headquarters",
-              footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
+                footer_col3_title: "Head Office",
+                footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-712-0410(Rep)",
+                cs_center: "客服中心：02-712-0410(Rep) | 传真：02-712-0411 (工作日 09:00 - 17:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
-                menu_ceo: "公司介绍",
-                menu_air: "航空运输",
+                menu_ceo: "회사소개",
                 menu_ocean: "海上运输",
+                menu_air: "航空运输",
                 menu_triangle: "三角贸易",
                 menu_customs: "清关业务",
                 menu_board: "行业动态",
@@ -560,92 +657,97 @@
                 btn_quote: "报价申请",
                 btn_admin: "管理员",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
-                hero_title: "从海洋到天空，<br><span class=\"text-orange-500\">FUTURE GLS</span> 为您连结世界。",
-                hero_desc: "提供全球主要航线优化运费、AI实时货物追踪及一站式清关代理。",
+                hero_title: "从海洋到天空，<br><span class=\"text-orange-500\">FUTURE GLS</span> 为您连接。",
+                hero_desc: "提供全球主要航线最佳运费、实时货物位置追踪及清关代理。<br class=\"hidden sm:block\">体验全球业务的可靠物流解决方案。",
                 hero_btn1: "免费报价咨询",
                 hero_btn2: "实时货物追踪",
                 svc_sub: "OUR CORE SERVICES & NEWS",
-                svc_title: "从海运到空运的综合物流解决方案",
+                svc_title: "海运至空运的一站式综合物流解决方案",
+                svc_desc: "根据进出口客户的特点，提供最佳物流路径与透明的结算体系。",
                 card1_title: "海上运输 (Ocean)",
+                card1_desc: "提供 FCL / LCL 集装箱货物及特种货物 (Reefer, Open Top) 的全球稳定运输服务。",
                 card2_title: "航空运输 (Air)",
+                card2_desc: "为紧急货物及高价值物品提供次日达及包机服务 (Charter)，确保快速交货。",
                 card3_title: "清关代理 (Customs)",
+                card3_desc: "专业报关师利用基础设施，迅速准确地处理复杂的关税法规及检疫程序。",
                 card4_title: "保税仓库及 3PL",
+                card4_desc: "基于最新智能仓库管理系统 (WMS) 提供出入库、库存管理及包装解决方案。",
                 more_view: "查看详情",
-                tab_notice: "公告事项",
                 tab_news: "行业动态",
-                btn_more: "More",
+                tab_notice: "公告",
+                btn_more: "更多",
                 track_tag: "REAL-TIME VISIBILITY",
-                track_title: "我的货物在哪里？请进行实时追踪。",
+                track_title: "我的货物现在在哪里？请实时追踪。",
                 track_box1_title: "货物实时追踪",
-                track_box1_desc: "选择船公司并输入B/L单号即可立即连接官方追踪系统。",
-                vessel_box_title: "船舶查询",
-                vessel_box_desc: "输入船名即可确认起运港、到达日等码头船期信息。",
-                vessel_placeholder: "请输入船名",
-                vessel_btn: "船舶船期查询 ↗",
-                vessel_info1: "✓ 点击查询按钮时将复制船名并跳转至船期网站。",
+                track_box1_desc: "选择船公司并输入 B/L 号码，即可立即连接至官方追踪系统。",
                 opt_kmtc: "高丽海运",
                 opt_sinokor: "长锦商船",
-                opt_doowoo: "斗友海运",
-                track_placeholder: "请输入B/L单号",
+                opt_doowoo: "斗宇海运",
+                track_placeholder: "输入 B/L 号码",
                 track_btn: "实时查询 ↗",
-                track_info1: "✓ 点击查询按钮时将自动复制B/L单号",
-                exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "今日汇率及船期查询",
-                exch_desc: "准确计算物流费用并查询船期。",
-                rate_table_title: "主要货币汇率信息",
+                track_info1: "✓ 点击查询按钮时，B/L 号码将自动复制。",
+                vessel_box_title: "船舶查询",
+                vessel_box_desc: "输入船名，即可查看起运港、到达日等码头计划信息。",
+                vessel_placeholder: "请输入船名",
+                vessel_btn: "查询船舶计划 ↗",
+                vessel_info1: "✓ 点击查询按钮时将复制船名并跳转至码头计划网站。",
+                exch_tag: "LIVE EXCHANGE RATES & SCHEDULES",
+                exch_title: "今日汇率及实时船舶计划",
+                exch_desc: "一目了然地查看全球金融市场汇率信息及专业进出口船舶运行计划。",
+                rate_table_title: "主要货币汇率信息 (KRW 基准)",
                 rate_loading: "正在实时加载...",
-                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 实际物流结算汇率可能会因船公司及海关适用时间而产生微小差异。",
-                th_currency: "币种名称",
-                th_base: "基准汇率",
-                th_buy: "现钞买入价",
-                th_sell: "现钞卖出价",
-                sched_box_title: "实时船舶船期查询",
+                th_currency: "货币名称 (Code)",
+                th_base: "买卖基准率",
+                th_buy: "现钞买入",
+                th_sell: "现钞卖出",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 实际结算物流费时，汇率可能因船公司及海关适用时间不同而产生微小差异。",
+                sched_box_title: "实时船舶计划查询",
                 sched_export: "出口 (Export)",
                 sched_import: "进口 (Import)",
                 sched_pol: "起运港 (POL)",
                 sched_pod: "目的港 (POD)",
                 sched_date: "查询基准日 (ETD)",
-                sched_btn: "查询船期 ↗",
+                sched_btn: "查询计划 ↗",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "申请定制物流报价",
-                quote_desc: "请留下详细信息，我们的货运代理将在2小时内为您提供最佳报价。",
-                form_name: "公司名称 / 负责人姓名 *",
-                form_name_ph: "未来全球",
+                quote_desc: "留下详细信息，专属货代将在 2 小时内为您提供最佳报价。",
+                form_name: "公司名称 / 联系人姓名 *",
+                form_name_ph: "FUTURE GLS / 经理",
                 form_phone: "联系电话 *",
                 form_mode: "运输模式",
                 opt_mode1: "海上运输 (FCL)",
                 opt_mode2: "海上运输 (LCL)",
                 opt_mode3: "航空运输 (Air)",
-                opt_mode4: "仅清关/仓储代理",
-                form_pol: "起运港 (POL)",
-                form_pol_ph: "例: 上海",
-                form_pod: "目的港 (POD)",
-                form_pod_ph: "例: 釜山",
+                opt_mode4: "仅清关/仓库代理",
+                form_pol: "起运地 (POL)",
+                form_pol_ph: "例: Shanghai, China",
+                form_pod: "目的地 (POD)",
+                form_pod_ph: "例: Busan, Korea",
                 form_memo: "货物信息及咨询事项",
-                form_memo_ph: "请填写货物种类、CBM/重量、预计出货日期等。",
+                form_memo_ph: "请填写货物种类、CBM/重量、预计发货日程等。",
                 form_submit: "提交免费报价申请",
-                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
+                footer_desc: "全球物流的新标准，FUTURE GLS。<br>安全地将您的商业价值传递至世界各地。",
                 footer_col1_title: "主要服务",
-                footer_s1: "海上运输",
+                footer_s1: "海上运输 (FCL/LCL)",
                 footer_s2: "航空货物运输",
                 footer_s3: "进出口清关代理",
                 footer_s4: "保税仓库管理",
                 footer_col2_title: "客服中心",
                 footer_tel: "电话：02-712-0410(Rep)",
                 footer_fax: "传真：02-712-0411",
-                footer_email: "邮箱：docs@futuregls.com",
-                footer_hours: "工作时间：工作日 09:00 - 17:00",
+                footer_email: "邮箱：future@futuregls.com",
+                footer_hours: "营业时间：工作日 09:00 - 17:00",
                 footer_col3_title: "总部地址",
-                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满",
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676 <br> 대표이사: 郑周满"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-712-0410(Rep)",
+                cs_center: "カスタマーセンター：02-712-0410(Rep) | FAX：02-712-0411 (平日 09:00 - 17:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
                 menu_ceo: "会社紹介",
-                menu_air: "航空輸送",
                 menu_ocean: "海上輸送",
+                menu_air: "航空輸送",
                 menu_triangle: "三国間輸送",
                 menu_customs: "通関業務",
                 menu_board: "業界ニュース",
@@ -653,57 +755,62 @@
                 btn_quote: "お見積り",
                 btn_admin: "管理者",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
-                hero_title: "海から空へ、<br><span class=\"text-orange-500\">FUTURE GLS</span> が繋ぎます。",
-                hero_desc: "世界主要航路の最適化された運賃提供、AIリアルタイム貨物位置追跡。",
-                hero_btn1: "無料お見積り相談",
+                hero_title: "海から sky まで、<br><span class=\"text-orange-500\">FUTURE GLS</span> がつなぎます。",
+                hero_desc: "세계 주요 항로 최적화 운임 제공, 실시간 화물 위치 추적 및 통관 대행까지.<br class=\"hidden sm:block\">글로벌 비즈니스의 확실한 물류 솔루션을 경험하세요.",
+                hero_btn1: "無料見積もり問い合わせ",
                 hero_btn2: "貨物リアルタイム追跡",
                 svc_sub: "OUR CORE SERVICES & NEWS",
                 svc_title: "海上から航空まで統合物流ソリューション",
+                svc_desc: "輸出入のお客様の特性に合わせた最適な物流ルートと透明性の高い精算体系をサポートします。",
                 card1_title: "海上輸送 (Ocean)",
+                card1_desc: "FCL / LCL コンテナ貨物、特殊貨物 (Reefer, Open Top) の世界中への安定した配送サービスを提供します。",
                 card2_title: "航空輸送 (Air)",
+                card2_desc: "緊急貨物や高価品のための翌日配送およびチャーター便サービス (Charter) で迅速な納期を保証します。",
                 card3_title: "通関代行 (Customs)",
-                card4_title: "保税倉庫および 3PL",
+                card3_desc: "複雑な関税規定および検疫手続きを専門の通関士がインフラを活用して迅速・正確に処理します。",
+                card4_title: "保税倉庫及び 3PL",
+                card4_desc: "最新のスマート倉庫管理システム (WMS) に基づく入出庫、在庫管理、パッキングソリューションを提供します。",
                 more_view: "詳細を見る",
-                tab_notice: "お知らせ",
                 tab_news: "業界ニュース",
+                tab_notice: "お知らせ",
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
-                track_title: "お荷物は今どこに？リアルタイムで追跡してください。",
+                track_title: "私の貨物、今どこに？リアルタイムで追跡してください。",
                 track_box1_title: "貨物リアルタイム追跡",
-                track_box1_desc: "船会社を選択し、B/L番号を入力すると公式トラッキングシステムにすぐ接続されます。",
-                vessel_box_title: "船舶照会",
-                vessel_box_desc: "船名を入力すると、出港地や到着日などのターミナルスケジュール情報をご確認いただけます。",
-                vessel_placeholder: "船名を入力してください",
-                vessel_btn: "船舶スケジュール照会 ↗",
-                vessel_info1: "✓ 照会ボタンクリック時に船名がコピーされ、ターミナルスケジュールサイトに移動します。",
+                track_box1_desc: "船会社を選択して B/L 番号を入力すると、公式追跡システムに即座に接続されます。",
                 opt_kmtc: "高麗海運",
                 opt_sinokor: "長錦商船",
-                opt_doowoo: "斗友海運",
-                track_placeholder: "B/L番号を入力",
+                opt_doowoo: "斗宇海運",
+                track_placeholder: "B/L 番号入力",
                 track_btn: "リアルタイム照会 ↗",
-                track_info1: "✓ 照会ボタンクリック時にB/L番号が自動コピーされます",
-                exch_tag: "LIVE EXCHANGE RATES",
-                exch_title: "本日の為替レートおよび船便スケジュール",
-                exch_desc: "為替情報と運行スケジュールを正確に確認できます。",
-                rate_table_title: "主要通貨為替情報",
-                rate_loading: "リアルタイム読込中...",
-                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 実際の物流費精算時の為替レートは、船社および税関の適用時点により微細な差が生じる場合があります。",
-                th_currency: "通貨名",
-                th_base: "売買基準レート",
-                th_buy: "現金購入時",
-                th_sell: "現金売却時",
+                track_info1: "✓ 照会ボタンをクリックすると B/L 番号が自動コピーされます。",
+                vessel_box_title: "船舶照会",
+                vessel_box_desc: "船名を入力すると出港地、到着日などのターミナルスケジュール情報を確認できます。",
+                vessel_placeholder: "船名を入力してください",
+                vessel_btn: "船舶スケジュール照会 ↗",
+                vessel_info1: "✓ 照会ボタンをクリックすると船名がコピーされ、ターミナルスケジュールサイトに移動します。",
+                exch_tag: "LIVE EXCHANGE RATES & SCHEDULES",
+                exch_title: "本日の為替レート及びリアルタイム船舶スケジュール",
+                exch_desc: "グローバル金融市場の為替レート情報と専門輸出入船舶の運航日程を一目で確認できます。",
+                rate_table_title: "主要通貨の為替レート情報 (KRW 基準)",
+                rate_loading: "リアルタイム読み込み中...",
+                th_currency: "通貨名 (Code)",
+                th_base: "売買基準率",
+                th_buy: "現金買う時",
+                th_sell: "現金売る時",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 実際の物流費精算時、為替レートは船会社および税関の適用時点により若干の差が生じることがあります。",
                 sched_box_title: "リアルタイム船舶スケジュール照会",
                 sched_export: "輸出 (Export)",
                 sched_import: "輸入 (Import)",
-                sched_pol: "出発地 (POL)",
-                sched_pod: "到着地 (POD)",
+                sched_pol: "出港地 (POL)",
+                sched_pod: "入港地 (POD)",
                 sched_date: "照会基準日 (ETD)",
                 sched_btn: "スケジュール照会する ↗",
                 quote_tag: "FAST & EASY QUOTE",
-                quote_title: "カスタム物流お見積り依頼",
-                quote_desc: "詳細な内容を残していただければ、担当フォワーダーが2時間以内に最適なお見積りをご案内いたします。",
+                quote_title: "カスタム物流見積もり依頼",
+                quote_desc: "詳細を入力していただければ、担当フォワーダーが 2 時間以内に最適な見積もりをご案内いたします。",
                 form_name: "会社名 / 担当者名 *",
-                form_name_ph: "フューチャーグローバル",
+                form_name_ph: "FUTURE GLS / 担当者",
                 form_phone: "連絡先 *",
                 form_mode: "輸送モード",
                 opt_mode1: "海上輸送 (FCL)",
@@ -711,22 +818,22 @@
                 opt_mode3: "航空輸送 (Air)",
                 opt_mode4: "通関/倉庫代行のみ",
                 form_pol: "出発地 (POL)",
-                form_pol_ph: "例: 上海",
+                form_pol_ph: "例: Shanghai, China",
                 form_pod: "到着地 (POD)",
-                form_pod_ph: "例: 釜山",
-                form_memo: "貨物情報およびお問い合わせ",
-                form_memo_ph: "貨物の種類、CBM/重量、出荷予定日などをご記入ください。",
-                form_submit: "無料お見積り申請を提出する",
-                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                form_pod_ph: "例: Busan, Korea",
+                form_memo: "貨物情報及びお問い合わせ事項",
+                form_memo_ph: "貨物の種類、CBM/重量、出荷予定日程などをご記入ください。",
+                form_submit: "無料見積もり me 依頼送信",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中に安全にお届けします。",
                 footer_col1_title: "主要サービス",
-                footer_s1: "海上輸送",
+                footer_s1: "海上輸送 (FCL/LCL)",
                 footer_s2: "航空貨物輸送",
                 footer_s3: "輸出入通関代行",
                 footer_s4: "保税倉庫管理",
                 footer_col2_title: "カスタマーセンター",
                 footer_tel: "電話：02-712-0410(Rep)",
-                footer_fax: "ファックス：02-712-0411",
-                footer_email: "メール：docs@futuregls.com",
+                footer_fax: "FAX：02-712-0411",
+                footer_email: "メール：future@futuregls.com",
                 footer_hours: "営業時間：平日 09:00 - 17:00",
                 footer_col3_title: "本社所在地",
                 footer_addr: "ソウル特別市江南区テヘラン路64ギル13、9階<br> 事業者登録番号: 105-87-87676<br> 代表取締役: 鄭周満"
@@ -734,22 +841,58 @@
         };
 
         const originalTextCache = new Map();
-        
+
         window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => originalTextCache.set(el, el.getAttribute('placeholder')));
+
+            const savedLang = localStorage.getItem('site_lang') || 'ko';
+            applyCustomLanguage(savedLang);
+        });
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', () => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        });
+
+        window.changeLanguage = function(langCode, labelText) {
+            localStorage.setItem('site_lang', langCode);
+            document.documentElement.setAttribute('lang', langCode);
+            updateLangButtonText(langCode);
+            applyCustomLanguage(langCode);
+            document.getElementById('langDropdown').classList.add('hidden');
+        }
+
+        function applyCustomLanguage(lang) {
+            updateLangButtonText(lang);
+
+            const dict = i18nData[lang] || i18nData['ko'];
+            if (!dict) return;
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
-                originalTextCache.set(el, el.innerHTML);
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerHTML = dict[key];
+                else if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
             });
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                originalTextCache.set(el + '_ph', el.placeholder);
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) el.setAttribute('placeholder', dict[key]);
+                else if (originalTextCache.has(el)) el.setAttribute('placeholder', originalTextCache.get(el));
             });
+        }
 
-            // 저장된 언어를 불러와 적용하고 버튼 텍스트도 동기화합니다.
-            const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') {
-                applyCustomLanguage(savedLang);
-            }
-            updateLangButtonText(savedLang);
+        function updateLangButtonText(langCode) {
+            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            const textEl = document.getElementById('langBtnText');
+            if (textEl && map[langCode]) textEl.innerText = map[langCode];
+        }
 
+        window.addEventListener('DOMContentLoaded', () => {
             const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
             const adminContainer = document.getElementById('adminContainer');
 
@@ -765,7 +908,7 @@
                     `;
                 } else {
                     adminContainer.innerHTML = `
-                        <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                         </a>
                         <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
@@ -774,325 +917,10 @@
                     `;
                 }
             }
+
+            const currentLang = localStorage.getItem('site_lang') || 'ko';
+            applyCustomLanguage(currentLang);
         });
-
-        function toggleLangMenu(e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.toggle('hidden');
-        }
-
-        window.addEventListener('click', () => {
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
-        });
-
-        window.changeLanguage = function(langCode, labelText) {
-            localStorage.setItem('site_lang', langCode);
-            document.documentElement.setAttribute('lang', langCode);
-            updateLangButtonText(langCode);
-            applyCustomLanguage(langCode);
-            const dropdown = document.getElementById('langDropdown');
-            if (dropdown) dropdown.classList.add('hidden');
-        }
-
-        function applyCustomLanguage(lang) {
-            if (lang === 'ko') {
-                document.documentElement.setAttribute('lang', 'ko');
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
-                });
-                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                    if (originalTextCache.has(el + '_ph')) el.placeholder = originalTextCache.get(el + '_ph');
-                });
-                updateLangButtonText('ko');
-                return;
-            }
-
-            const dict = i18nData[lang];
-            if (!dict) return;
-
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key]) {
-                    el.innerHTML = dict[key];
-                }
-            });
-
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (dict[key]) {
-                    el.placeholder = dict[key];
-                }
-            });
-        }
-
-        function updateLangButtonText(langCode) {
-            const map = { 'ko': 'KOR', 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
-            const textEl = document.getElementById('langBtnText');
-            if (textEl && map[langCode]) {
-                textEl.innerText = map[langCode];
-            }
-        }
-    </script>
-
-    <!-- Firebase SDK 및 견적 신청 이메일 전송 로직 -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBPwNp7-Yrl6LwAqaReC3ht1JKwSnTTEcI",
-            authDomain: "jch01-65141.firebaseapp.com",
-            projectId: "jch01-65141",
-            storageBucket: "jch01-65141.firebasestorage.app",
-            messagingSenderId: "885424801252",
-            appId: "1:885424801252:web:0b840323f160d0d4cc73f1",
-            measurementId: "G-3ECML2H6S6"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        let notices = [];
-        let industryNews = [];
-
-        window.renderBoardLists = function() {
-            const newsContainer = document.getElementById('newsContainer');
-            const noticeContainer = document.getElementById('noticeContainer');
-
-            if (newsContainer) {
-                if (industryNews.length === 0) {
-                    newsContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 업계소식이 없습니다.</div>`;
-                } else {
-                    newsContainer.innerHTML = industryNews.slice(0, 5).map(item => `
-                        <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">${item.title}</span>
-                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
-                        </a>
-                    `).join('');
-                }
-            }
-
-            if (noticeContainer) {
-                if (notices.length === 0) {
-                    noticeContainer.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs font-medium">등록된 공지사항이 없습니다.</div>`;
-                } else {
-                    noticeContainer.innerHTML = notices.slice(0, 5).map(item => `
-                        <a href="board-view.html?id=${item.id}" class="py-3 flex items-center justify-between gap-2 hover:bg-slate-100/60 px-3 rounded-xl transition-colors group">
-                            <span class="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-orange-600 transition-colors truncate">${item.title}</span>
-                            <span class="text-[11px] text-slate-400 shrink-0">${item.date}</span>
-                        </a>
-                    `).join('');
-                }
-            }
-        };
-
-        async function fetchMainBoardPosts() {
-            try {
-                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-                notices = [];
-                industryNews = [];
-
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    const postItem = { id: docSnap.id, ...data };
-                    if (data.category === '공지사항') notices.push(postItem);
-                    else if (data.category === '업계소식') industryNews.push(postItem);
-                });
-                renderBoardLists();
-            } catch (error) {
-                console.error("메인 게시글 로딩 실패:", error);
-            }
-        }
-
-        async function fetchExchangeRates() {
-            try {
-                const res = await fetch('https://open.er-api.com/v6/latest/KRW');
-                const data = await res.json();
-                if (data && data.rates) {
-                    const r = data.rates;
-                    const usdKrw = (1 / r.USD).toFixed(2);
-                    const eurKrw = (1 / r.EUR).toFixed(2);
-                    const jpyKrw = ((1 / r.JPY) * 100).toFixed(2);
-                    const cnyKrw = (1 / r.CNY).toFixed(2);
-                    const gbpKrw = (1 / r.GBP).toFixed(2);
-
-                    const tbody = document.getElementById('rateTableBody');
-                    if (tbody) {
-                        tbody.innerHTML = `
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> 미국 USD</td>
-                                <td class="p-3.5 font-bold text-slate-900">₩ ${usdKrw}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(usdKrw) * 1.015).toFixed(2)}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(usdKrw) * 0.985).toFixed(2)}</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> 유럽연합 EUR</td>
-                                <td class="p-3.5 font-bold text-slate-900">₩ ${eurKrw}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(eurKrw) * 1.015).toFixed(2)}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(eurKrw) * 0.985).toFixed(2)}</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> 일본 JPY (100엔)</td>
-                                <td class="p-3.5 font-bold text-slate-900">₩ ${jpyKrw}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(jpyKrw) * 1.015).toFixed(2)}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(jpyKrw) * 0.985).toFixed(2)}</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> 중국 CNY</td>
-                                <td class="p-3.5 font-bold text-slate-900">₩ ${cnyKrw}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 1.015).toFixed(2)}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(cnyKrw) * 0.985).toFixed(2)}</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-3.5 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500"></span> 영국 GBP</td>
-                                <td class="p-3.5 font-bold text-slate-900">₩ ${gbpKrw}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(gbpKrw) * 1.015).toFixed(2)}</td>
-                                <td class="p-3.5 text-slate-600">₩ ${(Number(gbpKrw) * 0.985).toFixed(2)}</td>
-                            </tr>
-                        `;
-                    }
-                    const timeEl = document.getElementById('rateUpdateTime');
-                    if (timeEl) {
-                        const now = new Date();
-                        timeEl.innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} 기준`;
-                    }
-                }
-            } catch (e) {
-                console.error("환율 정보 로드 실패:", e);
-            }
-        }
-
-        window.openCarrierTracking = function() {
-            const carrier = document.getElementById('carrierSelect').value;
-            const blNo = document.getElementById('blInput').value.trim();
-            if (!blNo) {
-                alert('B/L 번호를 입력해주세요.');
-                document.getElementById('blInput').focus();
-                return;
-            }
-            navigator.clipboard.writeText(blNo).then(() => {
-                alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.`);
-                let trackingUrl = (carrier === 'KMTC') ? 'https://www.ekmtc.com/index.html#/cargo-tracking' :
-                                  (carrier === 'SINOKOR') ? 'https://ebiz.sinokor.co.kr/' :
-                                  (carrier === 'DOOWOO') ? 'https://www.doowoo.co.kr/pst_webapp/ExpBookingSearchMove.do' :
-                                  'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
-                window.open(trackingUrl, '_blank');
-            });
-        }
-
-        window.openVesselSchedule = function() {
-            const vesselName = document.getElementById('vesselNameInput').value.trim();
-            if (!vesselName) {
-                alert('선박명을 입력해주세요.');
-                document.getElementById('vesselNameInput').focus();
-                return;
-            }
-            navigator.clipboard.writeText(vesselName).then(() => {
-                alert(`선박명 [${vesselName}]이(가) 클립보드에 복사되었습니다.`);
-                window.open('https://www.tradlinx.com/ko/container-terminal-schedule', '_blank');
-            });
-        }
-
-        window.handleQuoteSubmit = function(event) {
-            event.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = "전송 중...";
-            submitBtn.disabled = true;
-
-            const now = new Date();
-            const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}시 ${String(now.getMinutes()).padStart(2,'0')}분`;
-
-            const formElement = document.getElementById('quoteForm');
-            const formData = new FormData(formElement);
-
-            const userName = formData.get('user_name');
-
-            const templateParams = {
-                name: userName,
-                submission_time: dateStr,
-                user_name: userName,
-                user_phone: formData.get('user_phone'),
-                transport_mode: formData.get('transport_mode'),
-                pol: formData.get('pol') || '미입력',
-                pod: formData.get('pod') || '미입력',
-                message: formData.get('message') || '내용 없음',
-                to_email: 'future@futuregls.com'
-            };
-
-            emailjs.send('service_d5h280b', 'template_aiw9x2d', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    alert('견적 문의가 성공적으로 접수되어 메일이 발송되었습니다!\n담당 포워더가 검토 후 2시간 이내에 연락드리겠습니다.');
-                    formElement.reset();
-                    submitBtn.innerText = "무료 견적 신청 제출하기";
-                    submitBtn.disabled = false;
-                }, function(error) {
-                    console.error('FAILED...', error);
-                    alert('메일 전송에 실패하였습니다. (콘솔창의 에러 내용을 확인해 주세요)');
-                    submitBtn.innerText = "무료 견적 신청 제출하기";
-                    submitBtn.disabled = false;
-                });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchMainBoardPosts();
-            fetchExchangeRates();
-        });
-    </script>
-
-    <!-- 스케줄 조회 UI용 스크립트 추가 -->
-    <script>
-        const koreaPorts = [
-            {name: "인천 (Incheon)", id: "105162"}, {name: "평택 (Pyeongtaek)", id: "105168"}, 
-            {name: "부산 (Busan)", id: "105169"}, {name: "광양 (Gwangyang)", id: "105165"}, {name: "울산 (Ulsan)", id: "105172"}
-        ];
-        const worldPorts = [
-            {name: "닝보 (Ningbo)", id: "104939"}, {name: "상해 (Shanghai)", id: "104947"}, {name: "샤먼 (Xiamen)", id: "104955"},
-            {name: "칭따오 (Qingdao)", id: "104944"}, {name: "텐진 (Tianjin)", id: "104952"}, {name: "웨이하이 (Weihai)", id: "104953"},
-            {name: "신강 (Xinjiang/Other)", id: "104956"}, {name: "홍콩 (Hong Kong)", id: "105038"}, {name: "호치민 (Ho Chi Minh)", id: "105407"},
-            {name: "하이퐁 (Haiphong)", id: "105405"}, {name: "자카르타 (Jakarta)", id: "105046"}
-        ];
-
-        function setMode(mode) {
-            const polSelect = document.getElementById('pol');
-            const podSelect = document.getElementById('pod');
-            
-            const btnExport = document.getElementById('btnExport');
-            const btnImport = document.getElementById('btnImport');
-
-            polSelect.innerHTML = '';
-            podSelect.innerHTML = '';
-
-            if (mode === 'export') {
-                btnExport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md";
-                btnImport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900";
-                
-                koreaPorts.forEach(p => polSelect.add(new Option(p.name, p.id)));
-                worldPorts.forEach(p => podSelect.add(new Option(p.name, p.id)));
-            } else {
-                btnImport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md";
-                btnExport.className = "py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900";
-                
-                worldPorts.forEach(p => polSelect.add(new Option(p.name, p.id)));
-                koreaPorts.forEach(p => podSelect.add(new Option(p.name, p.id)));
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const dateInput = document.getElementById('scheduleDate');
-            if (dateInput) {
-                dateInput.value = new Date().toISOString().substring(0, 10);
-            }
-            setMode('export');
-        });
-
-        function openTradlinxSchedule() {
-            const url = `https://www.tradlinx.com/ko/ocean-schedule-fcl?org=${document.getElementById('pol').value}&des=${document.getElementById('pod').value}&day=${document.getElementById('scheduleDate').value}`;
-            window.open(url, '_blank');
-        }
     </script>
 </body>
 </html>
