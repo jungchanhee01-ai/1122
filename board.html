@@ -317,73 +317,6 @@
 
     <script>
         const i18nData = {
-            ko: {
-                cs_center: "고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)",
-                nav_tracking: "화물 추적",
-                nav_exchange: "환율 조회",
-                nav_quote: "견적 요청",
-                menu_ceo: "회사소개",
-                menu_ocean: "해상운송",
-                menu_air: "항공운송",
-                menu_triangle: "삼국간운송",
-                menu_customs: "통관업무",
-                menu_board: "업계소식",
-                btn_tracking: "화물 추적",
-                btn_quote: "견적 요청",
-                btn_admin: "관리자",
-                nav_home: "홈",
-                customer_center_label: "C U S T O M E R &nbsp; C E N T E R",
-                page_title_main: "물류 산업의 최신",
-                page_title_sub: "소식 및 공지",
-                page_title_end: "를 전해드립니다.",
-                btn_write: "글쓰기",
-                tab_all: "전체",
-                tab_notice: "공지사항",
-                tab_news: "업계소식",
-                table_th_no: "번호",
-                table_th_category: "구분",
-                table_th_title: "제목",
-                table_th_writer: "작성자",
-                table_th_date: "작성일자",
-                table_th_views: "조회",
-                loading_text: "데이터를 불러오는 중...",
-                search_opt_title: "제목",
-                search_opt_writer: "작성자",
-                search_placeholder: "검색어를 입력하세요",
-                btn_search: "검색",
-                btn_edit: "수정하기",
-                btn_delete: "삭제하기",
-                btn_list: "목록으로",
-                modal_title: "게시글 작성",
-                modal_title_edit: "게시글 수정",
-                modal_cat_label: "카테고리 선택",
-                modal_title_label: "제목",
-                modal_title_placeholder: "제목을 입력하세요",
-                modal_writer_label: "작성자",
-                modal_content_label: "내용",
-                font_size_default: "글자 크기 선택",
-                font_size_12: "12 px (작게)",
-                font_size_14: "14 px (보통)",
-                font_size_16: "16 px (기본)",
-                font_size_20: "20 px (크게)",
-                font_size_24: "24 px (매우 크게)",
-                btn_img_attach: "사진 첨부",
-                btn_cancel: "취소",
-                btn_submit: "등록하기",
-                footer_desc: "글로벌 물류의 새로운 기준, FUTURE GLS.<br>고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.",
-                footer_col1_title: "주요 서비스",
-                footer_s1: "해상 운송 (FCL/LCL)",
-                footer_s2: "항공 화물 운송",
-                footer_s3: "수출입 통관 대행",
-                footer_s4: "보세 창고 관리",
-                footer_col2_title: "고객 센터",
-                footer_tel: "전화: 02-712-0410(Rep)",
-                footer_fax: "팩스: 02-712-0411",
-                footer_email: "이메일: future@futuregls.com",
-                footer_hours: "운영시간: 평일 09:00 - 17:00",
-                footer_col3_title: "본사 위치",
-                footer_addr: "서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br> 사업자등록번호: 105-87-87676 | 대표이사: 정주만"
-            },
             en: {
                 cs_center: "Customer Center: 02-712-0410(Rep) (Weekdays 09:00 - 17:00)",
                 nav_tracking: "Cargo Tracking",
@@ -449,14 +382,14 @@
                 footer_email: "Email: future@futuregls.com",
                 footer_hours: "Hours: Weekdays 09:00 - 17:00",
                 footer_col3_title: "Head Office",
-                footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
+               footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
             },
             "zh-CN": {
                 cs_center: "客服中心：02-712-0410(Rep) | 传真：02-712-0411 (工作日 09:00 - 17:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
-                menu_ceo: "회사소개",
+                menu_ceo: "公司介绍",
                 menu_ocean: "海上运输",
                 menu_air: "航空运输",
                 menu_triangle: "三角贸易",
@@ -516,7 +449,7 @@
                 footer_email: "邮箱：future@futuregls.com",
                 footer_hours: "营业时间：工作日 09:00 - 17:00",
                 footer_col3_title: "总部地址",
-                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676  <br>대표이사: 郑周满"
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满"
             },
             ja: {
                 cs_center: "カスタマーセンター：02-712-0410(Rep) | FAX：02-712-0411 (平日 09:00 - 17:00)",
@@ -594,7 +527,11 @@
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => originalTextCache.set(el, el.getAttribute('placeholder')));
 
             const savedLang = localStorage.getItem('site_lang') || 'ko';
-            applyCustomLanguage(savedLang);
+            if (savedLang !== 'ko') {
+                applyCustomLanguage(savedLang);
+            } else {
+                updateLangButtonText('ko');
+            }
 
             document.body.classList.add('translated');
         });
@@ -620,18 +557,27 @@
         function applyCustomLanguage(lang) {
             updateLangButtonText(lang);
 
-            const dict = i18nData[lang] || i18nData['ko'];
+            if (lang === 'ko') {
+                document.documentElement.setAttribute('lang', 'ko');
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    if (originalTextCache.has(el)) el.setAttribute('placeholder', originalTextCache.get(el));
+                });
+                return;
+            }
+
+            const dict = i18nData[lang];
             if (!dict) return;
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
-                else if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
             });
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (dict[key]) el.setAttribute('placeholder', dict[key]);
-                else if (originalTextCache.has(el)) el.setAttribute('placeholder', originalTextCache.get(el));
             });
         }
 
@@ -693,7 +639,7 @@
             textSpan.setAttribute('data-i18n', i18nKey);
             
             const currentLang = localStorage.getItem('site_lang') || 'ko';
-            if (i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
+            if (currentLang !== 'ko' && i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
                 textSpan.innerText = i18nData[currentLang][i18nKey];
             } else {
                 textSpan.innerText = originalTextCache.get(textSpan) || (category === '공지사항' ? '공지사항' : '업계소식');
@@ -789,7 +735,9 @@
             });
 
             const currentLang = localStorage.getItem('site_lang') || 'ko';
-            applyCustomLanguage(currentLang);
+            if (currentLang !== 'ko') {
+                applyCustomLanguage(currentLang);
+            }
         }
 
         window.searchBoard = function() {
@@ -846,7 +794,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             const currentLang = localStorage.getItem('site_lang') || 'ko';
-            applyCustomLanguage(currentLang);
+            if (currentLang !== 'ko') {
+                applyCustomLanguage(currentLang);
+            }
         }
 
         window.showListView = function() {
@@ -891,7 +841,7 @@
             textSpan.setAttribute('data-i18n', i18nKey);
 
             const currentLang = localStorage.getItem('site_lang') || 'ko';
-            if (i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
+            if (currentLang !== 'ko' && i18nData[currentLang] && i18nData[currentLang][i18nKey]) {
                 textSpan.innerText = i18nData[currentLang][i18nKey];
             } else {
                 textSpan.innerText = cat;
@@ -993,10 +943,6 @@
                 if (deleteButtonContainer) deleteButtonContainer.classList.add('hidden');
                 if (editButtonContainer) editButtonContainer.classList.add('hidden');
             }
-
-            const currentLang = localStorage.getItem('site_lang') || 'ko';
-            applyCustomLanguage(currentLang);
         });
     </script>
-</body>
 </html>
