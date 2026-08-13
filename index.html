@@ -209,8 +209,8 @@
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block">CARGO TRACKING</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">화물 실시간 추적</h3>
-                        <p class="text-xs text-slate-400 mb-6">선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="track_box1_title">화물 실시간 추적</h3>
+                        <p class="text-xs text-slate-400 mb-6" data-i18n="track_box1_desc">선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
                         
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <select id="carrierSelect" class="w-full md:w-28 bg-slate-900 text-white text-base font-bold px-3 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
@@ -240,21 +240,21 @@
                         <div class="flex items-center gap-2 mb-3">
                             <span class="text-xs font-bold tracking-widest text-amber-400 uppercase bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full inline-block">VESSEL SCHEDULE</span>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">선박 조회</h3>
-                        <p class="text-xs text-slate-400 mb-6">선박명을 입력하시면 출항지, 도착일 등 터미널 스케줄 정보를 확인하실 수 있습니다.</p>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="vessel_box_title">선박 조회</h3>
+                        <p class="text-xs text-slate-400 mb-6" data-i18n="vessel_box_desc">선박명을 입력하시면 출항지, 도착일 등 터미널 스케줄 정보를 확인하실 수 있습니다.</p>
 
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <div class="relative flex-1 w-full">
-                                <input type="text" id="vesselNameInput" placeholder="선박명을 입력하세요" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                                <input type="text" id="vesselNameInput" placeholder="선박명을 입력하세요" data-i18n-placeholder="vessel_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-amber-500 placeholder-slate-500">
                             </div>
                             <button type="button" onclick="openVesselSchedule()" class="w-full md:w-auto bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
-                                <span>선박 스케줄 조회 ↗</span>
+                                <span data-i18n="vessel_btn">선박 스케줄 조회 ↗</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="text-xs text-slate-400 mt-6 px-2 border-t border-slate-700 pt-5">
-                        <span>✓ 조회 버튼 클릭 시 선박명이 복사되며 터미널 스케줄 사이트로 이동합니다.</span>
+                        <span data-i18n="vessel_info1">✓ 조회 버튼 클릭 시 선박명이 복사되며 터미널 스케줄 사이트로 이동합니다.</span>
                     </div>
                 </div>
             </div>
@@ -267,7 +267,7 @@
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block mb-2" data-i18n="exch_tag">LIVE EXCHANGE RATES & SCHEDULES</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="exch_title">오늘의 환율 및 실시간 선박 스케줄</h2>
-                <p class="text-slate-500 text-xs sm:text-sm mt-2">글로벌 금융 시장 환율 정보와 전문 수출입 선박 운항 일정을 한눈에 확인하세요.</p>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2" data-i18n="exch_desc">글로벌 금융 시장 환율 정보와 전문 수출입 선박 운항 일정을 한눈에 확인하세요.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8">
@@ -296,7 +296,7 @@
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-500">
-                        <p><i class="ri-information-line text-orange-600"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
+                        <p data-i18n="rate_notice"><i class="ri-information-line text-orange-600"></i> 실제 물류비 정산 시 환율은 선사 및 세관 적용 시점에 따라 미세한 차이가 발생할 수 있습니다.</p>
                     </div>
                 </div>
 
@@ -305,38 +305,38 @@
                     <div>
                         <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
                             <h3 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
-                                <i class="ri-ship-line text-blue-600 text-xl"></i> 실시간 선박 스케줄 조회
+                                <i class="ri-ship-line text-blue-600 text-xl"></i> <span data-i18n="sched_box_title">실시간 선박 스케줄 조회</span>
                             </h3>
                          
                         </div>
 
                         <!-- 수출/수입 전환 탭 -->
                         <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-2xl mb-5 border border-slate-200">
-                            <button onclick="setMode('export')" id="btnExport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md">수출 (Export)</button>
-                            <button onclick="setMode('import')" id="btnImport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900">수입 (Import)</button>
+                            <button onclick="setMode('export')" id="btnExport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 bg-blue-600 text-white shadow-md" data-i18n="sched_export">수출 (Export)</button>
+                            <button onclick="setMode('import')" id="btnImport" class="py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-slate-600 hover:text-slate-900" data-i18n="sched_import">수입 (Import)</button>
                         </div>
 
                         <!-- 입력 폼 영역 -->
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">출항지 (POL)</label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5" data-i18n="sched_pol">출항지 (POL)</label>
                                 <select id="pol" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition"></select>
                             </div>
                             
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">입항지 (POD)</label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5" data-i18n="sched_pod">입항지 (POD)</label>
                                 <select id="pod" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition"></select>
                             </div>
                             
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1.5">조회 기준일 (ETD)</label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1.5" data-i18n="sched_date">조회 기준일 (ETD)</label>
                                 <input type="date" id="scheduleDate" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-blue-600 transition">
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-6 pt-4 border-t border-slate-100">
-                        <button onclick="openTradlinxSchedule()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm shadow-md transition-all">
+                        <button onclick="openTradlinxSchedule()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm shadow-md transition-all" data-i18n="sched_btn">
                             스케줄 조회하기 ↗
                         </button>
                     </div>
@@ -372,10 +372,10 @@
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="form_mode">운송 모드</label>
                             <select name="transport_mode" class="w-full px-4 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-orange-500">
-                                <option>해상 운송 (FCL)</option>
-                                <option>해상 운송 (LCL)</option>
-                                <option>항공 운송 (Air)</option>
-                                <option>통관/창고 대행만</option>
+                                <option data-i18n="opt_mode1">해상 운송 (FCL)</option>
+                                <option data-i18n="opt_mode2">해상 운송 (LCL)</option>
+                                <option data-i18n="opt_mode3">항공 운송 (Air)</option>
+                                <option data-i18n="opt_mode4">통관/창고 대행만</option>
                             </select>
                         </div>
                         <div>
@@ -483,10 +483,16 @@
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "Where is my cargo? Track it in real-time.",
-                track_desc: "Select a carrier and enter your B/L number to instantly connect.",
-                opt_kmtc: "고려해운",
-                opt_sinokor: "장금상선",
-                opt_doowoo: "두우해운",
+                track_box1_title: "Cargo Tracking",
+                track_box1_desc: "Select a carrier and enter your B/L number to instantly connect.",
+                vessel_box_title: "Vessel Schedule",
+                vessel_box_desc: "Enter the vessel name to check terminal schedule information such as departure and arrival dates.",
+                vessel_placeholder: "Enter vessel name",
+                vessel_btn: "Vessel Schedule ↗",
+                vessel_info1: "✓ Vessel name is copied and redirected to the schedule site on click.",
+                opt_kmtc: "KMTC",
+                opt_sinokor: "Sinokor",
+                opt_doowoo: "Doowoo",
                 track_placeholder: "Enter B/L No.",
                 track_btn: "Real-Time Search ↗",
                 track_info1: "✓ B/L number is automatically copied to clipboard on search",
@@ -495,10 +501,18 @@
                 exch_desc: "Accurately check exchange rates and vessel schedules.",
                 rate_table_title: "Major Currency Exchange Rates (vs KRW)",
                 rate_loading: "Loading real-time rates...",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> Actual logistics settlement rates may slightly vary depending on carrier and customs application timing.",
                 th_currency: "Currency (Code)",
                 th_base: "Base Rate",
                 th_buy: "Cash Buy",
                 th_sell: "Cash Sell",
+                sched_box_title: "Real-Time Vessel Schedule",
+                sched_export: "Export",
+                sched_import: "Import",
+                sched_pol: "Port of Loading (POL)",
+                sched_pod: "Port of Discharge (POD)",
+                sched_date: "Schedule Date (ETD)",
+                sched_btn: "Search Schedule ↗",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "Request Custom Logistics Quote",
                 quote_desc: "Leave your details and our forwarder will provide an optimal quote.",
@@ -506,6 +520,10 @@
                 form_name_ph: "Future Global / Manager Kim",
                 form_phone: "Phone Number *",
                 form_mode: "Transport Mode",
+                opt_mode1: "Ocean Freight (FCL)",
+                opt_mode2: "Ocean Freight (LCL)",
+                opt_mode3: "Air Freight (Air)",
+                opt_mode4: "Customs/Warehouse Only",
                 form_pol: "Port of Loading (POL)",
                 form_pol_ph: "e.g. Shanghai, China",
                 form_pod: "Port of Discharge (POD)",
@@ -525,7 +543,7 @@
                 footer_email: "Email: docs@futuregls.com",
                 footer_hours: "Hours: Weekdays 09:00 - 17:00",
                 footer_col3_title: "Headquarters",
-                footer_addr: "12F Future Tower, Teheran-ro, Gangnam-gu, Seoul"
+              footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
             },
             "zh-CN": {
                 cs_center: "客服中心：02-712-0410(Rep)",
@@ -558,10 +576,16 @@
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "我的货物在哪里？请进行实时追踪。",
-                track_desc: "选择船公司并输入B/L单号。",
-                opt_kmtc: "고려해운",
-                opt_sinokor: "장금상선",
-                opt_doowoo: "두우해운",
+                track_box1_title: "货物实时追踪",
+                track_box1_desc: "选择船公司并输入B/L单号即可立即连接官方追踪系统。",
+                vessel_box_title: "船舶查询",
+                vessel_box_desc: "输入船名即可确认起运港、到达日等码头船期信息。",
+                vessel_placeholder: "请输入船名",
+                vessel_btn: "船舶船期查询 ↗",
+                vessel_info1: "✓ 点击查询按钮时将复制船名并跳转至船期网站。",
+                opt_kmtc: "高丽海运",
+                opt_sinokor: "长锦商船",
+                opt_doowoo: "斗友海运",
                 track_placeholder: "请输入B/L单号",
                 track_btn: "实时查询 ↗",
                 track_info1: "✓ 点击查询按钮时将自动复制B/L单号",
@@ -570,25 +594,37 @@
                 exch_desc: "准确计算物流费用并查询船期。",
                 rate_table_title: "主要货币汇率信息",
                 rate_loading: "正在实时加载...",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 实际物流结算汇率可能会因船公司及海关适用时间而产生微小差异。",
                 th_currency: "币种名称",
                 th_base: "基准汇率",
                 th_buy: "现钞买入价",
                 th_sell: "现钞卖出价",
+                sched_box_title: "实时船舶船期查询",
+                sched_export: "出口 (Export)",
+                sched_import: "进口 (Import)",
+                sched_pol: "起运港 (POL)",
+                sched_pod: "目的港 (POD)",
+                sched_date: "查询基准日 (ETD)",
+                sched_btn: "查询船期 ↗",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "申请定制物流报价",
-                quote_desc: "请留下详细信息。",
+                quote_desc: "请留下详细信息，我们的货运代理将在2小时内为您提供最佳报价。",
                 form_name: "公司名称 / 负责人姓名 *",
                 form_name_ph: "未来全球",
                 form_phone: "联系电话 *",
                 form_mode: "运输模式",
+                opt_mode1: "海上运输 (FCL)",
+                opt_mode2: "海上运输 (LCL)",
+                opt_mode3: "航空运输 (Air)",
+                opt_mode4: "仅清关/仓储代理",
                 form_pol: "起运港 (POL)",
                 form_pol_ph: "例: 上海",
                 form_pod: "目的港 (POD)",
                 form_pod_ph: "例: 釜山",
                 form_memo: "货物信息及咨询事项",
-                form_memo_ph: "请填写货物种类等。",
+                form_memo_ph: "请填写货物种类、CBM/重量、预计出货日期等。",
                 form_submit: "提交免费报价申请",
-                footer_desc: "全球物流新标准，FUTURE GLS.",
+                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
                 footer_col1_title: "主要服务",
                 footer_s1: "海上运输",
                 footer_s2: "航空货物运输",
@@ -600,7 +636,7 @@
                 footer_email: "邮箱：docs@futuregls.com",
                 footer_hours: "工作时间：工作日 09:00 - 17:00",
                 footer_col3_title: "总部地址",
-                footer_addr: "首尔特别市江南区"
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼"
             },
             ja: {
                 cs_center: "カスタマーセンター：02-712-0410(Rep)",
@@ -633,37 +669,55 @@
                 btn_more: "More",
                 track_tag: "REAL-TIME VISIBILITY",
                 track_title: "お荷物は今どこに？リアルタイムで追跡してください。",
-                track_desc: "船会社を選択してB/L番号を入力してください。",
-                opt_kmtc: "고려해운",
-                opt_sinokor: "장금상선",
-                opt_doowoo: "두우해운",
+                track_box1_title: "貨物リアルタイム追跡",
+                track_box1_desc: "船会社を選択し、B/L番号を入力すると公式トラッキングシステムにすぐ接続されます。",
+                vessel_box_title: "船舶照会",
+                vessel_box_desc: "船名を入力すると、出港地や到着日などのターミナルスケジュール情報をご確認いただけます。",
+                vessel_placeholder: "船名を入力してください",
+                vessel_btn: "船舶スケジュール照会 ↗",
+                vessel_info1: "✓ 照会ボタンクリック時に船名がコピーされ、ターミナルスケジュールサイトに移動します。",
+                opt_kmtc: "高麗海運",
+                opt_sinokor: "長錦商船",
+                opt_doowoo: "斗友海運",
                 track_placeholder: "B/L番号を入力",
                 track_btn: "リアルタイム照会 ↗",
                 track_info1: "✓ 照会ボタンクリック時にB/L番号が自動コピーされます",
                 exch_tag: "LIVE EXCHANGE RATES",
                 exch_title: "本日の為替レートおよび船便スケジュール",
-                exch_desc: "為替情報と運항スケジュールを正確に確認できます。",
+                exch_desc: "為替情報と運行スケジュールを正確に確認できます。",
                 rate_table_title: "主要通貨為替情報",
                 rate_loading: "リアルタイム読込中...",
+                rate_notice: "<i class=\"ri-information-line text-orange-600\"></i> 実際の物流費精算時の為替レートは、船社および税関の適用時点により微細な差が生じる場合があります。",
                 th_currency: "通貨名",
                 th_base: "売買基準レート",
                 th_buy: "現金購入時",
                 th_sell: "現金売却時",
+                sched_box_title: "リアルタイム船舶スケジュール照会",
+                sched_export: "輸出 (Export)",
+                sched_import: "輸入 (Import)",
+                sched_pol: "出発地 (POL)",
+                sched_pod: "到着地 (POD)",
+                sched_date: "照会基準日 (ETD)",
+                sched_btn: "スケジュール照会する ↗",
                 quote_tag: "FAST & EASY QUOTE",
                 quote_title: "カスタム物流お見積り依頼",
-                quote_desc: "詳細な内容を残してください。",
+                quote_desc: "詳細な内容を残していただければ、担当フォワーダーが2時間以内に最適なお見積りをご案内いたします。",
                 form_name: "会社名 / 担当者名 *",
                 form_name_ph: "フューチャーグローバル",
                 form_phone: "連絡先 *",
                 form_mode: "輸送モード",
+                opt_mode1: "海上輸送 (FCL)",
+                opt_mode2: "海上輸送 (LCL)",
+                opt_mode3: "航空輸送 (Air)",
+                opt_mode4: "通関/倉庫代行のみ",
                 form_pol: "出発地 (POL)",
                 form_pol_ph: "例: 上海",
                 form_pod: "到着地 (POD)",
                 form_pod_ph: "例: 釜山",
                 form_memo: "貨物情報およびお問い合わせ",
-                form_memo_ph: "貨物の種類などをご記入ください。",
+                form_memo_ph: "貨物の種類、CBM/重量、出荷予定日などをご記入ください。",
                 form_submit: "無料お見積り申請を提出する",
-                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
                 footer_col1_title: "主要サービス",
                 footer_s1: "海上輸送",
                 footer_s2: "航空貨物輸送",
@@ -675,7 +729,7 @@
                 footer_email: "メール：docs@futuregls.com",
                 footer_hours: "営業時間：平日 09:00 - 17:00",
                 footer_col3_title: "本社所在地",
-                footer_addr: "ソウル特別市江南区"
+                footer_addr: "ソウル特別市江南区テヘラン로 64ギル 13、9階"
             }
         };
 
