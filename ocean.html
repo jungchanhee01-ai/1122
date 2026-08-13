@@ -23,7 +23,7 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-                  <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410 | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
+                  <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -43,7 +43,7 @@
             <!-- 중앙 네비게이션 -->
             <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
-                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="ocean.html" class="text-orange-600 hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
                 <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
                 <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
@@ -193,7 +193,7 @@
                 </div>
                 <div>
                     <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
-                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410</p>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410(Rep)</p>
                     <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
                     <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
                     <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
@@ -215,7 +215,7 @@
     <script>
         const i18nData = {
             en: {
-                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                cs_center: "Customer Center: 02-712-0410(Rep) (Weekdays 09:00 - 17:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
@@ -249,10 +249,23 @@
                 sec2_title: "Ocean Import",
                 sec2_desc: "Through our overseas branches and close partner network worldwide, we transport your valuable import cargo promptly and accurately.",
                 import_workflow_title: "Import Workflow",
-                import_workflow_steps: 'Port Selection <span class="text-orange-600">→</span> Pre-Arrival Doc Receipt <span class="text-orange-600">→</span> Arrival <span class="text-orange-600">→</span> Import Customs <span class="text-orange-600">→</span> Inland Transport <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
+                import_workflow_steps: 'Port Selection <span class="text-orange-600">→</span> Pre-Arrival Doc Receipt <span class="text-orange-600">→</span> Arrival <span class="text-orange-600">→</span> Import Customs <span class="text-orange-600">→</span> Inland Transport <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
+                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Key Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Freight",
+                footer_s3: "Customs Clearance Agency",
+                footer_s4: "Bonded Warehouse Management",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Tel: 02-712-0410(Rep)",
+                footer_fax: "Fax: 02-712-0411",
+                footer_email: "Email: future@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 17:00",
+                footer_col3_title: "Head Office",
+                footer_addr: "9F, 13, Teheran-ro 64-gil, Gangnam-gu, Seoul<br> (Daechi-dong, Poonglim I-Won Lemon) <br>Business Registration No: 105-87-87676 | CEO: Jung Joo-man"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                cs_center: "客服中心：02-712-0410(Rep) (工作日 09:00 - 17:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
@@ -286,10 +299,23 @@
                 sec2_title: "海运进口",
                 sec2_desc: "通过海外分公司及全球紧密的合作伙伴网络，迅速、准确地运输您宝贵的进口货物。",
                 import_workflow_title: "进口业务流程 (Import Workflow)",
-                import_workflow_steps: '选择装运地 <span class="text-orange-600">→</span> 抵港前收单 <span class="text-orange-600">→</span> 抵港 <span class="text-orange-600">→</span> 进口清关 <span class="text-orange-600">→</span> 内陆运输 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
+                import_workflow_steps: '选择装运地 <span class="text-orange-600">→</span> 抵港前收单 <span class="text-orange-600">→</span> 抵港 <span class="text-orange-600">→</span> 进口清关 <span class="text-orange-600">→</span> 内陆运输 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
+                footer_desc: "全球物流新标准，FUTURE GLS。<br>将您的商业价值安全送达全球。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海运服务 (FCL/LCL)",
+                footer_s2: "空运服务",
+                footer_s3: "进出口报关代理",
+                footer_s4: "保税仓库管理",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-712-0410(Rep)",
+                footer_fax: "传真：02-712-0411",
+                footer_email: "电子邮箱：future@futuregls.com",
+                footer_hours: "营业时间：工作日 09:00 - 17:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔特别市江南区德黑兰路64吉13，9楼<br> (大峙洞, Poonglim I-Won Lemon) <br>企业注册号：105-87-87676 | 代表理事：郑柱万"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                cs_center: "カスタマーセンター：02-712-0410(Rep) (平日 09:00 - 17:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
@@ -323,7 +349,20 @@
                 sec2_title: "海上輸入",
                 sec2_desc: "海外支社および世界中の緊密なパートナーネットワークを通じ、大切な輸入貨物を迅速かつ正確に輸送します。",
                 import_workflow_title: "業務手順 (Import Workflow)",
-                import_workflow_steps: '積地選択 <span class="text-orange-600">→</span> 到着前書類受取 <span class="text-orange-600">→</span> 到着 <span class="text-orange-600">→</span> 輸入通関 <span class="text-orange-600">→</span> 内陸輸送 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D'
+                import_workflow_steps: '積地選択 <span class="text-orange-600">→</span> 到着前書類受取 <span class="text-orange-600">→</span> 到着 <span class="text-orange-600">→</span> 輸入通関 <span class="text-orange-600">→</span> 内陸輸送 <span class="text-orange-600">→</span> DELIVERY <span class="text-orange-600">→</span> P.O.D',
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中へ安全にお届けします。",
+                footer_col1_title: "主なサービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "保税倉庫管理",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-712-0410(Rep)",
+                footer_fax: "ファックス：02-712-0411",
+                footer_email: "メール：future@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 17:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル市江南区テヘラン路64キル13、9階<br> (大峙洞、豊林アイワンレモン) <br>事業者登録番号：105-87-87676 | 代表取締役：チョン・ジュマン"
             }
         };
 
@@ -335,16 +374,15 @@
             
             if (adminContainer) {
                 if (isLoggedIn === 'true') {
-    adminContainer.innerHTML = `
-        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
-            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
-        </div>
-        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
-            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
-        </div>
-    `;
-}
-                else {
+                    adminContainer.innerHTML = `
+                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
+                        </div>
+                    `;
+                } else {
                     adminContainer.innerHTML = `
                         <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
@@ -358,7 +396,10 @@
 
             document.querySelectorAll('[data-i18n]').forEach(el => originalTextCache.set(el, el.innerHTML));
             const savedLang = localStorage.getItem('site_lang') || 'ko';
-            if (savedLang !== 'ko') applyCustomLanguage(savedLang);
+            if (savedLang !== 'ko') {
+                const map = { 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+                applyCustomLanguage(savedLang, map[savedLang] || 'KOR');
+            }
             setTimeout(() => document.body.classList.add('translated'), 100);
         });
 
@@ -369,11 +410,12 @@
             localStorage.setItem('site_lang', langCode);
             document.documentElement.setAttribute('lang', langCode);
             document.getElementById('langBtnText').innerText = labelText;
-            applyCustomLanguage(langCode);
+            applyCustomLanguage(langCode, labelText);
             document.getElementById('langDropdown').classList.add('hidden');
         }
 
-        function applyCustomLanguage(lang) {
+        function applyCustomLanguage(lang, labelText = 'KOR') {
+            document.getElementById('langBtnText').innerText = labelText;
             if (lang === 'ko') {
                 document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = originalTextCache.get(el));
                 return;

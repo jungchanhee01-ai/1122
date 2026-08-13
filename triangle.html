@@ -23,7 +23,7 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-           <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410 | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
+                  <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -45,7 +45,7 @@
                 <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
                 <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
                 <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
-                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
+                <a href="triangle.html" class="text-orange-600 hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
                 <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
                 <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
             </nav>
@@ -77,6 +77,7 @@
             </div>  
         </div>
     </header>
+
 
     <!-- 메인 컨텐츠 영역 -->
     <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
@@ -124,20 +125,21 @@
                 <span data-i18n="sec2_title">삼국간 무역의 형태</span>
             </h3>
             <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+                <!-- 다이어그램 구조 시각화 -->
                 <div class="max-w-md mx-auto py-8 relative flex flex-col items-center justify-center">
-                    <div class="bg-orange-50 border border-orange-200 text-orange-700 font-bold px-6 py-3 rounded-xl mb-12 shadow-sm">
+                    <div class="bg-orange-50 border border-orange-200 text-orange-700 font-bold px-6 py-3 rounded-xl mb-12 shadow-sm" data-i18n="diag_buyer">
                         (A) Buyer
                     </div>
                     <div class="flex justify-between w-full px-8">
-                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm" data-i18n="diag_supplier">
                             (B) Supplier
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm">
+                        <div class="bg-slate-50 border border-slate-200 text-slate-800 font-bold px-5 py-3 rounded-xl shadow-sm" data-i18n="diag_seller">
                             (C) Seller
                         </div>
                     </div>
                 </div>
-                <p class="text-xs text-slate-400 mt-2" data-i18n="sec2_diagram_caption">▲ 삼국간 무역 트라이앵글 구조 (Buyer - Supplier - Seller)</p>
+                <p class="text-xs text-slate-400 mt-2" data-i18n="diag_caption">▲ 삼국간 무역 트라이앵글 구조 (Buyer - Supplier - Seller)</p>
             </div>
         </section>
 
@@ -151,19 +153,19 @@
                 <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        <span data-i18n="sec3_li1">(B)지역에서 물건 생산</span>
+                        <span data-i18n="flow_1">(B)지역에서 물건 생산</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        <span data-i18n="sec3_li2">(B)지역 단위의 파트너/지사를 통하여</span>
+                        <span data-i18n="flow_2">(B)지역 단위의 파트너/지사를 통하여</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        <span data-i18n="sec3_li3">(A)지역으로 물건선적</span>
+                        <span data-i18n="flow_3">(A)지역으로 물건선적</span>
                     </li>
                     <li class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-600"></span>
-                        <span data-i18n="sec3_li4">(A)지역 단위의 파트너/지사를 통하여 화물을 인도함</span>
+                        <span data-i18n="flow_4">(A)지역 단위의 파트너/지사를 통하여 화물을 인도함</span>
                     </li>
                 </ul>
             </div>
@@ -202,13 +204,13 @@
             <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
                 <ul class="space-y-3 text-sm font-semibold text-slate-700 bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">1.</span> <span data-i18n="sec5_li1">전반적인 통제를 한국에서 control 할 수 있음</span>
+                        <span class="text-orange-600 font-bold">1.</span> <span data-i18n="char_1">전반적인 통제를 한국에서 control 할 수 있음</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">2.</span> <span data-i18n="sec5_li2">운임 및 기타 비용등의 정산을 한국에서 처리가 가능함</span>
+                        <span class="text-orange-600 font-bold">2.</span> <span data-i18n="char_2">운임 및 기타 비용등의 정산을 한국에서 처리가 가능함</span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="text-orange-600 font-bold">3.</span> <span data-i18n="sec5_li3">서류 Switch가 용이</span>
+                        <span class="text-orange-600 font-bold">3.</span> <span data-i18n="char_3">서류 Switch가 용이</span>
                     </li>
                 </ul>
             </div>
@@ -217,7 +219,7 @@
     </main>
 
     <!-- 푸터 -->
-  <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
                 <div>
@@ -240,7 +242,7 @@
                 </div>
                 <div>
                     <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
-                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410</p>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410(Rep)</p>
                     <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
                     <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
                     <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
@@ -262,7 +264,7 @@
     <script>
         const i18nData = {
             en: {
-                cs_center: "Customer Center: 02-6203-8800 (Weekdays 09:00 - 18:00)",
+                cs_center: "Customer Center: 02-712-0410(Rep) (Weekdays 09:00 - 17:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
@@ -279,30 +281,46 @@
                 breadcrumb_home: "Home",
                 breadcrumb_current: "Triangle Trade",
                 page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
-                page_main_title: "Efficient <span class=\"text-orange-600\">Triangle Trade Solutions</span> for Third-Country Cargo Movement",
+                page_main_title: "Efficient Cargo Movement Solutions for <span class=\"text-orange-600\">Triangle Trade</span>",
                 sec1_title: "Triangle Trade",
-                sec1_desc1: "Refers to cargo transportation moving between countries other than South Korea, i.e., third countries, and is a transportation form widely used for processing trade, etc.",
-                sec1_desc2: "Through our network connected with major world regions, we directly transport cargo from third countries to destination countries, achieving freight cost savings and simple administrative procedures such as Switch B/L issuance, implementing local customs clearance and rapid operational control from the Korean headquarters.",
-                sec1_desc3: "As a specialist in such triangle trade, FUTURE GLS provides delicate services that maximize customer satisfaction.",
+                sec1_desc1: "Refers to cargo transportation moving between countries other than Korea, frequently used for processing and manufacturing.",
+                sec1_desc2: "Through our network connected to major global regions, we transport cargo directly from third countries to destination countries, reducing freight costs and simplifying procedures such as Switch B/L issuance for local customs clearance and rapid headquarters control in Korea.",
+                sec1_desc3: "As a specialist in triangle trade, FUTURE GLS provides delicate services to maximize customer satisfaction.",
                 sec2_title: "Triangle Trade Structure",
-                sec2_diagram_caption: "▲ Triangle Trade Structure (Buyer - Supplier - Seller)",
+                diag_buyer: "(A) Buyer",
+                diag_supplier: "(B) Supplier",
+                diag_seller: "(C) Seller",
+                diag_caption: "▲ Triangle Trade Structure (Buyer - Supplier - Seller)",
                 sec3_title: "Cargo Flow",
-                sec3_li1: "Goods produced in region (B)",
-                sec3_li2: "Through local partners/branches in region (B)",
-                sec3_li3: "Cargo shipped to region (A)",
-                sec3_li4: "Cargo delivered through local partners/branches in region (A)",
+                flow_1: "Goods produced in region (B)",
+                flow_2: "Through partners/branches in region (B)",
+                flow_3: "Cargo shipped to region (A)",
+                flow_4: "Cargo delivered through partners/branches in region (A)",
                 sec4_title: "Service Details",
-                table_row1_title: "1) Loading Port Document Issuance",
-                table_row1_desc: "Past method of issuing original or surrender B/L in region (B) and then delivering documents to region (A)",
-                table_row2_title: "2) Switch Document Issuance",
-                table_row2_desc: "Delivering documents to region (A) after issuing Switch B/L in region (C) (short duration and favorable for customs clearance)",
-                sec5_title: "Operational Characteristics",
-                sec5_li1: "Overall control can be managed from South Korea",
-                sec5_li2: "Settlement of freight and other expenses can be processed in South Korea",
-                sec5_li3: "Easy document switching"
+                table_row1_title: "1) Loading Port Doc Issuance",
+                table_row1_desc: "Traditional method of issuing original or surrender B/L in region (B) and delivering documents to region (A)",
+                table_row2_title: "2) Switch Doc Issuance",
+                table_row2_desc: "Issuing Switch B/L in region (C) and delivering documents to region (A) (Shorter period, easier customs clearance)",
+                sec5_title: "Business Characteristics",
+                char_1: "Overall control can be managed from Korea",
+                char_2: "Freight and other expenses can be settled in Korea",
+                char_3: "Easy document switching",
+                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Key Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Freight",
+                footer_s3: "Customs Clearance",
+                footer_s4: "Bonded Warehouse",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Phone: 02-712-0410(Rep)",
+                footer_fax: "Fax: 02-712-0411",
+                footer_email: "Email: docs@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 17:00",
+                footer_col3_title: "Headquarters",
+                footer_addr: "12F Future Tower, 415 Teheran-ro, Gangnam-gu, Seoul (Samsung-dong)<br>Business Registration No: 220-88-01234"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-6203-8800 (工作日 09:00 - 18:00)",
+                cs_center: "客服中心：02-712-0410(Rep) (工作日 09:00 - 17:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
@@ -321,28 +339,44 @@
                 page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
                 page_main_title: "实现第三国间高效货物运输的<span class=\"text-orange-600\">三角贸易解决方案</span>",
                 sec1_title: "三角贸易",
-                sec1_desc1: "指在韩国以外的国家（即第三国）之间流动的货物运输，是广泛用于来料加工等的运输形式。",
-                sec1_desc2: "通过与世界主要地区相连的网络，直接将货物从第三国运往目的国，从而达到节约运费的效果，并通过签发Switch B/L等简便的业务流程，实现当地清关以及韩国总部迅速的业务控制。",
-                sec1_desc3: "作为此类三角贸易的专家，FUTURE GLS提供最大程度满足客户需求的细致服务。",
+                sec1_desc1: "指在韩国以外的国家（即第三国之间）流动的货物运输，常用于来料加工等运输形态。",
+                sec1_desc2: "通过与全球主要地区相连的网络，直接从第三国向目的国运送货物，从而实现运费节约，并通过签发Switch B/L等简便业务流程，实现当地清关及韩国总部对业务的迅速管控。",
+                sec1_desc3: "作为三角贸易的专家，FUTURE GLS提供最大限度满足客户满意度的细致服务。",
                 sec2_title: "三角贸易的形态",
-                sec2_diagram_caption: "▲ 三角贸易结构 (Buyer - Supplier - Seller)",
+                diag_buyer: "(A) Buyer (买方)",
+                diag_supplier: "(B) Supplier (供应商)",
+                diag_seller: "(C) Seller (卖方)",
+                diag_caption: "▲ 三角贸易三角形结构 (Buyer - Supplier - Seller)",
                 sec3_title: "货物流向",
-                sec3_li1: "在(B)地区生产商品",
-                sec3_li2: "通过(B)地区的合作伙伴/分公司",
-                sec3_li3: "将商品装运至(A)地区",
-                sec3_li4: "通过(A)地区的合作伙伴/分公司交付货物",
+                flow_1: "在(B)地区生产产品",
+                flow_2: "通过(B)地区的合作伙伴/分公司",
+                flow_3: "将货物装船运往(A)地区",
+                flow_4: "通过(A)地区的合作伙伴/分公司交付货物",
                 sec4_title: "服务详情",
-                table_row1_title: "1) 装运港单证签发",
-                table_row1_desc: "在(B)地区签发original或surrender B/L后将单证交付至(A)地区的传统方法",
+                table_row1_title: "1) 装运地单证签发",
+                table_row1_desc: "在(B)地区签发original或surrender B/L后向(A)地区转交单证的传统方法",
                 table_row2_title: "2) 换单 (Switch) 签发",
-                table_row2_desc: "在(C)地区签发Switch B/L后将单证交付至(A)地区（周期短且通关便利）",
+                table_row2_desc: "在(C)地区签发Switch B/L后向(A)地区转交单证（周期短且利于清关）",
                 sec5_title: "业务特性",
-                sec5_li1: "可在韩国进行整体统筹控制",
-                sec5_li2: "运费及其他费用等可在韩国结算",
-                sec5_li3: "单证互换(Switch)简便"
+                char_1: "可在韩国进行整体管控",
+                char_2: "运费及其他费用等可在韩国结算",
+                char_3: "单证转换 (Switch) 简便",
+                footer_desc: "全球物流新标准，FUTURE GLS.<br>安全地将您的商业价值传递至全球。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海上运输 (FCL/LCL)",
+                footer_s2: "航空货物运输",
+                footer_s3: "进出口清关代理",
+                footer_s4: "保税仓库管理",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-712-0410(Rep)",
+                footer_fax: "传真：02-712-0411",
+                footer_email: "邮箱：docs@futuregls.com",
+                footer_hours: "工作时间：工作日 09:00 - 17:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔特别市江南区德黑兰路415，未来大厦12层（三成洞）<br>营业执照号：220-88-01234"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-6203-8800 (平日 09:00 - 18:00)",
+                cs_center: "カスタマーセンター：02-712-0410(Rep) (平日 09:00 - 17:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
@@ -359,27 +393,43 @@
                 breadcrumb_home: "ホーム",
                 breadcrumb_current: "三国間輸送",
                 page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
-                page_main_title: "第3国間の効率的な貨物移動のための<span class=\"text-orange-600\">三国間輸送ソリューション</span>",
+                page_main_title: "第三国間の効率的な貨物移動のための<span class=\"text-orange-600\">三国間輸送ソリューション</span>",
                 sec1_title: "三国間輸送",
-                sec1_desc1: "韓国以外の国家、すなわち第3国間で動く貨物輸送を言い、賃加工などに多く使用される輸送形態です。",
-                sec1_desc2: "世界主要地域とつながっている弊社のNetworkを通じて、第3国から目的国へ貨物を直接輸送することで運送料節減の効果およびSwitch B/L発行などの簡単な業務手順を介して現地通関および韓国国内本社の迅速な業務controlを実現しています。",
-                sec1_desc3: "このような三国間輸送のSpecialistとして、私ども（株）フューチャージーエルスはお客様の満足を極大化するきめ細かなサービスを提供しています。",
+                sec1_desc1: "韓国以外の国、すなわち第三国間で動く貨物輸送を指し、賃加工等に多く使用される輸送形態です。",
+                sec1_desc2: "世界主要地域と繋がっている弊社のNetworkを通じ、第三国から目的地へ貨物を直接輸送することで運賃節約の効果およびSwitch B/L発行等の簡単な業務手順を通じて、現地通関および韓国国内本社の迅速な業務controlを実現しています。",
+                sec1_desc3: "このような三国間輸送のSpecialistとして、株式会社フューチャー지엘스はお客様の満足を極大化するきめ細やかなサービスを提供しています。",
                 sec2_title: "三国間貿易の形態",
-                sec2_diagram_caption: "▲ 三国間貿易トライアングル構造 (Buyer - Supplier - Seller)",
+                diag_buyer: "(A) Buyer",
+                diag_supplier: "(B) Supplier",
+                diag_seller: "(C) Seller",
+                diag_caption: "▲ 三国間貿易トライアングル構造 (Buyer - Supplier - Seller)",
                 sec3_title: "貨物の流れ",
-                sec3_li1: "(B)地域で物品生産",
-                sec3_li2: "(B)地域単位のパートナー/支社を通じて",
-                sec3_li3: "(A)地域へ物品積載",
-                sec3_li4: "(A)地域単位のパートナー/支社を通じて貨物を引き渡す",
+                flow_1: "(B)地域での生産",
+                flow_2: "(B)地域のパートナー/支社を通じて",
+                flow_3: "(A)地域へ貨物積出",
+                flow_4: "(A)地域のパートナー/支社を通じて貨物を引渡し",
                 sec4_title: "サービス内容",
-                table_row1_title: "1) 積地書類発行",
-                table_row1_desc: "(B)地域でoriginal or surrender B/L発行後、(A)地域へ書類を引き渡す過去の方法",
-                table_row2_title: "2) Switch書類発行",
-                table_row2_desc: "(C)地域でSwitch B/L発行後、(A)地域へ書類を引き渡す（期日が短く通関上容易）",
+                table_row1_title: "1) 積地書類発給",
+                table_row1_desc: "(B)地域でoriginal or surrender B/L発行後、(A)地域へ書類を引き渡す従来の方法",
+                table_row2_title: "2) Switch書類発給",
+                table_row2_desc: "(C)地域でSwitch B/L発行後、(A)地域へ書類を引き渡し（期日が短く通関上容易）",
                 sec5_title: "業務の特性",
-                sec5_li1: "全般的な統制を韓国でcontrolできる",
-                sec5_li2: "運賃およびその他の費用等の精算を韓国で処理が可能である",
-                sec5_li3: "書類Switchが容易"
+                char_1: "全般的な統制を韓国からcontrol可能",
+                char_2: "運賃およびその他の費用等の精算を韓国で処理可能",
+                char_3: "書類Switchが容易",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS.<br>お客様のビジネス価値を世界中に安全にお届けします。",
+                footer_col1_title: "主要サービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "保税倉庫管理",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-712-0410(Rep)",
+                footer_fax: "ファックス：02-712-0411",
+                footer_email: "メール：docs@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 17:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル特別市江南区テヘラン路415、フューチャータワー12階（三成洞）<br>事業者登録番号：220-88-01234"
             }
         };
 
@@ -391,18 +441,17 @@
             
             if (adminContainer) {
                 if (isLoggedIn === 'true') {
-    adminContainer.innerHTML = `
-        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
-            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
-        </div>
-        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
-            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
-        </div>
-    `;
-}
-                else {
                     adminContainer.innerHTML = `
-                        <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
+                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
+                        </div>
+                    `;
+                } else {
+                    adminContainer.innerHTML = `
+                        <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
                             <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
                         </a>
                         <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
@@ -431,7 +480,11 @@
 
         function applyCustomLanguage(lang) {
             if (lang === 'ko') {
-                document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = originalTextCache.get(el));
+                document.documentElement.setAttribute('lang', 'ko');
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+                document.getElementById('langBtnText').innerText = 'KOR';
                 return;
             }
             const dict = i18nData[lang];
@@ -440,6 +493,8 @@
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
             });
+            const map = { 'en': 'ENG', 'zh-CN': 'CHN', 'ja': 'JPN' };
+            if (map[lang]) document.getElementById('langBtnText').innerText = map[lang];
         }
     </script>
 </body>
