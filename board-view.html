@@ -86,7 +86,7 @@
 
                 <div id="adminContainer" class="relative group py-2">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
                     </a>
                 </div>
             </div>  
@@ -163,7 +163,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1" data-i18n="label_writer">작성자</label>
-                    <input type="text" id="postWriterInput" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                    <input type="text" id="postWriterInput" value="Admin" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1" data-i18n="label_content">내용</label>
@@ -294,7 +294,7 @@
             document.getElementById('postCategoryInput').value = currentPostData.category || '공지사항';
             document.getElementById('selectedCategoryText').innerText = currentPostData.category || '공지사항';
             document.getElementById('postTitleInput').value = currentPostData.title || '';
-            document.getElementById('postWriterInput').value = currentPostData.writer || '관리자';
+            document.getElementById('postWriterInput').value = currentPostData.writer || 'Admin';
             document.getElementById('postContentEditor').innerHTML = currentPostData.content || '';
             
             document.getElementById('writeModal').classList.remove('hidden');
@@ -370,7 +370,7 @@
                 menu_board: "업계소식",
                 btn_tracking: "화물 추적",
                 btn_quote: "견적 요청",
-                btn_admin: "관리자",
+                btn_admin: "Admin",
                 date_label: "작성일:",
                 loading_title: "게시글을 불러오는 중입니다...",
                 loading_content: "잠시만 기다려주세요. 데이터를 안전하게 불러오고 있습니다.",
@@ -478,7 +478,7 @@
                 menu_board: "行业动态",
                 btn_tracking: "货物追踪",
                 btn_quote: "索取报价",
-                btn_admin: "管理员",
+                btn_admin: "Admin",
                 date_label: "发布日期:",
                 loading_title: "正在加载文章...",
                 loading_content: "请稍候，正在安全加载数据。",
@@ -532,7 +532,7 @@
                 menu_board: "業界ニュース",
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
-                btn_admin: "管理者",
+                btn_admin: "Admin",
                 date_label: "作成日:",
                 loading_title: "投稿を読み込んでいます...",
                 loading_content: "しばらくお待ちください。データを安全に読み込んでいます。",

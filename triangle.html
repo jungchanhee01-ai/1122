@@ -71,7 +71,7 @@
                 <!-- 관리자 버튼 영역 -->
                 <div id="adminContainer" class="relative group py-2">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
                     </a>
                 </div>
             </div>  
@@ -333,7 +333,7 @@
                 menu_board: "行业动态",
                 btn_tracking: "货物追踪",
                 btn_quote: "报价申请",
-                btn_admin: "管理员",
+                btn_admin: "Admin",
                 breadcrumb_home: "首页",
                 breadcrumb_current: "三角贸易",
                 page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
@@ -389,7 +389,7 @@
                 menu_board: "業界ニュース",
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
-                btn_admin: "管理者",
+                btn_admin: "Admin",
                 breadcrumb_home: "ホーム",
                 breadcrumb_current: "三国間輸送",
                 page_sub_tag: "T R I A N G L E &nbsp; T R A F F I C &nbsp; S E R V I C E",
@@ -443,7 +443,7 @@
                 if (isLoggedIn === 'true') {
                     adminContainer.innerHTML = `
                         <div class="hidden sm:inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none whitespace-nowrap">
-                            <i class="ri-user-star-line text-orange-600"></i> 관리자(FUTURE)
+                            <i class="ri-user-star-line text-orange-600"></i> Admin(FUTURE)
                         </div>
                         <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
                             <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center whitespace-nowrap">로그아웃</a>
@@ -452,7 +452,7 @@
                 } else {
                     adminContainer.innerHTML = `
                         <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
                         </a>
                         <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
                             <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center whitespace-nowrap">로그인</a>
