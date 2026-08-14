@@ -34,9 +34,9 @@
     <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
         <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
             <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2008 · GLOBAL SMART FORWARDING</span>
+                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2013 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-       <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)</span>
+       <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 18:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -86,7 +86,7 @@
 
                 <div id="adminContainer" class="relative group py-2">
                     <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
-                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">관리자</span>
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
                     </a>
                 </div>
             </div>  
@@ -163,7 +163,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1" data-i18n="label_writer">작성자</label>
-                    <input type="text" id="postWriterInput" value="관리자" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
+                    <input type="text" id="postWriterInput" value="Admin" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:border-orange-600">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase mb-1" data-i18n="label_content">내용</label>
@@ -205,7 +205,7 @@
                     <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410(Rep)</p>
                     <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
                     <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
-                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 17:00</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 18:00</p>
                 </div>
                 <div>
                     <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
@@ -294,7 +294,7 @@
             document.getElementById('postCategoryInput').value = currentPostData.category || '공지사항';
             document.getElementById('selectedCategoryText').innerText = currentPostData.category || '공지사항';
             document.getElementById('postTitleInput').value = currentPostData.title || '';
-            document.getElementById('postWriterInput').value = currentPostData.writer || '관리자';
+            document.getElementById('postWriterInput').value = currentPostData.writer || 'Admin';
             document.getElementById('postContentEditor').innerHTML = currentPostData.content || '';
             
             document.getElementById('writeModal').classList.remove('hidden');
@@ -358,7 +358,7 @@
         // 다국어 사전 데이터
         const translations = {
             ko: {
-                cs_center: "고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 17:00)",
+                cs_center: "고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 18:00)",
                 nav_tracking: "화물 추적",
                 nav_exchange: "환율 조회",
                 nav_quote: "견적 요청",
@@ -370,7 +370,7 @@
                 menu_board: "업계소식",
                 btn_tracking: "화물 추적",
                 btn_quote: "견적 요청",
-                btn_admin: "관리자",
+                btn_admin: "Admin",
                 date_label: "작성일:",
                 loading_title: "게시글을 불러오는 중입니다...",
                 loading_content: "잠시만 기다려주세요. 데이터를 안전하게 불러오고 있습니다.",
@@ -396,7 +396,7 @@
                 footer_tel: "전화: 02-712-0410(Rep)",
                 footer_fax: "팩스: 02-712-0411",
                 footer_email: "이메일: future@futuregls.com",
-                footer_hours: "운영시간: 평일 09:00 - 17:00",
+                footer_hours: "운영시간: 평일 09:00 - 18:00",
                 footer_col3_title: "본사 위치",
                 footer_addr: "서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br>사업자등록번호: 105-87-87676 | 대표이사: 정주만",
                 error_invalid_access: "잘못된 접근입니다.",
@@ -412,7 +412,7 @@
                 alert_delete_fail: "삭제 중 오류가 발생했습니다."
             },
             en: {
-                cs_center: "Customer Center: +82-2-712-0410 | Fax: +82-2-712-0411 (Mon-Fri 09:00 - 17:00)",
+                cs_center: "Customer Center: +82-2-712-0410(Rep) | Fax: +82-2-712-0411 (Mon-Fri 09:00 - 18:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rate",
                 nav_quote: "Request Quote",
@@ -447,12 +447,12 @@
                 footer_s3: "Customs Brokerage",
                 footer_s4: "Bonded Warehouse",
                 footer_col2_title: "Customer Center",
-                footer_tel: "Tel: +82-2-712-0410",
+                footer_tel: "Tel: +82-2-712-0410(Rep)",
                 footer_fax: "Fax: +82-2-712-0411",
                 footer_email: "Email: future@futuregls.com",
-                footer_hours: "Hours: Mon-Fri 09:00 - 17:00",
+                footer_hours: "Hours: Mon-Fri 09:00 - 18:00",
                 footer_col3_title: "Headquarters",
-                footer_addr: "9F, 13, Teheran-ro 64-gil, Gangnam-gu, Seoul<br>(Daechi-dong, Poonglim I-won Lemon)<br>Business Reg No: 105-87-87676 | CEO: Jung Joo-man",
+              footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
                 error_invalid_access: "Invalid access.",
                 error_not_exist: "The post does not exist or has been deleted.",
                 error_not_found_title: "Post not found.",
@@ -466,7 +466,7 @@
                 alert_delete_fail: "An error occurred during deletion."
             },
             "zh-CN": {
-                cs_center: "客服中心: +82-2-712-0410 | 传真: +82-2-712-0411 (周一至周五 09:00 - 17:00)",
+                cs_center: "客服中心: +82-2-712-0410 | 传真: +82-2-712-0411 (周一至周五 09:00 - 18:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "索取报价",
@@ -478,7 +478,7 @@
                 menu_board: "行业动态",
                 btn_tracking: "货物追踪",
                 btn_quote: "索取报价",
-                btn_admin: "管理员",
+                btn_admin: "Admin",
                 date_label: "发布日期:",
                 loading_title: "正在加载文章...",
                 loading_content: "请稍候，正在安全加载数据。",
@@ -501,12 +501,12 @@
                 footer_s3: "进出口清关代理",
                 footer_s4: "保税仓库管理",
                 footer_col2_title: "客服中心",
-                footer_tel: "电话: +82-2-712-0410",
+                footer_tel: "电话: +82-2-712-0410(Rep)",
                 footer_fax: "传真: +82-2-712-0411",
                 footer_email: "邮箱: future@futuregls.com",
-                footer_hours: "营业时间: 周一至周五 09:00 - 17:00",
+                footer_hours: "营业时间: 周一至周五 09:00 - 18:00",
                 footer_col3_title: "总公司地址",
-                footer_addr: "首尔特别市江南区德黑兰路64街13号9层<br>(大峙洞, Poonglim I-won Lemon)<br>营业执照号: 105-87-87676 | 代表理事: 郑周万",
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满",
                 error_invalid_access: "访问无效。",
                 error_not_exist: "文章不存在或已被删除。",
                 error_not_found_title: "未找到文章。",
@@ -520,7 +520,7 @@
                 alert_delete_fail: "删除时发生错误。"
             },
             ja: {
-                cs_center: "カスタマーセンター: +82-2-712-0410 | FAX: +82-2-712-0411 (平日 09:00 - 17:00)",
+                cs_center: "カスタマーセンター: +82-2-712-0410(Rep) | FAX: +82-2-712-0411 (平日 09:00 - 18:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替レート",
                 nav_quote: "お見積り",
@@ -532,7 +532,7 @@
                 menu_board: "業界ニュース",
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
-                btn_admin: "管理者",
+                btn_admin: "Admin",
                 date_label: "作成日:",
                 loading_title: "投稿を読み込んでいます...",
                 loading_content: "しばらくお待ちください。データを安全に読み込んでいます。",
@@ -555,12 +555,12 @@
                 footer_s3: "輸出入通関代行",
                 footer_s4: "保税倉庫管理",
                 footer_col2_title: "カスタマーセンター",
-                footer_tel: "電話: +82-2-712-0410",
+                footer_tel: "電話: +82-2-712-0410(Rep)",
                 footer_fax: "FAX: +82-2-712-0411",
                 footer_email: "メール: future@futuregls.com",
-                footer_hours: "営業時間: 平日 09:00 - 17:00",
+                footer_hours: "営業時間: 平日 09:00 - 18:00",
                 footer_col3_title: "本社所在地",
-                footer_addr: "ソウル市江南区テヘラン路64ギル13、9階<br>(大峙洞、豊林アイウォンレモン)<br>事業者登録番号: 105-87-87676 | 代表取締役: チョン・ジュマン",
+                footer_addr: "ソウル特別市江南区テヘラン路64ギル13、9階<br> 事業者登録番号: 105-87-87676<br> 代表取締役: 鄭周満"
                 error_invalid_access: "不正なアクセスです。",
                 error_not_exist: "存在しないか、削除された投稿です。",
                 error_not_found_title: "投稿が見つかりません。",
