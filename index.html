@@ -29,7 +29,16 @@
             gap: 2rem;      
         }
         body { background-color: #f8fafc; }
-</style>
+
+        /* 아래로 이동 버튼을 위한 바운스 애니메이션 효과 */
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-arrow {
+            animation: bounceArrow 2s infinite;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
 
@@ -126,6 +135,16 @@
                 </a>
             </div>
         </div>
+
+        <!-- 추가된 아래로 가기 화살표 버튼 (영상 아래 서비스 섹션으로 이동) -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
+            <a href="#services" class="flex flex-col items-center text-white/80 hover:text-white transition-colors animate-bounce-arrow focus:outline-none">
+                <div class="w-8 h-12 rounded-full border-2 border-white/40 flex items-start justify-center p-1 bg-black/20 backdrop-blur-sm">
+                    <div class="w-1.5 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+                </div>
+                <i class="ri-arrow-down-s-line text-2xl -mt-1 text-orange-400"></i>
+            </a>
+        </div>
     </section>
 
     <!-- Services Section & Interactive Dynamic Board -->
@@ -210,7 +229,7 @@
                             <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block">CARGO TRACKING</span>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2" data-i18n="track_box1_title">화물 실시간 추적</h3>
-                        <p class="text-xs text-slate-400 mb-6" data-i18n="track_box1_desc">선사를 선택하고 B/L 번호를 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
+                        <p class="text-xs text-slate-400 mb-6" data-i18n="track_box1_desc">선사를 선택하고 B/L 번호 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
                         
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <select id="carrierSelect" class="w-full md:w-28 bg-slate-900 text-white text-base font-bold px-3 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
