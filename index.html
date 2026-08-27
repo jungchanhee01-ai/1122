@@ -94,14 +94,15 @@
         </div>
     </header>
 
-    <section class="relative bg-slate-900 text-white overflow-hidden h-[calc(100vh-80px)] flex items-center justify-center px-4">
+    <!-- 히어로 섹션: 좌측 하단 배치로 수정 -->
+    <section class="relative bg-slate-900 text-white overflow-hidden h-[calc(100vh-80px)] flex items-end justify-start pb-16 sm:pb-20 pl-6 sm:pl-16 lg:pl-24 pr-4">
         <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
             <source src="video/main-video.mp4" type="video/mp4">
             동영상을 지원하지 않는 브라우저입니다.
         </video>
-        <div class="absolute inset-0 bg-slate-950/30"></div>
+        <div class="absolute inset-0 bg-slate-950/40"></div>
         
-        <div class="max-w-7xl w-full mx-auto relative z-10 text-center sm:text-left">
+        <div class="max-w-4xl w-full relative z-10 text-left">
             <span class="px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-widest uppercase mb-6 inline-block border border-orange-500/30">
                 <i class="ri-sparkling-fill"></i> <span data-i18n="hero_tag">SMART GLOBAL FORWARDING PARTNER</span>
             </span>
@@ -116,7 +117,7 @@
                 글로벌 비즈니스의 확실한 물류 솔루션을 경험하세요.
             </p>
             
-           <div class="flex flex-wrap gap-4 mb-16 justify-center sm:justify-start">
+           <div class="flex flex-wrap gap-4 justify-start">
                 <a href="#quote" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-600/30 hover:bg-orange-700 transition-all flex items-center gap-2" data-i18n="hero_btn1">
                     무상 견적 문의
                 </a>
