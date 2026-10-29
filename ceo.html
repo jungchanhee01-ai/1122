@@ -23,7 +23,7 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2013 · GLOBAL SMART FORWARDING</span>
                 <span class="hidden md:inline text-slate-700">|</span>
-    <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 18:00)</span>
+                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 18:00)</span>
             </div>
             <div class="flex items-center gap-4 font-medium">
                 <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
@@ -78,8 +78,9 @@
         </div>
     </header>
     
-    <main class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
-        <div class="mb-14 border-b border-slate-200 pb-8">
+    <!-- max-w-5xl에서 max-w-7xl로 확장하여 좌우 여백 정상화 -->
+    <main class="py-16 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full flex-1">
+        <div class="mb-12 border-b border-slate-200 pb-8">
             <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-4">
                 <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
                 <i class="ri-arrow-right-s-line"></i>
@@ -98,22 +99,53 @@
             </h1>
         </div>
 
-        <div class="grid md:grid-cols-12 gap-12 items-center mb-20">
-            <div class="md:col-span-5 bg-white p-3 rounded-2xl border border-slate-200 shadow-lg">
-                <div class="relative overflow-hidden rounded-xl aspect-[4/5]">
-                    <img src="https://omgdesignmedia.com/wp-content/uploads/2025/06/2-5.webp" alt="CEO 이미지">
+        <!-- 카드 & 인사말 통합 섹션 -->
+        <div class="grid md:grid-cols-12 gap-8 lg:gap-14 items-start mb-16 bg-white p-8 sm:p-12 lg:p-14 rounded-3xl border border-slate-200 shadow-sm">
+            <!-- 좌측 이미지 카드 (5열 할당) -->
+            <div class="md:col-span-5 bg-slate-900/5 p-3.5 rounded-2xl border border-slate-200/70 shadow-sm">
+                <div class="relative overflow-hidden rounded-xl aspect-[4/5] shadow-inner group bg-slate-100">
+                    <img id="ceoImage" src="images/CEO.JPEG" alt="CEO 인사말 이미지" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="handleImageFallback(this)" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="absolute bottom-4 left-4 right-4 text-left">
+                        <span class="inline-block text-[11px] font-bold tracking-wider text-orange-400 uppercase bg-slate-950/80 px-2.5 py-1 rounded backdrop-blur-sm">GLOBAL LOGISTICS</span>
+                    </div>
                 </div>
-                <div class="text-center py-3 text-xs font-bold text-slate-500 tracking-wider">WWW.FUTUREGLS.COM</div>
+                <div class="flex justify-between items-center px-3 pt-3.5 pb-1 text-xs font-extrabold text-slate-500 tracking-wider">
+                    <span class="text-slate-800">FUTURE GLS</span>
+                    <span>WWW.FUTUREGLS.COM</span>
+                </div>
             </div>
 
-            <div class="md:col-span-7 space-y-6 text-slate-600 text-sm sm:text-base leading-relaxed" data-i18n="ceo_content">
-                <p>당사는 동남아 및 미국, 중남미 중심으로 전세계 600개국으로 국제운송 Air & Sea뿐만 아니라 Sea & Air를 연계한 최상의 물류 서비스를 제공하고 있으며 앞으로도 세계를 대표하는 종합물류 회사로 발전하여 명실공히 업계 수위의 자리를 차지하고 하고 있습니다.</p>
-                <p>오랜 경험에서 축적된 풍부한 Know-how와 연구개발로 최고의 서비스를 자랑하는 저희 (주)퓨처지엘스는 3자 물류 서비스(Third Party Logistics) 제공업체로 사업영역을 확장하여, 경영환경이 갈수록 치열해지는 현재 상황에서 고객이 좀 더 저렴한 비용으로 최상의 서비스를 제공 받을 수 있도록 하기 위해 고객서비스는 한층 향상시키고, 물류비용은 절감함과 동시에 효율적인 물류운영에 힘쓰고 있으며, 고객이 원하는 것을 바로 고객의 입장에서 생각하는 최상의 물류 서비스를 제공하여 최고의 종합 물류기업으로 거듭나겠습니다.</p>
+            <!-- 우측 본문 텍스트 & 서명 영역 (7열 할당) -->
+            <div class="md:col-span-7 flex flex-col justify-between h-full pt-1">
+                <div class="space-y-5 text-slate-600 text-base sm:text-lg leading-relaxed text-justify" data-i18n="ceo_content">
+                    <p class="font-semibold text-slate-900 text-lg sm:text-xl leading-snug">퓨처지엘에스(FUTURE GLS) 홈페이지를 찾아주신 고객 여러분,<br>진심으로 환영합니다.</p>
+                    <p>오늘날의 글로벌 물류 환경은 단순한 화물의 이동을 넘어, 기업의 공급망 경쟁력과 비즈니스 성패를 좌우하는 핵심 축이 되었습니다. 퓨처지엘에스는 북미, 중남미, 동남아를 비롯한 전 세계 주요 거점 네트워크와 축적된 물류 노하우를 바탕으로 해상(Ocean), 항공(Air), 복합 운송(Sea & Air), 통관에 이르는 통합 맞춤형 포워딩 솔루션을 제공하고 있습니다.</p>
+                    <p>복잡하고 다변화되는 무역 환경 속에서 고객의 물류 비용을 최적화하고, 안전하고 신속한 운송 리드타임을 보장하기 위해 선제적인 위험 관리와 프로세스 혁신에 집중하고 있습니다. 퓨처지엘에스는 고객의 성공이 곧 우리의 성장이라는 신념 아래, 언제나 고객의 현장과 가장 가까운 곳에서 최적의 해답을 제시하는 든든한 파트너가 될 것을 약속드립니다.</p>
+                    <p>감사합니다.</p>
+                    <p class="pt-3 font-bold text-slate-900 text-lg text-right sm:text-left">(주)퓨처지엘에스 대표이사 정 주 만</p>
+                </div>
+
+                <!-- 하단 전문성 지표 미니 카드 -->
+                <div class="grid grid-cols-3 gap-4 pt-8 mt-8 border-t border-slate-100">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
+                        <div class="text-xs text-slate-500 font-medium" data-i18n="kpi_title_1">글로벌 거점</div>
+                        <div class="text-base font-bold text-slate-800 mt-1" data-i18n="kpi_val_1">전 세계 네트워크</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
+                        <div class="text-xs text-slate-500 font-medium" data-i18n="kpi_title_2">통합 물류</div>
+                        <div class="text-base font-bold text-slate-800 mt-1" data-i18n="kpi_val_2">해상 · 항공 · 통관</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
+                        <div class="text-xs text-slate-500 font-medium" data-i18n="kpi_title_3">물류비 최적화</div>
+                        <div class="text-base font-bold text-orange-600 mt-1" data-i18n="kpi_val_3">맞춤 솔루션</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-  <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
                 <div>
@@ -156,9 +188,23 @@
     </footer>
 
     <script>
+        let fallbackAttempt = 0;
+        function handleImageFallback(img) {
+            fallbackAttempt++;
+            if (fallbackAttempt === 1) {
+                img.src = 'images/CEO.jpg';
+            } else if (fallbackAttempt === 2) {
+                img.src = 'images/ceo.png';
+            } else if (fallbackAttempt === 3) {
+                img.src = 'images/ceo.jpg';
+            } else if (fallbackAttempt === 4) {
+                img.src = 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80';
+            }
+        }
+
         const i18nData = {
             en: {
-                cs_center: "Customer Center: 02-712-0410(Rep) (Weekdays 09:00 - 18:00)",
+                cs_center: "Customer Center: 02-712-0410(Rep) | Fax: 02-712-0411 (Weekdays 09:00 - 18:00)",
                 nav_tracking: "Cargo Tracking",
                 nav_exchange: "Exchange Rates",
                 nav_quote: "Get a Quote",
@@ -177,7 +223,17 @@
                 breadcrumb_current: "CEO Message",
                 page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
                 page_main_title: "Providing the <span class=\"text-orange-600\">\"Best Logistics Service\"</span> from the customer's perspective, we will grow into the <span class=\"text-orange-600\">\"Top Logistics Company\"</span>.",
-                ceo_content: "<p>We provide the best logistics services by combining Air & Sea and Sea & Air transport to 600 countries worldwide, focusing on Southeast Asia, the US, and Latin America. We are evolving into a world-leading integrated logistics company.</p><p>With our rich know-how and R&D, FUTURE GLS Co., Ltd. is expanding its business as a 3PL provider. We strive for efficiency and cost reduction to provide top-tier services at lower costs, thinking from the customer's perspective.</p>",
+                ceo_content: `<p class="font-semibold text-slate-900 text-lg sm:text-xl leading-snug">Welcome to FUTURE GLS.<br>We sincerely appreciate your visit to our website.</p>
+                <p>In today's fast-changing global trade environment, logistics goes beyond mere cargo transportation—it serves as the core pillar determining enterprise supply chain competitiveness and business success. Leveraging extensive logistics know-how and strategic network hubs across North America, Latin America, and Southeast Asia, FUTURE GLS delivers comprehensive, customized forwarding solutions spanning Ocean, Air, Multimodal (Sea & Air), and Customs Clearance.</p>
+                <p>We focus on proactive risk management and continuous process innovation to optimize your logistics costs and ensure reliable, fast lead times amid dynamic market conditions. Under the firm belief that customer success drives our own growth, FUTURE GLS promises to stand by your side as an agile, dependable partner providing the best solutions.</p>
+                <p>Thank you.</p>
+                <p class="pt-3 font-bold text-slate-900 text-lg text-right sm:text-left">FUTURE GLS Co., Ltd. &nbsp; CEO Juman Jung</p>`,
+                kpi_title_1: "Global Hubs",
+                kpi_val_1: "Worldwide Network",
+                kpi_title_2: "Integrated Logistics",
+                kpi_val_2: "Ocean · Air · Customs",
+                kpi_title_3: "Cost Optimization",
+                kpi_val_3: "Tailored Solutions",
                 footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
                 footer_col1_title: "Key Services",
                 footer_s1: "Ocean Freight (FCL/LCL)",
@@ -190,10 +246,10 @@
                 footer_email: "Email: future@futuregls.com",
                 footer_hours: "Hours: Weekdays 09:00 - 18:00",
                 footer_col3_title: "Head Office",
-              footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
+                footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
             },
             "zh-CN": {
-                cs_center: "客服中心：02-712-0410(Rep) (工作日 09:00 - 18:00)",
+                cs_center: "客服中心：02-712-0410(Rep) | 传真：02-712-0411 (工作日 09:00 - 18:00)",
                 nav_tracking: "货物追踪",
                 nav_exchange: "汇率查询",
                 nav_quote: "报价申请",
@@ -212,23 +268,33 @@
                 breadcrumb_current: "CEO致辞",
                 page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
                 page_main_title: "从客户的角度思考，提供<span class=\"text-orange-600\">“最优物流服务”</span>，成为<span class=\"text-orange-600\">“顶级物流企业”</span>。",
-                ceo_content: "<p>我们以东南亚、美国及拉美为中心，提供连接海空联运（Sea & Air）及空运、海运服务，覆盖全球600个国家，正发展成为全球顶尖的综合物流公司。</p><p>凭借丰富的经验和研发能力，FUTURE GLS作为第三方物流（3PL）提供商不断扩张业务。在激烈的经营环境中，我们致力于降低物流成本，提升服务效率，始终站在客户立场，提供最优质的物流解决方案。</p>",
+                ceo_content: `<p class="font-semibold text-slate-900 text-lg sm:text-xl leading-snug">衷心欢迎各位客户访问FUTURE GLS官方网站。<br>感谢您的信任与支持。</p>
+                <p>当今的全球物流环境已超越了单纯的货物转运，成为决定企业供应链竞争力与商业成败的关键支柱。FUTURE GLS以北美、拉美、东南亚等全球主要枢纽网络与深厚的物流专长为基础，提供涵盖海运（Ocean）、空运（Air）、多式联运（Sea & Air）及通关的一体化定制货运代理方案。</p>
+                <p>在复杂多变的国际贸易环境下，我们专注于先导性风险管控与业务流程创新，全力优化客户物流成本并确保货物安全、快速交付。FUTURE GLS坚信“客户的成功就是我们的成长”，将始终立足客户现场最近之处，做值得信赖的最佳合作伙伴。</p>
+                <p>谢谢。</p>
+                <p class="pt-3 font-bold text-slate-900 text-lg text-right sm:text-left">(株)FUTURE GLS 代表理事 郑周满</p>`,
+                kpi_title_1: "全球枢纽",
+                kpi_val_1: "全球服务网络",
+                kpi_title_2: "综合物流",
+                kpi_val_2: "海运 · 空运 · 清关",
+                kpi_title_3: "物流成本优化",
+                kpi_val_3: "定制解决方案",
                 footer_desc: "全球物流新标准，FUTURE GLS。<br>将您的商业价值安全送达全球。",
                 footer_col1_title: "主要服务",
                 footer_s1: "海运服务 (FCL/LCL)",
                 footer_s2: "空运服务",
                 footer_s3: "进出口报关代理",
-                footer_s4: "保税仓库管理",
+                footer_s4: "行业动态",
                 footer_col2_title: "客服中心",
                 footer_tel: "电话：02-712-0410(Rep)",
                 footer_fax: "传真：02-712-0411",
                 footer_email: "电子邮箱：future@futuregls.com",
                 footer_hours: "营业时间：工作日 09:00 - 18:00",
                 footer_col3_title: "总部地址",
-                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满",
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼 (大峙洞、枫林I-One Lemon)<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满"
             },
             ja: {
-                cs_center: "カスタマーセンター：02-712-0410(Rep) (平日 09:00 - 18:00)",
+                cs_center: "カスタマーセンター：02-712-0410(Rep) | FAX：02-712-0411 (平日 09:00 - 18:00)",
                 nav_tracking: "貨物追跡",
                 nav_exchange: "為替照会",
                 nav_quote: "お見積り",
@@ -247,20 +313,30 @@
                 breadcrumb_current: "CEOメッセージ",
                 page_sub_tag: "C O M P A N Y &nbsp; I N T R O D U C T I O N",
                 page_main_title: "顧客の立場で考え、<span class=\"text-orange-600\">「最高の物流サービス」</span>を提供し、<span class=\"text-orange-600\">「トップ物流企業」</span>として生まれ変わります。",
-                ceo_content: "<p>当社は東南アジア、米国、中南米を中心に、世界600カ国へ国際輸送（Air & Sea、Sea & Air）を提供しており、世界を代表する総合物流会社へと成長を続けています。</p><p>長年の経験で培ったノウハウを誇る当社は、3PL事業へも領域を拡大しています。厳しい経営環境の中、コスト削減とサービス向上を両立し、顧客の視点に立った物流運営で、最高の総合物流企業を目指します。</p>",
+                ceo_content: `<p class="font-semibold text-slate-900 text-lg sm:text-xl leading-snug">FUTURE GLSのホームページをご覧いただき、<br>誠にありがとうございます。</p>
+                <p>今日のグローバル物流環境は、単なる貨物輸送にとどまらず、企業のサプライチェーン競争力とビジネスの成否を左右する中核的な役割を担っています。FUTURE GLSは、北米、中南米、東南アジアをはじめとする全世界の主要拠点ネットワークと蓄積された物流ノウハウを基盤に、海上輸送(Ocean)、航空輸送(Air)、複合一貫輸送(Sea & Air)、通関に至るワンストップのフォワーディングソリューションを提供しています。</p>
+                <p>複雑かつ多変する貿易環境において、お客様の物流コストを最適化し、安全かつ迅速なリードタイムを保証するため、先制的なリスク管理とプロセスの革新に注力しております。「お客様の成功こそが当社の成長」という信念のもと、常に最適な答えを提案する頼もしいパートナーとなることをお約束いたします。</p>
+                <p>ありがとうございます。</p>
+                <p class="pt-3 font-bold text-slate-900 text-lg text-right sm:text-left">株式会社FUTURE GLS 代表取締役 チョン・ジュマン</p>`,
+                kpi_title_1: "グローバル拠点",
+                kpi_val_1: "全世界ネットワーク",
+                kpi_title_2: "総合物流",
+                kpi_val_2: "海上 · 航空 · 通関",
+                kpi_title_3: "物流コスト最適化",
+                kpi_val_3: "オーダーメイド提案",
                 footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中へ安全にお届けします。",
                 footer_col1_title: "主なサービス",
                 footer_s1: "海上輸送 (FCL/LCL)",
                 footer_s2: "航空貨物輸送",
                 footer_s3: "輸出入通関代行",
-                footer_s4: "保税倉庫管理",
+                footer_s4: "業界ニュース",
                 footer_col2_title: "カスタマーセンター",
                 footer_tel: "電話：02-712-0410(Rep)",
                 footer_fax: "ファックス：02-712-0411",
                 footer_email: "メール：future@futuregls.com",
                 footer_hours: "営業時間：平日 09:00 - 18:00",
                 footer_col3_title: "本社所在地",
-                footer_addr: "ソウル市江南区テヘラン路64キル13、9階<br> (大峙洞、豊林アイワンレモン) <br>事業者登録番号：105-87-87676 | 代表取締役：チョン・ジュマン"
+                footer_addr: "ソウル市江南区テヘラン路64キル13、9階 (大峙洞、豊林アイワンレモン)<br>事業者登録番号：105-87-87676 | 代表取締役：チョン・ジュマン"
             }
         };
 
