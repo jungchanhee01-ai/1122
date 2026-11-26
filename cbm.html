@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBM 계산기</title>
+  <style>
+    :root {
+      --primary: #1a66ff;
+      --primary-hover: #0052f5;
+      --bg-page: #ffffff;
+      --bg-sub: #f4f6fa;
+      --border: #dfe4ee;
+      --text-main: #191f28;
+      --text-sub: #4e5968;
+      --text-muted: #8b95a1;
+      --radius-lg: 14px;
+      --radius-md: 8px;
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .cbm-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .cbm-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .cbm-header p {
+      font-size: 14px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+    }
+
+    .notice-bar {
+      background-color: var(--bg-sub);
+      border-radius: var(--radius-md);
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 20px;
+    }
+
+    .notice-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #8b95a1;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #eef1f6;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .required-note {
+      font-size: 12px;
+      color: var(--primary);
+    }
+
+    .form-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      width: 130px;
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 10px;
+      flex-shrink: 0;
+    }
+
+    .form-label span {
+      color: var(--primary);
+      margin-left: 2px;
+    }
+
+    .form-control-group {
+      flex: 1;
+    }
+
+    .input-guide {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .dimension-inputs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    input[type="number"],
+    select {
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0 14px;
+      font-size: 14px;
+      color: var(--text-main);
+      background-color: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--primary);
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .dim-input {
+      width: 78px;
+      text-align: left;
+    }
+
+    .unit-select {
+      width: 84px;
+      cursor: pointer;
+    }
+
+    .single-input-wrap {
+      position: relative;
+      width: 180px;
+    }
+
+    .single-input-wrap input {
+      width: 100%;
+      padding-right: 36px;
+    }
+
+    .unit-suffix {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .multiply-sign {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 12px 44px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .result-section {
+      background-color: var(--bg-sub);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 36px;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn-reset {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
+    .btn-reset:hover {
+      background: #f9fafb;
+    }
+
+    .result-table-wrap {
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid #e6ebf2;
+      overflow-x: auto;
+    }
+
+    table.result-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 13px;
+    }
+
+    .result-table th {
+      background-color: #f8fafc;
+      color: var(--text-sub);
+      font-weight: 500;
+      padding: 12px 14px;
+      text-align: center;
+      border-bottom: 1px solid #edf0f5;
+    }
+
+    .result-table th:first-child,
+    .result-table td:first-child {
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .result-table td {
+      padding: 16px 14px;
+      text-align: center;
+      border-bottom: 1px solid #f1f3f7;
+      vertical-align: middle;
+    }
+
+    .result-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cargo-name {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .cargo-spec {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .val-bold {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .stack-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
+
+    .stack-val {
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .btn-delete {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
+    .btn-delete:hover {
+      background: #fff1f0;
+      border-color: #ffa39e;
+      color: #cf1322;
+    }
+
+    .total-row {
+      background-color: #f4f8ff;
+    }
+
+    .total-row td {
+      font-weight: 700;
+      color: var(--primary);
+      border-top: 1px solid #dce6f7;
+    }
+
+    .total-row td:first-child {
+      color: var(--text-main);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .result-footnote {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .spec-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .spec-table-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+    }
+
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      font-size: 13px;
+    }
+
+    .spec-table th {
+      background-color: var(--bg-sub);
+      color: var(--text-sub);
+      font-weight: 600;
+      padding: 13px 18px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .spec-table th:first-child,
+    .spec-table td:first-child {
+      text-align: left;
+      padding-left: 22px;
+      font-weight: 600;
+      color: var(--text-main);
+      width: 28%;
+    }
+
+    .spec-table td {
+      padding: 13px 18px;
+      text-align: center;
+      color: var(--text-sub);
+      border-bottom: 1px solid #eef1f6;
+    }
+
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    @media (max-width: 680px) {
+      .card { padding: 20px; }
+      .form-row { flex-direction: column; }
+      .form-label { width: 100%; padding-top: 0; margin-bottom: 8px; }
+      .btn-primary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cbm-wrapper">
+  <div class="cbm-header">
+    <h1>CBM 계산기</h1>
+    <p>화물 크기와 중량을 입력해 CBM, Revenue Ton, 필요 컨테이너 수량을 계산해 보세요.</p>
+  </div>
+
+  <div class="notice-bar">
+    <span class="notice-icon">i</span>
+    <span>최종 포장 후의 화물 정보를 입력해 주세요.</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-title">화물정보 입력</div>
+      <div class="required-note">* 표시는 필수 입력 항목입니다.</div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">화물 크기<span>*</span></div>
+      <div class="form-control-group">
+        <div class="input-guide">가로×세로×높이를 입력해 주세요.</div>
+        <div class="dimension-inputs">
+          <input type="number" id="width" class="dim-input" placeholder="0" min="0" step="any" />
+          <span class="multiply-sign">×</span>
+          <input type="number" id="depth" class="dim-input" placeholder="0" min="0" step="any" />
+          <span class="multiply-sign">×</span>
+          <input type="number" id="height" class="dim-input" placeholder="0" min="0" step="any" />
+          <select id="unit" class="unit-select">
+            <option value="cm" selected>cm</option>
+            <option value="mm">mm</option>
+            <option value="m">m</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">중량<span>*</span></div>
+      <div class="form-control-group">
+        <div class="single-input-wrap">
+          <input type="number" id="weight" placeholder="" min="0" step="any" />
+          <span class="unit-suffix">kg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">수량</div>
+      <div class="form-control-group">
+        <div class="single-input-wrap">
+          <input type="number" id="qty" value="1" min="1" step="1" />
+          <span class="unit-suffix">개</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="btn-primary" id="calcBtn">계산하기</button>
+    </div>
+  </div>
+
+  <div class="result-section">
+    <div class="result-header">
+      <div class="card-title">계산 결과</div>
+      <button type="button" class="btn-reset" id="resetBtn">초기화</button>
+    </div>
+
+    <div class="result-table-wrap">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>화물</th>
+            <th>총 CBM</th>
+            <th>R/T</th>
+            <th>C/W (항공)</th>
+            <th>필요 컨테이너 수</th>
+            <th>20'ft</th>
+            <th>40'ft</th>
+            <th>40'HC</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="resultBody">
+          <tr>
+            <td colspan="9" class="empty-state">화물 정보를 입력하고 [계산하기] 버튼을 눌러주세요.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="result-footnote">
+      <span class="notice-icon">i</span>
+      <span>화물특성 및 포장상태에 따라 적입수량의 차이가 있을 수 있습니다.</span>
+    </div>
+  </div>
+
+  <div class="spec-section">
+    <h2>컨테이너 규격 참고표</h2>
+    <div class="spec-table-wrap">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>규격</th>
+            <th>20'ft</th>
+            <th>40'ft</th>
+            <th>40'HC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>높이(Height)</td>
+            <td>8'6"</td>
+            <td>8'6"</td>
+            <td>9'6"</td>
+          </tr>
+          <tr>
+            <td>자체 무게(Tare)</td>
+            <td>2,200kg</td>
+            <td>3,600kg</td>
+            <td>3,800kg</td>
+          </tr>
+          <tr>
+            <td>적재 가능 무게(Payload)</td>
+            <td>28,280kg</td>
+            <td>28,900kg</td>
+            <td>28,700kg</td>
+          </tr>
+          <tr>
+            <td>최대 총 무게(Max Gross)</td>
+            <td>30,480kg</td>
+            <td>32,500kg</td>
+            <td>32,500kg</td>
+          </tr>
+          <tr>
+            <td>도어(Door, 너비×높이)</td>
+            <td>2,340×2,280mm</td>
+            <td>2,340×2,280mm</td>
+            <td>2,340×2,585mm</td>
+          </tr>
+          <tr>
+            <td>내부(Interior, 길이×너비×높이)</td>
+            <td>5,898×2,352×2,392mm</td>
+            <td>12,032×2,352×2,392mm</td>
+            <td>12,032×2,352×2,698mm</td>
+          </tr>
+          <tr>
+            <td>내부 용적(Interior Cubic)</td>
+            <td>33.2m³</td>
+            <td>67.6m³</td>
+            <td>76.3m³</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CONTAINERS = {
+    ft20: { length: 5898, width: 2352, height: 2392, payload: 28280, cubic: 33.2 },
+    ft40: { length: 12032, width: 2352, height: 2392, payload: 28900, cubic: 67.6 },
+    hc40: { length: 12032, width: 2352, height: 2698, payload: 28700, cubic: 76.3 }
+  };
+
+  let cargoList = [];
+
+  function convertToMm(val, unit) {
+    if (unit === "mm") return val;
+    if (unit === "cm") return val * 10;
+    if (unit === "m") return val * 1000;
+    return val;
+  }
+
+  // 소수점 첫째 자리 올림 (0보다 크면 최소 0.1로 표시)
+  function ceilOneDecimal(num) {
+    if (num <= 0) return 0;
+    return Math.ceil(num * 10) / 10;
+  }
+
+  function calcFloorMaxCount(cLength, cWidth, itemL, itemW) {
+    if (itemL <= 0 || itemW <= 0) return 0;
+    const fitNormal = Math.floor(cLength / itemL) * Math.floor(cWidth / itemW);
+    const fitRotated = Math.floor(cLength / itemW) * Math.floor(cWidth / itemL);
+    return Math.max(fitNormal, fitRotated);
+  }
+
+  function calcContainerNeed(spec, wMm, dMm, hMm, weightKg, qty, totalCbm) {
+    const floorCap = calcFloorMaxCount(spec.length, spec.width, wMm, dMm);
+    const weightCap = weightKg > 0 ? Math.floor(spec.payload / weightKg) : Infinity;
+
+    let raw1, raw2;
+
+    if (hMm > spec.height || floorCap === 0) {
+      const byVol = totalCbm / spec.cubic;
+      const byWeight = (weightKg * qty) / spec.payload;
+      raw1 = Math.max(byVol, byWeight);
+      raw2 = Math.max(byVol / 2, byWeight);
+    } else {
+      const cap1Tier = Math.min(floorCap, weightCap);
+      const canStack2 = hMm * 2 <= spec.height;
+      const cap2Tier = Math.min(canStack2 ? floorCap * 2 : floorCap, weightCap);
+
+      raw1 = cap1Tier > 0 ? qty / cap1Tier : 0;
+      raw2 = cap2Tier > 0 ? qty / cap2Tier : 0;
+    }
+
+    return {
+      tier1: ceilOneDecimal(raw1),
+      tier2: ceilOneDecimal(raw2)
+    };
+  }
+
+  function addCargo() {
+    const w = parseFloat(document.getElementById("width").value);
+    const d = parseFloat(document.getElementById("depth").value);
+    const h = parseFloat(document.getElementById("height").value);
+    const unit = document.getElementById("unit").value;
+    const weight = parseFloat(document.getElementById("weight").value);
+    const qty = parseInt(document.getElementById("qty").value, 10) || 1;
+
+    if (!w || w <= 0 || !d || d <= 0 || !h || h <= 0) {
+      alert("화물 크기(가로, 세로, 높이)를 정확히 입력해 주세요.");
+      return;
+    }
+    if (isNaN(weight) || weight <= 0) {
+      alert("화물 중량(kg)을 정확히 입력해 주세요.");
+      return;
+    }
+    if (qty <= 0) {
+      alert("수량은 1개 이상 입력해 주세요.");
+      return;
+    }
+
+    const wMm = convertToMm(w, unit);
+    const dMm = convertToMm(d, unit);
+    const hMm = convertToMm(h, unit);
+
+    const wCm = wMm / 10;
+    const dCm = dMm / 10;
+    const hCm = hMm / 10;
+
+    const unitVolumeCm3 = wCm * dCm * hCm;
+    const totalVolumeCm3 = unitVolumeCm3 * qty;
+    const totalCbm = totalVolumeCm3 / 1000000;
+
+    const totalWeightKg = weight * qty;
+    const totalTon = totalWeightKg / 1000;
+    const rt = Math.max(totalCbm, totalTon);
+
+    const volWeightKg = totalVolumeCm3 / 6000;
+    const cw = Math.max(totalWeightKg, volWeightKg);
+
+    const c20 = calcContainerNeed(CONTAINERS.ft20, wMm, dMm, hMm, weight, qty, totalCbm);
+    const c40 = calcContainerNeed(CONTAINERS.ft40, wMm, dMm, hMm, weight, qty, totalCbm);
+    const c40hc = calcContainerNeed(CONTAINERS.hc40, wMm, dMm, hMm, weight, qty, totalCbm);
+
+    cargoList.push({
+      id: Date.now(),
+      specText: `${w}×${d}×${h}${unit} · ${weight}kg · ${qty}개`,
+      totalVolumeCm3,
+      totalWeightKg,
+      totalCbm,
+      rt,
+      cw,
+      c20,
+      c40,
+      c40hc
+    });
+
+    renderTable();
+  }
+
+  function removeCargo(id) {
+    cargoList = cargoList.filter(item => item.id !== id);
+    renderTable();
+  }
+
+  function resetAll() {
+    cargoList = [];
+    document.getElementById("width").value = "";
+    document.getElementById("depth").value = "";
+    document.getElementById("height").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("qty").value = "1";
+    document.getElementById("unit").value = "cm";
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById("resultBody");
+
+    if (cargoList.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="9" class="empty-state">화물 정보를 입력하고 [계산하기] 버튼을 눌러주세요.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    let sumVolumeCm3 = 0;
+    let sumWeightKg = 0;
+    let sumCbm = 0;
+    let sum20T1 = 0, sum20T2 = 0;
+    let sum40T1 = 0, sum40T2 = 0;
+    let sumHcT1 = 0, sumHcT2 = 0;
+
+    let rowsHtml = cargoList.map((item, idx) => {
+      sumVolumeCm3 += item.totalVolumeCm3;
+      sumWeightKg += item.totalWeightKg;
+      sumCbm += item.totalCbm;
+      sum20T1 += item.c20.tier1;
+      sum20T2 += item.c20.tier2;
+      sum40T1 += item.c40.tier1;
+      sum40T2 += item.c40.tier2;
+      sumHcT1 += item.c40hc.tier1;
+      sumHcT2 += item.c40hc.tier2;
+
+      return `
+        <tr>
+          <td>
+            <div class="cargo-name">화물 ${idx + 1}</div>
+            <div class="cargo-spec">${item.specText}</div>
+          </td>
+          <td class="val-bold">${item.totalCbm.toFixed(3)} CBM</td>
+          <td class="val-bold">${item.rt.toFixed(2)} CBM</td>
+          <td class="val-bold">${item.cw.toFixed(2)} kg</td>
+          <td>
+            <div class="stack-label">1단 적재<br>2단 적재</div>
+          </td>
+          <td>
+            <div class="stack-val">${item.c20.tier1.toFixed(1)}개<br>${item.c20.tier2.toFixed(1)}개</div>
+          </td>
+          <td>
+            <div class="stack-val">${item.c40.tier1.toFixed(1)}개<br>${item.c40.tier2.toFixed(1)}개</div>
+          </td>
+          <td>
+            <div class="stack-val">${item.c40hc.tier1.toFixed(1)}개<br>${item.c40hc.tier2.toFixed(1)}개</div>
+          </td>
+          <td>
+            <button type="button" class="btn-delete" onclick="removeCargo(${item.id})">삭제</button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    if (cargoList.length > 1) {
+      const totalRt = Math.max(sumCbm, sumWeightKg / 1000);
+      const totalCw = Math.max(sumWeightKg, sumVolumeCm3 / 6000);
+
+      rowsHtml += `
+        <tr class="total-row">
+          <td>총 합계</td>
+          <td>${sumCbm.toFixed(3)} CBM</td>
+          <td>${totalRt.toFixed(3)} CBM</td>
+          <td>${totalCw.toFixed(2)} kg</td>
+          <td>
+            <div class="stack-label">1단 적재<br>2단 적재</div>
+          </td>
+          <td>${sum20T1.toFixed(1)}개<br>${sum20T2.toFixed(1)}개</td>
+          <td>${sum40T1.toFixed(1)}개<br>${sum40T2.toFixed(1)}개</td>
+          <td>${sumHcT1.toFixed(1)}개<br>${sumHcT2.toFixed(1)}개</td>
+          <td></td>
+        </tr>
+      `;
+    }
+
+    tbody.innerHTML = rowsHtml;
+  }
+
+  document.getElementById("calcBtn").addEventListener("click", addCargo);
+  document.getElementById("resetBtn").addEventListener("click", resetAll);
+
+  document.querySelectorAll(".card input").forEach(input => {
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") addCargo();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -94,6 +94,39 @@
         </div>
     </header>
 
+    <!-- 우측 퀵 메뉴 UI (추가된 영역) -->
+    <aside aria-label="물류 퀵 메뉴" class="hidden xl:flex fixed right-6 2xl:right-10 top-1/2 -translate-y-1/2 z-40 flex-col bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-lg shadow-slate-900/5 p-2.5 w-32 transition-all">
+        <div class="px-2 pt-1 pb-2 mb-1.5 border-b border-slate-100 text-center">
+            <span class="block text-[10px] font-extrabold tracking-widest text-orange-600 uppercase">QUICK TOOLS</span>
+        </div>
+        <nav class="flex flex-col gap-1.5">
+            <a href="cbm.html" class="group flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-all">
+                <div class="w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-orange-600 group-hover:text-white text-slate-600 flex items-center justify-center transition-colors shadow-xs">
+                    <i class="ri-calculator-line text-lg"></i>
+                </div>
+                <span class="text-xs font-bold tracking-tight text-center" data-i18n="quick_cbm">CBM 계산</span>
+            </a>
+            <a href="https://www.tradlinx.com/ko/unipass" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-all">
+                <div class="w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-orange-600 group-hover:text-white text-slate-600 flex items-center justify-center transition-colors shadow-xs">
+                    <i class="ri-file-search-line text-lg"></i>
+                </div>
+                <span class="text-xs font-bold tracking-tight text-center" data-i18n="quick_customs">통관 조회</span>
+            </a>
+            <a href="terminal/index.html" class="group flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-all">
+                <div class="w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-orange-600 group-hover:text-white text-slate-600 flex items-center justify-center transition-colors shadow-xs">
+                    <i class="ri-ship-2-line text-lg"></i>
+                </div>
+                <span class="text-xs font-bold tracking-tight text-center" data-i18n="quick_terminal">터미널 정보</span>
+            </a>
+            <a href="incotermss.html" class="group flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-all">
+                <div class="w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-orange-600 group-hover:text-white text-slate-600 flex items-center justify-center transition-colors shadow-xs">
+                    <i class="ri-book-open-line text-lg"></i>
+                </div>
+                <span class="text-xs font-bold tracking-tight text-center" data-i18n="quick_incoterms">인코텀즈</span>
+            </a>
+        </nav>
+    </aside>
+
     <!-- 히어로 섹션: 좌측 여백(pl-*)을 넓혀 텍스트를 오른쪽으로 이동 -->
     <section class="relative bg-slate-900 text-white overflow-hidden h-[calc(100vh-80px)] flex items-center justify-start pl-12 sm:pl-28 lg:pl-48 pr-4">
         <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
@@ -211,37 +244,7 @@
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3" data-i18n="track_title">내 화물, 지금 어디에? 실시간으로 추적하세요.</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mt-10">
-                <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
-                    <div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block">CARGO TRACKING</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="track_box1_title">화물 실시간 추적</h3>
-                        <p class="text-xs text-slate-400 mb-6" data-i18n="track_box1_desc">선사를 선택하고 B/L 번호 입력하시면 공식 트래킹 시스템으로 즉시 연결됩니다.</p>
-                        
-                        <div class="flex flex-col md:flex-row items-center gap-4">
-                            <select id="carrierSelect" class="w-full md:w-28 bg-slate-900 text-white text-base font-bold px-3 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 shrink-0">
-                                <option value="KMTC" data-i18n="opt_kmtc">고려해운</option>
-                                <option value="SINOKOR" data-i18n="opt_sinokor">장금상선</option>
-                                <option value="DOOWOO" data-i18n="opt_doowoo">두우해운</option>
-                                <option value="SITC">SITC</option>
-                            </select>
-
-                            <div class="relative flex-1 w-full">
-                                <input type="text" id="blInput" placeholder="B/L 번호 입력" data-i18n-placeholder="track_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 placeholder-slate-500">
-                            </div>
-
-                            <button type="button" onclick="openCarrierTracking()" class="w-full md:w-auto bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
-                                <span data-i18n="track_btn">실시간 조회 ↗</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 mt-6 px-2 border-t border-slate-700 pt-5 gap-2">
-                        <span class="flex items-center gap-1.5 text-slate-400 font-normal" data-i18n="track_info1">✓ 조회 버튼 클릭 시 B/L 번호 자동 복사 됩니다.</span>
-                    </div>
-                </div>
-
+                <!-- 좌측: 선박 조회 -->
                 <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
                     <div>
                         <div class="flex items-center gap-2 mb-3">
@@ -252,7 +255,7 @@
 
                         <div class="flex flex-col md:flex-row items-center gap-4">
                             <div class="relative flex-1 w-full">
-                                <input type="text" id="vesselNameInput" placeholder="선박명을 입력하세요" data-i18n-placeholder="vessel_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                                <input type="text" id="vesselNameInput" placeholder="예: HYUNDAI DREAM / HMM" data-i18n-placeholder="vessel_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-amber-500 placeholder-slate-500">
                             </div>
                             <button type="button" onclick="openVesselSchedule()" class="w-full md:w-auto bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
                                 <span data-i18n="vessel_btn">선박 스케줄 조회 ↗</span>
@@ -261,7 +264,37 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 mt-6 px-2 border-t border-slate-700 pt-5 gap-2">
-                        <span class="flex items-center gap-1.5 text-slate-400 font-normal" data-i18n="vessel_info1">✓ 조회 버튼 클릭 시 선박명이 복사되며 터미널 스케줄 사이트로 이동합니다.</span>
+                        <span class="flex items-center gap-1.5 text-slate-400 font-normal" data-i18n="vessel_info1">✓ 버튼 클릭 시 선박명이 자동 복사되며 터미널 스케줄 창이 열립니다.</span>
+                    </div>
+                </div>
+
+                <!-- 우측: 통관 조회 (MBL / HBL 선택 + B/L 번호 입력) -->
+                <div class="bg-slate-800 border border-slate-700 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between text-left">
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold tracking-widest text-orange-400 uppercase bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full inline-block">CUSTOMS CLEARANCE</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2" data-i18n="customs_box_title">통관 조회</h3>
+                        <p class="text-xs text-slate-400 mb-6" data-i18n="customs_box_desc">MBL 또는 HBL을 고른 뒤 B/L 번호를 넣으면 수입 통관 현황을 바로 확인할 수 있습니다.</p>
+
+                        <div class="flex flex-col md:flex-row items-center gap-4">
+                            <div class="flex items-center gap-1.5 w-full md:w-auto bg-slate-900 p-1.5 rounded-2xl border border-slate-700 shrink-0" role="group" aria-label="B/L 구분 선택">
+                                <button type="button" id="btnMBL" onclick="selectBlType('MBL')" class="flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold transition-all bg-orange-600 text-white shadow">MBL</button>
+                                <button type="button" id="btnHBL" onclick="selectBlType('HBL')" class="flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white">HBL</button>
+                            </div>
+
+                            <div class="relative flex-1 w-full">
+                                <input type="text" id="customsBlInput" placeholder="예: HLCU... / HDMU26001234" data-i18n-placeholder="customs_bl_placeholder" class="w-full bg-slate-900 text-white text-base px-6 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-orange-500 placeholder-slate-500">
+                            </div>
+
+                            <button type="button" onclick="openCustomsTracking()" class="w-full md:w-auto bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0">
+                                <span data-i18n="customs_btn">통관 조회 ↗</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 mt-6 px-2 border-t border-slate-700 pt-5 gap-2">
+                        <span class="flex items-center gap-1.5 text-slate-400 font-normal" data-i18n="customs_info1">✓ 영문·숫자 조합 B/L 번호를 정확히 입력해 주세요.</span>
                     </div>
                 </div>
             </div>
@@ -464,6 +497,10 @@
                 btn_tracking: "Cargo Tracking",
                 btn_quote: "Request Quote",
                 btn_admin: "Admin",
+                quick_cbm: "CBM Calc",
+                quick_customs: "Customs Check",
+                quick_terminal: "Terminal Info",
+                quick_incoterms: "Incoterms",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "From Sea to Sky,<br><span class=\"text-orange-500\">FUTURE GLS</span> connects you.",
                 hero_desc: "Providing optimized freight rates for major global routes, real-time cargo tracking, and customs clearance services.<br class=\"hidden sm:block\"> Experience reliable logistics solutions for your global business.",
@@ -488,9 +525,14 @@
                 track_title: "Where is my cargo? Track it in real-time.",
                 track_box1_title: "Cargo Tracking",
                 track_box1_desc: "Select a carrier and enter your B/L number to instantly connect.",
+                customs_box_title: "Customs Clearance",
+                customs_box_desc: "Pick MBL or HBL and enter your B/L number to check import customs status.",
+                customs_bl_placeholder: "e.g. HLCU... / HDMU26001234",
+                customs_btn: "Customs Search ↗",
+                customs_info1: "✓ Enter alphanumeric B/L No. accurately.",
                 vessel_box_title: "Vessel Schedule",
                 vessel_box_desc: "Enter the vessel name to check terminal schedule information such as departure and arrival dates.",
-                vessel_placeholder: "Enter vessel name",
+                vessel_placeholder: "e.g. HYUNDAI DREAM / HMM",
                 vessel_btn: "Vessel Schedule ↗",
                 vessel_info1: "✓ Vessel name is copied and redirected to the schedule site on click.",
                 opt_kmtc: "KMTC",
@@ -562,6 +604,10 @@
                 btn_tracking: "货物追踪",
                 btn_quote: "报价申请",
                 btn_admin: "Admin",
+                quick_cbm: "CBM计算",
+                quick_customs: "通关查询",
+                quick_terminal: "码头信息",
+                quick_incoterms: "贸易术语",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "从海洋到天空，<br><span class=\"text-orange-500\">FUTURE GLS</span>为您连接。",
                 hero_desc: "提供全球主要航线优化运费、实时货物位置追踪及清关代理。<br class=\"hidden sm:block\">体验全球业务的可靠物流解决方案。",
@@ -581,9 +627,14 @@
                 track_title: "我的货物在哪里？请进行实时追踪。",
                 track_box1_title: "货物实时追踪",
                 track_box1_desc: "选择船公司并输入B/L单号即可立即连接官方追踪系统。",
+                customs_box_title: "通关查询",
+                customs_box_desc: "选择MBL或HBL并输入B/L单号，即可快速查看进口通关动态。",
+                customs_bl_placeholder: "例: HLCU... / HDMU26001234",
+                customs_btn: "通关查询 ↗",
+                customs_info1: "✓ 请准确输入英文字母与数字组合的B/L号。",
                 vessel_box_title: "船舶查询",
                 vessel_box_desc: "输入船名即可确认起运港、到达日等码头船期信息。",
-                vessel_placeholder: "请输入船名",
+                vessel_placeholder: "例: HYUNDAI DREAM / HMM",
                 vessel_btn: "船舶船期查询 ↗",
                 vessel_info1: "✓ 点击查询按钮时将复制船名并跳转至船期网站。",
                 opt_kmtc: "高丽海运",
@@ -655,6 +706,10 @@
                 btn_tracking: "貨物追跡",
                 btn_quote: "お見積り",
                 btn_admin: "Admin",
+                quick_cbm: "CBM計算",
+                quick_customs: "通関照会",
+                quick_terminal: "ターミナル情報",
+                quick_incoterms: "インコタームズ",
                 hero_tag: "SMART GLOBAL FORWARDING PARTNER",
                 hero_title: "海から空へ、<br><span class=\"text-orange-500\">FUTURE GLS</span>がおつなぎします。",
                 hero_desc: "世界主要航路の最適化運賃提供、リアルタイム貨物位置追跡および通関代行まで。<br class=\"hidden sm:block\">グローバルビジネスの確実な物流ソリューションをご体験ください。",
@@ -674,9 +729,14 @@
                 track_title: "お荷物は今どこに？リアルタイムで追跡してください。",
                 track_box1_title: "貨物リアルタイム追跡",
                 track_box1_desc: "船会社を選択し、B/L番号を入力すると公式トラッキングシステムにすぐ接続されます。",
+                customs_box_title: "通関照会",
+                customs_box_desc: "MBLまたはHBLを選び、B/L番号を入力すると輸入通関の動きをすぐ確認できます。",
+                customs_bl_placeholder: "例: HLCU... / HDMU26001234",
+                customs_btn: "通関照会 ↗",
+                customs_info1: "✓ 英数字のB/L番号を正確に入力してください。",
                 vessel_box_title: "船舶照会",
                 vessel_box_desc: "船名を入力すると、出港地や到着日などのターミナルスケジュール情報をご確認いただけます。",
-                vessel_placeholder: "船名を入力してください",
+                vessel_placeholder: "例: HYUNDAI DREAM / HMM",
                 vessel_btn: "船舶スケジュール照会 ↗",
                 vessel_info1: "✓ 照会ボタンクリック時に船名がコピーされ、ターミナルスケジュールサイトに移動します。",
                 opt_kmtc: "高麗海運",
@@ -743,7 +803,7 @@
                 originalTextCache.set(el, el.innerHTML);
             });
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                originalTextCache.set(el + '_ph', el.placeholder);
+                originalTextCache.set(el, el.placeholder);
             });
 
             // 저장된 언어를 불러와 적용하고 버튼 텍스트도 동기화합니다.
@@ -806,7 +866,7 @@
                     if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
                 });
                 document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                    if (originalTextCache.has(el + '_ph')) el.placeholder = originalTextCache.get(el + '_ph');
+                    if (originalTextCache.has(el)) el.placeholder = originalTextCache.get(el);
                 });
                 updateLangButtonText('ko');
                 return;
@@ -967,23 +1027,35 @@
             }
         }
 
-        window.openCarrierTracking = function() {
-            const carrier = document.getElementById('carrierSelect').value;
-            const blNo = document.getElementById('blInput').value.trim();
+        let selectedCustomsBlType = 'MBL';
+
+        window.selectBlType = function(type) {
+            selectedCustomsBlType = type;
+            const btnMBL = document.getElementById('btnMBL');
+            const btnHBL = document.getElementById('btnHBL');
+            const activeClass = "flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold transition-all bg-orange-600 text-white shadow";
+            const inactiveClass = "flex-1 md:flex-none px-4 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-white";
+
+            if (type === 'MBL') {
+                btnMBL.className = activeClass;
+                btnHBL.className = inactiveClass;
+            } else {
+                btnHBL.className = activeClass;
+                btnMBL.className = inactiveClass;
+            }
+        };
+
+        window.openCustomsTracking = function() {
+            const blNo = document.getElementById('customsBlInput').value.trim();
             if (!blNo) {
                 alert('B/L 번호를 입력해주세요.');
-                document.getElementById('blInput').focus();
+                document.getElementById('customsBlInput').focus();
                 return;
             }
-            navigator.clipboard.writeText(blNo).then(() => {
-                alert(`B/L 번호 [${blNo}]가 클립보드에 복사되었습니다.`);
-                let trackingUrl = (carrier === 'KMTC') ? 'https://www.ekmtc.com/index.html#/cargo-tracking' :
-                                  (carrier === 'SINOKOR') ? 'https://ebiz.sinokor.co.kr/' :
-                                  (carrier === 'DOOWOO') ? 'https://www.doowoo.co.kr/pst_webapp/ExpBookingSearchMove.do' :
-                                  'https://ebusiness.sitcline.com/#/topMenu/cargoTracK/';
-                window.open(trackingUrl, '_blank');
-            });
-        }
+            const typeCode = selectedCustomsBlType === 'MBL' ? '1' : '2';
+            const unipassUrl = `https://www.tradlinx.com/ko/unipass?type=${typeCode}&blNo=${encodeURIComponent(blNo)}&blYr=2026`;
+            window.open(unipassUrl, '_blank', 'noopener,noreferrer');
+        };
 
         window.openVesselSchedule = function() {
             const vesselName = document.getElementById('vesselNameInput').value.trim();
@@ -1098,3 +1170,4 @@
     </script>
 </body>
 </html>
+```[cite: 12]

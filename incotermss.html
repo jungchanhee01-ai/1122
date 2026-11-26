@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE GLS - 인코텀즈 2020</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body { font-family: 'Pretard', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .dynamic-nav { font-size: 1rem; gap: 2rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-orange-600 selection:text-white">
+
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="ri-global-line text-orange-500"></i> SINCE 2013 · GLOBAL SMART FORWARDING</span>
+                <span class="hidden md:inline text-slate-700">|</span>
+                <span class="hidden md:inline text-slate-300" data-i18n="cs_center">고객센터: 02-712-0410(Rep) | 팩스: 02-712-0411 (평일 09:00 - 18:00)</span>
+            </div>
+            <div class="flex items-center gap-4 font-medium">
+                <a href="index.html#tracking" class="hover:text-orange-400 transition-colors" data-i18n="nav_tracking">화물 추적</a>
+                <a href="index.html#exchange" class="hover:text-orange-400 transition-colors" data-i18n="nav_exchange">환율 조회</a>
+                <a href="index.html#quote" class="hover:text-orange-400 transition-colors text-orange-400 font-bold" data-i18n="nav_quote">견적 요청</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between gap-4">
+            <!-- 로고 영역 -->
+            <a href="index.html" class="flex items-center gap-2.5 shrink-0">
+                <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-16 sm:h-20 w-48 sm:w-64 object-contain mix-blend-multiply">
+            </a>
+            <!-- 중앙 네비게이션 -->
+            <nav class="hidden lg:flex items-center font-bold text-slate-700 dynamic-nav transition-all">
+                <a href="ceo.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ceo">회사소개</a>
+                <a href="ocean.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_ocean">해상운송</a>
+                <a href="air.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_air">항공운송</a>
+                <a href="triangle.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_triangle">삼국간운송</a>
+                <a href="customs.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_customs">통관업무</a>
+                <a href="board.html" class="hover:text-orange-600 transition-colors whitespace-nowrap" data-i18n="menu_board">업계소식</a>
+            </nav>
+
+            <div id="authButtons" class="flex items-center gap-2.5 shrink-0">
+                <div class="relative">
+                    <button type="button" onclick="toggleLangMenu(event)" id="currentLangBtn" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all">
+                        <i class="ri-global-line"></i> <span id="langBtnText">KOR</span> <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 text-xs font-bold text-slate-700">
+                        <a href="javascript:void(0);" onclick="changeLanguage('ko', 'KOR')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">한국어</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('en', 'ENG')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">English</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('zh-CN', 'CHN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">中文</a>
+                        <a href="javascript:void(0);" onclick="changeLanguage('ja', 'JPN')" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600">日本語</a>
+                    </div>
+                </div>
+                <a href="index.html#tracking" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 transition-all whitespace-nowrap">
+                    <i class="ri-search-line"></i> <span data-i18n="btn_tracking">화물 추적</span>
+                </a>
+                <a href="index.html#quote" class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2.5 rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition-all shadow-md shadow-orange-600/20 whitespace-nowrap">
+                    <span data-i18n="btn_quote">견적 요청</span> <i class="ri-arrow-right-line"></i>
+                </a>
+                <div id="adminContainer" class="relative group py-2">
+                    <a id="adminBtn" href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                        <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 본문 영역 -->
+    <main class="py-12 max-w-5xl mx-auto px-6 sm:px-8 w-full flex-1 space-y-6">
+        <div class="border-b border-slate-200 pb-6">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                <a href="index.html" class="hover:text-orange-600" data-i18n="breadcrumb_home">홈</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-orange-600 font-bold" data-i18n="breadcrumb_current">인코텀즈 2020</span>
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">INCOTERMS® 2020</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight" data-i18n="page_main_title">
+                인코텀즈(Incoterms) 2020
+            </h1>
+        </div>
+
+        <!-- 01 조건 선택 -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="text-xs font-black text-orange-600">01</span>
+                <h2 class="text-base font-extrabold text-slate-900" data-i18n="sec01_title">조건 선택</h2>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <button type="button" onclick="setModeTab('all')" id="btnTabAll" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition" data-i18n="tab_all">
+                    전체 보기
+                </button>
+                <button type="button" onclick="setModeTab('any')" id="btnTabAny" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-i18n="tab_any">
+                    모든 운송방식
+                </button>
+            </div>
+
+            <div class="mb-4">
+                <div id="anyTermsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+            </div>
+
+            <div id="seaGroupWrap">
+                <div id="seaGroupLabel" class="text-[11px] font-bold text-slate-400 mb-2" data-i18n="sea_group_label">해상·내수로 운송</div>
+                <div id="seaTermsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
+            </div>
+        </section>
+
+        <!-- 02 선택된 인코텀즈 헤더 + 8단계 타임라인 -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="text-xs font-black text-orange-600">02</span>
+                <h2 id="sec02Title" class="text-base sm:text-lg font-extrabold text-slate-900">EXW (Ex Works) : 공장인도</h2>
+            </div>
+
+            <div class="overflow-x-auto pb-2">
+                <div id="timelineNodes" class="min-w-[760px] grid grid-cols-8 gap-2 pt-2"></div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-5 mt-4 pt-3 border-t border-slate-100 text-xs font-semibold text-slate-600">
+                <span class="inline-flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-xs bg-orange-600 inline-block"></span> <span id="legendSeller" data-i18n="legend_seller">매도인 부담</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-xs bg-slate-200 border border-slate-300 inline-block"></span> <span id="legendBuyer" data-i18n="legend_buyer">매수인 부담</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span> <span id="legendRisk" data-i18n="legend_risk">위험 이전 지점</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- 03 핵심 정리 -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-5">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-orange-600">03</span>
+                <h2 class="text-base font-extrabold text-slate-900" data-i18n="sec03_title">핵심 정리</h2>
+            </div>
+
+            <p id="coreLead" class="text-sm font-bold text-slate-900 leading-relaxed"></p>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <div id="labelUsedFor" class="text-xs font-bold text-slate-500 mb-1" data-i18n="label_used_for">주로 쓰는 곳</div>
+                    <div id="coreUsedFor" class="text-xs sm:text-sm font-semibold text-slate-800"></div>
+                </div>
+                <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200">
+                    <div class="flex items-center gap-1.5 text-xs font-extrabold text-amber-800 mb-1">
+                        <span class="w-4 h-4 rounded-full bg-amber-600 text-white text-[10px] font-black inline-flex items-center justify-center">!</span>
+                        <span id="coreCautionTitle"></span>
+                    </div>
+                    <p id="coreCautionBody" class="text-xs text-slate-700 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <p id="coreDetail" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl border border-slate-200">
+                    <h3 id="labelSellerDo" class="text-xs font-extrabold text-orange-600 mb-2.5" data-i18n="label_seller_do">매도인이 하는 일</h3>
+                    <ul id="sellerDuties" class="space-y-1.5 text-xs text-slate-700 list-disc pl-4"></ul>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-200">
+                    <h3 id="labelBuyerDo" class="text-xs font-extrabold text-slate-900 mb-2.5" data-i18n="label_buyer_do">매수인이 하는 일</h3>
+                    <ul id="buyerDuties" class="space-y-1.5 text-xs text-slate-700 list-disc pl-4"></ul>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="text-xs text-slate-700 leading-relaxed">
+                    <span id="labelTip" class="font-extrabold text-slate-900 mr-1.5" data-i18n="label_tip">실무 팁</span>
+                    <span id="practicalTip"></span>
+                </div>
+                <button type="button" id="relatedTermBtn" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:border-orange-500 hover:text-orange-600 text-xs font-bold text-slate-800 transition shrink-0 self-start sm:self-center">
+                    <span id="labelRelated" data-i18n="label_related">함께 보면 좋은 조건</span> <span id="relatedTermLabel"></span> →
+                </button>
+            </div>
+        </section>
+
+        <!-- 04 비용·위험 부담 -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-black text-orange-600">04</span>
+                    <h2 class="text-base font-extrabold text-slate-900" data-i18n="sec04_title">비용·위험 부담</h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold">
+                    <span id="badgeSellerCount" class="px-2.5 py-1 rounded-md bg-orange-600 text-white">매도인 1</span>
+                    <span id="badgeBuyerCount" class="px-2.5 py-1 rounded-md bg-slate-200 text-slate-800">매수인 10</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 text-xs bg-slate-50">
+                            <th class="py-3 px-4 font-bold" data-i18n="th_item">항목</th>
+                            <th class="py-3 px-4 font-bold text-right" data-i18n="th_burden">부담</th>
+                        </tr>
+                    </thead>
+                    <tbody id="burdenTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-slate-500 text-xs py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-12 sm:px-16 lg:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 items-start">
+                <div>
+                    <div class="flex items-center gap-2.5 text-slate-900 font-black text-lg mb-2">
+                        <img src="logo/logo.png" alt="FUTURE GLS 로고" class="h-20 w-auto object-contain">
+                    </div>
+                    <p class="leading-relaxed text-slate-500" data-i18n="footer_desc">
+                        글로벌 물류의 새로운 기준, FUTURE GLS.<br>
+                        고객의 비즈니스 가치를 전 세계로 안전하게 전달합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col1_title">주요 서비스</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="ocean.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s1">해상 운송 (FCL/LCL)</a></li>
+                        <li><a href="air.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s2">항공 화물 운송</a></li>
+                        <li><a href="customs.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s3">수출입 통관 대행</a></li>
+                        <li><a href="board.html" class="hover:text-orange-600 transition-colors" data-i18n="footer_s4">업계 소식</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col2_title">고객 센터</h4>
+                    <p class="mb-1.5" data-i18n="footer_tel">전화: 02-712-0410(Rep)</p>
+                    <p class="mb-1.5" data-i18n="footer_fax">팩스: 02-712-0411</p>
+                    <p class="mb-1.5" data-i18n="footer_email">이메일: future@futuregls.com</p>
+                    <p data-i18n="footer_hours">운영시간: 평일 09:00 - 18:00</p>
+                </div>
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-4 text-sm" data-i18n="footer_col3_title">본사 위치</h4>
+                    <p class="leading-relaxed" data-i18n="footer_addr">
+                        서울시 강남구 테헤란로 64길 13, 9층<br> (대치동, 풍림아이원레몬) <br>
+                        사업자등록번호: 105-87-87676 | 대표이사: 정주만
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400">
+                <p>&copy; 2026 FUTURE GLS Co., Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const UI_TEXT = {
+            ko: {
+                sea_group_label: "해상·내수로 운송",
+                legend_seller: "매도인 부담",
+                legend_buyer: "매수인 부담",
+                legend_risk: "위험 이전 지점",
+                label_used_for: "주로 쓰는 곳",
+                label_seller_do: "매도인이 하는 일",
+                label_buyer_do: "매수인이 하는 일",
+                label_tip: "실무 팁",
+                label_related: "함께 보면 좋은 조건",
+                seller_badge: "매도인",
+                buyer_badge: "매수인",
+                seller_short: "매도인",
+                buyer_short: "매수인",
+                risk_title: "위험 이전 지점",
+                mode_row: "운송 방식",
+                risk_row: "위험 이전 시점",
+                items: [
+                    "포장비", "적재비", "수출항·지정장소까지 운송", "수출 통관·세금",
+                    "수출지 터미널 비용", "운송수단 적재", "운임", "보험",
+                    "도착지 터미널 비용", "도착지까지 운송", "도착지 양하", "수입 통관·세금"
+                ]
+            },
+            en: {
+                sea_group_label: "Sea & Inland Waterway",
+                legend_seller: "Seller Burden",
+                legend_buyer: "Buyer Burden",
+                legend_risk: "Transfer of Risk",
+                label_used_for: "Commonly Used For",
+                label_seller_do: "What Seller Does",
+                label_buyer_do: "What Buyer Does",
+                label_tip: "Practical Tip",
+                label_related: "Related Rule",
+                seller_badge: "Seller",
+                buyer_badge: "Buyer",
+                seller_short: "Seller",
+                buyer_short: "Buyer",
+                risk_title: "Transfer of Risk",
+                mode_row: "Mode of Transport",
+                risk_row: "Transfer of Risk",
+                items: [
+                    "Packaging Fee", "Loading Charges", "Delivery to Port/Place", "Export Duty, Taxes & Security Clearance",
+                    "Origin Terminal Charges", "Loading on Carriage", "Carriage Charges", "Insurance",
+                    "Destination Terminal Charges", "Delivery to Destination", "Unloading at Destination", "Import Duty, Taxes & Security Clearance"
+                ]
+            },
+            "zh-CN": {
+                sea_group_label: "海运及内河水运",
+                legend_seller: "卖方承担",
+                legend_buyer: "买方承担",
+                legend_risk: "风险转移点",
+                label_used_for: "常见用途",
+                label_seller_do: "卖方负责事项",
+                label_buyer_do: "买方负责事项",
+                label_tip: "实务提示",
+                label_related: "关联术语",
+                seller_badge: "卖方",
+                buyer_badge: "买方",
+                seller_short: "卖方",
+                buyer_short: "买方",
+                risk_title: "风险转移点",
+                mode_row: "运输方式",
+                risk_row: "风险转移点",
+                items: [
+                    "包装费", "装货费", "至出口港/指定地运输", "出口报关·税费",
+                    "起运港码头费", "装上运输工具", "运费", "保险",
+                    "目的港码头费", "至目的地运输", "目的港卸货", "进口报关·税费"
+                ]
+            },
+            ja: {
+                sea_group_label: "海上・内水輸送",
+                legend_seller: "売主負担",
+                legend_buyer: "買主負担",
+                legend_risk: "危険移転地点",
+                label_used_for: "主な用途",
+                label_seller_do: "売主が行うこと",
+                label_buyer_do: "買主が行うこと",
+                label_tip: "実務のヒント",
+                label_related: "あわせて見たい条件",
+                seller_badge: "売主",
+                buyer_badge: "買主",
+                seller_short: "売主",
+                buyer_short: "買主",
+                risk_title: "危険移転地点",
+                mode_row: "輸送形態",
+                risk_row: "危険移転地点",
+                items: [
+                    "梱包費", "積込費", "輸出港・指定場所までの輸送", "輸出通関・税",
+                    "輸出地ターミナル費用", "輸送手段への積込", "運賃", "保険",
+                    "到着地ターミナル費用", "到着地までの輸送", "到着地荷卸", "輸入通関・税"
+                ]
+            }
+        };
+
+        const i18nData = {
+            en: {
+                cs_center: "Customer Center: 02-712-0410(Rep) | Fax: 02-712-0411 (Weekdays 09:00 - 18:00)",
+                nav_tracking: "Cargo Tracking",
+                nav_exchange: "Exchange Rates",
+                nav_quote: "Get a Quote",
+                menu_ceo: "About Us",
+                menu_ocean: "Ocean Freight",
+                menu_air: "Air Freight",
+                menu_triangle: "Triangle Trade",
+                menu_customs: "Customs",
+                menu_board: "Industry News",
+                btn_tracking: "Cargo Tracking",
+                btn_quote: "Request Quote",
+                btn_admin: "Admin",
+                breadcrumb_home: "Home",
+                breadcrumb_current: "Incoterms 2020",
+                page_main_title: "Incoterms® 2020",
+                sec01_title: "Select Rule",
+                tab_all: "All Rules",
+                tab_any: "Any Mode of Transport",
+                sec03_title: "Key Summary",
+                sec04_title: "Cost & Risk Allocation",
+                th_item: "Item",
+                th_burden: "Allocation",
+                footer_desc: "New standard in global logistics, FUTURE GLS.<br>Safely delivering your business value worldwide.",
+                footer_col1_title: "Key Services",
+                footer_s1: "Ocean Freight (FCL/LCL)",
+                footer_s2: "Air Freight",
+                footer_s3: "Customs Clearance Agency",
+                footer_s4: "Industry News",
+                footer_col2_title: "Customer Center",
+                footer_tel: "Tel: 02-712-0410(Rep)",
+                footer_fax: "Fax: 02-712-0411",
+                footer_email: "Email: future@futuregls.com",
+                footer_hours: "Hours: Weekdays 09:00 - 18:00",
+                footer_col3_title: "Head Office",
+                footer_addr: "9th Floor, 13 Teheran-ro 64-gil, Gangnam-gu, Seoul, Korea<br>Business Registration No.: 105-87-87676 <br> CEO: Juman Jung"
+            },
+            "zh-CN": {
+                cs_center: "客服中心：02-712-0410(Rep) | 传真：02-712-0411 (工作日 09:00 - 18:00)",
+                nav_tracking: "货物追踪",
+                nav_exchange: "汇率查询",
+                nav_quote: "报价申请",
+                menu_ceo: "公司介绍",
+                menu_ocean: "海上运输",
+                menu_air: "航空运输",
+                menu_triangle: "三角贸易",
+                menu_customs: "清关业务",
+                menu_board: "行业动态",
+                btn_tracking: "货物追踪",
+                btn_quote: "报价申请",
+                btn_admin: "Admin",
+                breadcrumb_home: "首页",
+                breadcrumb_current: "贸易术语 2020",
+                page_main_title: "国际贸易术语解释通则 2020",
+                sec01_title: "选择术语",
+                tab_all: "全部术语",
+                tab_any: "任何运输方式",
+                sec03_title: "核心要点",
+                sec04_title: "费用与风险承担",
+                th_item: "项目",
+                th_burden: "承担方",
+                footer_desc: "全球物流新标准，FUTURE GLS。<br>将您的商业价值安全送达全球。",
+                footer_col1_title: "主要服务",
+                footer_s1: "海运服务 (FCL/LCL)",
+                footer_s2: "空运服务",
+                footer_s3: "进出口报关代理",
+                footer_s4: "行业动态",
+                footer_col2_title: "客服中心",
+                footer_tel: "电话：02-712-0410(Rep)",
+                footer_fax: "传真：02-712-0411",
+                footer_email: "电子邮箱：future@futuregls.com",
+                footer_hours: "营业时间：工作日 09:00 - 18:00",
+                footer_col3_title: "总部地址",
+                footer_addr: "首尔特别市江南区德黑兰路64街13号9楼 (大峙洞、枫林I-One Lemon)<br>企业注册号: 105-87-87676  <br>代表理事: 郑周满"
+            },
+            ja: {
+                cs_center: "カスタマーセンター：02-712-0410(Rep) | FAX：02-712-0411 (平日 09:00 - 18:00)",
+                nav_tracking: "貨物追跡",
+                nav_exchange: "為替照会",
+                nav_quote: "お見積り",
+                menu_ceo: "会社紹介",
+                menu_ocean: "海上輸送",
+                menu_air: "航空輸送",
+                menu_triangle: "三国間輸送",
+                menu_customs: "通関業務",
+                menu_board: "業界ニュース",
+                btn_tracking: "貨物追跡",
+                btn_quote: "お見積り",
+                btn_admin: "Admin",
+                breadcrumb_home: "ホーム",
+                breadcrumb_current: "インコタームズ 2020",
+                page_main_title: "インコタームズ 2020",
+                sec01_title: "条件選択",
+                tab_all: "すべて表示",
+                tab_any: "全輸送形態",
+                sec03_title: "重要ポイント",
+                sec04_title: "費用・危険負担",
+                th_item: "項目",
+                th_burden: "負担",
+                footer_desc: "グローバル物流の新しい基準、FUTURE GLS。<br>お客様のビジネス価値を世界中へ安全にお届けします。",
+                footer_col1_title: "主なサービス",
+                footer_s1: "海上輸送 (FCL/LCL)",
+                footer_s2: "航空貨物輸送",
+                footer_s3: "輸出入通関代行",
+                footer_s4: "業界ニュース",
+                footer_col2_title: "カスタマーセンター",
+                footer_tel: "電話：02-712-0410(Rep)",
+                footer_fax: "ファックス：02-712-0411",
+                footer_email: "メール：future@futuregls.com",
+                footer_hours: "営業時間：平日 09:00 - 18:00",
+                footer_col3_title: "本社所在地",
+                footer_addr: "ソウル市江南区テヘラン路64キル13、9階 (大峙洞、豊林アイワンレモン)<br>事業者登録番号：105-87-87676 | 代表取締役：チョン・ジュマン"
+            }
+        };
+
+        const NODES = [
+            { ko: "매도인 공장", en: "Seller's Premises" },
+            { ko: "운송인 인도", en: "First Carrier" },
+            { ko: "선측", en: "Alongside Ship" },
+            { ko: "본선 적재", en: "On Board" },
+            { ko: "주운송", en: "Main Carriage" },
+            { ko: "도착항", en: "Destination Port" },
+            { ko: "지정장소 도착", en: "Named Place" },
+            { ko: "양하 완료·수입", en: "Unloaded · Import" }
+        ];
+
+        const TERMS_DATA = {
+            EXW: {
+                code: "EXW", en: "Ex Works", ko: "공장인도", mode: "any",
+                modeText: "Any Mode", riskText: "At Buyer's Disposal",
+                sellerUpTo: 0, riskNodeIdx: 0, related: "FCA",
+                burden: ["S", "B", "B", "B", "B", "B", "B", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인의 공장·창고에서 물품을 넘기면 매도인의 의무가 끝납니다. 매도인 의무가 가장 작고, 매수인 부담이 가장 큰 조건입니다.",
+                        usedFor: "소량 화물, 매수인이 운송을 주도하는 거래, 국내거래",
+                        cautionTitle: "국제거래에서는 분쟁이 잦습니다",
+                        cautionBody: "매수인이 수출국에서 수출통관을 해야 하는데, 외국 회사가 직접 하기 어려운 경우가 많습니다. 수출자 부담을 줄이고 싶다면 FCA(매도인 공장 인도)가 더 현실적입니다.",
+                        detail: "매수인이 적재, 수출통관부터 수입통관까지 모든 비용과 위험을 부담합니다. 매도인은 물품을 실어 줄 의무가 없습니다. 실어 주더라도 그 위험과 비용은 매수인 몫입니다. 국제거래에서는 매수인이 수출국 통관을 직접 하기 어려운 경우가 많습니다.",
+                        sellerDo: ["지정 장소에서 물품 준비·인도", "인도 준비 완료 통지", "상업송장 등 기본 서류 제공"],
+                        buyerDo: ["적재·수출통관", "국내·국제 운송 계약과 운임", "보험", "수입통관·관세"],
+                        tip: "국내거래에 적합합니다. 국제거래라면 매도인이 수출통관까지 해 주는 FCA(매도인 공장 인도)를 권장합니다."
+                    },
+                    en: {
+                        lead: "Seller's obligation ends once goods are placed at buyer's disposal at seller's premises—minimal seller duty and maximum buyer burden.",
+                        usedFor: "Small shipments, buyer-led transport, domestic trade",
+                        cautionTitle: "Frequent disputes in international trade",
+                        cautionBody: "Buyer must handle export clearance in the seller's country, which is often difficult for foreign companies. FCA is usually more practical.",
+                        detail: "Buyer bears all costs and risks from loading and export clearance through import clearance. Seller has no obligation to load goods, and even if seller loads them, risk and cost remain with buyer.",
+                        sellerDo: ["Prepare and place goods at named location", "Notice of availability", "Provide commercial invoice and basic documents"],
+                        buyerDo: ["Loading and export clearance", "Domestic and international carriage contracts and freight", "Insurance", "Import clearance and duties"],
+                        tip: "Best suited for domestic deals. For international trade, FCA is generally recommended."
+                    },
+                    "zh-CN": {
+                        lead: "卖方在工厂或仓库交货即完成义务，是卖方责任最小、买方负担最大的术语。",
+                        usedFor: "小批量货物、买方主导运输的交易、国内交易",
+                        cautionTitle: "国际交易中容易产生纠纷",
+                        cautionBody: "买方需在出口国办理出口清关，境外企业往往难以直接办理，实务中通常更建议采用 FCA。",
+                        detail: "从装货、出口清关到进口清关的所有费用和风险均由买方承担。卖方无装货义务，即便协助装货，风险与费用仍归买方。",
+                        sellerDo: ["在指定地点备货并交货", "发出交货准备通知", "提供商业发票等基本单据"],
+                        buyerDo: ["装货与出口清关", "干线运输合同及运费", "保险", "进口清关与关税"],
+                        tip: "适合国内交易；国际交易建议使用卖方负责出口清关的 FCA。"
+                    },
+                    ja: {
+                        lead: "売主の工場・倉庫で引き渡せば売主の義務は完了します。売主の義務が最も小さく、買主の負担が最も大きい条件です。",
+                        usedFor: "小口貨物、買主主導の輸送取引、国内取引",
+                        cautionTitle: "国際取引ではトラブルが起きやすい条件です",
+                        cautionBody: "買主が輸出国で輸出通関を行う必要がありますが、海外企業が直接行うのは難しいケースが多いため、実務ではFCAが現実的です。",
+                        detail: "積込・輸出通関から輸入通関まで全ての費用と危険を買主が負担します。売主に積込義務はなく、積込を行っても危険と費用は買主側となります。",
+                        sellerDo: ["指定場所での物品準備・引渡し", "引渡準備完了の通知", "商業送り状などの基本書類提供"],
+                        buyerDo: ["積込・輸出通関", "国内・国際輸送契約と運賃", "保険", "輸入通関・関税"],
+                        tip: "国内取引に向いています。国際取引では輸出通関まで行うFCAが推奨されます。"
+                    }
+                }
+            },
+            FCA: {
+                code: "FCA", en: "Free Carrier", ko: "운송인인도", mode: "any",
+                modeText: "Any Mode", riskText: "Delivery to Carrier",
+                sellerUpTo: 2, riskNodeIdx: 1, related: "EXW",
+                burden: ["S", "S", "S", "S", "B", "B", "B", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인이 수출통관을 마친 뒤 지정 장소에서 매수인이 지정한 운송인에게 인도하면 매도인 의무가 끝납니다.",
+                        usedFor: "컨테이너(FCL·LCL) 화물, 항공 화물, 복합운송",
+                        cautionTitle: "인도 장소(공장 vs 터미널) 구분이 중요합니다",
+                        cautionBody: "매도인 구내에서 인도할 때는 상차 완료 시점, 그 외 지정 장소에서 인도할 때는 매도인 운송수단 위에서 양하 준비된 시점이 기준입니다.",
+                        detail: "컨테이너 화물과 항공 화물에서 가장 실용적인 기본 조건입니다. 수출통관은 매도인이 진행하고, 이후 국제 운송과 수입통관은 매수인이 주도합니다.",
+                        sellerDo: ["물품 준비 및 수출통관", "지정 장소에서 매수인 지정 운송인에게 인도", "운송서류 발급 협조"],
+                        buyerDo: ["국제 주운송 계약 및 운임 지급", "적하보험 가입", "도착지 양하 및 수입통관·관세"],
+                        tip: "컨테이너 화물 거래 시 관행적인 FOB 대신 FCA를 사용하면 선적 전 CY 반입·파손 분쟁을 줄일 수 있습니다."
+                    },
+                    en: {
+                        lead: "Seller completes export clearance and delivers goods to buyer's nominated carrier at the named place.",
+                        usedFor: "Containerized cargo (FCL/LCL), air freight, multimodal transport",
+                        cautionTitle: "Distinguish seller's premises vs. other named places",
+                        cautionBody: "At seller's premises, delivery occurs when loaded; elsewhere, when ready for unloading from seller's transport.",
+                        detail: "A practical standard rule for container and air shipments where seller handles export clearance and buyer arranges main carriage and import clearance.",
+                        sellerDo: ["Prepare goods and export clearance", "Deliver to buyer's carrier at named place", "Assist with transport documents"],
+                        buyerDo: ["Main carriage contract and freight", "Cargo insurance", "Unloading at destination and import clearance"],
+                        tip: "Prefer FCA over FOB for containerized cargo to avoid pre-loading terminal risk gaps."
+                    },
+                    "zh-CN": {
+                        lead: "卖方办理出口清关后，在指定地点将货物交给买方指定的承运人即完成交货。",
+                        usedFor: "集装箱货物（FCL/LCL）、空运、多式联运",
+                        cautionTitle: "注意区分“卖方所在地”与其他指定地点",
+                        cautionBody: "在卖方所在地交货以装上运输工具为准；在其他指定地点交货以卖方运输工具上等待卸货为准。",
+                        detail: "集装箱和空运实务中最稳妥的常用术语，由卖方负责出口清关，买方负责干线运输与进口清关。",
+                        sellerDo: ["备货及出口清关", "在指定地点向买方指定承运人交货", "协助办理运输单据"],
+                        buyerDo: ["订立干线运输合同并支付运费", "办理货运保险", "目的港卸货及进口清关·税费"],
+                        tip: "集装箱运输建议优先使用 FCA 替代传统习惯中的 FOB。"
+                    },
+                    ja: {
+                        lead: "売主が輸出通関を終えた後、指定場所で売主指定の運送人に引き渡すと売主の義務が完了します。",
+                        usedFor: "コンテナ貨物（FCL・LCL）、航空貨物、複合一貫輸送",
+                        cautionTitle: "売主構内か、その他の指定場所かで基準が異なります",
+                        cautionBody: "売主構内では積込完了時、それ以外の指定場所では売主の輸送手段上で荷卸準備が整った時点が基準です。",
+                        detail: "コンテナや航空輸送で実用性の高い基本条件です。輸出通関は売主、国際輸送と輸入通関は買主が担います。",
+                        sellerDo: ["物品準備および輸出通関", "指定場所で買主指定運送人へ引渡し", "船積書類作成への協力"],
+                        buyerDo: ["国際輸送契約および運賃支払い", "貨物保険の手配", "到着地荷卸および輸入通関・関税"],
+                        tip: "コンテナ輸送ではFOBよりもFCAを使うことで引き渡し時点の食い違いを防ぎやすくなります。"
+                    }
+                }
+            },
+            CPT: {
+                code: "CPT", en: "Carriage Paid To", ko: "운송비지급인도", mode: "any",
+                modeText: "Any Mode", riskText: "Delivery to First Carrier",
+                sellerUpTo: 5, riskNodeIdx: 1, related: "CIP",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인이 지정 목적지까지의 운송비를 부담하지만, 위험은 첫 번째 운송인에게 인도하는 시점에 매수인에게 넘어갑니다.",
+                        usedFor: "항공 화물, 컨테이너·복합운송",
+                        cautionTitle: "운임 부담과 위험 이전 지점이 다릅니다",
+                        cautionBody: "매도인이 목적지 운임을 내더라도 운송 중 파손·분실 위험은 수출지에서 운송인에게 넘긴 순간부터 매수인 책임입니다.",
+                        detail: "매도인이 수출통관과 지정 목적지까지의 운송 계약을 체결하고 운임을 지급합니다. 매수인은 도착지 하역비(계약에 별도 정함이 없는 한)와 수입통관·관세를 부담합니다.",
+                        sellerDo: ["수출통관 및 지정 목적지까지의 운송 계약·운임 지급", "인도 통지 및 운송서류 제공"],
+                        buyerDo: ["수출지 인도 이후의 화물 위험 부담", "적하보험 가입", "수입통관 및 관세·부가세 납부"],
+                        tip: "항공운송이나 복합운송에서 매도인이 운임을 부담할 때 활용하며, 보험이 필요하다면 CIP를 검토하세요."
+                    },
+                    en: {
+                        lead: "Seller pays carriage to the named destination, while risk transfers to buyer when delivered to the first carrier.",
+                        usedFor: "Air freight, container and multimodal shipments",
+                        cautionTitle: "Cost point and risk transfer point differ",
+                        cautionBody: "Even though seller pays freight to destination, risk of loss or damage passes to buyer upon delivery to first carrier.",
+                        detail: "Seller handles export clearance and contracts carriage to destination; buyer bears transit risk, destination unloading (unless agreed otherwise), and import clearance.",
+                        sellerDo: ["Export clearance and carriage contract/freight to destination", "Delivery notice and transport documents"],
+                        buyerDo: ["Risk after delivery to first carrier", "Cargo insurance", "Import clearance and duties/taxes"],
+                        tip: "Use CPT when seller pays freight in air/multimodal trade; consider CIP if insurance is also required."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担至指定目的地的运费，但风险在货物交给第一承运人时即转移给买方。",
+                        usedFor: "空运、集装箱及多式联运",
+                        cautionTitle: "费用划分点与风险转移点不一致",
+                        cautionBody: "即使卖方支付了至目的地的运费，货物交第一承运人后的运输风险仍由买方承担。",
+                        detail: "卖方负责出口清关并安排至目的地的运输，买方承担运输风险、目的港卸货费（另有约定除外）及进口清关与税费。",
+                        sellerDo: ["出口清关及订立至目的地运输合同·付运费", "交货通知及提供运输单据"],
+                        buyerDo: ["交第一承运人后的货物风险", "办理货运保险", "进口清关及缴纳关税·增值税"],
+                        tip: "空运或多式联运由卖方付运费时适用；若需保险可考虑 CIP。"
+                    },
+                    ja: {
+                        lead: "売主が指定目的地までの運賃を負担しますが、危険は最初の運送人に引き渡した時点で買主に移ります。",
+                        usedFor: "航空貨物、コンテナ・複合一貫輸送",
+                        cautionTitle: "費用負担の分岐点と危険移転の時点が異なります",
+                        cautionBody: "目的地までの運賃を売主が払っても、運送人に引き渡した後の滅失・損傷リスクは買主が負います。",
+                        detail: "売主が輸出通関と目的地までの輸送契約・運賃を負担し、買主は輸送中の危険、到着地荷卸費用（特約なき場合）、輸入通関・関税を負担します。",
+                        sellerDo: ["輸出通関および目的地までの輸送契約・運賃支払", "引渡通知および運送書類の提供"],
+                        buyerDo: ["最初の運送人引渡後の危険負担", "貨物保険の手配", "輸入通関および関税・消費税の支払い"],
+                        tip: "航空や複合輸送で売主が運賃を負担する場合に使い、保険も必要な場合はCIPを検討します。"
+                    }
+                }
+            },
+            CIP: {
+                code: "CIP", en: "Carriage and Insurance Paid To", ko: "운송비·보험료지급인도", mode: "any",
+                modeText: "Any Mode", riskText: "Delivery to First Carrier",
+                sellerUpTo: 5, riskNodeIdx: 1, related: "CIF",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "S", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인이 지정 목적지까지의 운송비와 적하보험료를 부담하며, 위험은 첫 번째 운송인에게 인도할 때 넘어갑니다.",
+                        usedFor: "항공 화물, 고가·정밀 컨테이너 화물",
+                        cautionTitle: "Incoterms 2020에서 보험 담보 수준이 높아졌습니다",
+                        cautionBody: "매도인은 원칙적으로 최대 담보 조건인 ICC(A) 수준의 적하보험을 가입해야 합니다.",
+                        detail: "CPT와 마찬가지로 위험은 운송인 인도 시 매수인에게 이전되지만, 매도인이 매수인을 피보험자로 하는 적하보험을 부보할 의무를 집니다.",
+                        sellerDo: ["수출통관 및 지정 목적지 운송 계약·운임 지급", "ICC(A) 기준 적하보험 가입 및 보험증명서 제공"],
+                        buyerDo: ["수출지 인도 이후의 위험 부담", "추가 보험(필요 시) 및 수입통관·관세"],
+                        tip: "CIF와 달리 모든 운송방식에 쓸 수 있고 기본 보험 담보가 ICC(A)로 넓어 고가 화물에 적합합니다."
+                    },
+                    en: {
+                        lead: "Seller pays carriage and cargo insurance to destination, while risk transfers upon delivery to the first carrier.",
+                        usedFor: "Air freight, high-value or precision container cargo",
+                        cautionTitle: "Higher minimum insurance cover under Incoterms 2020",
+                        cautionBody: "Seller must obtain insurance complying with ICC (A) cover as the baseline.",
+                        detail: "Like CPT, risk passes to buyer upon delivery to first carrier, while seller must also procure cargo insurance for buyer.",
+                        sellerDo: ["Export clearance and carriage to destination", "Obtain ICC (A) cargo insurance and provide certificate"],
+                        buyerDo: ["Risk after delivery to first carrier", "Additional cover if needed and import clearance"],
+                        tip: "Works across all transport modes and provides broader ICC (A) default coverage than CIF."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担至指定目的地的运费与货运保险费，风险在交给第一承运人时转移给买方。",
+                        usedFor: "空运、高价值或精密集装箱货物",
+                        cautionTitle: "2020 版提高了最低保险险别要求",
+                        cautionBody: "卖方通常需按 ICC（A）险别投保货运险。",
+                        detail: "风险转移点与 CPT 相同，但卖方还须为买方投保货运险并提供保险凭证。",
+                        sellerDo: ["出口清关及安排至目的地运输·付运费", "投保 ICC（A）货运险并提供保险单据"],
+                        buyerDo: ["交第一承运人后的风险", "按需补充保险及进口清关·税费"],
+                        tip: "适用于各种运输方式，且默认保险保障范围高于 CIF。"
+                    },
+                    ja: {
+                        lead: "売主が指定目的地までの運賃と貨物保険料を負担し、危険は最初の運送人に引き渡した時点で移ります。",
+                        usedFor: "航空貨物、高価格・精密コンテナ貨物",
+                        cautionTitle: "Incoterms 2020で保険カバー水準が引き上げられました",
+                        cautionBody: "売主は原則としてICC（A）条件水準の貨物保険を手配する必要があります。",
+                        detail: "危険移転はCPTと同じく最初の運送人引渡時ですが、売主に買主のための貨物保険手配義務が加わります。",
+                        sellerDo: ["輸出通関および目的地までの輸送手配・運賃支払", "ICC（A）基準の貨物保険手配と証明書提供"],
+                        buyerDo: ["最初の運送人引渡後の危険負担", "必要に応じた追加保険および輸入通関・関税"],
+                        tip: "全輸送形態で使え、基本保険条件がICC（A）となるため高価貨物に適しています。"
+                    }
+                }
+            },
+            DAP: {
+                code: "DAP", en: "Delivered at Place", ko: "도착장소인도", mode: "any",
+                modeText: "Any Mode", riskText: "At Disposal at Named Place",
+                sellerUpTo: 6, riskNodeIdx: 6, related: "DPU",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "-", "S", "S", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인이 수입국 지정 장소에서 양하 준비된 상태로 인도할 때까지 운송비와 위험을 부담합니다.",
+                        usedFor: "도어(Door) 또는 지정 장소 인도 거래, 복합운송",
+                        cautionTitle: "수입통관과 하역(Unloading)은 매수인 몫입니다",
+                        cautionBody: "지정 장소에 도착한 뒤 하역 작업과 수입통관·관세 납부는 매수인이 처리해야 합니다.",
+                        detail: "수출통관, 주운송, 수입국 내륙운송까지 매도인이 책임지고 지정 장소에 도착시켜 매수인이 내릴 수 있는 상태로 넘깁니다.",
+                        sellerDo: ["수출통관 및 도착지까지 전 구간 운송", "지정 장소에서 양하 준비 완료 상태로 인도"],
+                        buyerDo: ["지정 장소에서의 하역 작업", "수입통관 및 관세·부가세 납부"],
+                        tip: "수입국 통관 절차를 매수인이 직접 처리하면서 내륙 배송까지 매도인에게 맡기고 싶을 때 유용합니다."
+                    },
+                    en: {
+                        lead: "Seller bears cost and risk until goods are placed at buyer's disposal ready for unloading at the named place.",
+                        usedFor: "Door or named-place delivery, multimodal shipments",
+                        cautionTitle: "Import clearance and unloading belong to buyer",
+                        cautionBody: "Once goods arrive ready for unloading at the named place, unloading, import clearance, and duties are buyer's responsibility.",
+                        detail: "Seller handles export clearance, main carriage, and inland transport to the named destination ready for unloading.",
+                        sellerDo: ["Export clearance and transport to named place", "Deliver ready for unloading at destination"],
+                        buyerDo: ["Unloading at named place", "Import clearance and duties/taxes"],
+                        tip: "Useful when buyer handles import customs locally while seller delivers inland to the named place."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担将货物运至进口国指定地点并在卸货准备状态下交货前的费用与风险。",
+                        usedFor: "门到门或指定地点交货、多式联运",
+                        cautionTitle: "进口清关与卸货由买方负责",
+                        cautionBody: "货物在指定地点处于可卸货状态后，卸货作业、进口清关及关税由买方承担。",
+                        detail: "卖方负责出口清关、干线运输及目的国内陆运输至指定地点，交由买方卸货。",
+                        sellerDo: ["出口清关及至指定地点的全程运输", "在指定地点以可卸货状态交货"],
+                        buyerDo: ["在指定地点卸货", "进口清关及缴纳关税·税费"],
+                        tip: "适合买方自行办理进口清关、由卖方负责内陆送达指定地点的交易。"
+                    },
+                    ja: {
+                        lead: "売主が輸入国の指定場所で荷卸準備が整った状態で引き渡すまで費用と危険を負担します。",
+                        usedFor: "ドア渡し・指定場所渡し、複合一貫輸送",
+                        cautionTitle: "輸入通関と荷卸（Unloading）は買主側です",
+                        cautionBody: "指定場所で荷卸可能な状態になった後の荷卸作業、輸入通関、関税は買主が負担します。",
+                        detail: "輸出通関から国際輸送、輸入国内陸輸送まで売主が担い、指定場所で荷卸可能な状態にして引き渡します。",
+                        sellerDo: ["輸出通関および指定場所までの輸送", "指定場所で荷卸準備完了状態での引渡し"],
+                        buyerDo: ["指定場所での荷卸作業", "輸入通関および関税・消費税の支払い"],
+                        tip: "輸入通関を買主が行い、指定場所までの輸送を売主に任せたい場合に便利です。"
+                    }
+                }
+            },
+            DPU: {
+                code: "DPU", en: "Delivered at Place Unloaded", ko: "도착지양하인도", mode: "any",
+                modeText: "Any Mode", riskText: "After Unloading at Named Place",
+                sellerUpTo: 7, riskNodeIdx: 7, related: "DAP",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "-", "S", "S", "S", "B"],
+                i18n: {
+                    ko: {
+                        lead: "매도인이 수입국 지정 장소에서 물품을 하역(양하) 완료하여 인도할 때까지 비용과 위험을 부담합니다.",
+                        usedFor: "현장·공장·터미널 하역 인도 거래",
+                        cautionTitle: "도착지 하역 장비·작업 가능 여부를 미리 확인하세요",
+                        cautionBody: "11개 규칙 중 매도인이 도착지 양하(Unloading)까지 책임지는 유일한 조건입니다.",
+                        detail: "과거 DAT에서 명칭이 변경된 규칙으로, 터미널뿐 아니라 합의된 지정 장소에서 운송수단으로부터 물품을 내린 시점까지 매도인이 책임집니다.",
+                        sellerDo: ["수출통관 및 지정 장소까지 운송", "지정 장소에서 물품 하역(양하) 완료 인도"],
+                        buyerDo: ["수입통관 및 관세·부가세 납부", "양하 완료 이후 보관·반출"],
+                        tip: "수입국 현장에서 매도인 측이 하역까지 맡을 수 있는 여건이 확실할 때 사용하세요."
+                    },
+                    en: {
+                        lead: "Seller bears cost and risk until goods are unloaded from arriving transport at the named place.",
+                        usedFor: "Site, plant, or terminal delivery requiring unloading by seller",
+                        cautionTitle: "Confirm unloading capability at destination in advance",
+                        cautionBody: "DPU is the only Incoterms 2020 rule where seller is responsible for unloading at destination.",
+                        detail: "Replaced DAT; delivery occurs once goods are unloaded at the agreed named place, while buyer handles import clearance and duties.",
+                        sellerDo: ["Export clearance and transport to named place", "Complete unloading at named place"],
+                        buyerDo: ["Import clearance and duties/taxes", "Storage and onward movement after unloading"],
+                        tip: "Use DPU only when seller can reliably arrange unloading at the destination site."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担在进口国指定地点将货物从到达的运输工具上卸货完毕前的所有费用与风险。",
+                        usedFor: "工地、工厂或码头需由卖方卸货的交货",
+                        cautionTitle: "需提前确认目的地的卸货条件",
+                        cautionBody: "这是 11 种术语中唯一由卖方承担目的地卸货义务的规则。",
+                        detail: "由原 DAT 更名而来，不仅限于码头，在约定地点完成卸货即交货，进口清关与税费由买方负责。",
+                        sellerDo: ["出口清关及至指定地点运输", "在指定地点完成卸货并交货"],
+                        buyerDo: ["进口清关及缴纳关税·税费", "卸货完成后的仓储与提货"],
+                        tip: "确认目的地方便安排卸货作业后再选用 DPU。"
+                    },
+                    ja: {
+                        lead: "売主が輸入国の指定場所で輸送手段から荷卸を完了して引き渡すまで費用と危険を負担します。",
+                        usedFor: "現場・工場・ターミナルでの荷卸込引渡し",
+                        cautionTitle: "到着地での荷卸作業可否を事前に確認してください",
+                        cautionBody: "11ルールの中で、到着地の荷卸（Unloading）まで売主が担う唯一の条件です。",
+                        detail: "旧DATから名称変更された条件で、ターミナルに限らず合意した指定場所で荷卸完了時に引き渡されます。",
+                        sellerDo: ["輸出通関および指定場所までの輸送", "指定場所での荷卸完了引渡し"],
+                        buyerDo: ["輸入通関および関税・消費税の支払い", "荷卸完了後の保管・搬出"],
+                        tip: "到着地で荷卸手配が確実に行える場合に活用します。"
+                    }
+                }
+            },
+            DDP: {
+                code: "DDP", en: "Delivered Duty Paid", ko: "관세지급인도", mode: "any",
+                modeText: "Any Mode", riskText: "At Disposal Cleared for Import",
+                sellerUpTo: 7, riskNodeIdx: 7, related: "DAP",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "-", "S", "S", "S", "S"],
+                i18n: {
+                    ko: {
+                        lead: "수출통관부터 수입통관, 관세·부가세 납부, 지정 장소 인도까지 매도인 부담이 가장 큰 조건입니다.",
+                        usedFor: "샘플·소액 거래, 수입자 통관 대행이 가능한 도어 배송",
+                        cautionTitle: "수입국 수입통관·세금 납부 주체 요건을 확인하세요",
+                        cautionBody: "수입국 세관 규정에 따라 매도인이 직접 수입신고나 관세 납부를 진행할 수 없는 경우가 있습니다.",
+                        detail: "매수인은 지정 장소에서 물품을 수령하기만 하면 되며, 매도인이 수출·수입 통관과 관련 제세공과금을 모두 부담합니다.",
+                        sellerDo: ["수출통관 및 국제·내륙 운송", "수입통관 및 관세·부가세 납부", "지정 장소에서 인도"],
+                        buyerDo: ["지정 장소에서 물품 수령", "계약상 합의된 범위 내 하역 협조"],
+                        tip: "매도인에게 가장 큰 리스크가 따르므로 현지 통관·세금 처리 가능 여부를 반드시 먼저 점검하세요."
+                    },
+                    en: {
+                        lead: "Maximum seller obligation—covering export clearance, transport, import clearance, and import duties/taxes to destination.",
+                        usedFor: "Samples, small orders, or door delivery where import clearance is arranged",
+                        cautionTitle: "Check local rules on who can clear imports and pay duties",
+                        cautionBody: "In some countries, a non-resident seller cannot act as importer of record or clear customs directly.",
+                        detail: "Buyer simply takes delivery at the named place while seller handles export/import customs and duties/taxes.",
+                        sellerDo: ["Export clearance and full transit", "Import clearance and duties/taxes", "Delivery at named place"],
+                        buyerDo: ["Take delivery at named place", "Agreed unloading assistance"],
+                        tip: "Verify local import customs feasibility before agreeing to DDP."
+                    },
+                    "zh-CN": {
+                        lead: "卖方义务最大的术语，涵盖出口清关、运输、进口清关、进口关税及税费直至指定地点交货。",
+                        usedFor: "样品、小额订单或可安排清关的门到门交付",
+                        cautionTitle: "需确认进口国对进口清关及缴税主体的规定",
+                        cautionBody: "部分国家不允许境外卖方直接办理进口申报或缴纳关税。",
+                        detail: "买方仅需在指定地点收货，出口与进口清关及相关税费均由卖方承担。",
+                        sellerDo: ["出口清关及全程运输", "进口清关及缴纳关税·税费", "在指定地点交货"],
+                        buyerDo: ["在指定地点收货", "按约定配合卸货"],
+                        tip: "卖方风险最高，务必先确认目的国清关与税费代缴可行性。"
+                    },
+                    ja: {
+                        lead: "輸出通関から輸入通関、関税・消費税の支払い、指定場所引渡しまで売主負担が最も大きい条件です。",
+                        usedFor: "サンプル・小口取引、通関手配が可能なドア渡し",
+                        cautionTitle: "輸入国の輸入通関・納税主体の要件を確認してください",
+                        cautionBody: "国や税関規定によっては、非居住者の売主が直接輸入申告や納税を行えない場合があります。",
+                        detail: "買主は指定場所で受け取るのみで、輸出入通関および関連税金を売主が負担します。",
+                        sellerDo: ["輸出通関および全区間輸送", "輸入通関および関税・消費税の納付", "指定場所での引渡し"],
+                        buyerDo: ["指定場所での物品受領", "合意範囲内での荷卸協力"],
+                        tip: "売主リスクが大きいため、現地の通関・納税可否を事前確認してください。"
+                    }
+                }
+            },
+            FAS: {
+                code: "FAS", en: "Free Alongside Ship", ko: "선측인도", mode: "sea",
+                modeText: "Sea & Inland Waterway", riskText: "Alongside Vessel",
+                sellerUpTo: 2, riskNodeIdx: 2, related: "FOB",
+                burden: ["S", "S", "S", "S", "B", "B", "B", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "선적항에서 매수인이 지정한 본선의 선측(부두나 바지선 위)에 물품을 놓았을 때 매도인 의무가 끝납니다.",
+                        usedFor: "벌크 화물, 중량·대형 화물 해상운송",
+                        cautionTitle: "본선 적재(On Board) 비용과 위험은 매수인 몫입니다",
+                        cautionBody: "배 옆에 물품을 갖다 놓은 뒤 크레인 등으로 배에 싣는 과정부터 매수인이 부담합니다.",
+                        detail: "수출통관 후 선적항 부두 또는 바지선 옆에 화물을 인도하면 매도인의 비용 및 위험 부담이 종료됩니다.",
+                        sellerDo: ["수출통관 및 선적항 본선 선측에 물품 배치", "인도 통지 및 관련 서류 제공"],
+                        buyerDo: ["본선 적재 및 해상운송 계약·운임 지급", "적하보험 가입 및 수입통관"],
+                        tip: "컨테이너 터미널(CY)에 반입되는 일반 컨테이너 화물에는 FCA가 더 적합합니다."
+                    },
+                    en: {
+                        lead: "Seller delivers when goods are placed alongside the buyer's nominated vessel at the named port of shipment.",
+                        usedFor: "Bulk cargo and heavy/oversized sea shipments",
+                        cautionTitle: "Loading on board costs and risks fall on buyer",
+                        cautionBody: "Once placed alongside the vessel, lifting/loading onto the ship and ocean freight are buyer's responsibility.",
+                        detail: "Seller completes export clearance and places goods alongside the vessel at the named port.",
+                        sellerDo: ["Export clearance and place alongside vessel", "Delivery notice and documents"],
+                        buyerDo: ["Loading on vessel and ocean freight contract", "Cargo insurance and import clearance"],
+                        tip: "Use FCA rather than FAS for containerized goods handed over at a terminal."
+                    },
+                    "zh-CN": {
+                        lead: "卖方在装运港将货物置于买方指定船只的船边（码头或驳船上）即完成交货。",
+                        usedFor: "散货、重大件海运",
+                        cautionTitle: "装上船（On Board）的费用与风险由买方承担",
+                        cautionBody: "货物靠船边后，吊装上船及后续海运费均由买方负责。",
+                        detail: "卖方办理出口清关并将货物交至装运港船边，此后费用与风险转归买方。",
+                        sellerDo: ["出口清关及在装运港船边交货", "交货通知及提供单据"],
+                        buyerDo: ["装船及订立海运合同·付海运费", "货运保险及进口清关"],
+                        tip: "集装箱货物通常更适合使用 FCA。"
+                    },
+                    ja: {
+                        lead: "船積港で買主指定の本船の船側（岸壁やはしけ上）に物品を置いた時点で売主の義務が完了します。",
+                        usedFor: "ばら積み貨物、重量・大型貨物の海上輸送",
+                        cautionTitle: "本船積込（On Board）の費用と危険は買主側です",
+                        cautionBody: "船側に置いた後の本船への積込作業や海上運賃は買主が負担します。",
+                        detail: "輸出通関後、船積港の本船船側に物品を配置した時点で売主の費用・危険負担が終わります。",
+                        sellerDo: ["輸出通関および船積港の船側への配置", "引渡通知および書類の提供"],
+                        buyerDo: ["本船積込および海上輸送契約・運賃支払", "貨物保険および輸入通関"],
+                        tip: "ターミナル搬入となるコンテナ貨物にはFCAが適しています。"
+                    }
+                }
+            },
+            FOB: {
+                code: "FOB", en: "Free On Board", ko: "본선인도", mode: "sea",
+                modeText: "Sea & Inland Waterway", riskText: "On Board Vessel",
+                sellerUpTo: 3, riskNodeIdx: 3, related: "FCA",
+                burden: ["S", "S", "S", "S", "S", "S", "B", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "선적항에서 매수인이 지정한 본선 갑판 위에 물품이 적재(On Board)될 때 매도인의 비용과 위험이 끝납니다.",
+                        usedFor: "해상 벌크·일반화물 거래",
+                        cautionTitle: "컨테이너 화물에는 FCA 사용을 권장합니다",
+                        cautionBody: "컨테이너 화물은 선적 전 터미널에 먼저 입고되므로, 선적 시점 기준인 FOB는 실제 위험 이전과 어긋날 수 있습니다.",
+                        detail: "매도인이 수출통관을 마치고 선적항 본선 위에 화물을 실어 주면, 이후 해상운임·도착항 비용·수입통관은 매수인이 부담합니다.",
+                        sellerDo: ["수출통관 및 선적항 본선 적재 완료", "본선적재 B/L 발급 협조 및 서류 제공"],
+                        buyerDo: ["선박 수배 및 해상운임 지급", "적하보험 가입", "도착항 양하 및 수입통관·관세"],
+                        tip: "해상무역에서 가장 많이 쓰이는 조건이지만, 컨테이너 화물이라면 FCA 조건을 함께 검토해 보세요."
+                    },
+                    en: {
+                        lead: "Seller's cost and risk end when goods are placed on board the vessel nominated by buyer at the named port of shipment.",
+                        usedFor: "Bulk and general sea cargo",
+                        cautionTitle: "FCA is recommended for containerized cargo",
+                        cautionBody: "Containers are delivered to terminals before vessel loading, so FOB may not match actual risk transfer.",
+                        detail: "Seller handles export clearance and loading on board; buyer handles ocean freight, arrival charges, insurance, and import customs.",
+                        sellerDo: ["Export clearance and loading on board", "Assist with on-board B/L and documents"],
+                        buyerDo: ["Vessel booking and ocean freight", "Cargo insurance", "Destination unloading and import clearance"],
+                        tip: "Widely used in sea trade, but review FCA for container shipments."
+                    },
+                    "zh-CN": {
+                        lead: "货物在装运港装上买方指定的船只（On Board）后，卖方的费用与风险即告终止。",
+                        usedFor: "海运散货及普通海运货物",
+                        cautionTitle: "集装箱货物建议使用 FCA",
+                        cautionBody: "集装箱通常先交入码头堆场，使用以装船为节点的 FOB 可能与实际风险交接不符。",
+                        detail: "卖方负责出口清关与装船，买方负责海运费、目的港费用、保险及进口清关。",
+                        sellerDo: ["出口清关及完成装船", "协助签发已装船提单及提供单据"],
+                        buyerDo: ["订舱及支付海运费", "办理货运保险", "目的港卸货及进口清关·税费"],
+                        tip: "海运常用术语，但集装箱运输建议同时评估 FCA。"
+                    },
+                    ja: {
+                        lead: "船積港で買主指定の本船甲板上に物品が積み込まれた時点で売主の費用と危険が終わります。",
+                        usedFor: "海上ばら積み・一般貨物取引",
+                        cautionTitle: "コンテナ貨物にはFCAの利用が推奨されます",
+                        cautionBody: "コンテナは船積前にターミナルへ搬入されるため、船積基準のFOBと実態がずれることがあります。",
+                        detail: "輸出通関と本船積込までを売主が行い、海上運賃・到着地費用・保険・輸入通関は買主が負担します。",
+                        sellerDo: ["輸出通関および本船積込完了", "本船積込B/L発行協力および書類提供"],
+                        buyerDo: ["船舶手配および海上運賃支払", "貨物保険の手配", "到着地荷卸および輸入通関・関税"],
+                        tip: "海上取引で広く使われますが、コンテナ貨物ではFCAも検討してください。"
+                    }
+                }
+            },
+            CFR: {
+                code: "CFR", en: "Cost and Freight", ko: "운임포함인도", mode: "sea",
+                modeText: "Sea & Inland Waterway", riskText: "On Board Vessel",
+                sellerUpTo: 5, riskNodeIdx: 3, related: "CIF",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "-", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "목적항까지의 해상운임은 매도인이 부담하지만, 위험은 선적항 본선 적재 시점에 매수인에게 넘어갑니다.",
+                        usedFor: "해상운송에서 매도인이 운임을 부담하는 거래",
+                        cautionTitle: "운임은 매도인이 내지만 해상 위험은 매수인 책임입니다",
+                        cautionBody: "항해 중 화물 손상이 발생해도 선적항에서 이미 적재되었다면 매수인이 위험을 부담합니다.",
+                        detail: "수출통관과 목적항까지의 해상운임을 매도인이 부담하며, 도착항 양하·터미널 비용과 수입통관은 매수인이 부담합니다.",
+                        sellerDo: ["수출통관 및 목적항까지의 해상운송 계약·운임 지급", "운송서류 제공"],
+                        buyerDo: ["선적항 적재 이후의 해상 위험 부담", "적하보험 가입", "도착항 비용 및 수입통관·관세"],
+                        tip: "매수인이 자체 보험을 들고 있고 매도인이 해상운임을 포함해 단가를 제시할 때 자주 쓰입니다."
+                    },
+                    en: {
+                        lead: "Seller pays ocean freight to the named port of destination, while risk transfers when goods are on board at shipment.",
+                        usedFor: "Sea shipments where seller pays freight",
+                        cautionTitle: "Seller pays freight, but buyer bears sea transit risk",
+                        cautionBody: "Once loaded on board at the port of shipment, damage during sea transit is buyer's risk.",
+                        detail: "Seller covers export clearance and ocean freight to destination port; buyer covers sea risk, insurance, arrival charges, and import customs.",
+                        sellerDo: ["Export clearance and ocean freight to destination port", "Provide transport documents"],
+                        buyerDo: ["Sea transit risk after loading on board", "Cargo insurance", "Destination charges and import clearance"],
+                        tip: "Common when buyer insures cargo separately and seller quotes freight to destination."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担至目的港的海运费，但风险在装运港货物装上船时即转移给买方。",
+                        usedFor: "由卖方承担海运费的海运交易",
+                        cautionTitle: "卖方付运费，但海上运输风险由买方承担",
+                        cautionBody: "货物在装运港装船后，海运途中的货损风险归买方。",
+                        detail: "卖方负责出口清关及至目的港的海运费，买方承担海运风险、保险、目的港费用及进口清关。",
+                        sellerDo: ["出口清关及订立至目的港海运合同·付海运费", "提供运输单据"],
+                        buyerDo: ["装船后的海运风险", "办理货运保险", "目的港费用及进口清关·税费"],
+                        tip: "适合买方自行投保、卖方报含目的港海运费价格的交易。"
+                    },
+                    ja: {
+                        lead: "目的港までの海上運賃は売主が負担しますが、危険は船積港の本船積込時に買主へ移ります。",
+                        usedFor: "海上輸送で売主が運賃を負担する取引",
+                        cautionTitle: "運賃は売主払いですが、海上危険は買主責任です",
+                        cautionBody: "船積港で本船に積み込まれた後の航海中の損傷リスクは買主が負います。",
+                        detail: "輸出通関と目的港までの海上運賃を売主が負担し、海上危険・保険・到着地費用・輸入通関は買主が負担します。",
+                        sellerDo: ["輸出通関および目的港までの海上輸送契約・運賃支払", "運送書類の提供"],
+                        buyerDo: ["本船積込後の海上危険負担", "貨物保険の手配", "到着地費用および輸入通関・関税"],
+                        tip: "買主側で保険を手配し、売主が目的港までの運賃込みで提示する場合に使われます。"
+                    }
+                }
+            },
+            CIF: {
+                code: "CIF", en: "Cost, Insurance and Freight", ko: "운임·보험료포함인도", mode: "sea",
+                modeText: "Sea & Inland Waterway", riskText: "On Board Vessel",
+                sellerUpTo: 5, riskNodeIdx: 3, related: "CFR",
+                burden: ["S", "S", "S", "S", "S", "S", "S", "S", "B", "B", "B", "B"],
+                i18n: {
+                    ko: {
+                        lead: "목적항까지의 해상운임과 해상적하보험료를 매도인이 부담하며, 위험은 선적항 본선 적재 시 넘어갑니다.",
+                        usedFor: "해상무역에서 운임·보험 포함 단가 거래",
+                        cautionTitle: "기본 보험은 최소 담보(ICC C) 기준입니다",
+                        cautionBody: "더 넓은 보장이 필요하면 매수인이 별도 보험을 추가하거나 계약에 ICC(A) 조건을 명시해야 합니다.",
+                        detail: "CFR 조건에 매도인의 해상적하보험 가입 의무가 더해진 조건입니다. 위험 이전 시점은 CFR과 동일하게 선적항 본선 적재 시점입니다.",
+                        sellerDo: ["수출통관 및 목적항 해상운임 지급", "ICC(C) 기준 해상적하보험 가입 및 증권 제공"],
+                        buyerDo: ["선적항 적재 이후의 위험 부담", "도착항 비용 및 수입통관·관세"],
+                        tip: "신용장(L/C)이나 수출입 단가 협상에서 익숙하지만, 컨테이너 화물에는 CIP가 더 맞습니다."
+                    },
+                    en: {
+                        lead: "Seller pays ocean freight and marine insurance to destination, while risk transfers when loaded on board at shipment.",
+                        usedFor: "Sea trade quoting cost, insurance, and freight",
+                        cautionTitle: "Default insurance cover is minimum ICC (C)",
+                        cautionBody: "If broader protection is desired, agree on ICC (A) or arrange additional coverage.",
+                        detail: "Adds seller's marine insurance obligation to CFR, with risk still transferring on board at the port of shipment.",
+                        sellerDo: ["Export clearance and ocean freight", "Obtain ICC (C) marine insurance and provide policy"],
+                        buyerDo: ["Risk after loading on board", "Destination charges and import clearance"],
+                        tip: "Familiar in sea trade and L/C deals, though CIP is generally better suited for containers."
+                    },
+                    "zh-CN": {
+                        lead: "卖方承担至目的港的海运费与海运保险费，风险在装运港货物装上船时转移给买方。",
+                        usedFor: "海运贸易中的成本加保险费、运费报价",
+                        cautionTitle: "默认保险险别为最低保障的 ICC（C）",
+                        cautionBody: "如需更广保障，应在合同中约定 ICC（A）或另行加保。",
+                        detail: "在 CFR 基础上增加卖方投保海运险的义务，风险转移节点仍为装运港装船。",
+                        sellerDo: ["出口清关及支付至目的港海运费", "投保 ICC（C）海运险并提供保单"],
+                        buyerDo: ["装船后的风险", "目的港费用及进口清关·税费"],
+                        tip: "海运与信用证交易中常见，但集装箱货物更推荐使用 CIP。"
+                    },
+                    ja: {
+                        lead: "目的港までの海上運賃と海上保険料を売主が負担し、危険は船積港の本船積込時に移ります。",
+                        usedFor: "海上取引での運賃・保険料込み条件",
+                        cautionTitle: "基本保険は最小補償のICC（C）基準です",
+                        cautionBody: "より広い補償が必要な場合はICC（A）の特約や追加手配を検討してください。",
+                        detail: "CFRに売主の海上保険手配義務が加わる条件で、危険移転時点は船積港の本船積込時です。",
+                        sellerDo: ["輸出通関および目的港までの海上運賃支払", "ICC（C）基準の海上保険手配と証券提供"],
+                        buyerDo: ["本船積込後の危険負担", "到着地費用および輸入通関・関税"],
+                        tip: "海上取引やL/Cで馴染みがありますが、コンテナ貨物にはCIPがより適しています。"
+                    }
+                }
+            }
+        };
+
+        const originalTextCache = new Map();
+        let currentLang = "ko";
+        let currentFilter = "all";
+        let currentCode = "EXW";
+
+        function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        }
+
+        function setHtml(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = value;
+        }
+
+        function toggleLangMenu(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById("langDropdown");
+            if (dropdown) dropdown.classList.toggle("hidden");
+        }
+
+        window.addEventListener("click", () => {
+            const dropdown = document.getElementById("langDropdown");
+            if (dropdown) dropdown.classList.add("hidden");
+        });
+
+        function changeLanguage(langCode, labelText) {
+            localStorage.setItem("site_lang", langCode);
+            document.documentElement.setAttribute("lang", langCode);
+            const btnText = document.getElementById("langBtnText");
+            if (btnText) btnText.innerText = labelText;
+            applyCustomLanguage(langCode, labelText);
+            const dropdown = document.getElementById("langDropdown");
+            if (dropdown) dropdown.classList.add("hidden");
+        }
+
+        function applyCustomLanguage(lang, labelText = "KOR") {
+            currentLang = lang;
+            const btnText = document.getElementById("langBtnText");
+            if (btnText) btnText.innerText = labelText;
+
+            if (lang === "ko") {
+                document.querySelectorAll("[data-i18n]").forEach(el => {
+                    if (originalTextCache.has(el)) el.innerHTML = originalTextCache.get(el);
+                });
+            } else {
+                const dict = i18nData[lang];
+                if (dict) {
+                    document.querySelectorAll("[data-i18n]").forEach(el => {
+                        const key = el.getAttribute("data-i18n");
+                        if (dict[key] !== undefined) el.innerHTML = dict[key];
+                    });
+                }
+            }
+            renderIncotermsContent();
+        }
+
+        function setModeTab(tab) {
+            currentFilter = tab;
+            const btnAll = document.getElementById("btnTabAll");
+            const btnAny = document.getElementById("btnTabAny");
+            const seaWrap = document.getElementById("seaGroupWrap");
+
+            if (tab === "all") {
+                if (btnAll) btnAll.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition";
+                if (btnAny) btnAny.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                if (seaWrap) seaWrap.classList.remove("hidden");
+            } else {
+                if (btnAny) btnAny.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition";
+                if (btnAll) btnAll.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                if (seaWrap) seaWrap.classList.add("hidden");
+                if (TERMS_DATA[currentCode] && TERMS_DATA[currentCode].mode === "sea") {
+                    currentCode = "EXW";
+                }
+            }
+            renderIncotermsContent();
+        }
+
+        function selectTerm(code) {
+            currentCode = code;
+            renderIncotermsContent();
+        }
+
+        function renderTermButton(item) {
+            const active = item.code === currentCode;
+            return `
+                <button type="button" onclick="selectTerm('${item.code}')"
+                    class="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl border text-left transition ${
+                        active
+                            ? "bg-orange-600 border-orange-600 text-white shadow-xs"
+                            : "bg-slate-50 border-slate-200 text-slate-800 hover:border-orange-400 hover:bg-orange-50/40"
+                    }">
+                    <span class="text-xs font-black">${item.code}</span>
+                    <span class="text-[11px] font-medium truncate ${active ? "text-orange-100" : "text-slate-500"}">${item.ko}</span>
+                </button>
+            `;
+        }
+
+        function renderIncotermsContent() {
+            const term = TERMS_DATA[currentCode] || TERMS_DATA.EXW;
+            const ui = UI_TEXT[currentLang] || UI_TEXT.ko;
+            const tInfo = term.i18n[currentLang] || term.i18n.ko;
+
+            setText("seaGroupLabel", ui.sea_group_label);
+            setText("legendSeller", ui.legend_seller);
+            setText("legendBuyer", ui.legend_buyer);
+            setText("legendRisk", ui.legend_risk);
+            setText("labelUsedFor", ui.label_used_for);
+            setText("labelSellerDo", ui.label_seller_do);
+            setText("labelBuyerDo", ui.label_buyer_do);
+            setText("labelTip", ui.label_tip);
+            setText("labelRelated", ui.label_related);
+
+            const allList = Object.values(TERMS_DATA);
+            setHtml("anyTermsGrid", allList.filter(t => t.mode === "any").map(renderTermButton).join(""));
+            setHtml("seaTermsGrid", allList.filter(t => t.mode === "sea").map(renderTermButton).join(""));
+
+            setText("sec02Title", `${term.code} (${term.en}) : ${term.ko}`);
+
+            setHtml("timelineNodes", NODES.map((node, idx) => {
+                const isSeller = idx <= term.sellerUpTo;
+                const isRiskPoint = idx === term.riskNodeIdx;
+                return `
+                    <div class="relative rounded-xl border p-3 flex flex-col justify-between min-h-[96px] ${
+                        isSeller
+                            ? "bg-orange-600 border-orange-600 text-white"
+                            : "bg-slate-100 border-slate-200 text-slate-700"
+                    }">
+                        ${isRiskPoint ? `
+                            <span title="${ui.risk_title}" class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center shadow-sm">!</span>
+                        ` : ""}
+                        <div>
+                            <div class="text-xs font-extrabold leading-snug">${node.ko}</div>
+                            <div class="text-[10px] mt-0.5 leading-tight ${isSeller ? "text-orange-100" : "text-slate-400"}">${node.en}</div>
+                        </div>
+                        <div class="text-[10px] font-bold mt-2 pt-1.5 border-t ${
+                            isSeller ? "border-white/25 text-white" : "border-slate-200 text-slate-500"
+                        }">
+                            ${isSeller ? ui.seller_badge : ui.buyer_badge}
+                        </div>
+                    </div>
+                `;
+            }).join(""));
+
+            setText("coreLead", tInfo.lead);
+            setText("coreUsedFor", tInfo.usedFor);
+            setText("coreCautionTitle", tInfo.cautionTitle);
+            setText("coreCautionBody", tInfo.cautionBody);
+            setText("coreDetail", tInfo.detail);
+            setHtml("sellerDuties", tInfo.sellerDo.map(d => `<li>${d}</li>`).join(""));
+            setHtml("buyerDuties", tInfo.buyerDo.map(d => `<li>${d}</li>`).join(""));
+            setText("practicalTip", tInfo.tip);
+
+            const rel = TERMS_DATA[term.related];
+            setText("relatedTermLabel", rel ? `${rel.code} ${rel.ko}` : term.related);
+            const relBtn = document.getElementById("relatedTermBtn");
+            if (relBtn) {
+                relBtn.onclick = () => {
+                    if (rel && rel.mode === "sea" && currentFilter === "any") {
+                        setModeTab("all");
+                    }
+                    selectTerm(term.related);
+                    const sec02 = document.getElementById("sec02Title");
+                    if (sec02) sec02.scrollIntoView({ behavior: "smooth", block: "start" });
+                };
+            }
+
+            const sellerCount = term.burden.filter(b => b === "S").length;
+            const buyerCount = term.burden.filter(b => b === "B").length;
+            setText("badgeSellerCount", `${ui.seller_short} ${sellerCount}`);
+            setText("badgeBuyerCount", `${ui.buyer_short} ${buyerCount}`);
+
+            const topRows = `
+                <tr>
+                    <td class="py-3 px-4 font-semibold text-slate-700">${ui.mode_row} <span class="text-xs font-normal text-slate-400 ml-1">Mode of Transport</span></td>
+                    <td class="py-3 px-4 text-right font-bold text-slate-800">${term.modeText}</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-semibold text-slate-700">${ui.risk_row} <span class="text-xs font-normal text-slate-400 ml-1">Transfer of Risk</span></td>
+                    <td class="py-3 px-4 text-right font-bold text-rose-600">${term.riskText}</td>
+                </tr>
+            `;
+
+            const itemRows = ui.items.map((label, idx) => {
+                const code = term.burden[idx];
+                let badgeHtml = `<span class="text-slate-400 font-bold">-</span>`;
+                if (code === "S") {
+                    badgeHtml = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-orange-50 text-orange-700 border border-orange-200 font-bold text-xs">${ui.seller_badge}</span>`;
+                } else if (code === "B") {
+                    badgeHtml = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 font-bold text-xs">${ui.buyer_badge}</span>`;
+                }
+                return `
+                    <tr class="hover:bg-slate-50/70 transition-colors">
+                        <td class="py-3 px-4 font-medium text-slate-700">${label}</td>
+                        <td class="py-3 px-4 text-right">${badgeHtml}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            setHtml("burdenTableBody", topRows + itemRows);
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const isLoggedIn = localStorage.getItem("isAdminLoggedIn");
+            const adminContainer = document.getElementById("adminContainer");
+
+            if (adminContainer) {
+                if (isLoggedIn === "true") {
+                    adminContainer.innerHTML = `
+                        <div class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 shadow-sm shrink-0 cursor-pointer select-none">
+                            <i class="ri-user-star-line text-orange-600"></i> Admin(FUTURE)
+                        </div>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="javascript:void(0);" onclick="localStorage.removeItem('isAdminLoggedIn'); location.reload();" class="block px-4 py-2 hover:bg-slate-50 hover:text-red-600 text-center">로그아웃</a>
+                        </div>
+                    `;
+                } else {
+                    adminContainer.innerHTML = `
+                        <a href="login/login.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-md whitespace-nowrap">
+                            <i class="ri-user-settings-line"></i> <span data-i18n="btn_admin">Admin</span>
+                        </a>
+                        <div class="hidden group-hover:block absolute right-0 top-full w-28 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs font-bold text-slate-700">
+                            <a href="login/login.html" class="block px-4 py-2 hover:bg-slate-50 hover:text-orange-600 text-center">로그인</a>
+                        </div>
+                    `;
+                }
+            }
+
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                originalTextCache.set(el, el.innerHTML);
+            });
+
+            renderIncotermsContent();
+
+            const savedLang = localStorage.getItem("site_lang") || "ko";
+            if (savedLang !== "ko") {
+                const map = { en: "ENG", "zh-CN": "CHN", ja: "JPN" };
+                applyCustomLanguage(savedLang, map[savedLang] || "KOR");
+            }
+        });
+    </script>
+</body>
+</html>
+```[cite: 9]
+
+파일을 저장(`Ctrl+S`)한 뒤 브라우저에서 `Ctrl+Shift+R`로 새로고침해 보시면 버튼 목록, 타임라인, 핵심 정리, 비용·위험 부담 표와 언어 전환이 모두 동작합니다[cite: 9].
